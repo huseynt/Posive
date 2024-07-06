@@ -1,14 +1,13 @@
 # To install this project, follow these steps:
 ```
-npm i
-npm i @reduxjs/toolkit
-npm i react-redux
-npm i react-loader-spinner --save
-npm i -D tailwindcss postcss autoprefixer
-npx tailwindcss init -p
-npm i tw-elements
-npm i swiper
-npm i --save-dev @types/swiper
+npm install
+npm install @reduxjs/toolkit
+npm install react-redux
+npm install react-loader-spinner --save
+npm install -D tailwindcss postcss autoprefixer
+npm install tw-elements
+npm install swiper
+npm install --save-dev @types/swiper
 ```
 
 # React + TypeScript + Vite
