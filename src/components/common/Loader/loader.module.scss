@@ -1,9 +1,10 @@
+@import '../reUseable/variable';
 .loaderWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   position: fixed;
-  background-color: #000;
+  background-color: $main_color;
   width: 100vw;
   min-height: 100vh;
   z-index: 99999;
@@ -36,7 +37,7 @@
     .loaderContent {
       max-width: 200px;
       p {
-        font-size: 40px;
+        font-size: 20px;
       }
     }
   }
