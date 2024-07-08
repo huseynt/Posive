@@ -76,7 +76,7 @@ font-weight: 700;
   left: 3%;
   font-size: 0.75rem; //12px
   color: $main_color;
-  background-color: #fff;
+  background-color: $white;
   padding: 0 5px;
   z-index: 3;
   position: absolute;
@@ -120,7 +120,7 @@ font-weight: 700;
   }
 }
 
-%rightChange_on {
+%Change_on {
   @keyframes load {
     from {
         transform: translateX(100%);
