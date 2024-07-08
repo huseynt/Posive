@@ -11,14 +11,13 @@ const Registr = () => {
   useEffect(() => {
     setTimeout(() => {
       setCheck(false)
-    }, 1200)
+    }, 280)
   }, [])
   // ------------------------
   
-
   return (
     <div className={style.login}>
-      {check && <TriangleLoader />}
+      {/* {check && <TriangleLoader />} */}
       <RegistrForm/>
       <RegistrDescription/>
     </div>

@@ -9,24 +9,15 @@ import {
 
 function App() {
 
-  // const navigate = useNavigate()
-  
-  // const handleAbout = () => {
-  //   navigate('/about')
-  // }
 
 
   return (
     <div className={style.app}>
-    {/* <Login/> */}
-    {/* <Registr/> */}
-
-
-
     <Routes>
         <Route path='/registr' element={ <Registr/> }/>
         <Route path='/' element={ <Login/> }/>
     </Routes>
+    
     </div>
   )
 }

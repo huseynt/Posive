@@ -3,6 +3,18 @@
 @import '../../../common/reUseable/mixin';
 
 
+@keyframes load {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
 .login {
     width: 100%;
     height: 100vh;
@@ -13,6 +25,8 @@
     align-items: center;
     justify-content: center;
 
+
+
     @include mobile {
         padding: 0 5%;
         grid-row: 1 / 1;
@@ -20,6 +34,7 @@
 
     &_logo {
         margin-top: auto;
+        animation: load 1s ease-in-out;
         img {
         width: 28px;
         height: 28px;
@@ -29,6 +44,7 @@
     &_name {
         margin-top: 11px;
         @extend %l_b;
+        animation: load 1s ease-in-out;
     }
 
     &_form {
@@ -38,6 +54,7 @@
         display: flex;
         flex-direction: column;
         row-gap: 16px;
+        animation: load 1s ease-in-out;
 
         &_email {
             position: relative;
@@ -145,6 +162,8 @@
             color: $white;
             cursor: pointer;
             background-color: $main_color;
+            animation: load 1s ease-in-out;
+
             &:hover {
                 transition: .2s ease-in-out;
                 background-color: darken($main_color, 7%);
@@ -158,6 +177,8 @@
         text-align: center;
         border-bottom: 1px solid $gray;
         position: relative;
+        animation: load 1s ease-in-out;
+
         // background-color: $dark_blue;
         span {
             display: inline;
@@ -184,6 +205,8 @@
         justify-content: center;
         align-items: center;
         column-gap: 10px;
+        animation: load 1s ease-in-out;
+        
         &:hover {
             transition: .2s ease-in-out;
             border: 1px solid $light_m_gray;
@@ -198,6 +221,8 @@
         margin-top: 24px;
         display: flex;
         justify-content: center;
+        animation: load 1s ease-in-out;
+
         a {
             cursor: pointer;
             margin-left: 7px;
@@ -213,6 +238,8 @@
         @extend %sm;
         display: flex;
         justify-content: space-around;
+        animation: load 1s ease-in-out;
+
 
         @include mobile {
             flex-direction: column;
@@ -247,3 +274,4 @@ input::selection {
     color: $main_color;
     background: $white;
   }
+

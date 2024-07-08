@@ -2,6 +2,17 @@
 @import '../../../common/reUseable/extend';
 @import '../../../common/reUseable/mixin';
 
+@keyframes load {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 
 .login {
     width: 100%;
@@ -19,8 +30,7 @@
     }
 
     &_logo {
-        // width: 100%;
-        // max-width: 416px;
+        animation: load 1s ease-in-out;
         margin-top: auto;
         img {
         width: 30px;
@@ -32,6 +42,12 @@
         width: 100%;
         max-width: 416px;
         cursor: pointer;
+        animation: load 1s ease-in-out;
+
+
+        div {
+            width: 50px;
+        }
     }
 
     &_name {
@@ -39,11 +55,14 @@
         max-width: 416px;
         margin-top: 5px;
         @extend %l_b;
+        animation: load 1s ease-in-out;
     }
 
     &_information {
         width: 100%;
         max-width: 416px;
+        animation: load 1s ease-in-out;
+
     }
 
     &_form {
@@ -53,6 +72,8 @@
         display: flex;
         flex-direction: column;
         row-gap: 16px;
+        animation: load 1s ease-in-out;
+
 
         &_email {
             position: relative;
@@ -161,6 +182,9 @@
             color: $white;
             cursor: pointer;
             background-color: $main_color;
+            animation: load 1s ease-in-out;
+
+
             &:hover {
                 transition: .2s ease-in-out;
                 background-color: darken($main_color, 7%);
@@ -174,6 +198,8 @@
         text-align: center;
         border-bottom: 1px solid $gray;
         position: relative;
+        animation: load 1s ease-in-out;
+
         // background-color: $dark_blue;
         span {
             display: inline;
@@ -200,6 +226,8 @@
         justify-content: center;
         align-items: center;
         column-gap: 10px;
+        animation: load 1s ease-in-out;
+
         &:hover {
             transition: .2s ease-in-out;
             border: 1px solid $light_m_gray;
@@ -214,7 +242,9 @@
         margin-top: 24px;
         display: flex;
         justify-content: center;
-        a {
+        animation: load 1s ease-in-out;
+
+        div {
             cursor: pointer;
             margin-left: 7px;
             color: $link_blue;
@@ -229,6 +259,8 @@
         @extend %sm;
         display: flex;
         justify-content: space-around;
+        animation: load 1s ease-in-out;
+
 
         @include mobile {
             flex-direction: column;

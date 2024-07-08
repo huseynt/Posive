@@ -31,16 +31,14 @@ const LoginForm = () => {
     navigate('/')
   }
 
-  
-
 
   return (
     <div className={style.login}>
       <div className={style.login_logo}>
         <img src={logo} alt="Posive" />
       </div>
-      <div className={style.login_previous} onClick={handleLogin}>
-        <img src={previous} alt="previous" />
+      <div className={style.login_previous}>
+        <div onClick={handleLogin}><img src={previous} alt="previous" /></div>
       </div>
       <h2 className={style.login_name}>Registr</h2>
       <p className={style.login_information}>Let’s create new account</p>
@@ -145,8 +143,8 @@ const LoginForm = () => {
       </button>
 
       <div className={style.login_registr}>
-        <span>Don’t have an account? </span>
-        <a href="#">Register Here</a>
+        <span>Already have an account?  </span>
+        <div onClick={handleLogin}>Login Here</div>
       </div>
 
       <div className={style.login_footer}>
