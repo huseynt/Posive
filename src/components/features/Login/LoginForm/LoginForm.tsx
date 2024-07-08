@@ -33,7 +33,6 @@ const LoginForm = () => {
   const handleForgot = () => {
     navigate('/forgot')
   }
-  
 
 
   return (

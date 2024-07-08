@@ -61,7 +61,7 @@
 
             input {
                 width: 100%;
-                padding: 13px 36px 13px 13px;
+                padding: 7px 13px;
                 border: none;
                 border-radius: 10px;
                 border-bottom: 1px solid $gray;
@@ -91,7 +91,7 @@
 
             input {
                 width: 100%;
-                padding: 13px 36px 13px 13px;
+                padding: 7px 36px 7px 13px;
                 border: none;
                 border-radius: 10px;
                 border-bottom: 1px solid $gray;
@@ -116,7 +116,7 @@
             &_eye {
                 position: absolute;
                 right: 10px;
-                top: 13px;
+                top: 7px;
                 padding: 5px;
                 z-index: 999;
                 cursor: pointer;
@@ -155,7 +155,7 @@
         }
         &_submit {
             width: 100%;
-            padding: 13px 24px;
+            padding: 7px 24px;
             border-radius: 10px;
             border: 1px solid $light_gray;
             @extend %m;
@@ -195,7 +195,7 @@
     &_google {
         width: 100%;
         max-width: 416px;
-        padding: 13px 24px;
+        padding: 7px 24px;
         border-radius: 10px;
         border: 1px solid $light_gray;
         @extend %sm;

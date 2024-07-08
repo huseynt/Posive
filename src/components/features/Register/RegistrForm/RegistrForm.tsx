@@ -2,7 +2,6 @@ import style from "./registrForm.module.scss";
 import logo from "/assets/posive_logo.svg";
 import eye_hide from '/assets/eye-hide.svg'
 import eye_show from '/assets/eye-open.svg'
-import google from '/assets/google.svg'
 import previous from '/assets/arrow-left.svg'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -114,33 +113,13 @@ const LoginForm = () => {
         </div>
 
 
-        <div className={style.login_form_actions}>
-          <div className={style.login_form_actions_save}>
-            <input type="checkbox" name="remember" id="remember"/>
-            <label htmlFor="remember"> Remember me</label>
-          </div>
-
-          <a className={style.login_form_actions_forgot} href="#">
-            Forgot Password
-          </a>
-        </div>
-
         <input
           className={style.login_form_submit}
           type="submit"
-          value="Login"
+          value="Registr"
           onClick={sumbit}
         />
       </form>
-
-      <div className={style.login_or}>
-        <span>or</span>
-      </div>
-
-      <button className={style.login_google}>
-      <span><img src={google} alt="google" /></span>
-      Login with Google
-      </button>
 
       <div className={style.login_registr}>
         <span>Already have an account?  </span>
