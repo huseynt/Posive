@@ -1,8 +1,9 @@
-import style from "./loginForm.module.scss";
+import style from "./registrForm.module.scss";
 import logo from "../../../../../public/assets/posive_logo.svg";
 import eye_hide from '../../../../../public/assets/eye-hide.svg'
 import eye_show from '../../../../../public/assets/eye-open.svg'
 import google from '../../../../../public/assets/google.svg'
+import previous from '../../../../../public/assets/arrow-left.svg'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -25,11 +26,11 @@ const LoginForm = () => {
     e.preventDefault();
   }
 
-
   const navigate = useNavigate()
-  const handleRegistr = () => {
-    navigate('/registr')
+  const handleLogin = () => {
+    navigate('/')
   }
+
   
 
 
@@ -38,9 +39,26 @@ const LoginForm = () => {
       <div className={style.login_logo}>
         <img src={logo} alt="Posive" />
       </div>
-      <h2 className={style.login_name}>Login</h2>
+      <div className={style.login_previous} onClick={handleLogin}>
+        <img src={previous} alt="previous" />
+      </div>
+      <h2 className={style.login_name}>Registr</h2>
+      <p className={style.login_information}>Let’s create new account</p>
 
       <form className={style.login_form} action="submit">
+
+        <div className={style.login_form_email}>
+          <input 
+          type="text" 
+          id="email" 
+          onChange={change} 
+          value={data.email}
+          className={style.login_form_email_input}
+          />
+          <p className={data.email ? style.label_focus: style.label}>Your Name</p>
+        </div>
+
+
         <div className={style.login_form_email}>
           <input 
           type="text" 
@@ -52,6 +70,17 @@ const LoginForm = () => {
           <p className={data.email ? style.label_focus: style.label}>Email</p>
         </div>
 
+        <div className={style.login_form_email}>
+          <input 
+          type="text" 
+          id="email" 
+          onChange={change} 
+          value={data.email}
+          className={style.login_form_email_input}
+          />
+          <p className={data.email ? style.label_focus: style.label}>Phone Number</p>
+        </div>
+
         <div className={style.login_form_password}>
           <input 
           type={hide ? "text" : "password"} 
@@ -61,6 +90,23 @@ const LoginForm = () => {
           className={style.login_form_password_input}
           />
           <p className={data.password ? style.label_focus: style.label}>Password</p>
+          <span 
+          className={style.login_form_password_eye}
+          onClick={() => setHide(!hide)}
+          >
+            <img src={hide?eye_show:eye_hide} alt="eye" />
+          </span>
+        </div>
+
+        <div className={style.login_form_password}>
+          <input 
+          type={hide ? "text" : "password"} 
+          id="password"
+          onChange={change}
+          value={data.password}
+          className={style.login_form_password_input}
+          />
+          <p className={data.password ? style.label_focus: style.label}>Repeat Password</p>
           <span 
           className={style.login_form_password_eye}
           onClick={() => setHide(!hide)}
@@ -100,7 +146,7 @@ const LoginForm = () => {
 
       <div className={style.login_registr}>
         <span>Don’t have an account? </span>
-        <a onClick={handleRegistr}>Register Here</a>
+        <a href="#">Register Here</a>
       </div>
 
       <div className={style.login_footer}>

@@ -1,29 +1,28 @@
-import style from './login.module.scss'
-import LoginDescription from './LoginDescription/LoginDescription'
-import LoginForm from './LoginForm/LoginForm'
+import style from './registr.module.scss'
+import RegistrDescription from './RegistrDescription/RegistrDescription'
+import RegistrForm from './RegistrForm/RegistrForm'
 import { useEffect, useState } from 'react'
 import TriangleLoader from '../../common/Loader/Triangle'
 
-const Login = () => {
+const Registr = () => {
 
   // ------- for test -------
   const [check, setCheck] = useState(true)
   useEffect(() => {
     setTimeout(() => {
       setCheck(false)
-    }, 1000)
+    }, 1200)
   }, [])
-
   // ------------------------
   
 
   return (
     <div className={style.login}>
       {check && <TriangleLoader />}
-      <LoginDescription/>
-      <LoginForm/>
+      <RegistrForm/>
+      <RegistrDescription/>
     </div>
   )
 }
 
-export default Login
+export default Registr
