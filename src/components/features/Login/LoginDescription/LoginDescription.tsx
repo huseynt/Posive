@@ -1,6 +1,6 @@
 import style from "./loginDescription.module.scss";
-import login_wall from '../../../../../public/assets/login_wall.png';
-import login_person from '../../../../../public/assets/login_wall_person.png';
+import login_wall from '/assets/login_wall.png';
+import login_person from '/assets/login_wall_person.png';
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";

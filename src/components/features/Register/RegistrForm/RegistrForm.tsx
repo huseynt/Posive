@@ -1,9 +1,9 @@
 import style from "./registrForm.module.scss";
-import logo from "../../../../../public/assets/posive_logo.svg";
-import eye_hide from '../../../../../public/assets/eye-hide.svg'
-import eye_show from '../../../../../public/assets/eye-open.svg'
-import google from '../../../../../public/assets/google.svg'
-import previous from '../../../../../public/assets/arrow-left.svg'
+import logo from "/assets/posive_logo.svg";
+import eye_hide from '/assets/eye-hide.svg'
+import eye_show from '/assets/eye-open.svg'
+import google from '/assets/google.svg'
+import previous from '/assets/arrow-left.svg'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 

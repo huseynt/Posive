@@ -90,3 +90,45 @@ font-weight: 700;
   transition: all 0.3s ease-in-out;
   z-index: -1;
 }
+
+
+
+------------------- for chage login and register -------------------
+%rightChange {
+  @keyframes load {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+  }
+}
+
+%leftChange_on {
+  @keyframes load {
+    from {
+        transform: translateX(100%);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+  }
+}
+
+%rightChange_on {
+  @keyframes load {
+    from {
+        transform: translateX(100%);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+  }
+}

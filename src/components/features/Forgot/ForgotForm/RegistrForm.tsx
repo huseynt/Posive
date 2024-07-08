@@ -1,8 +1,8 @@
-import style from "./loginForm.module.scss";
+import style from "./registrForm.module.scss";
 import logo from "/assets/posive_logo.svg";
 import eye_hide from '/assets/eye-hide.svg'
 import eye_show from '/assets/eye-open.svg'
-import google from '/assets/google.svg'
+import previous from '/assets/arrow-left.svg'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -25,15 +25,10 @@ const LoginForm = () => {
     e.preventDefault();
   }
 
-
   const navigate = useNavigate()
-  const handleRegistr = () => {
-    navigate('/registr')
+  const handleLogin = () => {
+    navigate('/')
   }
-  const handleForgot = () => {
-    navigate('/forgot')
-  }
-  
 
 
   return (
@@ -41,19 +36,14 @@ const LoginForm = () => {
       <div className={style.login_logo}>
         <img src={logo} alt="Posive" />
       </div>
-      <h2 className={style.login_name}>Login</h2>
+      <div className={style.login_previous}>
+        <div onClick={handleLogin}><img src={previous} alt="previous" /></div>
+      </div>
+      <h2 className={style.login_name}>Reset password</h2>
+      <p className={style.login_information}>Input your email address account to receive a reset link</p>
 
       <form className={style.login_form} action="submit">
-        <div className={style.login_form_email}>
-          <input 
-          type="text" 
-          id="email" 
-          onChange={change} 
-          value={data.email}
-          className={style.login_form_email_input}
-          />
-          <p className={data.email ? style.label_focus: style.label}>Email</p>
-        </div>
+
 
         <div className={style.login_form_password}>
           <input 
@@ -72,19 +62,6 @@ const LoginForm = () => {
           </span>
         </div>
 
-
-        <div className={style.login_form_actions}>
-          <div className={style.login_form_actions_save}>
-            <input type="checkbox" name="remember" id="remember"/>
-            <label htmlFor="remember"> Remember me</label>
-          </div>
-
-          <div className={style.login_form_actions_forgot} onClick={handleForgot}>
-            Forgot Password
-          </div>
-        </div>
-
-
         <input
           className={style.login_form_submit}
           type="submit"
@@ -92,20 +69,6 @@ const LoginForm = () => {
           onClick={sumbit}
         />
       </form>
-
-      <div className={style.login_or}>
-        <span>or</span>
-      </div>
-
-      <button className={style.login_google}>
-      <span><img src={google} alt="google" /></span>
-      Login with Google
-      </button>
-
-      <div className={style.login_registr}>
-        <span>Don’t have an account? </span>
-        <a onClick={handleRegistr}>Register Here</a>
-      </div>
 
       <div className={style.login_footer}>
         <p>© 2023 Posive. All rights reserved.</p>
