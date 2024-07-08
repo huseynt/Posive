@@ -2,7 +2,7 @@
 
 .triangle {
     position: fixed;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     z-index: 99999999;
     background-color: $main_color;

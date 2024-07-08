@@ -1,11 +1,13 @@
 @import "../../../common/reUseable/mixin";
 
+
 .login {
     width: 100%;
     height: 100vh;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-content: center;
+
 
     @include mobile {
         grid-template-columns: 1fr;
