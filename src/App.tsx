@@ -25,17 +25,12 @@ function App() {
 
   return (
     <div className={style.app}>
-
+              {check && <TriangleLoader />}
 
     <Router>
       <Routes>
           <Route path='/registr' element={ <Registr/> }/>
-          <Route path='*' element={ 
-            <div className={style.login}>
-              {check && <TriangleLoader />}
-              <Login/>
-            </div>
-           }/>
+          <Route path='*' element={ <Login/>}/>
           <Route path='/forgot' element={ <Forgot/> }/>
       </Routes>
     </Router>
