@@ -14,7 +14,9 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     const handleStateChange = () => {
-      setLoaded(document.readyState === "complete");
+      setTimeout(() => {
+        setLoaded(document.readyState === "complete");
+      }, 400);
     };
     document.addEventListener('readystatechange', handleStateChange);
     return () => {
@@ -25,14 +27,16 @@ function App() {
 
   return (
     <div className={style.app}>
-      {!loaded ? <TriangleLoader /> :
+      {!loaded && <TriangleLoader /> }
+      <div style={{opacity: loaded ? '1' : '0'}}>
         <Router>
-          <Routes>
-            <Route path='/registr' element={<Registr />} />
-            <Route path='*' element={<Login />} />
-            <Route path='/forgot' element={<Forgot />} />
-          </Routes>
-        </Router>}
+            <Routes>
+              <Route path='/registr' element={<Registr />} />
+              <Route path='*' element={<Login />} />
+              <Route path='/forgot' element={<Forgot />} />
+            </Routes>
+          </Router>
+      </div>
     </div>
   );
 }
