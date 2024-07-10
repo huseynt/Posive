@@ -1,5 +1,17 @@
 @import 'variable';
 
+%s {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.75rem; //12px
+  font-weight: 500;
+}
+
+%s_b {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
 %sm {
   font-family: "Manrope", sans-serif;
   font-size: 0.9rem; //14px
@@ -20,6 +32,18 @@
 %m_b {
   font-family: "Manrope", sans-serif;
   font-size: 1rem;
+  font-weight: 700;
+}
+
+%ml {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.25rem;     //20px
+  font-weight: 500;
+}
+
+%ml_b {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.25rem;
   font-weight: 700;
 }
 

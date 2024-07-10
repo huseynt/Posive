@@ -2,6 +2,7 @@ import style from './App.module.scss'
 import Login from './components/pages/features/Login/Login'
 import Registr from './components/pages/features/Register/Registr'
 import Forgot from './components/pages/features/Forgot/Forgot'
+import Home from './components/pages/Home/Home'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Routes, Route } from 'react-router-dom'
 
@@ -32,8 +33,9 @@ function App() {
         <Router>
             <Routes>
               <Route path='/registr' element={<Registr />} />
-              <Route path='*' element={<Login />} />
+              <Route path='/login' element={<Login />} />
               <Route path='/forgot' element={<Forgot />} />
+              <Route path='*' element={<Home />} />
             </Routes>
           </Router>
       </div>
