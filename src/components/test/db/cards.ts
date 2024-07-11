@@ -4,83 +4,83 @@ export const meals = [
       name: "Health Salad",
       price: 10.00,
       description: "A healthy salad made with fresh vegetables and fruits",
-      imageUrl: "/public/meals/health_salad.png"
+      imageUrl: "public/meals/health_salad.png"
     },
     {
       id: 2,
       name: "Indomie with Cheese",
       price: 15.00,
       description: "A delicious plate of indomie with cheese and vegetables",
-      imageUrl: "/public/meals/indomie.png"
+      imageUrl: "public/meals/indomie.png"
     },
     {
       id: 3,
       name: "Healthy Salad Svocado",
       price: 12.00,
       description: "A healthy salad made with fresh vegetables and avocado",
-      imageUrl: "/public/meals/health_salad_avocado.png"
+      imageUrl: "public/meals/health_salad_avocado.png"
     },
     {
       id: 4,
       name: "Tsunami Salmon",
       price: 15.00,
       description: "A healthy salad made with fresh vegetables and fruits",
-      imageUrl: "/public/meals/tsunami_salmon.png"
+      imageUrl: "public/meals/tsunami_salmon.png"
     },
     {
       id: 5,
       name: "Tropical Smoothies",
       price: 12.00,
       description: "A healthy salad made with fresh vegetables and fruits",
-      imageUrl: "/public/meals/tropical_smoothies.png"
+      imageUrl: "public/meals/tropical_smoothies.png"
     },
     {
       id: 6,
       name: "Smooky Beef",
       price: 25.00,
       description: "A healthy salad made with fresh vegetables and fruits",
-      imageUrl: "/public/meals/smooky_beef.png"
+      imageUrl: "public/meals/smooky_beef.png"
     },
     {
       id: 7,
       name: "Salmon Coco Sauce",
       price: 18.00,
       description: "A healthy salad made with fresh vegetables and fruits",
-      imageUrl: "/public/meals/salmon_coco.png"
+      imageUrl: "public/meals/salmon_coco.png"
     },
     {
       id: 8,
       name: "Indomie Seafood",
       price: 15.00,
       description: "A healthy salad made with fresh vegetables and fruits",
-      imageUrl: "/public/meals/indomie_seafood.png"
+      imageUrl: "public/meals/indomie_seafood.png"
     },
     {
       id: 9,
       name: "Indomie Soto",
       price: 16.00,
       description: "A healthy salad made with fresh vegetables and fruits",
-      imageUrl: "/public/meals/indomie_soto.png"
+      imageUrl: "public/meals/indomie_soto.png"
     },
     {
       id: 10,
       name: "Japanese Rice Bowl",
       price: 13.00,
       description: "A healthy salad made with fresh vegetables and fruits",
-      imageUrl: "/public/meals/japanese_rice.png"
+      imageUrl: "public/meals/japanese_rice.png"
     },
     {
       id: 11,
       name: "Kimchi Rice",
       price: 19.00,
       description: "A healthy salad made with fresh vegetables and fruits",
-      imageUrl: "/public/meals/kimchi_rice.png"
+      imageUrl: "public/meals/kimchi_rice.png"
     },
     {
       id: 12,
       name: "Tsunami Beef Egg",
       price: 16.00,
       description: "A healthy salad made with fresh vegetables and fruits",
-      imageUrl: "/public/meals/tsunami_beef_egg.png"
+      imageUrl: "public/meals/tsunami_beef_egg.png"
     }
 ]
