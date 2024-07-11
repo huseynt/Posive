@@ -1,4 +1,7 @@
 import style from './main.module.scss'
+import { meals } from '../../../test/db/cards'
+import Meal from '../Meal/Meal'
+
 
 const Main = () => {
   return (
@@ -82,8 +85,17 @@ const Main = () => {
 
 
 
-{/* -------------------------- cards ---------------------------------- */}
-
+        {/* -------------------------- cards ---------------------------------- */}
+        <div className={style.main_meals}>
+            {meals.map((meal) => (
+                <Meal key={meal.id}
+                id={meal.id}
+                name={meal.name}
+                price={meal.price}
+                description={meal.description}
+                imageUrl={meal.imageUrl}/>
+            ))}
+        </div>
 
 
 
