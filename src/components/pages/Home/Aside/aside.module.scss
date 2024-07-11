@@ -1,0 +1,11 @@
+@import "../../../common/reUseable/variable";
+@import "../../../common/reUseable/mixin";
+@import "../../../common/reUseable/extend";
+
+.aside {
+    width: 400px;
+    height: 100vh;
+    background-color: gray;
+    // position: fixed; 
+
+}

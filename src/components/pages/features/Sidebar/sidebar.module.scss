@@ -169,6 +169,7 @@
         &_about {
             background: $white;
             padding: 0 10px;
+            user-select: none;
             h4 {
                 @extend %sm_b;
             }
