@@ -123,19 +123,19 @@
 
 
             &:hover {
-                background-color: $main_color;
+                background-color: $main_color !important;
 
                 svg {
                     path {
-                        fill: $white;
+                        fill: $white !important;
                     }
                 }
                 
                 h4 {
-                    color: $white;
+                    color: $white !important;
                 }
                 p {
-                    color: $white;
+                    color: $white !important;
                 }
             }
 
