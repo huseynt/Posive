@@ -15,9 +15,7 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     const handleStateChange = () => {
-      setTimeout(() => {
         setLoaded(document.readyState === "complete");
-      }, 400);
     };
     document.addEventListener('readystatechange', handleStateChange);
     return () => {
