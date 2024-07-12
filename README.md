@@ -8,6 +8,8 @@ npm install -D tailwindcss postcss autoprefixer
 npm install tw-elements
 npm install swiper
 npm install --save-dev @types/swiper
+npm install qrcode.react
+npm install --save-dev @types/qrcode.react
 ```
 
 # React + TypeScript + Vite

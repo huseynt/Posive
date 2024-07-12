@@ -22,8 +22,8 @@
     padding: 0 1.5%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    row-gap: 8px;
+    justify-content: space-around;
+    row-gap: 2px;
     overflow-x: hidden;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -59,8 +59,7 @@
                 column-gap: 3px;
 
                 svg {
-                    width: 14px;
-                    fill: $light_m_gray;
+                    width: 13px;
                 }
             }
         }

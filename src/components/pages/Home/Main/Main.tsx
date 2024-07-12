@@ -24,9 +24,11 @@ const Main: React.FC<MainProps> = (props) => {
     }, [category, mealsFiltered])
 
 
+
   return (
     <div className={style.overflow}>
       <div className={style.main}>
+
 
         {/* ------------------------------up-------------------------------- */}
         <div className={style.main_up}>
