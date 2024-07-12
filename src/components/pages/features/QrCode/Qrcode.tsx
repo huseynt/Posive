@@ -1,5 +1,6 @@
 import QRCode from "qrcode.react";
 import style from "./qrcode.module.scss";
+import React, { useEffect } from "react";
 
 interface IQRCodeComponentProps {
   qrOpen: boolean;
@@ -8,8 +9,37 @@ interface IQRCodeComponentProps {
 
 const QRCodeComponent: React.FC<IQRCodeComponentProps> = (props) => {
   const { qrOpen, setQrOpen } = props;
+  const [code, setCode] = React.useState<string>("");
+  // const id: string = "LK21-121KL-12UI-78HY-FGA8";
 
-  const id: string = "LK21-121KL-12UI-78HY-FGA8";
+// --------------------for test--------------------------
+  const generateRandomCode = (): void => {
+    const segments = [];
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    for (let i = 0; i < 5; i++) {
+      let segment = '';
+      for (let j = 0; j < 4; j++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        segment += characters[randomIndex];
+      }
+      segments.push(segment);
+    }
+  
+    setCode(segments.join('-'));
+  };
+  useEffect(() => {
+    generateRandomCode();
+    const intervalId = setInterval(() => {
+      generateRandomCode();
+    }, 7000); 
+    return () => {
+      clearInterval(intervalId);
+    }
+  }, []);
+// ----------------------------
+
+
+
 
   return (
     <div className={style.qrcode}>
@@ -21,7 +51,7 @@ const QRCodeComponent: React.FC<IQRCodeComponentProps> = (props) => {
           Waiting for payment from customers
         </p>
         <div className={style.qrcode_block_qr}>
-          <QRCode value={id} size={224} fgColor={"#d4733b"} />
+          <QRCode value={code} size={224} fgColor={"#d4733b"} />
         </div>
 
         <div className={style.qrcode_block_or}>
@@ -31,9 +61,9 @@ const QRCodeComponent: React.FC<IQRCodeComponentProps> = (props) => {
         <p className={style.qrcode_block_label}>Manualy enter the code below</p>
 
         <div className={style.qrcode_block_manual}>
-          <p className={style.qrcode_block_manual_id}>{id}</p>
+          <p className={style.qrcode_block_manual_id}>{code}</p>
           <div className={style.qrcode_block_manual_copy}
-          onClick={() => navigator.clipboard.writeText(id)}
+          onClick={() => navigator.clipboard.writeText(code)}
           >
             <svg
               width="17"

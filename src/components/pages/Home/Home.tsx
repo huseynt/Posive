@@ -4,6 +4,7 @@ import Main from './Main/Main'
 import Aside from './Aside/Aside'
 import { useState } from 'react'
 import QRCode from '../features/QrCode/Qrcode';
+// import Notification from '../features/Notification/Notification'
 
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
       <Main bag={bag} setBag={setBag}/>
       <Aside bag={bag} setQrOpen={setQrOpen}/>
       {qrOpen && <QRCode qrOpen={qrOpen} setQrOpen={setQrOpen}/> }
+      {/* <Notification/> */}
     </div>
   )
 }
