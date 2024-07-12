@@ -27,7 +27,7 @@ const LoginForm = () => {
 
   const navigate = useNavigate()
   const handleLogin = () => {
-    navigate('/')
+    navigate('/login')
   }
 
 

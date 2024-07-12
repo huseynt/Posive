@@ -23,6 +23,7 @@ const LoginForm = () => {
 
   const sumbit = (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
+    handleHome()
   }
 
 
@@ -32,6 +33,9 @@ const LoginForm = () => {
   }
   const handleForgot = () => {
     navigate('/forgot')
+  }
+  const handleHome = () => {
+    navigate('/')
   }
 
 

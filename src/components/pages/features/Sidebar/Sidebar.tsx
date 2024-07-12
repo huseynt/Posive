@@ -2,6 +2,7 @@ import style from "./sidebar.module.scss";
 import { useState } from "react";
 import logo from "/assets/posive_logo.svg";
 import user1 from "/assets/user1.png";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const [toggleMenu, setToggleMenu] = useState(true);
@@ -17,6 +18,11 @@ const Sidebar = () => {
       setToggleUser(!toggleUser);
     }
   };
+
+  const navigate = useNavigate()
+  const handleLogout = () => {
+    navigate('/login')
+  }
 
   return (
     <div
@@ -373,7 +379,7 @@ const Sidebar = () => {
           style={{ display: toggleMenu ? "none" : "block" }}
         >
           {/* <div>Settings</div> */}
-          <div>Logout</div>
+          <div onClick={handleLogout}>Logout</div>
         </div>
       </div>
     </div>

@@ -14,7 +14,7 @@ const Aside: React.FC<AsideProps> = (props) => {
     style={{
       width: bag ? '450px' : '0',
       opacity: bag ? '1' : '0',
-      padding: bag ? '20px' : '20px 0',
+      padding: bag ? '5px 1.5% 7px' : '5px 0 7px',
       transition: 'all 0.2s ease-in-out'
     }}
     >
