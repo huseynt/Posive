@@ -325,7 +325,7 @@ const Sidebar = () => {
           gridTemplateColumns: toggleMenu ? "1fr" : "1fr 3fr 1fr",
           border: toggleMenu ? "none" : "1px solid #6C7278",
           transition: "all 0.3s ease",
-          marginBottom: !toggleUser ? "32%" : "1%",
+          marginBottom: !toggleUser ? "20%" : "1%",
         }}
         onClick={handleToggleUser}
       >
@@ -372,7 +372,7 @@ const Sidebar = () => {
           }
           style={{ display: toggleMenu ? "none" : "block" }}
         >
-          <div>Settings</div>
+          {/* <div>Settings</div> */}
           <div>Logout</div>
         </div>
       </div>

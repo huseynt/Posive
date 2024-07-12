@@ -5,12 +5,13 @@
 
 .meal {
     width: 100%;
-    max-width: 500px;
+    max-width: 350px;
     background-color: $white;
     padding: 8px;
     border-radius: 7px;
-    margin: 0 auto;
+    // margin: 0 auto;
     border: 1px solid $gray;
+    cursor: pointer;
 
 
 
@@ -38,17 +39,18 @@
     }
 
     &_count {
-        width: 86px;
+        width: 113px;
         display: flex;
+        justify-content: space-between;
         margin: 0 5px 5px auto;
 
         button {
-            width: 28px;
-            height: 28px;
-            padding-bottom: 2px;
+            width: 37px;
+            padding: 0px 10px;
             background-color: transparent;
             border: 1px solid $gray;
             border-radius: 7px;
+            @extend %ml_b;
 
             &:hover {
                 background-color: $main_light_two;
@@ -57,7 +59,7 @@
 
         p {
             @extend %m_b;
-            margin: auto 10px;
+            margin: auto 0;
         }
     }
 }

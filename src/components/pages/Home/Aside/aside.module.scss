@@ -2,9 +2,383 @@
 @import "../../../common/reUseable/mixin";
 @import "../../../common/reUseable/extend";
 
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        display: 'none';
+    }
+    to {
+        opacity: 1;
+        display: 'flex';
+    }
+}
+
 .aside {
-    width: 400px;
+    width: 450px;
     height: 100vh;
-    background-color: rgb(255, 255, 255);
-    padding: 32px;
+    max-height: 1080px;
+    background-color: #ffffff;
+    padding: .7% 1.5% 1.5% 1.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: 8px;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    // ------------------------- up -------------------------
+    &_up {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 12px;
+        border-bottom: 1px solid $gray;
+        animation: slideIn .5s ease;
+
+        &_order {
+
+
+            h4 {
+                @extend %sm_b;
+                margin-bottom: 1px;
+                cursor: default
+            }
+            p {
+                height: 15px;
+                @extend %s;
+                color: $light_m_gray;
+                user-select: none;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                column-gap: 3px;
+
+                svg {
+                    width: 14px;
+                    fill: $light_m_gray;
+                }
+            }
+        }
+
+        &_settings {
+            padding: 1px 13px;
+            border-radius: 10px;
+            border: 1px solid $gray;
+            
+            svg {
+                width: 17px;
+                path {
+                    stroke: $black;
+                }
+            }
+
+            &:hover {
+                background-color: $main_light_two;
+
+                svg {
+                    path {
+                        stroke: $main_color;
+                    }
+                }
+            }
+        }
+    }
+    // ----------------- customer -----------------
+    &_customer {
+        position: relative;
+        margin-top: 9px;
+
+        &_name {
+            @extend %sm_b;
+            padding: 7px 20px 7px 33px;
+            border-radius: 10px;
+            border: 1px solid $gray;
+        }
+
+        &_label {
+            position: absolute;
+            @extend %s;
+            color: $light_m_gray;
+            background-color: $white;
+            padding: 0 5px;
+            top: -8px;
+            left: 12px;
+            user-select: none;
+        }
+
+        &_icon {
+            width: 18px;
+            height: 14px;
+            position: absolute;
+            top: 50%;
+            left: 12px;
+            transform: translateY(-50%);
+        }
+    }
+
+    // ----------------- place -----------------
+    &_place {
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
+
+        &_head {
+            @extend %sm;
+            color: $light_m_gray;
+        }
+
+        &_selection {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            column-gap: 12px;
+    
+            &_option {
+                width: 100%;
+                min-width: 136px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                column-gap: 7px;
+                padding: 5px 20px 5px 20px;
+                border-radius: 10px;
+                border: 1px solid $gray;
+                cursor: pointer;
+                @extend %sm;
+
+    
+                &:hover {
+                    border: 1px solid $main_color;
+                    background-color: $main_light_two;
+                    color: $main_color;
+    
+                    svg {
+                        path {
+                            fill: $main_color;
+                        }
+                    }
+                }
+    
+                &_name {
+                    @extend %sm;
+                }
+    
+                &_icon {
+                    width: 18px;
+                }
+            }
+        }
+    }
+
+    // ----------------- table -----------------
+    &_table {
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
+
+        &_head {
+            @extend %sm;
+            color: $light_m_gray;
+        }
+
+        &_select {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 15px 8px 15px;
+            border-radius: 10px;
+            border: 1px solid $gray;
+            cursor: pointer;
+            @extend %sm;
+
+            &:hover {
+                border: 1px solid $main_color;
+                background-color: $main_light_two;
+                color: $main_color;
+
+                svg {
+                    path {
+                        fill: $main_color;
+                    }
+                }
+            }
+
+            &_name {
+                @extend %sm;
+            }
+        }
+    }
+    
+    // ----------------- your order -----------------
+    &_order {
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
+
+        &_head {
+            @extend %sm;
+            color: $light_m_gray;
+        }
+
+        &_list {
+            width: 100%;
+            height: 110px;
+            display: flex;
+            flex-direction: column;
+            row-gap: 7px;
+            overflow-y: scroll;
+
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            &_select {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 8px 15px 8px 15px;
+                border-radius: 10px;
+                border: 1px solid $gray;
+                cursor: pointer;
+                @extend %s;
+
+    
+                &:hover {
+                    border: 1px solid $main_color;
+                    background-color: $main_light_two;
+                    color: $main_color;
+    
+                    svg {
+                        path {
+                            fill: $main_color;
+                        }
+                    }
+                }
+    
+                &_left {
+                    display: flex;
+                    align-items: center;
+                    column-gap: 12px;
+    
+    
+                    &_name {
+                        @extend %sm;
+                    }
+    
+                    &_number {
+                        @extend %s;
+                        padding: 2px 9px;
+                        border-radius: 50%;
+                        background-color: $light_gray;
+                        color: $white;
+                    }
+                }
+            }
+        }
+    }
+    // ----------------- detail orders -----------------
+    &_detail {
+        width: 100%;
+        padding: 8px 15px 8px 15px;
+        border-radius: 10px;
+        border: 1px solid $gray;
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        margin-top: 5px;
+
+        &_orders {
+            display: flex;
+            flex-direction: column;
+            row-gap: 5px;
+            @extend %sm;
+
+            &_subtotal {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            &_tax {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+
+        &_total {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid $gray;
+            padding-top: 7px;
+            @extend %sm_b;
+        }
+    }
+    // ----------------- payment method -----------------
+    &_payment {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
+
+        &_head {
+            @extend %sm;
+            color: $light_m_gray;
+        }
+
+        &_select {
+            display: flex;
+            justify-content: space-between;
+            column-gap: 10px;
+
+            &_option {
+                width: 100%;
+
+                &:hover {
+                    cursor: pointer;
+
+                    div {
+                        border: 1px solid $main_color;
+                    }
+                    p {
+                        color: $main_color;
+                    }
+                }
+
+                &_icon {
+                    width: 100%;
+                    height: 50px;
+                    display: grid;
+                    place-items: center;
+                    border-radius: 10px;
+                    border: 1px solid $gray;
+                } 
+                &_name {
+                    @extend %s;
+                    text-align: center;
+                    margin-top: 5px;
+                }
+            }
+        }
+    }
+    // ----------------- make order -----------------
+    &_makeorder {
+        width: 100%;
+        padding: 8px 0;
+        text-align: center;
+        background-color: $main_color;
+        border-radius: 10px;
+        color: $white;
+        @extend %sm_b;
+
+        &:hover {
+            background-color: $main_color_dark;
+        }
+    }
 }

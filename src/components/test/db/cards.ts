@@ -183,12 +183,12 @@ export const meals = [
       imageUrl: "/meals/kimchi_rice.png",
       category: "Rice Bowl"
   },
-  {
-      id: 24,
-      name: "Tsunami Beef Egg",
-      price: 16.00,
-      description: "A healthy salad made with fresh vegetables and fruits",
-      imageUrl: "/meals/tsunami_beef_egg.png",
-      category: "Main Course"
-  }
+//   {
+//       id: 24,
+//       name: "Tsunami Beef Egg",
+//       price: 16.00,
+//       description: "A healthy salad made with fresh vegetables and fruits",
+//       imageUrl: "/meals/tsunami_beef_egg.png",
+//       category: "Main Course"
+//   }
 ];

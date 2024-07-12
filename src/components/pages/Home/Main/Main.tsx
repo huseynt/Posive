@@ -5,8 +5,13 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { IMeal } from '../../../utils/interface/Meal'
 
+interface MainProps {
+    setBag: React.Dispatch<React.SetStateAction<boolean>>;
+    bag: boolean;
+  }
 
-const Main = () => {
+const Main: React.FC<MainProps> = (props) => {
+    const {bag, setBag} = props
     const [category, setCategory] = useState<string>("")
     const [mealsFiltered, setMealsFiltered] = useState<IMeal[]>([])
 
@@ -32,7 +37,9 @@ const Main = () => {
                     <path d="M14.6666 14.6668L13.3333 13.3335" stroke="#1A1C1E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
             </div>
-            <button className={style.main_up_bag}>
+            <button className={style.main_up_bag}
+            onClick={() => setBag(!bag)}
+            >
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M6.60758 1.5L3.89258 4.2225" stroke="#1A1C1E" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M11.3926 1.5L14.1076 4.2225" stroke="#1A1C1E" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />

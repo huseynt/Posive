@@ -4,9 +4,9 @@
 
 .overflow {
     width: 100%;
+    max-width: 1920px;
     height: 100vh;
     background-color: $light_bg_gray;
-    // background-color: black;
     overflow-y:scroll; 
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -19,7 +19,7 @@
 
 .main {
     width: 100%;
-    height: 2000px;
+    // height: 2000px;
     padding: 2%;
     display: flex;
     flex-direction: column;
@@ -159,7 +159,10 @@
     // ------------------ products ----------------------------
     &_meals {
         display: grid;
-        grid-template-columns: repeat(4, minmax(160px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        // display: flex;
+        // flex-wrap: wrap;
+        // justify-content: start;
         column-gap: 16px;
         row-gap: 24px;
     }
