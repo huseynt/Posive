@@ -179,11 +179,9 @@ const Table: React.FC<ITable> = (props) => {
               <div className={style.table_block_place_secondrow_fourperson_seat}>
                 <div></div>
                 <div></div>
-                <div></div>
               </div>
               <div className={style.table_block_place_secondrow_fourperson_table}><span style={{backgroundColor: "#12B3A8"}}></span>T09</div>
               <div className={style.table_block_place_secondrow_fourperson_seat}>
-                <div></div>
                 <div></div>
                 <div></div>
               </div>
