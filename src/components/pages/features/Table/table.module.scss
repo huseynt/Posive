@@ -65,7 +65,7 @@
         &_head {
             width: 100%;
             display: grid;
-            grid-template-columns: 1fr 3fr 1fr;
+            grid-template-columns: 1fr 3fr auto;
             justify-content: space-between;
 
             &_title {
