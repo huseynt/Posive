@@ -3,12 +3,11 @@ import style from "./qrcode.module.scss";
 import React, { useEffect } from "react";
 
 interface IQRCodeComponentProps {
-  qrOpen: boolean;
   setQrOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const QRCodeComponent: React.FC<IQRCodeComponentProps> = (props) => {
-  const { qrOpen, setQrOpen } = props;
+  const { setQrOpen } = props;
   const [code, setCode] = React.useState<string>("");
   // const id: string = "LK21-121KL-12UI-78HY-FGA8";
 
@@ -43,7 +42,7 @@ const QRCodeComponent: React.FC<IQRCodeComponentProps> = (props) => {
 
   return (
     <div className={style.qrcode}>
-      <div className={style.qrcode_bg} onClick={() => setQrOpen(!qrOpen)}></div>
+      <div className={style.qrcode_bg} onClick={() => setQrOpen(false)}></div>
 
       <div className={style.qrcode_block}>
         <h3 className={style.qrcode_block_head}>Scan QR Code</h3>

@@ -3,10 +3,11 @@ import style from "./aside.module.scss";
 interface AsideProps {
   bag: boolean;
   setQrOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setTable: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Aside: React.FC<AsideProps> = (props) => {
-  const { bag, setQrOpen } = props;
+  const { bag, setQrOpen, setTable } = props;
 
   const id: string = "#123456";
 
@@ -187,7 +188,9 @@ const Aside: React.FC<AsideProps> = (props) => {
         }}
       >
         <h3 className={style.aside_table_head}>Table :</h3>
-        <div className={style.aside_table_select}>
+        <div className={style.aside_table_select}
+        onClick={() => setTable(true)}
+        >
           <p className={style.aside_table_select_name}>Select Table</p>
           <svg
             className={style.aside_table_select_icon}

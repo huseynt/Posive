@@ -21,7 +21,7 @@ const Main: React.FC<MainProps> = (props) => {
         } else {
             setMealsFiltered(meals.filter((meal) => meal.category === category))
         }
-    }, [category, mealsFiltered])
+    }, [category])
 
 
 
@@ -63,7 +63,7 @@ const Main: React.FC<MainProps> = (props) => {
         {/* -------------------------------filter---------------------------------------------- */}
         <div className={style.main_filter}>
             <div className={style.main_filter_option}
-            onClick={() => setCategory('Main Course')}
+            onClick={() => category!=='Main Course' ? setCategory('Main Course') : setCategory('')}
             style={{backgroundColor: category === 'Main Course' ? '#EA7E41' : 'white'}}
             >
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -75,7 +75,7 @@ const Main: React.FC<MainProps> = (props) => {
                 </div>
             </div>
             <div className={style.main_filter_option}
-            onClick={() => setCategory('Rice Bowl')}
+            onClick={() => category!=='Rice Bowl' ? setCategory('Rice Bowl') : setCategory('')}
             style={{backgroundColor: category === 'Rice Bowl' ? '#EA7E41' : 'white'}}
             >
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -87,7 +87,7 @@ const Main: React.FC<MainProps> = (props) => {
                 </div>
             </div>
             <div className={style.main_filter_option}
-            onClick={() => setCategory('Fast Food')}
+            onClick={() => category!=='Fast Food' ? setCategory('Fast Food') : setCategory('')}
             style={{backgroundColor: category === 'Fast Food' ? '#EA7E41' : 'white'}}
             >
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -106,7 +106,7 @@ const Main: React.FC<MainProps> = (props) => {
                 </div>
             </div>
             <div className={style.main_filter_option}
-            onClick={() => setCategory('Healthy Food')}
+            onClick={() => category!=='Healthy Food' ? setCategory('Healthy Food') : setCategory('')}
             style={{backgroundColor: category === 'Healthy Food' ? '#EA7E41' : 'white'}}
             >
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
