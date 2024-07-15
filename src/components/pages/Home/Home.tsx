@@ -17,6 +17,7 @@ const Home = () => {
   return (
     <div className={style.home}>
       <Sidebar toggleMenu={toggleMenu} setToggleMenu={setToggleMenu}/>
+      
       {/* ----------------------------- for mobile bg ---------------------------- */}
       <div className={style.mobileBg}
       style={{
@@ -25,6 +26,7 @@ const Home = () => {
       onClick={() => setToggleMenu(true)}
       ></div>
       {/* ----------------------------- for mobile bg ---------------------------- */}
+
       <Main bag={bag} setBag={setBag} setToggleMenu={setToggleMenu}/>
       <Aside bag={bag} setQrOpen={setQrOpen} setTable={setTable} setBag={setBag}/>
       {qrOpen && <QRCode setQrOpen={setQrOpen}/> }
