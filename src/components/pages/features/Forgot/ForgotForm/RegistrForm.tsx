@@ -62,7 +62,7 @@ const LoginForm = () => {
       </form>
 
       <div className={style.login_footer}>
-        <p>© 2023 Posive. All rights reserved.</p>
+        <p>© 2024 Posive. All rights reserved.</p>
         <div className={style.login_footer_links}>
           <a href="#">Term & Condition</a>
           <a href="#" style={{borderLeft: "1px solid #000"}}>Privacy & Policy</a>
