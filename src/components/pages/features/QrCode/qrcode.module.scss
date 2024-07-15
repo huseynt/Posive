@@ -36,6 +36,10 @@
     backdrop-filter: blur(1px);
     animation: fadeBg 0.3s ease;
 
+    @include mobile {
+        padding: 3%;
+    }
+
     &_bg {
         position: absolute;
         width: 100%;

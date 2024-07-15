@@ -264,10 +264,10 @@ const Table: React.FC<ITable> = (props) => {
           </div>
 
           <div className={style.table_block_actions_right}>
-            <button className={style.table_block_actions_right_cancel}>Cancel</button>
-            <button className={style.table_block_actions_right_continue}
+            <button className={style.table_block_actions_right_cancel}
             onClick={() => setTable(false)}
-            >Continue</button>
+            >Cancel</button>
+            <button className={style.table_block_actions_right_continue}>Continue</button>
           </div>
 
         </div>

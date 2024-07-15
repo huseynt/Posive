@@ -4,8 +4,13 @@ import logo from "/assets/posive_logo.svg";
 import user1 from "/assets/user1.png";
 import { useNavigate } from "react-router-dom";
 
-const Sidebar = () => {
-  const [toggleMenu, setToggleMenu] = useState(true);
+interface ISidebarProps {
+  toggleMenu: boolean;
+  setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Sidebar: React.FC<ISidebarProps> = (props) => {
+  const { toggleMenu, setToggleMenu } = props;
   const [toggleUser, setToggleUser] = useState(true);
 
   const handleToggleMenu = () => {
@@ -30,6 +35,7 @@ const Sidebar = () => {
       style={{
         width: toggleMenu ? "80px" : "220px",
         transition: "all 0.3s ease",
+        transform: !toggleMenu ? "translateX(0)" : "",
       }}
     >
       {/* ------------------------------- up ------------------------------------------- */}

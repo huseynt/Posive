@@ -2,6 +2,21 @@
 @import "../../../common/reUseable/mixin";
 @import "../../../common/reUseable/extend";
 
+@keyframes searchOpen {
+    from {
+        transform: translateY(-200%);
+        z-index: -9;
+        opacity: 0;
+        height: 0;
+    }
+    to {
+        transform: translateY(0);
+        z-index: 1;
+        opacity: 1;
+        height: 46px;
+    }
+}
+
 .overflow {
     width: 100%;
     max-width: 1920px;
@@ -25,9 +40,17 @@
     flex-direction: column;
     row-gap: 24px;
 
+    @include mobile {
+        padding: 3%;
+    }
+
     // ---------------- up --------------------------
     &_up {
         display: flex;
+
+        @include mobile {
+            display: none;
+        }
 
         &_search {
             position: relative;
@@ -98,6 +121,85 @@
             }
         }
     }
+
+    // ------------------ mobile up -------------------------
+    &_mobileUp {
+        display: flex;
+        flex-direction: column;
+        row-gap: 16px;
+
+        @include desktop {
+            display: none;
+        }
+
+        &_actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 15px;
+
+            &_menu {
+                padding: 12px 13px;
+                background-color: $white;
+                border-radius: 7px;
+                border: 1px solid $gray;
+                user-select: none;
+                cursor: pointer;
+                svg {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+    
+            &_right {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                column-gap: 14px;
+    
+                &_search {
+                    padding: 12px;
+                    background-color: $white;
+                    border-radius: 7px;
+                    border: 1px solid $gray;
+                    user-select: none;
+                    cursor: pointer;
+                }
+    
+                &_setting {
+                    padding: 12px;
+                    background-color: $white;
+                    border-radius: 7px;
+                    border: 1px solid $gray;
+                    user-select: none;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        &_down {
+            position: relative;
+            transition: all 0.3s;
+            animation: searchOpen 0.3s;
+            transition: .3s ease-in-out;
+
+            &_input {
+                width: 100%;
+                padding: 10px 15px 10px 40px;
+                border-radius: 7px;
+                border: 1px solid $gray;
+                @extend %m;
+            }
+
+            &_icon {
+                position: absolute;
+                top: 50%;
+                left: 15px;
+                transform: translateY(-50%);
+            }
+        }
+    }
+
     // ---------------- filter --------------------------
 
     &_filter {
@@ -105,6 +207,15 @@
         display: flex;
         justify-content: space-between;
         column-gap: 16px;
+
+        @include mobile {
+            overflow-x: scroll;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
 
         
 
@@ -121,21 +232,13 @@
             cursor: pointer;
             border: 1px solid $gray;
 
-
-            &:hover {
-                background-color: $main_color !important;
+            @include mobile {
+                flex-direction: row;
+                column-gap: 8px;
+                justify-content: center;
 
                 svg {
-                    path {
-                        fill: $white !important;
-                    }
-                }
-                
-                h4 {
-                    color: $white !important;
-                }
-                p {
-                    color: $white !important;
+                    width: 15px;
                 }
             }
 
@@ -144,6 +247,10 @@
                 justify-content: space-between;
                 align-items: center;
 
+                @include mobile {
+                    display: block;
+                }
+
                 h4 {
                     @extend %sm_b;
                     color: $black;
@@ -151,8 +258,36 @@
                 p {
                     @extend %s;
                     color: $light_m_gray;
+
+                    @include mobile {
+                        display: none;
+                    }
                 }
             }
+
+            @include desktop {
+                &:hover {
+                    background-color: $main_color !important;
+    
+                    svg {
+                        path {
+                            fill: $white !important;
+                        }
+                    }
+                    
+                    h4 {
+                        color: $white !important;
+                    }
+                    p {
+                        color: $white !important;
+                    }
+    
+                }
+            }
+
+            
+
+            
         }
     }
 
@@ -165,5 +300,35 @@
         // justify-content: start;
         column-gap: 16px;
         row-gap: 24px;
+
+        @include mobile {
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+
+        }
+    }
+
+    // ------------------ for mobile coninue -------------------
+    &_continue {
+        width: 100%;
+        height: 90px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        padding: 20px 3% 10px;
+        background-color: $light_bg_gray;
+
+        @include desktop {
+            display: none;
+        }
+
+        &_btn {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: $main_color;
+            border: 1px solid $gray;
+            color: $white;
+            @extend %m_b;
+        }
     }
 }

@@ -74,7 +74,7 @@
 
             &_list {
                 display: flex;
-                column-gap: 20px;
+                column-gap: 15px;
                 align-items: center;
                 justify-content: center;
 
@@ -101,7 +101,7 @@
 
                 &_input {
                     width: 130px;
-                    @extend %m;
+                    @extend %sm;
                     padding: 0px 5px 0px 27px ;
 
                     &:focus {
@@ -125,7 +125,7 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 10px;
 
             &_firstrow {
                 display: grid;

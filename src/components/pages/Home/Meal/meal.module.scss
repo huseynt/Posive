@@ -30,8 +30,8 @@
         
         
         h4 {
-            @extend %sm_b;
-            margin-bottom: 6px
+            @extend %sm_b,%text_overflow;
+            margin-bottom: 6px;
         }
         p {
             @extend %s;

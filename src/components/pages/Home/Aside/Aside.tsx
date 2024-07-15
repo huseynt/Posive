@@ -4,11 +4,11 @@ interface AsideProps {
   bag: boolean;
   setQrOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setTable: React.Dispatch<React.SetStateAction<boolean>>;
+  setBag: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Aside: React.FC<AsideProps> = (props) => {
-  const { bag, setQrOpen, setTable } = props;
-
+  const { bag, setQrOpen, setTable, setBag } = props;
   const id: string = "#123456";
 
   return (
@@ -19,6 +19,7 @@ const Aside: React.FC<AsideProps> = (props) => {
         opacity: bag ? "1" : "0",
         padding: bag ? "5px 1.5% 7px" : "5px 0 7px",
         transition: "all 0.2s ease-in-out",
+        zIndex: bag ? "100" : "-1",
       }}
     >
       {/* ------------ aside_up -------------- */}
@@ -26,7 +27,6 @@ const Aside: React.FC<AsideProps> = (props) => {
         className={style.aside_up}
         style={{
           display: bag ? "flex" : "none",
-          // height: bag ? 'auto' : '0',
           transition: "all 0.1s ease-in-out",
         }}
       >
@@ -61,6 +61,35 @@ const Aside: React.FC<AsideProps> = (props) => {
             </svg>
           </p>
         </div>
+
+        {/* ------------------- for mobile ----------------- */}
+        <div className={style.aside_up_mobileLeft} onClick={() => setBag(!bag)}>
+          <svg
+            width="24"
+            height="25"
+            viewBox="0 0 24 25"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M9.57 6.6001L3.5 12.6701L9.57 18.7401"
+              stroke="#292D32"
+              strokeWidth="1.5"
+              strokeMiterlimit="10"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M20.5 12.6699H3.67"
+              stroke="#292D32"
+              strokeWidth="1.5"
+              strokeMiterlimit="10"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+
         <button className={style.aside_up_settings}>
           <svg
             width="18"
@@ -188,8 +217,9 @@ const Aside: React.FC<AsideProps> = (props) => {
         }}
       >
         <h3 className={style.aside_table_head}>Table :</h3>
-        <div className={style.aside_table_select}
-        onClick={() => setTable(true)}
+        <div
+          className={style.aside_table_select}
+          onClick={() => setTable(true)}
         >
           <p className={style.aside_table_select_name}>Select Table</p>
           <svg
