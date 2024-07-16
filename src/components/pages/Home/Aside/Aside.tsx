@@ -1,4 +1,5 @@
 import style from "./aside.module.scss";
+import { useState } from "react";
 
 interface AsideProps {
   bag: boolean;
@@ -11,6 +12,17 @@ const Aside: React.FC<AsideProps> = (props) => {
   const { bag, setQrOpen, setTable, setBag } = props;
   const id: string = "#123456";
 
+  const [data, setData] = useState({
+    name: ""
+  });
+
+  const change = (e: React.ChangeEvent<HTMLInputElement>) => { 
+    setData({
+      ...data,
+      [e.target.id]: e.target.value,
+    });
+  }
+
   return (
     <div
       className={style.aside}
@@ -18,7 +30,7 @@ const Aside: React.FC<AsideProps> = (props) => {
         width: bag ? "450px" : "0",
         opacity: bag ? "1" : "0",
         padding: bag ? "5px 1.5% 7px" : "5px 0 7px",
-        transition: "all 0.2s ease-in-out",
+        transition: "all 0.3s ease-in-out",
         zIndex: bag ? "100" : "-1",
       }}
     >
@@ -125,8 +137,14 @@ const Aside: React.FC<AsideProps> = (props) => {
           transition: "all 0.1s ease-in-out",
         }}
       >
-        <p className={style.aside_customer_name}>William Defoe</p>
-        <p className={style.aside_customer_label}>Customer Name</p>
+        <input 
+          type="text" 
+          id="name" 
+          onChange={change} 
+          value={data.name}
+          className={style.aside_customer_name}
+        />
+        <p className={data.name ? style.label_focus : style.label}>Customer Name</p>
         <svg
           className={style.aside_customer_icon}
           width="16"

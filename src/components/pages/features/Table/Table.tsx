@@ -55,6 +55,7 @@ const Table: React.FC<ITable> = (props) => {
               <p className={style.table_block_head_list_item_title}>Reserved</p>
             </div>
           </div>
+
           <div className={style.table_block_head_search}>
             <input className={style.table_block_head_search_input} type="text" placeholder="Search" />
             <svg className={style.table_block_head_search_svg} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -62,6 +63,7 @@ const Table: React.FC<ITable> = (props) => {
               <path d="M14.6666 14.6668L13.3333 13.3335" stroke="#1A1C1E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
+          
         </div>
 
         {/* --------------- place ------------------- */}
@@ -251,8 +253,12 @@ const Table: React.FC<ITable> = (props) => {
         <div className={style.table_block_actions}>
 
           <div className={style.table_block_actions_left}>
+
             <p className={style.table_block_actions_left_title}>Selected Table</p>
+
             <div className={style.table_block_actions_left_list}>
+              <div className={style.table_block_actions_left_list_selected}>T10</div>
+              <div className={style.table_block_actions_left_list_selected}>T10</div>
               <div className={style.table_block_actions_left_list_selected}>T10</div>
               <div className={style.table_block_actions_left_list_selected}>T10</div>
               <div className={style.table_block_actions_left_list_selected}>T10</div>

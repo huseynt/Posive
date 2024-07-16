@@ -37,6 +37,10 @@
     animation: fadeBg 0.3s ease;
     padding: 10px;
 
+    @include mobile {
+        padding: 0;
+    }
+
     &_bg {
         position: absolute;
         width: 100%;
@@ -49,7 +53,7 @@
     &_block {
         width: 100%;
         background-color: $white;
-        min-width: 750px;
+        min-width: 450px;
         max-width: 1000px;
         display: flex;
         flex-direction: column;
@@ -62,14 +66,31 @@
         animation: fadeIn 0.3s ease;
         @extend %sm_b;
 
+        @include mobile {
+            scale: 0.8;
+            padding: 15px;
+            position: absolute;
+        }
+
         &_head {
             width: 100%;
             display: grid;
-            grid-template-columns: 1fr 3fr auto;
+            grid-template-columns: auto 3fr auto;
+            grid-template-areas: 'title list search';
             justify-content: space-between;
+
+            @include mobile {
+                grid-template-columns: 1fr auto;
+                grid-template-areas: 
+                'title search'
+                'list list';
+                justify-content: space-between;
+                row-gap: 10px;
+            }
 
             &_title {
                 @extend %ml_b;
+                grid-area: title;
             }
 
             &_list {
@@ -77,12 +98,18 @@
                 column-gap: 15px;
                 align-items: center;
                 justify-content: center;
+                grid-area: list;
 
                 &_item {
                     display: flex;
                     align-items: center;
                     column-gap: 9px;
                     @extend %sm_b;
+
+                    @include mobile {
+                        font-size: 0.75rem;
+                        font-weight: 700;
+                    }
 
                     &_circle {
                         width: 12px;
@@ -98,6 +125,7 @@
                 border-radius: 10px;
                 position: relative;
                 border: 1px solid $gray;
+                grid-area: search;
 
                 &_input {
                     width: 130px;
@@ -151,14 +179,21 @@
                         justify-content: space-between;
                         align-items: center;
                         column-gap: 20px;
+
+                        @include mobile {
+                            column-gap: 5px;
+                        }
     
                         div {
                             width: 100%;
-                            // min-width: 68px;
-                            min-height: 32px;
+                            min-height: 25px;
                             background-color: aquamarine;
                             border-radius: 6px;
                             background-color: $light_bg_gray;
+
+                            @include mobile {
+                                height: 5px;
+                            }
                         }
     
                     }
@@ -172,6 +207,10 @@
                         background-color: $light_bg_gray;
                         display: flex;
                         justify-content: center;
+
+                        @include mobile {
+                            height: 45px;
+                        }
 
                         span {
                             width: 12px;
@@ -207,6 +246,10 @@
                         justify-content: space-between;
                         align-items: center;
                         column-gap: 20px;
+
+                        @include mobile {
+                            column-gap: 5px;
+                        }
     
                         div {
                             width: 100%;
@@ -214,6 +257,10 @@
                             background-color: aquamarine;
                             border-radius: 6px;
                             background-color: $light_bg_gray;
+
+                            @include mobile {
+                                height: 5px;
+                            }
                         }
     
                     }
@@ -227,6 +274,10 @@
                         background-color: $light_bg_gray;
                         display: flex;
                         justify-content: center;
+
+                        @include mobile {
+                            height: 45px;
+                        }
 
                         span {
                             width: 12px;
@@ -263,6 +314,10 @@
                         justify-content: space-between;
                         align-items: center;
                         column-gap: 20px;
+
+                        @include mobile {
+                            column-gap: 5px;
+                        }
     
                         div {
                             width: 100%;
@@ -270,6 +325,10 @@
                             background-color: aquamarine;
                             border-radius: 6px;
                             background-color: $light_bg_gray;
+
+                            @include mobile {
+                                height: 5px;
+                            }
                         }
     
                     }
@@ -283,6 +342,10 @@
                         background-color: $light_bg_gray;
                         display: flex;
                         justify-content: center;
+
+                        @include mobile {
+                            height: 45px;
+                        }
 
                         span {
                             width: 12px;
@@ -298,37 +361,61 @@
         // ----------------- actions -----------------
         &_actions {
             width: 100%;
-            display: flex;
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            column-gap: 10px;
+            grid-template-areas: 'actionlist actionright';
             justify-content: space-between;
+            align-items: center;
+
+            @include mobile {
+                grid-template-columns:  auto auto;
+                grid-template-areas: 
+                'actionlist actionlist'
+                'actionright actionright';
+                justify-content: space-between;
+                row-gap: 10px;
+            }
 
             &_left {
                 display: flex;
                 align-items: center;
+                justify-content: start;
+                grid-area: actionlist;
+                
 
                 &_title {
                     padding: 7px 15px 7px 0;
                     @extend %sm_b;
-                    min-width: 110px;
+                    min-width: 120px;
                 }
 
                 &_list {
-                    width: 100%;
-                    max-width: 450px;
+                    width: 36vw;
+                    max-width: 370px;
                     display: flex;
                     align-items: center;
                     column-gap: 15px;
                     overflow-x: scroll;
+                    @extend %text_overflow;
+                    grid-area: actionlist;
 
                     scrollbar-width: none;
                     -ms-overflow-style: none;
                     &::-webkit-scrollbar {
                     display: none;
                     }
+
+                    @include mobile {
+                        max-width: 250px;
+                        width: 100%;
+                    }
     
                     &_selected {
                         padding: 7px 20px;
                         background-color: $light_bg_gray;
                         border-radius: 8px;
+                        @extend %s_b;
                     }
                 }
             }
@@ -336,7 +423,13 @@
             &_right {
                 display: flex;
                 align-items: center;
+                justify-content: end;
                 column-gap: 10px;
+                grid-area: actionright;
+
+                @include mobile {
+                    justify-content: space-between;
+                }
 
                 &_cancel {
                     padding: 7px 20px;

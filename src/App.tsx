@@ -1,16 +1,20 @@
 import style from './App.module.scss'
+import './components/common/Theme/theme.module.scss'
+// ---------- import components ----------
 import Login from './components/pages/features/Login/Login'
 import Registr from './components/pages/features/Register/Registr'
 import Forgot from './components/pages/features/Forgot/Forgot'
 import Home from './components/pages/Home/Home'
+import TriangleLoader from './components/common/Loader/Triangle'
+// ---------- import components ----------
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Routes, Route } from 'react-router-dom'
-
 import { useEffect, useState } from 'react'
-import TriangleLoader from './components/common/Loader/Triangle'
+
+
+
 
 function App() {
-
   // ---------- loader ----------
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
