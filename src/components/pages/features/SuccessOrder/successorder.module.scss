@@ -119,6 +119,9 @@
                 border-radius: 10px;
                 background-color: $main_color;
                 color: $white; 
+                cursor: pointer;
+                user-select: none;
+
                 &:hover {
                     background-color: $main_color_dark;
                 }
@@ -133,6 +136,9 @@
                 column-gap: 10px;
                 border-radius: 10px;
                 border: 1px solid $gray;
+                cursor: pointer;
+                user-select: none;
+
                 &:hover {
                     border: 1px solid $light_gray;
                 }

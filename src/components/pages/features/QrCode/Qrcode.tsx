@@ -15,7 +15,7 @@ const QRCodeComponent: React.FC<IQRCodeComponentProps> = (props) => {
   const generateRandomCode = (): void => {
     const segments = [];
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 4; i++) {
       let segment = '';
       for (let j = 0; j < 4; j++) {
         const randomIndex = Math.floor(Math.random() * characters.length);
@@ -90,8 +90,12 @@ const QRCodeComponent: React.FC<IQRCodeComponentProps> = (props) => {
         </div>
 
         <div className={style.qrcode_block_actions}>
-          <div className={style.qrcode_block_actions_option}>Change Method</div>
-          <div className={style.qrcode_block_actions_option}>Send QR</div>
+          <div className={style.qrcode_block_actions_option}
+          onClick={() => setQrOpen(false)}
+          >Change Method</div>
+          <div className={style.qrcode_block_actions_option}
+          onClick={generateRandomCode}
+          >Send QR</div>
         </div>
       </div>
     </div>

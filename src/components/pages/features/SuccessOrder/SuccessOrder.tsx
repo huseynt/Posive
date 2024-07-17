@@ -1,4 +1,6 @@
 import style from "./successorder.module.scss";
+// import jsPDF from 'jspdf';
+// import html2canvas from 'html2canvas';
 
 interface IQRCodeComponentProps {
   setSuccessOrder: React.Dispatch<React.SetStateAction<boolean>>;
@@ -7,13 +9,33 @@ interface IQRCodeComponentProps {
 const SuccessOrder: React.FC<IQRCodeComponentProps> = (props) => {
   const { setSuccessOrder } = props;
 
+  const handlePrint = () => {
+    window.print();
+  }
+
+  // const handlePrint = () => {
+  //   const input = document.getElementById('content');
+
+  //   html2canvas(input)
+  //     .then((canvas) => {
+  //       const imgData = canvas.toDataURL('image/png');
+  //       const pdf = new jsPDF();
+  //       pdf.addImage(imgData, 'PDF', 20, 20);
+  //       pdf.save('example.pdf');
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
+
+
+
+
   return (
     <div className={style.success}>
       <div
         className={style.success_bg}
         onClick={() => setSuccessOrder(false)}
       ></div>
-      <div className={style.success_block}>
+      <div className={style.success_block} id="content">
         <div className={style.success_block_head}>
           <svg
             className={style.success_block_head_icon}
@@ -82,9 +104,13 @@ const SuccessOrder: React.FC<IQRCodeComponentProps> = (props) => {
         </div>
 
         <div className={style.success_block_actions}>
-          <button className={style.success_block_actions_new}>New Order</button>
+          <button className={style.success_block_actions_new}
+          onClick={() => setSuccessOrder(false)}
+          >New Order</button>
 
-          <div className={style.success_block_actions_print}>
+          <div className={style.success_block_actions_print}
+          onClick={handlePrint}
+          >
             <svg
               className={style.success_block_actions_print_icon}
               width="17"
@@ -134,9 +160,7 @@ const SuccessOrder: React.FC<IQRCodeComponentProps> = (props) => {
                 strokeLinejoin="round"
               />
             </svg>
-            <p className={style.success_block_actions_print_name}>
-              Print Receipt
-            </p>
+            <p className={style.success_block_actions_print_name}>Print Receipt</p>
           </div>
         </div>
       </div>

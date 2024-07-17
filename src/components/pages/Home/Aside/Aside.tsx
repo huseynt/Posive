@@ -7,10 +7,11 @@ interface AsideProps {
   setTable: React.Dispatch<React.SetStateAction<boolean>>;
   setBag: React.Dispatch<React.SetStateAction<boolean>>;
   setSuccessOrder: React.Dispatch<React.SetStateAction<boolean>>;
+  requestNotify: (purpose: string) => void;
 }
 
 const Aside: React.FC<AsideProps> = (props) => {
-  const { bag, setQrOpen, setTable, setBag, setSuccessOrder } = props;
+  const { bag, setQrOpen, setTable, setBag, setSuccessOrder, requestNotify } = props;
   const id: string = "#123456";
 
   const [data, setData] = useState({
@@ -22,6 +23,15 @@ const Aside: React.FC<AsideProps> = (props) => {
       ...data,
       [e.target.id]: e.target.value,
     });
+  }
+
+  const handleOrder = () => {
+    if (data.name === "") {
+      requestNotify("important");
+    } else {
+      requestNotify("done");
+      setSuccessOrder(true);
+    }
   }
 
   return (
@@ -494,7 +504,7 @@ const Aside: React.FC<AsideProps> = (props) => {
           // height: bag ? 'auto' : '0',
           transition: "all 0.1s ease-in-out",
         }}
-        onClick={() => setSuccessOrder(true)}
+        onClick={handleOrder}
       >
         Make Order
       </button>

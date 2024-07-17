@@ -52,6 +52,7 @@
     &_block {
         width: 100%;
         max-width: 430px;
+        min-width: 340px;
         background-color: $white;
         display: flex;
         flex-direction: column;
@@ -102,7 +103,7 @@
 
             &_id {
                 width: 100%;
-                padding: 8px 20px;
+                padding: 8px 10px;
                 border: 1px solid $gray;
                 border-radius: 10px;
                 text-align: center;
@@ -137,12 +138,13 @@
             
             &_option {
                 width: 100%;
-                padding: 8px 20px;
+                padding: 8px 10px;
                 border: 1px solid $gray;
                 border-radius: 10px;
                 text-align: center;
                 user-select: none;
                 cursor: pointer;
+                @extend %text_overflow;
 
                 &:hover {
                     background-color: $main_light_color;

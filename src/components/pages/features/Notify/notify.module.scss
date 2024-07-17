@@ -1,0 +1,106 @@
+@import "../../../common/reUseable/variable";
+@import "../../../common/reUseable/mixin";
+@import "../../../common/reUseable/extend";
+
+@keyframes fade {
+    0% {
+        transform: translateX(200%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes out {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(200%);
+        opacity: 0;
+    }
+}
+
+
+.notify {
+    width: fit-content;
+    padding: 5px 9px;
+    background-color: $white;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    border-radius: 12px;
+    border: 3px solid transparent;
+    user-select: none;
+    animation: fade 0.5s ease-in-out;
+    z-index: 999999999999;
+
+    &_icon {
+
+
+        &_done {
+            path {
+                fill: $available;
+            }
+        }
+
+
+    }
+
+    &_text {
+
+        &_head {
+            @extend %sm_b;
+        }
+
+        &_desc {
+            @extend %s;
+        }
+    }
+}
+
+.notify_out {
+    width: fit-content;
+    padding: 5px 9px;
+    background-color: $white;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    border-radius: 12px;
+    border: 3px solid transparent;
+    user-select: none;
+    animation: out 0.5s ease-in-out;
+    transform: translateX(200%);
+    z-index: 999999999999;
+
+    &_icon {
+
+
+        &_done {
+            path {
+                fill: $available;
+            }
+        }
+
+
+    }
+
+    &_text {
+
+        &_head {
+            @extend %sm_b;
+        }
+
+        &_desc {
+            @extend %s;
+        }
+    }
+}
