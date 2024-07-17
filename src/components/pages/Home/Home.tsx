@@ -23,7 +23,7 @@ const Home = () => {
       setNotify(true)
       const timeout = setTimeout(() => {
         setNotify(false);
-      }, 2500);
+      }, 1800);
       return () => {
         clearTimeout(timeout);
       }
