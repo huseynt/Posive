@@ -6,10 +6,11 @@ interface AsideProps {
   setQrOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setTable: React.Dispatch<React.SetStateAction<boolean>>;
   setBag: React.Dispatch<React.SetStateAction<boolean>>;
+  setSuccessOrder: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Aside: React.FC<AsideProps> = (props) => {
-  const { bag, setQrOpen, setTable, setBag } = props;
+  const { bag, setQrOpen, setTable, setBag, setSuccessOrder } = props;
   const id: string = "#123456";
 
   const [data, setData] = useState({
@@ -493,6 +494,7 @@ const Aside: React.FC<AsideProps> = (props) => {
           // height: bag ? 'auto' : '0',
           transition: "all 0.1s ease-in-out",
         }}
+        onClick={() => setSuccessOrder(true)}
       >
         Make Order
       </button>

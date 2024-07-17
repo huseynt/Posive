@@ -5,12 +5,14 @@ import Aside from './Aside/Aside'
 import { useState } from 'react'
 import QRCode from '../features/QrCode/Qrcode';
 import Table from '../features/Table/Table';
+import SuccessOrder from '../features/SuccessOrder/SuccessOrder';
 
 const Home = () => {
   const [bag, setBag] = useState<boolean>(false)
   const [qrOpen, setQrOpen] = useState<boolean>(false)
   const [table, setTable] = useState<boolean>(false)
-  const [toggleMenu, setToggleMenu] = useState(true);
+  const [toggleMenu, setToggleMenu] = useState<boolean>(true);
+  const [successOrder, setSuccessOrder] = useState<boolean>(false)
 
 
 
@@ -28,9 +30,10 @@ const Home = () => {
       {/* ----------------------------- for mobile bg ---------------------------- */}
 
       <Main bag={bag} setBag={setBag} setToggleMenu={setToggleMenu}/>
-      <Aside bag={bag} setQrOpen={setQrOpen} setTable={setTable} setBag={setBag}/>
+      <Aside bag={bag} setQrOpen={setQrOpen} setTable={setTable} setBag={setBag} setSuccessOrder={setSuccessOrder}/>
       {qrOpen && <QRCode setQrOpen={setQrOpen}/> }
       {table && <Table setTable={setTable}/>}
+      {successOrder && <SuccessOrder setSuccessOrder={setSuccessOrder}/>}
     </div>
   )
 }
