@@ -31,7 +31,7 @@ const Main: React.FC<MainProps> = (props) => {
         {/* ------------------------------up-------------------------------- */}
         <div className={style.main_up}>
           <div className={style.main_up_search}>
-            <input type="text" placeholder="Search" />
+            <input type="text" placeholder="Search" id="search" />
             <svg
               width="16"
               height="16"

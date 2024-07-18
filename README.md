@@ -10,6 +10,8 @@ npm install swiper
 npm install --save-dev @types/swiper
 npm install qrcode.react
 npm install --save-dev @types/qrcode.react
+npm install --save react-apexcharts apexcharts
+npm install --save @types/react @types/react-dom @types/react-apexcharts
 ```
 
 # React + TypeScript + Vite

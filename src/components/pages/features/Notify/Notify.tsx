@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import style from "./notify.module.scss";
+import '../SuccessOrder/forprint.scss'
 
 interface INotify {
   notify: boolean;
@@ -45,6 +46,7 @@ const Notify: React.FC<INotify> = (props) => {
     <div
       className={notify === true ? style.notify : style.notify_out}
       style={{ borderColor: data.color }}
+      id="notify"
     >
       <div className={style.notify_icon}>
         {purpose === "done" && (

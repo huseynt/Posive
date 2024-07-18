@@ -40,6 +40,7 @@
     display: flex;
     flex-direction: column;
     row-gap: 24px;
+    transition: all 0.3s linear;
 
     @include mobile {
         padding: 3% 3% 30% 3%;
@@ -58,7 +59,7 @@
             max-width: 500px;
             width: 100%;
             margin-right: auto;
-            padding: 0 10px;
+            padding: 0;
             border-radius: 10px;
             background-color: $white;
             border: 1px solid $gray;
@@ -67,11 +68,12 @@
             input {
                 width: 100%;
                 @extend %m;
-                padding: 8px 10px 8px 40px;
+                padding: 8px 20px 8px 50px;
+                border-radius: 10px;
                 background-color: transparent;
 
                 &:focus {
-                    outline: none;
+                    outline: .5px solid $main_color;
                 }
             }
 
@@ -269,6 +271,7 @@
             @include desktop {
                 &:hover {
                     background-color: $main_color !important;
+                    transition: all 0.2s linear;
     
                     svg {
                         path {

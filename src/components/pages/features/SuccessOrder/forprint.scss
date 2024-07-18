@@ -1,0 +1,9 @@
+//--------------------- print ---------------------
+@media print {
+    @page {
+        size: A5;
+    }
+    #notify {
+        z-index: -1;
+    }
+}

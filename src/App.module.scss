@@ -29,11 +29,3 @@ body {
     color: $main_color;
     background: transparent;
   }
-
-
-//--------------------- print ---------------------
-@media print {
-    @page {
-        size: landscape;
-    }
-}

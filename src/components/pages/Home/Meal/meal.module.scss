@@ -13,6 +13,19 @@
     border: 1px solid $gray;
     cursor: pointer;
 
+    &:hover {
+        box-shadow: 0 0 10px 0 $main_light_color;
+        transition: 0.3s ease-in-out;
+
+        .meal_photo {
+            img {
+                object-fit: cover;
+                object-position: 50% 60%;
+                transition: 0.3s ease-in-out;
+            }
+        }
+    }
+
 
 
     &_photo {

@@ -54,7 +54,7 @@ const Home = () => {
       {qrOpen && <QRCode setQrOpen={setQrOpen}/> }
       {table && <Table setTable={setTable}/>}
       {successOrder && <SuccessOrder setSuccessOrder={setSuccessOrder}/>}
-      <Notify notify={notify} purpose={notifyPurpose} />
+      <Notify notify={notify} purpose={notifyPurpose} />  
     </div>
   )
 }
