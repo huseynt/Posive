@@ -1,12 +1,92 @@
 @import "../../common/reUseable/variable";
+@import "../../common/reUseable/extend";
 
 .triangle {
     position: fixed;
     width: 100vw;
     height: 100vh;
     z-index: 99999999;
-    background-color: $main_color;
+    background-color: #EA7E41;
     display: grid;
     place-items: center;
+
+    &_head {
+        text-align: center;
+        @extend %ls_b;
+        font-weight: 900;
+        // background-image: linear-gradient(0deg, #EA7E41 34%, #313131 33%, #000000 33%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        animation: rotate 1s linear infinite reverse;
+    }
+}
+
+
+@keyframes rotate {
+    0% {
+        background-image: linear-gradient(0deg, #EA7E41, #ffffff);
+    }
+    5% {
+        background-image: linear-gradient(18deg, #EA7E41, #ffffff);
+    }
+    // 0 5 10 .... write
+    10% {    
+        background-image: linear-gradient(36deg, #EA7E41, #ffffff);
+    }
+    15% {
+        background-image: linear-gradient(54deg, #EA7E41, #ffffff);
+    }
+    20% {
+        background-image: linear-gradient(62deg, #EA7E41, #ffffff);
+    }
+    25% {
+        background-image: linear-gradient(80deg, #EA7E41, #ffffff);
+    }
+    30% {
+        background-image: linear-gradient(98deg, #EA7E41, #ffffff);
+    }
+    35% {
+        background-image: linear-gradient(116deg, #EA7E41, #ffffff);
+    }
+    40% {
+        background-image: linear-gradient(134deg, #EA7E41, #ffffff);
+    }
+    45% {
+        background-image: linear-gradient(152deg, #EA7E41, #ffffff);
+    }
+    50% {
+        background-image: linear-gradient(170deg, #EA7E41, #ffffff);
+    }
+    55% {
+        background-image: linear-gradient(188deg, #EA7E41, #ffffff);
+    }
+    60% {
+        background-image: linear-gradient(206deg, #EA7E41, #ffffff);
+    }
+    65% {
+        background-image: linear-gradient(224deg, #EA7E41, #ffffff);
+    }
+    70% {
+        background-image: linear-gradient(242deg, #EA7E41, #ffffff);
+    }
+    75% {
+        background-image: linear-gradient(260deg, #EA7E41, #ffffff);
+    }
+    80% {
+        background-image: linear-gradient(278deg, #EA7E41, #ffffff);
+    }
+    85% {
+        background-image: linear-gradient(296deg, #EA7E41, #ffffff);
+    }
+    90% {
+        background-image: linear-gradient(314deg, #EA7E41, #ffffff);
+    }
+    95% {
+        background-image: linear-gradient(332deg, #EA7E41, #ffffff);
+    }
+    100% {
+        background-image: linear-gradient(360deg, #EA7E41, #ffffff);
+    }
 }
 
