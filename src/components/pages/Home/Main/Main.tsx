@@ -5,14 +5,17 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { IMeal } from "../../../utils/interface/Meal";
 
+
 interface MainProps {
   setBag: React.Dispatch<React.SetStateAction<boolean>>;
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  setNotification: React.Dispatch<React.SetStateAction<boolean>>;
+  notification: boolean;
   bag: boolean;
 }
 
 const Main: React.FC<MainProps> = (props) => {
-  const { bag, setBag, setToggleMenu } = props;
+  const { bag, setBag, setToggleMenu, setNotification, notification } = props;
   const [category, setCategory] = useState<string>("");
   const [mealsFiltered, setMealsFiltered] = useState<IMeal[]>([]);
   const [mobileSearch, setMobileSearch] = useState<boolean>(false);
@@ -104,7 +107,9 @@ const Main: React.FC<MainProps> = (props) => {
               />
             </svg>
           </button>
-          <button className={style.main_up_notification}>
+          <button className={style.main_up_notification}
+          onClick={() => setNotification(!notification)}
+          >
             <svg
               width="18"
               height="18"

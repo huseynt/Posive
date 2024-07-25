@@ -7,6 +7,8 @@ import QRCode from '../features/QrCode/Qrcode';
 import Table from '../features/Table/Table';
 import SuccessOrder from '../features/SuccessOrder/SuccessOrder';
 import Notify from '../features/Notify/Notify';
+import Notification from '../features/Notification/Notification';
+
 
 const Home = () => {
   const [bag, setBag] = useState<boolean>(false)
@@ -14,6 +16,7 @@ const Home = () => {
   const [table, setTable] = useState<boolean>(false)
   const [toggleMenu, setToggleMenu] = useState<boolean>(true);
   const [successOrder, setSuccessOrder] = useState<boolean>(false)
+  const [notification, setNotification] = useState<boolean>(false)
   const [notify, setNotify] = useState<boolean>(false)
 
 
@@ -44,7 +47,12 @@ const Home = () => {
       ></div>
       {/* ----------------------------- for mobile bg ---------------------------- */}
 
-      <Main bag={bag} setBag={setBag} setToggleMenu={setToggleMenu}/>
+      <Main bag={bag} 
+      setBag={setBag} 
+      setToggleMenu={setToggleMenu}
+      setNotification={setNotification}
+      notification={notification}
+      />
       <Aside bag={bag} 
       setQrOpen={setQrOpen} 
       setTable={setTable} 
@@ -54,7 +62,8 @@ const Home = () => {
       {qrOpen && <QRCode setQrOpen={setQrOpen}/> }
       {table && <Table setTable={setTable}/>}
       {successOrder && <SuccessOrder setSuccessOrder={setSuccessOrder}/>}
-      <Notify notify={notify} purpose={notifyPurpose} />  
+      {notification && <Notification setNotification={setNotification} bag={bag}/>}
+      <Notify notify={notify} purpose={notifyPurpose} />
     </div>
   )
 }

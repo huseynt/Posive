@@ -112,6 +112,7 @@
             margin-left: 16px;
             border-radius: 10px;
             border: 1px solid $gray;
+            z-index: 9991;
 
             &:hover {
                 background-color: $main_light_two;

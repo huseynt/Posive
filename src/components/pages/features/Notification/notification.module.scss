@@ -1,0 +1,114 @@
+@import "../../../common/reUseable/variable";
+@import "../../../common/reUseable/mixin";
+@import "../../../common/reUseable/extend";
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeBg {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+// scrollbar
+::-webkit-scrollbar {
+    width: 5px;
+    height: 300px;
+}
+::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+::-webkit-scrollbar-thumb {
+    background: $main_light_color;
+    border-radius: 15px;
+    height: 10px;
+}
+// scrollbar end
+
+
+.notification {
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000008;
+    position: fixed;
+    top: 0;
+    left: 0;
+    animation: fadeBg 0.3s ease;
+    z-index: 999;
+
+    @include mobile {
+        padding: 3%;
+    }
+
+    &_screen {
+        width: 100vw;
+        height: 100vh;
+        max-width: 1920px;
+        margin: 0 auto; 
+        position: relative;
+
+        @include mobile {
+            width: 100%;
+        }
+
+        &_bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            animation: fadeIn 0.3s ease;
+            z-index: 9;
+        }
+    
+        &_block {
+            width: 100%;
+            max-width: 480px;
+            min-width: 280px;
+            height: 300px;
+            background-color: $white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            row-gap: 20px;
+            border-radius: 14px;
+            border: 1px solid $gray;
+            padding: 12px 18px;
+            animation: fadeIn 0.3s ease;
+            position: absolute;
+            right: 0;
+            top: 85px;
+            z-index: 999999999;
+            margin-inline: 2%;
+    
+    
+    
+            @include mobile {
+                max-width: 100%;
+                min-width: none;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                border-radius: 0;
+                margin-inline: 0;
+            }
+    
+            &_list {
+                width: 100%;
+                overflow-x: hidden;
+                padding-right: 5px;
+            }
+    
+        }
+    }
+}

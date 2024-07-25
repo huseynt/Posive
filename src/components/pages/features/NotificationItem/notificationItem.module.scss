@@ -1,0 +1,23 @@
+@import "../../../common/reUseable/variable";
+@import "../../../common/reUseable/mixin";
+@import "../../../common/reUseable/extend";
+
+
+
+.item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 2px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid $gray;
+    cursor: pointer;
+    user-select: none;
+
+    &_head {
+        @extend %sm_b;
+    }
+    &_desc {
+        @extend %sm, %text_overflow;
+    }
+}
