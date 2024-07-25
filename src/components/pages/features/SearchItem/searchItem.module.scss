@@ -1,0 +1,13 @@
+@import "../../../common/reUseable/variable";
+@import "../../../common/reUseable/mixin";
+@import "../../../common/reUseable/extend";
+
+.item {
+    width: 100%;
+    @extend %m;
+    cursor: pointer;
+    user-select: none;
+    &:hover {
+        color: $main_color;
+    }
+}

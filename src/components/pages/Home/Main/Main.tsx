@@ -4,6 +4,7 @@ import Meal from "../Meal/Meal";
 import { useEffect } from "react";
 import { useState } from "react";
 import { IMeal } from "../../../utils/interface/Meal";
+import SearchItem from "../../features/SearchItem/SearchItem"
 
 interface MainProps {
   setBag: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,6 +19,33 @@ const Main: React.FC<MainProps> = (props) => {
   const [category, setCategory] = useState<string>("");
   const [mealsFiltered, setMealsFiltered] = useState<IMeal[]>([]);
   const [mobileSearch, setMobileSearch] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>("");
+  const [searchResult, setSearchResult] = useState<IMeal[]>([]);
+
+  const searchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+    if (search.length > 0) {
+      setSearchResult(
+        meals.filter((meal) =>
+          meal.name.toLowerCase().includes(search.toLowerCase())
+        )
+      );
+    } else {
+      setSearchResult([]);
+    }
+    console.log(searchResult);
+  };
+
+  const searchHandle = () => {
+    if (searchResult.length > 0) {
+      setMealsFiltered(searchResult)
+    }
+    console.log(searchResult);
+  } 
+
+  const findHandle = (name: string) => {
+    setMealsFiltered(meals.filter((meal) => meal.name === name));
+  }
 
   useEffect(() => {
     if (category === "") {
@@ -25,21 +53,32 @@ const Main: React.FC<MainProps> = (props) => {
     } else {
       setMealsFiltered(meals.filter((meal) => meal.category === category));
     }
-  }, [category]);
+
+    if (search.length ===0) {
+      setSearchResult([])
+    }
+  }, [category, search]);
 
   return (
     <div className={style.overflow}>
       <div className={style.main}>
         {/* ------------------------------up-------------------------------- */}
         <div className={style.main_up}>
-          <div className={style.main_up_search}>
-            <input type="text" placeholder="Search" id="search" />
+          <div className={style.main_up_search}
+          >
+            <input
+              type="text"
+              placeholder="Search"
+              id="search"
+              onChange={searchChange}
+            />
             <svg
               width="16"
               height="16"
               viewBox="0 0 16 16"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              onClick={searchHandle}
             >
               <path
                 d="M7.66659 14.0002C11.1644 14.0002 13.9999 11.1646 13.9999 7.66683C13.9999 4.16903 11.1644 1.3335 7.66659 1.3335C4.16878 1.3335 1.33325 4.16903 1.33325 7.66683C1.33325 11.1646 4.16878 14.0002 7.66659 14.0002Z"
@@ -56,7 +95,23 @@ const Main: React.FC<MainProps> = (props) => {
                 strokeLinejoin="round"
               />
             </svg>
+
+            <div className={style.main_up_search_estimated}
+            style={{display: search.length && searchResult.length > 0 ? "block !important" : "none",
+              borderBottom: search.length && searchResult.length > 0 ? "" : "none"
+            }}
+            >
+              <div>
+                {searchResult.map((meal) => (
+                  <SearchItem key={meal.id} 
+                  name={meal.name} 
+                  findHandle={findHandle}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
+
           <button className={style.main_up_bag} onClick={() => setBag(!bag)}>
             <svg
               width="18"
@@ -206,8 +261,9 @@ const Main: React.FC<MainProps> = (props) => {
                 </svg>
               </div>
 
-              <div className={style.main_mobileUp_actions_right_setting}
-              onClick={() => setNotification(!notification)}
+              <div
+                className={style.main_mobileUp_actions_right_setting}
+                onClick={() => setNotification(!notification)}
               >
                 {/* <svg
                   width="16"
