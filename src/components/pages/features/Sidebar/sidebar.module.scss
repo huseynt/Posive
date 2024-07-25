@@ -133,15 +133,15 @@
             transition: .1s ease-in-out;
 
             &:hover {
-                background-color: $main_light_two;
+                background-color: $main_light_two !important;
 
                 span {
                     @extend %sm;
-                    color: $main_color
+                    color: $main_color !important;
                 }
                 svg {
                     path {
-                        stroke: $main_color
+                        stroke: $main_color !important;
                     }
                 }
             }

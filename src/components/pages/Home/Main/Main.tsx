@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { IMeal } from "../../../utils/interface/Meal";
 
-
 interface MainProps {
   setBag: React.Dispatch<React.SetStateAction<boolean>>;
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -107,8 +106,9 @@ const Main: React.FC<MainProps> = (props) => {
               />
             </svg>
           </button>
-          <button className={style.main_up_notification}
-          onClick={() => setNotification(!notification)}
+          <button
+            className={style.main_up_notification}
+            onClick={() => setNotification(!notification)}
           >
             <svg
               width="18"
@@ -206,8 +206,10 @@ const Main: React.FC<MainProps> = (props) => {
                 </svg>
               </div>
 
-              <div className={style.main_mobileUp_actions_right_setting}>
-                <svg
+              <div className={style.main_mobileUp_actions_right_setting}
+              onClick={() => setNotification(!notification)}
+              >
+                {/* <svg
                   width="16"
                   height="16"
                   viewBox="0 0 16 16"
@@ -261,6 +263,35 @@ const Main: React.FC<MainProps> = (props) => {
                     strokeMiterlimit="10"
                     strokeLinecap="round"
                     strokeLinejoin="round"
+                  />
+                </svg> */}
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.01494 2.18262C6.53244 2.18262 4.51494 4.20012 4.51494 6.68262V8.85012C4.51494 9.30762 4.31994 10.0051 4.08744 10.3951L3.22494 11.8276C2.69244 12.7126 3.05994 13.6951 4.03494 14.0251C7.26744 15.1051 10.7549 15.1051 13.9874 14.0251C14.8949 13.7251 15.2924 12.6526 14.7974 11.8276L13.9349 10.3951C13.7099 10.0051 13.5149 9.30762 13.5149 8.85012V6.68262C13.5149 4.20762 11.4899 2.18262 9.01494 2.18262Z"
+                    stroke="#1A1C1E"
+                    strokeWidth="1.5"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M10.4024 2.40008C10.1699 2.33258 9.92994 2.28008 9.68244 2.25008C8.96244 2.16008 8.27244 2.21258 7.62744 2.40008C7.84494 1.84508 8.38494 1.45508 9.01494 1.45508C9.64494 1.45508 10.1849 1.84508 10.4024 2.40008Z"
+                    stroke="#1A1C1E"
+                    strokeWidth="1.5"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M11.2649 14.2949C11.2649 15.5324 10.2524 16.5449 9.01489 16.5449C8.39989 16.5449 7.82989 16.2899 7.42489 15.8849C7.01989 15.4799 6.76489 14.9099 6.76489 14.2949"
+                    stroke="#1A1C1E"
+                    strokeWidth="1.5"
+                    strokeMiterlimit="10"
                   />
                 </svg>
               </div>
