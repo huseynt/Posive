@@ -4,7 +4,7 @@ import Meal from "../Meal/Meal";
 import { useEffect } from "react";
 import { useState } from "react";
 import { IMeal } from "../../../utils/interface/Meal";
-import SearchItem from "../../features/SearchItem/SearchItem"
+import SearchItem from "../../features/SearchItem/SearchItem";
 
 interface MainProps {
   setBag: React.Dispatch<React.SetStateAction<boolean>>;
@@ -38,14 +38,18 @@ const Main: React.FC<MainProps> = (props) => {
 
   const searchHandle = () => {
     if (searchResult.length > 0) {
-      setMealsFiltered(searchResult)
+      setMealsFiltered(searchResult);
     }
     console.log(searchResult);
-  } 
+    setSearch("");
+    setSearchResult([]);
+  };
 
   const findHandle = (name: string) => {
     setMealsFiltered(meals.filter((meal) => meal.name === name));
-  }
+    setSearch("");
+    setSearchResult([]);
+  };
 
   useEffect(() => {
     if (category === "") {
@@ -54,23 +58,27 @@ const Main: React.FC<MainProps> = (props) => {
       setMealsFiltered(meals.filter((meal) => meal.category === category));
     }
 
-    if (search.length ===0) {
-      setSearchResult([])
+    if (search.length === 0) {
+      setSearchResult([]);
     }
-  }, [category, search]);
+  }, [category]);
 
   return (
     <div className={style.overflow}>
       <div className={style.main}>
         {/* ------------------------------up-------------------------------- */}
         <div className={style.main_up}>
-          <div className={style.main_up_search}
-          >
+
+
+          {/* ----------------------------------------- */}
+          <div className={style.main_up_search}>
             <input
               type="text"
               placeholder="Search"
               id="search"
+              autoComplete="off"
               onChange={searchChange}
+              value={search}
             />
             <svg
               width="16"
@@ -96,21 +104,31 @@ const Main: React.FC<MainProps> = (props) => {
               />
             </svg>
 
-            <div className={style.main_up_search_estimated}
-            style={{display: search.length && searchResult.length > 0 ? "block !important" : "none",
-              borderBottom: search.length && searchResult.length > 0 ? "" : "none"
-            }}
+            <div
+              className={style.main_up_search_estimated}
+              style={{
+                display:
+                  search.length && searchResult.length > 0
+                    ? "block !important"
+                    : "none",
+                borderBottom:
+                  search.length && searchResult.length > 0 ? "" : "none",
+              }}
             >
               <div>
                 {searchResult.map((meal) => (
-                  <SearchItem key={meal.id} 
-                  name={meal.name} 
-                  findHandle={findHandle}
+                  <SearchItem
+                    key={meal.id}
+                    name={meal.name}
+                    findHandle={findHandle}
                   />
                 ))}
               </div>
             </div>
           </div>
+
+
+          {/* ----------------------------------------- */}
 
           <button className={style.main_up_bag} onClick={() => setBag(!bag)}>
             <svg
