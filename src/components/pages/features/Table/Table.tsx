@@ -266,6 +266,24 @@ const Table: React.FC<ITable> = (props) => {
               <div className={style.table_block_actions_left_list_selected}>T10</div>
               <div className={style.table_block_actions_left_list_selected}>T10</div>
               <div className={style.table_block_actions_left_list_selected}>T10</div>
+              <div className={style.table_block_actions_left_list_selected}>T10</div>
+              <div className={style.table_block_actions_left_list_selected}>T10</div>
+              <div className={style.table_block_actions_left_list_selected}>T10</div>
+              <div className={style.table_block_actions_left_list_selected}>T10</div>
+              <div className={style.table_block_actions_left_list_selected}>T10</div>
+              <div className={style.table_block_actions_left_list_selected}>T10</div>
+              <div className={style.table_block_actions_left_list_selected}>T10</div>
+              <div className={style.table_block_actions_left_list_selected}>T10</div>
+              <div className={style.table_block_actions_left_list_selected}>T10</div>
+              <div className={style.table_block_actions_left_list_selected}>T10</div>
+              <div className={style.table_block_actions_left_list_selected}>T10</div>
+              <div className={style.table_block_actions_left_list_selected}>T10</div>
+              <div className={style.table_block_actions_left_list_selected}>T10</div>
+              <div className={style.table_block_actions_left_list_selected}>T10</div>
+              <div className={style.table_block_actions_left_list_selected}>T10</div>
+              <div className={style.table_block_actions_left_list_selected}>T10</div>
+              <div className={style.table_block_actions_left_list_selected}>T10</div>
+              <div className={style.table_block_actions_left_list_selected}>T10</div>
             </div>
           </div>
 

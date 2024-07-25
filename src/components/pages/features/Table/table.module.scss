@@ -23,6 +23,23 @@
 }
 
 
+// scrollbar
+.table_block_actions_left_list::-webkit-scrollbar {
+    width: 5px;
+    height: 7px !important;
+    background-color: #ffffff;
+}
+.table_block_actions_left_list::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+.table_block_actions_left_list::-webkit-scrollbar-thumb {
+    background: $main_color !important;
+    border-radius: 15px;
+}
+// scrollbar end
+
+
+
 .table {
     width: 100vw;
     height: 100vh;
@@ -392,19 +409,20 @@
 
                 &_list {
                     width: 36vw;
+                    height: 45px;
                     max-width: 370px;
                     display: flex;
                     align-items: center;
                     column-gap: 15px;
-                    overflow-x: scroll;
                     @extend %text_overflow;
                     grid-area: actionlist;
+                    overflow-x: scroll;
 
-                    scrollbar-width: none;
-                    -ms-overflow-style: none;
-                    &::-webkit-scrollbar {
-                    display: none;
-                    }
+                    // scrollbar-width: none;
+                    // -ms-overflow-style: none;
+                    // &::-webkit-scrollbar {
+                    // display: none;
+                    // }
 
                     @include mobile {
                         max-width: 250px;
