@@ -17,7 +17,7 @@ export const meals = [
   },
   {
       id: 3,
-      name: "Healthy Salad Svocado",
+      name: "Healthy Salad Avocado",
       price: 12.00,
       description: "A healthy salad made with fresh vegetables and avocado",
       imageUrl: "/meals/health_salad_avocado.png",

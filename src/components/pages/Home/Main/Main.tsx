@@ -5,6 +5,9 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { IMeal } from "../../../utils/interface/Meal";
 import SearchItem from "../../features/SearchItem/SearchItem";
+import {API} from "../../../utils/API/API";
+import axios from "axios";
+import {config} from "../../../utils/API/config";
 
 interface MainProps {
   setBag: React.Dispatch<React.SetStateAction<boolean>>;
@@ -63,6 +66,31 @@ const Main: React.FC<MainProps> = (props) => {
     }
   }, [category]);
 
+
+
+
+  async function getMeals() {
+    try {
+      const response = await axios.get(
+        API,
+        config
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
+  useEffect(() => {
+    return () => {
+      getMeals();
+    }
+  }, []);
+
+
+
+
+  
   return (
     <div className={style.overflow}>
       <div className={style.main}>
