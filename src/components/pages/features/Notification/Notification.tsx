@@ -20,7 +20,7 @@ const Notification: React.FC<INotification> = (props) => {
 
         <div
           className={style.notification_screen_block}
-          style={{ right: bag ? "350px" : "0" }}
+          style={{ right: bag ? "328px" : "0" }}
         >
           <div className={style.notification_screen_block_back}
           onClick={() => setNotification(false)}

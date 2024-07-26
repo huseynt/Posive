@@ -21,7 +21,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
   };
 
   const handleToggleUser = () => {
-    if (!toggleMenu) {
+    if (toggleMenu) {
       setToggleUser(!toggleUser);
     }
   };
@@ -35,16 +35,16 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
     <div
       className={style.sidebar}
       style={{
-        width: toggleMenu ? "80px" : "220px",
+        width: !toggleMenu ? "80px" : "220px",
         transition: "all 0.3s ease",
-        transform: !toggleMenu ? "translateX(0)" : "",
+        transform: toggleMenu ? "translateX(0)" : "",
       }}
     >
       {/* ------------------------------- up ------------------------------------------- */}
       <div
         className={style.sidebar_up}
         style={{
-          justifyContent: toggleMenu ? "center" : "space-between",
+          justifyContent: !toggleMenu ? "center" : "space-between",
         }}
       >
         <div className={style.sidebar_up_logo}>
@@ -52,14 +52,14 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             src={logo}
             alt="Posive"
             style={{
-              width: toggleMenu ? "0px" : "28px",
+              width: !toggleMenu ? "0px" : "28px",
               transition: "all 0.3s ease",
             }}
           />
           <h2
             className={style.sidebar_up_logo_head}
             style={{
-              fontSize: toggleMenu ? "0rem" : "1.25rem",
+              fontSize: !toggleMenu ? "0rem" : "1.25rem",
               transition: "all 0.3s ease",
             }}
           >
@@ -68,7 +68,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
         </div>
         <div
           className={
-            !toggleMenu ? style.sidebar_up_menu_open : style.sidebar_up_menu
+            toggleMenu ? style.sidebar_up_menu_open : style.sidebar_up_menu
           }
           onClick={handleToggleMenu}
         >
@@ -83,8 +83,8 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
 
         <div
           style={{
-            padding: toggleMenu ? "12px 0px" : "12px 20px",
-            justifyContent: toggleMenu ? "center" : "unset",
+            padding: !toggleMenu ? "12px 0px" : "12px 20px",
+            justifyContent: !toggleMenu ? "center" : "unset",
             backgroundColor: navigation === "pos" ? "#FDEFD9" : "unset",
           }}
           onClick={() => setNavigation("pos")}
@@ -131,8 +131,8 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           </svg>
           <span
             style={{
-              fontSize: toggleMenu ? "0rem" : "1rem",
-              opacity: toggleMenu ? "0" : "1",
+              fontSize: !toggleMenu ? "0rem" : "1rem",
+              opacity: !toggleMenu ? "0" : "1",
               color: navigation === "pos" ? "#EA7E41" : "#000",
             }}
           >
@@ -143,8 +143,8 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
 
         <div
           style={{
-            padding: toggleMenu ? "12px 0px" : "12px 20px",
-            justifyContent: toggleMenu ? "center" : "unset",
+            padding: !toggleMenu ? "12px 0px" : "12px 20px",
+            justifyContent: !toggleMenu ? "center" : "unset",
             backgroundColor: navigation === "overview" ? "#FDEFD9" : "unset"
           }}
           onClick={() => setNavigation("overview")}
@@ -197,7 +197,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           </svg>
           <span
             style={{
-              fontSize: toggleMenu ? "0rem" : "1rem",
+              fontSize: !toggleMenu ? "0rem" : "1rem",
               color: navigation === "overview" ? "#EA7E41" : "#000",
             }}
           >
@@ -207,8 +207,8 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
 
         <div
           style={{
-            padding: toggleMenu ? "12px 0px" : "12px 20px",
-            justifyContent: toggleMenu ? "center" : "unset",
+            padding: !toggleMenu ? "12px 0px" : "12px 20px",
+            justifyContent: !toggleMenu ? "center" : "unset",
             backgroundColor: navigation === "product" ? "#FDEFD9" : "unset"
           }}
           onClick={() => setNavigation("product")}
@@ -251,7 +251,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           </svg>
           <span
             style={{
-              fontSize: toggleMenu ? "0rem" : "1rem",
+              fontSize: !toggleMenu ? "0rem" : "1rem",
               color: navigation === "product" ? "#EA7E41" : "#000",
             }}
           >
@@ -261,8 +261,8 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
 
         <div
           style={{
-            padding: toggleMenu ? "12px 0px" : "12px 20px",
-            justifyContent: toggleMenu ? "center" : "unset",
+            padding: !toggleMenu ? "12px 0px" : "12px 20px",
+            justifyContent: !toggleMenu ? "center" : "unset",
             backgroundColor: navigation === "settings" ? "#FDEFD9" : "unset"
           }}
           onClick={() => setNavigation("settings")}
@@ -291,7 +291,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           </svg>
           <span
             style={{
-              fontSize: toggleMenu ? "0rem" : "1rem",
+              fontSize: !toggleMenu ? "0rem" : "1rem",
               color: navigation === "settings" ? "#EA7E41" : "#000",
             }}
           >
@@ -301,8 +301,8 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
 
         <div
           style={{
-            padding: toggleMenu ? "12px 0px" : "12px 20px",
-            justifyContent: toggleMenu ? "center" : "unset",
+            padding: !toggleMenu ? "12px 0px" : "12px 20px",
+            justifyContent: !toggleMenu ? "center" : "unset",
             backgroundColor: navigation === "help" ? "#FDEFD9" : "unset"
           }}
           onClick={() => setNavigation("help")}
@@ -338,7 +338,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           </svg>
           <span
             style={{
-              fontSize: toggleMenu ? "0rem" : "1rem",
+              fontSize: !toggleMenu ? "0rem" : "1rem",
               color: navigation === "help" ? "#EA7E41" : "#000",
             }}
           >
@@ -353,8 +353,8 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
         className={style.sidebar_user}
         id="sidebar_user"
         style={{
-          gridTemplateColumns: toggleMenu ? "1fr" : "1fr 3fr 1fr",
-          border: toggleMenu ? "none" : "1px solid #6C7278",
+          gridTemplateColumns: !toggleMenu ? "1fr" : "1fr 3fr 1fr",
+          border: !toggleMenu ? "none" : "1px solid #6C7278",
           transition: "all 0.3s ease",
           marginBottom: !toggleUser ? "20%" : "1%",
         }}
@@ -367,7 +367,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
         <div
           className={style.sidebar_user_about}
           style={{
-            display: toggleMenu ? "none" : "block",
+            display: !toggleMenu ? "none" : "block",
           }}
         >
           <h4>Jane</h4>
@@ -377,7 +377,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
         <div
           className={style.sidebar_user_icon}
           style={{
-            display: toggleMenu ? "none" : "block",
+            display: !toggleMenu ? "none" : "block",
           }}
         >
           <svg
@@ -401,7 +401,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
               ? style.sidebar_user_popup
               : style.sidebar_user_popup_open
           }
-          style={{ display: toggleMenu ? "none" : "block" }}
+          style={{ display: !toggleMenu ? "none" : "block" }}
         >
           {/* <div>Settings</div> */}
           <div onClick={handleLogout}>Logout</div>

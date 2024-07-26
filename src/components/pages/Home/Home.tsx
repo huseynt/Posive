@@ -2,19 +2,22 @@ import style from "./home.module.scss";
 import Sidebar from "../features/Sidebar/Sidebar";
 import Pos from "./Pos/Pos";
 import Aside from "./Aside/Aside";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import QRCode from "../features/QrCode/Qrcode";
 import Table from "../features/Table/Table";
 import SuccessOrder from "../features/SuccessOrder/SuccessOrder";
 import Notify from "../features/Notify/Notify";
 import Notification from "../features/Notification/Notification";
 import Overview from "./Overview/Overview";
+import Product from "./Product/Product";
+import Settings from "./Settings/Settings";
+import HelpCenter from "./HelpCenter/HelpCenter";
 
 const Home = () => {
   const [bag, setBag] = useState<boolean>(false);
   const [qrOpen, setQrOpen] = useState<boolean>(false);
   const [table, setTable] = useState<boolean>(false);
-  const [toggleMenu, setToggleMenu] = useState<boolean>(true);
+  const [toggleMenu, setToggleMenu] = useState<boolean>(false);
   const [successOrder, setSuccessOrder] = useState<boolean>(false);
   const [notification, setNotification] = useState<boolean>(false);
   const [notify, setNotify] = useState<boolean>(false);
@@ -32,6 +35,14 @@ const Home = () => {
     };
   };
 
+  useEffect(() => {
+    setBag(false);
+    setQrOpen(false);
+    setTable(false);
+    setSuccessOrder(false);
+    setNotification(false);
+  }, [navigation]);
+
   return (
     <div className={style.home}>
       <Sidebar toggleMenu={toggleMenu} 
@@ -44,9 +55,9 @@ const Home = () => {
       <div
         className={style.mobileBg}
         style={{
-          display: toggleMenu ? "none" : "block",
+          display: toggleMenu ? "block" : "none",
         }}
-        onClick={() => setToggleMenu(true)}
+        onClick={() => setToggleMenu(false)}
       ></div>
       {/* ----------------------------- for mobile bg ---------------------------- */}
 
@@ -61,6 +72,9 @@ const Home = () => {
       )}
 
       {navigation==="overview" && <Overview />}
+      {navigation==="product" && <Product />}
+      {navigation==="settings" && <Settings />}
+      {navigation==="help" && <HelpCenter />}
 
 
       <Aside

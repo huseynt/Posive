@@ -274,7 +274,7 @@ const Main: React.FC<MainProps> = (props) => {
           <div className={style.main_mobileUp_actions}>
             <div
               className={style.main_mobileUp_actions_menu}
-              onClick={() => setToggleMenu(false)}
+              onClick={() => setToggleMenu(true)}
             >
               <svg
                 width="16"

@@ -1,14 +1,14 @@
-import style from './overview.module.scss'
+import style from './product.module.scss'
 
-const Overview = () => {
+const Product = () => {
   return (
     <div className={style.overflow}>
       <div className={style.main}>
-        Overview
+        Product
         <h2>loading</h2>
       </div>
     </div>
   )
 }
 
-export default Overview
+export default Product

@@ -43,15 +43,19 @@ const Searchİnput: React.FC<ISearchInput> = (props) => {
     setSearch("");
     setSearchResult([]);
   };
+
+  const keyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      searchHandle();
+    }
+  }
+
   // ---------------------- --- -----------------------------
   useEffect(() => {
     if (search.length === 0) {
       setSearchResult([]);
     }
   }, [search.length]);
-
-
-
 
 
   return (
@@ -62,6 +66,7 @@ const Searchİnput: React.FC<ISearchInput> = (props) => {
         id="search"
         autoComplete="off"
         onChange={searchChange}
+        onKeyDown={keyPress}
         value={search}
       />
       <svg
