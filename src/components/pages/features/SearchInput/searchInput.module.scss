@@ -1,0 +1,65 @@
+@import "../../../common/reUseable/variable";
+@import "../../../common/reUseable/mixin";
+@import "../../../common/reUseable/extend";
+
+.search input:focus ~ .search_estimated,
+.search_estimated:focus-within {
+  display: block !important;
+  border: 1px solid $main_color;
+  border-top: none;
+  background-color: $white;
+}
+.search_estimated:focus-within {
+  display: block;
+}
+
+.search input:not(:focus) ~ .search_estimated,
+.search_estimated:not(:focus-within) {
+  display: none;
+  border: 1px solid $gray;
+  border-top: none;
+  background-color: transparent;
+}
+
+.search {
+  width: 100%;
+
+  input {
+    width: 100%;
+    @extend %m;
+    padding: 8px 20px 8px 50px;
+    border-radius: 10px;
+    background-color: transparent;
+    z-index: 99;
+
+    &:focus {
+      outline: 1px solid $main_color;
+    }
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 50%;
+    left: 23px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  &_estimated {
+    width: calc(100% + 1.5px);
+    padding: 2px 25px;
+    position: absolute;
+    top: 31px;
+    left: -1px;
+    color: $light_m_gray;
+    background-color: $available;
+    border-radius: 0 0 10px 10px;
+    background-color: $white;
+
+    &:hover {
+      display: block !important;
+    }
+  }
+}

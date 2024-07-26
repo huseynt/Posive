@@ -1,4 +1,6 @@
-export const meals = [
+import { IMeal } from "../../utils/interface/Meal";
+
+export const meals: IMeal[] = [
   {
       id: 1,
       name: "Health Salad",

@@ -1,10 +1,11 @@
-import style from "./main.module.scss";
+import style from "./pos.module.scss";
 import { meals } from "../../../test/db/cards";
 import Meal from "../Meal/Meal";
 import { useEffect } from "react";
 import { useState } from "react";
 import { IMeal } from "../../../utils/interface/Meal";
-import SearchItem from "../../features/SearchItem/SearchItem";
+import SearchInput from "../../features/SearchInput/SearchInput";
+// import SearchItem from "../../features/SearchItem/SearchInput";
 // import {API} from "../../../utils/API/API";
 // import axios from "axios";
 // import {config} from "../../../utils/API/config";
@@ -22,8 +23,8 @@ const Main: React.FC<MainProps> = (props) => {
   const [category, setCategory] = useState<string>("");
   const [mealsFiltered, setMealsFiltered] = useState<IMeal[]>([]);
   const [mobileSearch, setMobileSearch] = useState<boolean>(false);
-  const [search, setSearch] = useState<string>("");
-  const [searchResult, setSearchResult] = useState<IMeal[]>([]);
+  // const [search, setSearch] = useState<string>("");
+  // const [searchResult, setSearchResult] = useState<IMeal[]>([]);
 
 
 
@@ -60,35 +61,38 @@ const Main: React.FC<MainProps> = (props) => {
 
 
 
+// // ---------------------- search -----------------------------
+//   const searchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setSearch(e.target.value);
+//     if (search.length > 0) {
+//       setSearchResult(
+//         meals.filter((meal) =>
+//           meal.name.toLowerCase().includes(search.toLowerCase())
+//         )
+//       );
+//     } else {
+//       setSearchResult([]);
+//     }
+//     console.log(searchResult);
+//   };
 
-  const searchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-    if (search.length > 0) {
-      setSearchResult(
-        meals.filter((meal) =>
-          meal.name.toLowerCase().includes(search.toLowerCase())
-        )
-      );
-    } else {
-      setSearchResult([]);
-    }
-    console.log(searchResult);
-  };
+//   const searchHandle = () => {
+//     if (searchResult.length > 0) {
+//       setMealsFiltered(searchResult);
+//     }
+//     console.log(searchResult);
+//     setSearch("");
+//     setSearchResult([]);
+//   };
 
-  const searchHandle = () => {
-    if (searchResult.length > 0) {
-      setMealsFiltered(searchResult);
-    }
-    console.log(searchResult);
-    setSearch("");
-    setSearchResult([]);
-  };
+//   const findHandle = (name: string) => {
+//     setMealsFiltered(meals.filter((meal) => meal.name === name));
+//     setSearch("");
+//     setSearchResult([]);
+//   };
+// // ---------------------- --- -----------------------------
 
-  const findHandle = (name: string) => {
-    setMealsFiltered(meals.filter((meal) => meal.name === name));
-    setSearch("");
-    setSearchResult([]);
-  };
+
 
   useEffect(() => {
     if (category === "") {
@@ -97,9 +101,9 @@ const Main: React.FC<MainProps> = (props) => {
       setMealsFiltered(meals.filter((meal) => meal.category === category));
     }
 
-    if (search.length === 0) {
-      setSearchResult([]);
-    }
+    // if (search.length === 0) {
+    //   setSearchResult([]);
+    // }
   }, [category]);
 
 
@@ -118,7 +122,7 @@ const Main: React.FC<MainProps> = (props) => {
 
           {/* ----------------------------------------- */}
           <div className={style.main_up_search}>
-            <input
+            {/* <input
               type="text"
               placeholder="Search"
               id="search"
@@ -156,7 +160,8 @@ const Main: React.FC<MainProps> = (props) => {
                 display:
                   search.length && searchResult.length > 0
                     ? "block !important"
-                    : "none",
+                    : "none",import { meals } from './../../../test/db/cards';
+
                 borderBottom:
                   search.length && searchResult.length > 0 ? "" : "none",
               }}
@@ -170,7 +175,10 @@ const Main: React.FC<MainProps> = (props) => {
                   />
                 ))}
               </div>
-            </div>
+            </div> */}
+            <SearchInput meals={meals} 
+            setMealsFiltered={setMealsFiltered}
+            />
           </div>
 
 
@@ -422,7 +430,7 @@ const Main: React.FC<MainProps> = (props) => {
             className={style.main_mobileUp_down}
             style={{ display: mobileSearch ? "flex" : "none" }}
           >
-            <input
+            {/* <input
               className={style.main_mobileUp_down_input}
               type="text"
               placeholder="Search..."
@@ -449,7 +457,10 @@ const Main: React.FC<MainProps> = (props) => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
-            </svg>
+            </svg> */}
+            <SearchInput meals={meals} 
+            setMealsFiltered={setMealsFiltered}
+            />
           </div>
         </div>
 

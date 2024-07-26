@@ -1,6 +1,6 @@
 import style from "./home.module.scss";
 import Sidebar from "../features/Sidebar/Sidebar";
-import Main from "./Main/Main";
+import Pos from "./Pos/Pos";
 import Aside from "./Aside/Aside";
 import { useState } from "react";
 import QRCode from "../features/QrCode/Qrcode";
@@ -8,6 +8,7 @@ import Table from "../features/Table/Table";
 import SuccessOrder from "../features/SuccessOrder/SuccessOrder";
 import Notify from "../features/Notify/Notify";
 import Notification from "../features/Notification/Notification";
+import Overview from "./Overview/Overview";
 
 const Home = () => {
   const [bag, setBag] = useState<boolean>(false);
@@ -50,7 +51,7 @@ const Home = () => {
       {/* ----------------------------- for mobile bg ---------------------------- */}
 
       {navigation==="pos" && (
-        <Main
+        <Pos
           bag={bag}
           setBag={setBag}
           setToggleMenu={setToggleMenu}
@@ -58,6 +59,9 @@ const Home = () => {
           notification={notification}
         />
       )}
+
+      {navigation==="overview" && <Overview />}
+
 
       <Aside
         bag={bag}

@@ -1,0 +1,9 @@
+@import "../../../common/reUseable/variable";
+@import "../../../common/reUseable/mixin";
+@import "../../../common/reUseable/extend";
+
+
+.overview {
+    width: 100%;
+    background-color: $light_bg_gray;
+}
