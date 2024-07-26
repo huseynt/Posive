@@ -3,5 +3,6 @@ export interface IMeal {
     name: string,
     price: number,
     description: string,
-    imageUrl: string
+    imageUrl: string,
+    category: string,
 }

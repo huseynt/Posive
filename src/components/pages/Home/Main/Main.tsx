@@ -1,5 +1,5 @@
 import style from "./main.module.scss";
-import { meals } from "../../../test/db/cards";
+// import { meals } from "../../../test/db/cards";
 import Meal from "../Meal/Meal";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -24,6 +24,42 @@ const Main: React.FC<MainProps> = (props) => {
   const [mobileSearch, setMobileSearch] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
   const [searchResult, setSearchResult] = useState<IMeal[]>([]);
+
+
+
+
+
+// ---------------------- test -----------------------------
+  const [meals, setMeals] = useState<IMeal[]>([]);
+  async function getMeals() {
+    try {
+      axios.get(
+        API,
+        config
+      ).then (
+        (response) => {
+          setMeals(response.data.content);
+          setMealsFiltered(response.data.content);
+        }
+      )
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
+  useEffect(() => {
+    return () => {
+      getMeals();
+    }
+  }, []);
+// ---------------------------------------------------
+
+
+
+
+
+
+
 
   const searchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -68,24 +104,6 @@ const Main: React.FC<MainProps> = (props) => {
 
 
 
-
-  async function getMeals() {
-    try {
-      const response = await axios.get(
-        API,
-        config
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  
-  useEffect(() => {
-    return () => {
-      getMeals();
-    }
-  }, []);
 
 
 
@@ -618,6 +636,7 @@ const Main: React.FC<MainProps> = (props) => {
               price={meal.price}
               description={meal.description}
               imageUrl={meal.imageUrl}
+              category={meal.category}
             />
           ))}
         </div>
