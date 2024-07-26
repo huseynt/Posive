@@ -11,7 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-token.ts
+.env 
 
 # Editor directories and files
 .vscode/*
