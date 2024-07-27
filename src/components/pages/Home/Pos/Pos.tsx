@@ -45,6 +45,7 @@ const Main: React.FC<MainProps> = (props) => {
         (response) => {
           setMeals(response.data.content);
           setMealsFiltered(response.data.content);
+          console.log(response.data.content);
         }
       )
     } catch (error) {
