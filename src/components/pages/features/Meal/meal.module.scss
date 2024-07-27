@@ -2,16 +2,30 @@
 @import "../../../common/reUseable/mixin";
 @import "../../../common/reUseable/extend";
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+
 
 .meal {
     width: 100%;
     max-width: 350px;
     background-color: $white;
     padding: 8px;
-    border-radius: 7px;
-    // margin: 0 auto;
+    border-radius: 7px;;
     border: 1px solid $gray;
-    cursor: pointer;
+    animation: fadeIn .8s ease-in-out;
 
     &:hover {
         box-shadow: 0 0 10px 0 $main_light_color;
@@ -40,6 +54,15 @@
 
     &_information {
         padding: 8px 8px 2px 8px;
+        cursor: pointer;
+        user-select: none;
+
+        &:hover {
+            h4 {
+                color: $main_light_color;
+                transition: 0.3s ease-in-out;
+            }
+        }
         
         
         h4 {

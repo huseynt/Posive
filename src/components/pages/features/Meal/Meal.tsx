@@ -2,9 +2,16 @@ import style from './meal.module.scss'
 import { IMeal } from '../../../utils/interface/Meal'
 import { useState } from 'react'
 
+import AboutMeal from "../AboutMeal/AboutMeal";
+
+
 const Meal = (props: IMeal) => {
   const { id, name, price, description, imageUrl } = props;
   const [count, setCount] = useState(0);
+
+
+  const [aboutmeal, setAboutMeal] = useState<boolean>(false);
+
 
 
   return (
@@ -13,7 +20,9 @@ const Meal = (props: IMeal) => {
           <img src={imageUrl} alt={description} />
         </div>
         
-        <div className={style.meal_information}>
+        <div className={style.meal_information}
+        onClick={() => setAboutMeal(!aboutmeal)}
+        >
           <h4>{name}</h4>
           <p>${price.toFixed(2)}</p>
         </div>
@@ -25,6 +34,14 @@ const Meal = (props: IMeal) => {
           >{count}</p>
           <button onClick={() => setCount(count+1)}>+</button>
         </div>
+        {aboutmeal && <AboutMeal 
+        setAboutMeal={setAboutMeal} 
+        name={name}
+        price={price}
+        description={description}
+        imageUrl={imageUrl}
+        />}
+        
       </div>
     )
 }

@@ -1,6 +1,6 @@
 import style from "./pos.module.scss";
 // import { meals } from "../../../test/db/cards";
-import Meal from "../Meal/Meal";
+import Meal from "../../features/Meal/Meal";
 import { useEffect } from "react";
 import { useState } from "react";
 import { IMeal } from "../../../utils/interface/Meal";

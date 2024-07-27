@@ -1,4 +1,4 @@
-@import 'variable';
+@import "variable";
 
 %s {
   font-family: "Manrope", sans-serif;
@@ -25,9 +25,9 @@
 }
 
 %m {
-    font-family: "Manrope", sans-serif;
-    font-size: 1rem; //16px
-    font-weight: 500;
+  font-family: "Manrope", sans-serif;
+  font-size: 1rem; //16px
+  font-weight: 500;
 }
 %m_b {
   font-family: "Manrope", sans-serif;
@@ -35,21 +35,20 @@
   font-weight: 700;
 }
 
-
 %sl {
   font-family: "Manrope", sans-serif;
   font-size: 1.125rem; //18px
   font-weight: 500;
 }
 %sl_b {
-font-family: "Manrope", sans-serif;
-font-size: 1.125rem;
-font-weight: 700;
+  font-family: "Manrope", sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
 }
 
 %ml {
   font-family: "Manrope", sans-serif;
-  font-size: 1.25rem;     //20px
+  font-size: 1.25rem; //20px
   font-weight: 500;
 }
 
@@ -65,15 +64,15 @@ font-weight: 700;
   font-weight: 500;
 }
 %ls_b {
-font-family: "Manrope", sans-serif;
-font-size: 1.5rem; 
-font-weight: 700;
+  font-family: "Manrope", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 %l {
-    font-family: "Manrope", sans-serif;
-    font-size: 2rem; //32px
-    font-weight: 500;
+  font-family: "Manrope", sans-serif;
+  font-size: 2rem; //32px
+  font-weight: 500;
 }
 %l_b {
   font-family: "Manrope", sans-serif;
@@ -105,7 +104,6 @@ font-weight: 700;
   font-weight: 700;
 }
 
-
 // ----------------- Label -----------------
 %label_focus {
   top: -26%;
@@ -127,18 +125,22 @@ font-weight: 700;
   z-index: -1;
 }
 
-
-
-------------------- for chage login and register -------------------
-%rightChange {
+-------------------
+  for
+  chage
+  login
+  and
+  register
+  -------------------
+  %rightChange {
   @keyframes load {
     from {
-        transform: translateX(-100%);
-        opacity: 0;
+      transform: translateX(-100%);
+      opacity: 0;
     }
     to {
-        transform: translateY(0);
-        opacity: 1;
+      transform: translateY(0);
+      opacity: 1;
     }
   }
 }
@@ -146,19 +148,35 @@ font-weight: 700;
 %leftChange_on {
   @keyframes load {
     from {
-        transform: translateX(100%);
-        opacity: 1;
+      transform: translateX(100%);
+      opacity: 1;
     }
     to {
-        transform: translateY(0);
-        opacity: 1;
+      transform: translateY(0);
+      opacity: 1;
     }
   }
 }
 
 // ----------------- for text overflow (...) -----------------
 %text_overflow {
-  white-space: nowrap; 
-  overflow: hidden;             
-  text-overflow: ellipsis; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// ----------------- button -----------------
+%btn_main {
+  padding: 7px 30px;
+  background-color: $main_color;
+  border-radius: 10px;
+  @extend %m_b;
+  color: $white;
+  user-select: none;
+  cursor: pointer;
+  white-space: nowrap;
+
+  &:hover {
+    background-color: $main_color_dark;
+  }
 }

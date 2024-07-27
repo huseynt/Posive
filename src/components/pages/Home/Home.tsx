@@ -1,7 +1,7 @@
 import style from "./home.module.scss";
 import Sidebar from "../features/Sidebar/Sidebar";
 import Pos from "./Pos/Pos";
-import Aside from "./Aside/Aside";
+import Aside from "../features/Aside/Aside";
 import { useEffect, useState } from "react";
 import QRCode from "../features/QrCode/Qrcode";
 import Table from "../features/Table/Table";
@@ -12,6 +12,7 @@ import Overview from "./Overview/Overview";
 import Product from "./Product/Product";
 import Settings from "./Settings/Settings";
 import HelpCenter from "./HelpCenter/HelpCenter";
+// import AboutMeal from "../features/AboutMeal/AboutMeal";
 
 const Home = () => {
   const [bag, setBag] = useState<boolean>(false);
@@ -21,6 +22,7 @@ const Home = () => {
   const [successOrder, setSuccessOrder] = useState<boolean>(false);
   const [notification, setNotification] = useState<boolean>(false);
   const [notify, setNotify] = useState<boolean>(false);
+  // const [aboutmeal, setAboutMeal] = useState<boolean>(true);
   const [navigation, setNavigation] = useState<string>("pos");
 
   const [notifyPurpose, setNotifyPurpose] = useState<string>("");
@@ -88,9 +90,8 @@ const Home = () => {
       {qrOpen && <QRCode setQrOpen={setQrOpen} />}
       {table && <Table setTable={setTable} />}
       {successOrder && <SuccessOrder setSuccessOrder={setSuccessOrder} />}
-      {notification && (
-        <Notification setNotification={setNotification} bag={bag} />
-      )}
+      {notification && <Notification setNotification={setNotification} bag={bag} />}
+      {/* {aboutmeal && <AboutMeal setAboutMeal={setAboutMeal} />} */}
       <Notify notify={notify} purpose={notifyPurpose} />
     </div>
   );
