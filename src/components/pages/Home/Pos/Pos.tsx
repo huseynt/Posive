@@ -9,7 +9,7 @@ import SearchInput from "../../features/SearchInput/SearchInput";
 
 
 
-import {API} from "../../../utils/API/API";
+// import {API} from "../../../utils/API/API";
 import axios from "axios";
 import {config} from "../../../utils/API/config";
 
@@ -39,7 +39,7 @@ const Main: React.FC<MainProps> = (props) => {
   async function getMeals() {
     try {
       axios.get(
-        API,
+        "https://project-55919f.apibrew.io:8443/meals?limit=100",
         config
       ).then (
         (response) => {
