@@ -1,14 +1,17 @@
 import style from "./pos.module.scss";
-import { meals } from "../../../test/db/cards";
+// import { meals } from "../../../test/db/cards";
 import Meal from "../Meal/Meal";
 import { useEffect } from "react";
 import { useState } from "react";
 import { IMeal } from "../../../utils/interface/Meal";
 import SearchInput from "../../features/SearchInput/SearchInput";
 // import SearchItem from "../../features/SearchItem/SearchInput";
-// import {API} from "../../../utils/API/API";
-// import axios from "axios";
-// import {config} from "../../../utils/API/config";
+
+
+
+import {API} from "../../../utils/API/API";
+import axios from "axios";
+import {config} from "../../../utils/API/config";
 
 interface MainProps {
   setBag: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,6 +20,7 @@ interface MainProps {
   notification: boolean;
   bag: boolean;
 }
+
 
 const Main: React.FC<MainProps> = (props) => {
   const { bag, setBag, setToggleMenu, setNotification, notification } = props;
@@ -30,29 +34,29 @@ const Main: React.FC<MainProps> = (props) => {
 
 
 
-// ---------------------- test -----------------------------
-  // const [meals, setMeals] = useState<IMeal[]>([]);
-  // async function getMeals() {
-  //   try {
-  //     axios.get(
-  //       API,
-  //       config
-  //     ).then (
-  //       (response) => {
-  //         setMeals(response.data.content);
-  //         setMealsFiltered(response.data.content);
-  //       }
-  //     )
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+// ---------------------- api test ------------------------
+  const [meals, setMeals] = useState<IMeal[]>([]);
+  async function getMeals() {
+    try {
+      axios.get(
+        API,
+        config
+      ).then (
+        (response) => {
+          setMeals(response.data.content);
+          setMealsFiltered(response.data.content);
+        }
+      )
+    } catch (error) {
+      console.log(error);
+    }
+  }
   
-  // useEffect(() => {
-  //   return () => {
-  //     getMeals();
-  //   }
-  // }, []);
+  useEffect(() => {
+    return () => {
+      getMeals();
+    }
+  }, []);
 // ---------------------------------------------------
 
 
@@ -104,7 +108,7 @@ const Main: React.FC<MainProps> = (props) => {
     // if (search.length === 0) {
     //   setSearchResult([]);
     // }
-  }, [category]);
+  }, [category,meals]);
 
 
 
