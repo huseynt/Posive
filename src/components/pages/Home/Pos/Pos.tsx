@@ -10,8 +10,8 @@ import SearchInput from "../../features/SearchInput/SearchInput";
 
 
 // import {API} from "../../../utils/API/API";
-import axios from "axios";
-// import {config} from "../../../utils/API/config";
+import Axios from "axios";
+import {config} from "../../../utils/API/config";
 
 interface MainProps {
   setBag: React.Dispatch<React.SetStateAction<boolean>>;
@@ -37,16 +37,10 @@ const Main: React.FC<MainProps> = (props) => {
 // ---------------------- api test ------------------------
   const [meals, setMeals] = useState<IMeal[]>([]);
   async function getMeals() {
-    console.log("getMeals");
     try {
-      axios.get(
+      Axios.get(
         "https://project-55919f.apibrew.io:8443/meals?limit=100",
-        {
-          headers: {
-            'Accept': 'application/json',
-            'Authorization': `Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tL2FwaWJyZXcvYXBpYnJldyIsInN1YiI6ImNvbnRyb2xsZXIiLCJhdWQiOlsiZ2l0aHViLmNvbS9hcGlicmV3L2FwaWJyZXciXSwiZXhwIjoxNzI3MTIwNTc3LCJuYmYiOjE3MjE5MzY1NzcsImlhdCI6MTcyMTkzNjU3NywianRpIjoiZmY0NzgzZmYtN2QzOC00YzQ2LTg2YTctOTVjMzAyZDliZWM2IiwidXNlcm5hbWUiOiJjb250cm9sbGVyIiwidWlkIjoiZmU1NWU4M2YtNmJkNi00MzgzLTk3ZjgtMzVmMWYwY2NhYzA5Iiwic2NvcGVzIjpbIjo6RlVMTDo6Ojo6OkFMTE9XIl0sInBlcm1pc3Npb25zIjpbeyJpZCI6IjlmNzQ5OWUyLTFjYWUtNDA4ZC1iODQ0LTVhNzZiYWZkNDBiYyIsInZlcnNpb24iOjEsIm9wZXJhdGlvbiI6IkZVTEwiLCJwZXJtaXQiOiJBTExPVyJ9LHsiaWQiOiI5Zjc0OTllMi0xY2FlLTQwOGQtYjg0NC01YTc2YmFmZDQwYmMiLCJ2ZXJzaW9uIjoxLCJvcGVyYXRpb24iOiJGVUxMIiwicGVybWl0IjoiQUxMT1cifV19.0Z1Qb1Trips5RkX4kYAat7JmRWV0Id25D_2_vs8JY3HlJHtLfovLgpNhvAlgeFR8RMbfs8RdF7FXyDMSUvq5JUv7kFPEy1zR85DUCmol5K6BlzTUZk8kpasz-d1iynFIqWmdmr9QTpVJDCrhOfXTYCO-QcvoAjV2FAFFUNiKAFc`,
-          }
-        }
+        config
       ).then (
         (response) => {
           setMeals(response.data.content);
@@ -60,10 +54,10 @@ const Main: React.FC<MainProps> = (props) => {
   }
   
   useEffect(() => {
-    return () => {
+    if (meals.length === 0) {
       getMeals();
     }
-  }, []);
+  }, [meals.length]);
 // ---------------------------------------------------
 
 
