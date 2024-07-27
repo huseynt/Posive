@@ -180,3 +180,24 @@
     background-color: $main_color_dark;
   }
 }
+
+%btn_main_w {
+  padding: 7px 30px;
+  background-color: $white;
+  border-radius: 10px;
+  @extend %m_b;
+  color: $black;
+  user-select: none;
+  cursor: pointer;
+  white-space: nowrap;
+  border: 1px solid $gray;
+
+  &:hover {
+    background-color: $main_light_two;
+    color: $black;
+
+    path {
+      stroke: $black;
+    }
+  }
+}

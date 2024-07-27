@@ -2,6 +2,36 @@
 @import "../../../common/reUseable/mixin";
 @import "../../../common/reUseable/extend";
 
+@keyframes searchOpen {
+    from {
+        transform: translateY(-200%);
+        z-index: -9;
+        opacity: 0;
+        height: 0;
+    }
+    to {
+        transform: translateY(0);
+        z-index: 1;
+        opacity: 1;
+        height: 46px;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .overflow {
     width: 100%;
     max-width: 1920px;
@@ -16,5 +46,253 @@
 }
 
 .main {
-    text-align: center;
+    width: 100%;
+    padding: 20px 2% 2% 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 24px;
+
+    @include mobile {
+        padding: 3%;
+    }
+
+
+    &_up {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        animation: fadeIn 0.3s;
+
+        @include mobile {
+            flex-direction: column;
+            row-gap: 16px;
+        }
+
+        &_overview {
+            display: flex;
+            flex-direction: column;
+
+            @include mobile {
+                width: 100%;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                row-gap: 16px;
+            }
+
+            &_head {
+                @extend %ls_b;
+            }
+
+            &_date {
+                @extend %sm;
+                color: $light_m_gray;
+            }
+        }
+
+        &_actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            column-gap: 12px;
+
+            @include mobile {
+                width: 100%;
+            }
+
+            &_export {
+                padding: 7px 20px;
+                @extend %btn_main;
+                @extend %m;
+                display: flex;
+                align-items: center;
+                column-gap: 10px;
+            }
+
+            &_period {
+                padding: 7px 20px;
+                @extend %btn_main_w;
+                @extend %m;
+                display: flex;
+                align-items: center;
+                column-gap: 10px;
+            }
+        }
+    }
+
+    // ------------------ mobile up -------------------------
+    &_mobileUp {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 16px;
+
+        @include desktop {
+            display: none;
+        }
+
+        &_actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 5px;
+
+            &_menu {
+                padding: 12px 13px;
+                background-color: $white;
+                border-radius: 7px;
+                border: 1px solid $gray;
+                user-select: none;
+                cursor: pointer;
+                svg {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+    
+            &_right {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                column-gap: 14px;
+    
+                &_search {
+                    padding: 12px;
+                    background-color: $white;
+                    border-radius: 7px;
+                    border: 1px solid $gray;
+                    user-select: none;
+                    cursor: pointer;
+                }
+    
+                &_setting {
+                    padding: 12px;
+                    background-color: $white;
+                    border-radius: 7px;
+                    border: 1px solid $gray;
+                    user-select: none;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        &_down {
+            position: relative;
+            transition: all 0.3s;
+            animation: searchOpen 0.3s;
+            transition: .3s ease-in-out;
+            background-color: $white;
+            border-radius: 10px;
+        }
+    }
+    // ------------------------------------------
+
+
+
+
+
+    &_total {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        column-gap: 16px;
+        animation: fadeIn 0.5s;
+
+        @include mobile {
+            flex-direction: column;
+            row-gap: 16px;
+        }
+
+        &_option {
+            width: 100%;
+            background-color: $white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-radius: 7px;
+            border: 1px solid $gray;
+
+            &_text {
+                display: flex;
+                flex-direction: column;
+                row-gap: 6px;
+
+                &_up {
+                    @extend %sm;
+                    color: $light_m_gray;
+                }
+
+                &_head {
+                    @extend %ls_b;
+                }
+            }
+
+            &_icon {
+                padding: 8px;
+                border-radius: 7px;
+            }
+
+        }
+    }
+
+    &_down {
+        width: 100%;
+        padding: 18px 24px 24px 24px;
+        background-color: $white;
+        border-radius: 7px;
+        border: 1px solid $gray;
+        animation: fadeIn .7s ease-in-out;
+
+        height: 500px;
+
+        &_up {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &_head {
+                @extend %ml_b;
+            }
+
+            &_actions {
+                display: flex;
+                align-content: center;
+                column-gap: 12px;
+
+                &_search {
+                    position: relative;
+                    border: 1px solid $gray;
+                    border-radius: 10px;
+
+                    @include mobile {
+                        display: none;
+                    }
+                }
+
+                &_setting {
+                    padding: 8px 10px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    border: 1px solid $gray;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    user-select: none;
+
+                    &:hover {
+                        background-color: $main_light_two;
+                        border: 1px solid $main_color;
+                    }
+                }
+            }
+        }
+    }
+
+
+
 }

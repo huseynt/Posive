@@ -73,7 +73,7 @@ const Home = () => {
         />
       )}
 
-      {navigation==="overview" && <Overview />}
+      {navigation==="overview" && <Overview setToggleMenu={setToggleMenu}/>}
       {navigation==="product" && <Product />}
       {navigation==="settings" && <Settings />}
       {navigation==="help" && <HelpCenter />}
