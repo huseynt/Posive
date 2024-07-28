@@ -1,0 +1,40 @@
+@import "../../../common/reUseable/variable";
+@import "../../../common/reUseable/mixin";
+@import "../../../common/reUseable/extend";
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+.tr {
+    background-color: $white;
+    animation: fadeIn 0.5s ease-in-out;
+
+    &:hover {
+        background-color: $main_light_two;
+    }
+
+    td {
+        max-width: 300px;
+        text-align: left;
+        padding: 7px 12px;
+        @extend %sm, %text_overflow;
+
+        @include mobile {
+            padding: 7px 5px;
+        }
+    }
+
+    &_desktop {
+
+        @include mobile {
+            display: none;
+        }
+    }
+}

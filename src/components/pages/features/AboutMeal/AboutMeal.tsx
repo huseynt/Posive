@@ -16,6 +16,7 @@ const AboutMeal: React.FC<IQRCodeComponentProps> = (props) => {
       <div className={style.meal_bg} onClick={() => setAboutMeal(false)}></div>
 
       <div className={style.meal_block}>
+
         <h3 className={style.meal_block_head}>{name}</h3>
         <img
           className={style.meal_block_img}
@@ -29,6 +30,7 @@ const AboutMeal: React.FC<IQRCodeComponentProps> = (props) => {
           onClick={() => setAboutMeal(false)}
           >Back to Shopping</button>
         </div>
+        
       </div>
     </div>
   );

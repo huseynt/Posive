@@ -62,9 +62,18 @@
     padding: 26px;
     z-index: 30;
     animation: fadeIn 0.3s ease;
+    position: relative;
 
     &_head {
+      width: 100%;
+      // padding: 30px 0 30px;
       @extend %ml_b;
+      // position: absolute;
+      // background: linear-gradient(180deg, $white, $white_transaprent, transparent);
+      color: $black;
+      text-align: center;
+      top: 0;
+      left: 0;
     }
 
     &_img {
@@ -73,6 +82,7 @@
       max-height: 320px;
       object-fit: cover;
       border-radius: 12px;
+      animation: fadeIn 0.3s ease;
     }
 
     &_desc {

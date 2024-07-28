@@ -32,6 +32,11 @@
     }
 }
 
+
+.main_up_actions_period:hover .main_up_actions_period_down {
+    background-color: $main_light_two;
+}
+
 .overflow {
     width: 100%;
     max-width: 1920px;
@@ -118,6 +123,50 @@
                 display: flex;
                 align-items: center;
                 column-gap: 10px;
+                position: relative;
+
+                &_text {
+                    min-width: 88px;
+                    text-align: center;
+                }
+
+                &_bg {
+                    background-color: transparent;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100vw;
+                    height: 100vh;
+                    z-index: 9;
+                }
+                
+
+                &_down {
+                    width: calc(100% + 2px);
+                    position: absolute;
+                    top: 30px;
+                    left: -1px;
+                    background-color: $white;
+                    border: 1px solid $gray;
+                    border-top: none;
+                    padding: 7px 0px;
+                    border-radius: 0 0 10px 10px;
+                    z-index: 9;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+
+                    &_option {
+                        padding: 0 20px;
+                        text-align: center;
+                        z-index: 99999;
+
+                        &:hover {
+                            background-color: $white;
+                        }
+                    }
+                }
             }
         }
     }
@@ -246,8 +295,15 @@
         border-radius: 7px;
         border: 1px solid $gray;
         animation: fadeIn .7s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        align-items: center;
 
-        height: 500px;
+        @include mobile {
+            padding-inline: 15px;
+        }
+
 
         &_up {
             width: 100%;
@@ -287,6 +343,55 @@
                     &:hover {
                         background-color: $main_light_two;
                         border: 1px solid $main_color;
+                    }
+                }
+            }
+        }
+
+
+
+
+        &_transactions {
+            width: 100%;
+            background-color: $white;
+
+            &_table {
+                width: 100%;
+                @extend %text_overflow;
+                border-radius: 10px;
+
+                tr {
+
+                    th {
+                        max-width: 300px;
+                        text-align: left;
+                        padding: 10px 12px;
+                        @extend %sm, %text_overflow;
+                        color: $light_m_gray;
+                        background-color: $gray;
+
+                        @include mobile {
+                            padding: 7px 5px;
+                        }
+                    }
+
+                    td {
+                        max-width: 300px;
+                        text-align: left;
+                        padding: 7px 12px;
+                        @extend %sm, %text_overflow;
+
+                        @include mobile {
+                            padding: 7px 5px;
+                        }
+                    }
+                }
+
+
+                &_head_th_desktop {
+
+                    @include mobile {
+                        display: none;
                     }
                 }
             }

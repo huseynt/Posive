@@ -5,6 +5,8 @@ import SearchInput from "../../features/SearchInput/SearchInput";
 import { meals } from "../../../test/db/cards";
 import { IMeal } from "../../../utils/interface/Meal";
 import { useOutletContext } from "react-router-dom";
+import OverviewTableItem from "../../features/OverviewTableItem/OverviewTableItem";
+import {orders} from "../../../test/db/transactions"
 
 interface IOverview {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,6 +18,9 @@ const Overview = () => {
   const [date, setDate] = useState("");
   const [mobileSearch, setMobileSearch] = useState<boolean>(false);
   const [mealsFiltered, setMealsFiltered] = useState<IMeal[]>([]);
+  const [periodDown, setPeriodDown] = useState<boolean>(false);
+  const [period, setPeriod] = useState<string>("This week");
+  const [checked, setChecked] = useState<boolean>(false);
 
   useEffect(() => {
     const today = new Date();
@@ -27,6 +32,21 @@ const Overview = () => {
     setDate(formattedDate);
     console.log(mealsFiltered);
   }, [mealsFiltered]);
+
+
+  useEffect(() => {
+    console.log(period);
+  }, [period]);
+
+
+
+
+
+
+
+
+
+
 
   return (
     <div className={style.overflow}>
@@ -188,13 +208,16 @@ const Overview = () => {
             </div>
 
             <div className={style.main_up_actions_period}>
-              <p>This week</p>
+              <p className={style.main_up_actions_period_text}
+              onClick={() => setPeriodDown(!periodDown)}
+              >{period}</p>
               <svg
                 width="16"
                 height="17"
                 viewBox="0 0 16 17"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                onClick={() => setPeriodDown(!periodDown)}
               >
                 <path
                   d="M13.28 6.4668L8.9333 10.8135C8.41997 11.3268 7.57997 11.3268 7.06664 10.8135L2.71997 6.4668"
@@ -205,6 +228,36 @@ const Overview = () => {
                   strokeLinejoin="round"
                 />
               </svg>
+
+              <div className={style.main_up_actions_period_bg}
+              onClick={() => setPeriodDown(false)}
+              style={{ display: periodDown ? "block" : "none" }}
+              ></div>
+
+              <div className={style.main_up_actions_period_down}
+              style={{ display: periodDown ? "block" : "none" }}
+              >
+                <div className={style.main_up_actions_period_down_option}
+                onClick={() => {setPeriod("This week")
+                setPeriodDown(false)}
+                }
+                >This week</div>
+                <div className={style.main_up_actions_period_down_option}
+                onClick={() => {setPeriod("This month")
+                  setPeriodDown(false)}
+                }
+                >This month</div>
+                <div className={style.main_up_actions_period_down_option}
+                onClick={() => {setPeriod("This year")
+                  setPeriodDown(false)}
+                }
+                >This year</div>
+                <div className={style.main_up_actions_period_down_option}
+                onClick={() => {setPeriod("All time")
+                  setPeriodDown(false)}
+                }
+                >All time</div>
+              </div>
             </div>
           </div>
         </div>
@@ -424,7 +477,29 @@ const Overview = () => {
           </div>
 
           {/* -------------------------- Transactions main -------------------------------- */}
-          <div>asdasdasdasd</div>
+          <div className={style.main_down_transactions}>
+            <table className={style.main_down_transactions_table}>
+
+              <thead className={style.main_down_transactions_table_head}>
+                <tr className={style.main_down_transactions_table_head_th}>
+                  <th style={{textAlign : "center"}}><input type="checkbox" onClick={() => setChecked(!checked)}/></th>
+                  <th>Order ID</th>
+                  <th className={style.main_down_transactions_table_head_th_desktop}>Receipt No</th>
+                  <th className={style.main_down_transactions_table_head_th_desktop}>Menu</th>
+                  <th className={style.main_down_transactions_table_head_th_desktop}>Collected/Cashier</th>
+                  <th>Date & Time</th>
+                  <th className={style.main_down_transactions_table_head_th_desktop}>Payment method</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {orders.map((order, index) => (
+                  <OverviewTableItem key={index} checked={checked} {...order} />
+                ))}
+              </tbody>
+            </table>
+          </div>
 
         </div>
 
