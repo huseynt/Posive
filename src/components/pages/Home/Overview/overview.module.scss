@@ -199,7 +199,6 @@
         justify-content: space-between;
         align-items: center;
         column-gap: 16px;
-        animation: fadeIn 0.5s;
 
         @include mobile {
             flex-direction: column;
@@ -215,6 +214,7 @@
             padding: 15px 20px;
             border-radius: 7px;
             border: 1px solid $gray;
+            animation: fadeIn;
 
             &_text {
                 display: flex;

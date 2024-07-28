@@ -35,7 +35,7 @@ const LoginForm = () => {
     navigate('/forgot')
   }
   const handleHome = () => {
-    navigate('/')
+    navigate('/home')
   }
 
 

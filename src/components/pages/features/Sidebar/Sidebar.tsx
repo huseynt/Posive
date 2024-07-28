@@ -30,6 +30,10 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
   const handleLogout = () => {
     navigate('/login')
   }
+  const handleNavigation = (nav: string) => {
+    setNavigation(nav)
+    navigate(nav)
+  }
 
   return (
     <div
@@ -85,9 +89,9 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           style={{
             padding: !toggleMenu ? "12px 0px" : "12px 20px",
             justifyContent: !toggleMenu ? "center" : "unset",
-            backgroundColor: navigation === "pos" ? "#FDEFD9" : "unset",
+            backgroundColor: navigation === "" ? "#FDEFD9" : "unset",
           }}
-          onClick={() => setNavigation("pos")}
+          onClick={() => handleNavigation("")}
         >
           <svg
             width="18"
@@ -98,7 +102,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           >
             <path
               d="M3.75 7.5H5.25C6.75 7.5 7.5 6.75 7.5 5.25V3.75C7.5 2.25 6.75 1.5 5.25 1.5H3.75C2.25 1.5 1.5 2.25 1.5 3.75V5.25C1.5 6.75 2.25 7.5 3.75 7.5Z"
-              stroke={navigation === "pos" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === "" ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeMiterlimit="10"
               strokeLinecap="round"
@@ -106,7 +110,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             />
             <path
               d="M12.75 7.5H14.25C15.75 7.5 16.5 6.75 16.5 5.25V3.75C16.5 2.25 15.75 1.5 14.25 1.5H12.75C11.25 1.5 10.5 2.25 10.5 3.75V5.25C10.5 6.75 11.25 7.5 12.75 7.5Z"
-              stroke={navigation === "pos" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === "" ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeMiterlimit="10"
               strokeLinecap="round"
@@ -114,7 +118,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             />
             <path
               d="M12.75 16.5H14.25C15.75 16.5 16.5 15.75 16.5 14.25V12.75C16.5 11.25 15.75 10.5 14.25 10.5H12.75C11.25 10.5 10.5 11.25 10.5 12.75V14.25C10.5 15.75 11.25 16.5 12.75 16.5Z"
-              stroke={navigation === "pos" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === "" ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeMiterlimit="10"
               strokeLinecap="round"
@@ -122,7 +126,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             />
             <path
               d="M3.75 16.5H5.25C6.75 16.5 7.5 15.75 7.5 14.25V12.75C7.5 11.25 6.75 10.5 5.25 10.5H3.75C2.25 10.5 1.5 11.25 1.5 12.75V14.25C1.5 15.75 2.25 16.5 3.75 16.5Z"
-              stroke={navigation === "pos" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === "" ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeMiterlimit="10"
               strokeLinecap="round"
@@ -133,7 +137,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             style={{
               fontSize: !toggleMenu ? "0rem" : "1rem",
               opacity: !toggleMenu ? "0" : "1",
-              color: navigation === "pos" ? "#EA7E41" : "#000",
+              color: navigation === "" ? "#EA7E41" : "#000",
             }}
           >
             POS
@@ -147,7 +151,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             justifyContent: !toggleMenu ? "center" : "unset",
             backgroundColor: navigation === "overview" ? "#FDEFD9" : "unset"
           }}
-          onClick={() => setNavigation("overview")}
+          onClick={() => handleNavigation("overview")}
         >
           <svg
             width="18"
@@ -211,7 +215,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             justifyContent: !toggleMenu ? "center" : "unset",
             backgroundColor: navigation === "product" ? "#FDEFD9" : "unset"
           }}
-          onClick={() => setNavigation("product")}
+          onClick={() => handleNavigation("product")}
         >
           <svg
             width="18"
@@ -265,7 +269,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             justifyContent: !toggleMenu ? "center" : "unset",
             backgroundColor: navigation === "settings" ? "#FDEFD9" : "unset"
           }}
-          onClick={() => setNavigation("settings")}
+          onClick={() => handleNavigation("settings")}
         >
           <svg
             width="18"
@@ -305,7 +309,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             justifyContent: !toggleMenu ? "center" : "unset",
             backgroundColor: navigation === "help" ? "#FDEFD9" : "unset"
           }}
-          onClick={() => setNavigation("help")}
+          onClick={() => handleNavigation("help")}
         >
           <svg
             width="18"

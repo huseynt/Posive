@@ -4,13 +4,15 @@ import { useState } from "react";
 import SearchInput from "../../features/SearchInput/SearchInput";
 import { meals } from "../../../test/db/cards";
 import { IMeal } from "../../../utils/interface/Meal";
+import { useOutletContext } from "react-router-dom";
 
 interface IOverview {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Overview: React.FC<IOverview> = (props) => {
-  const { setToggleMenu } = props;
+const Overview = () => {
+  
+  const { setToggleMenu } = useOutletContext<IOverview>();
   const [date, setDate] = useState("");
   const [mobileSearch, setMobileSearch] = useState<boolean>(false);
   const [mealsFiltered, setMealsFiltered] = useState<IMeal[]>([]);
@@ -24,11 +26,12 @@ const Overview: React.FC<IOverview> = (props) => {
     });
     setDate(formattedDate);
     console.log(mealsFiltered);
-  }, [new Date(), mealsFiltered]);
+  }, [mealsFiltered]);
 
   return (
     <div className={style.overflow}>
       <div className={style.main}>
+
         {/* ----------------------------- mobile up ---------------------------------- */}
         <div className={style.main_mobileUp}>
           <div className={style.main_mobileUp_actions}>
@@ -138,6 +141,9 @@ const Overview: React.FC<IOverview> = (props) => {
           </div>
         </div>
 
+
+        
+        {/* ------------------------------ up ----------------------------------------- */}
         <div className={style.main_up}>
           <div className={style.main_up_overview}>
             <h3 className={style.main_up_overview_head}>Overview</h3>
@@ -203,8 +209,12 @@ const Overview: React.FC<IOverview> = (props) => {
           </div>
         </div>
 
+
+        {/* -------------------------- total review -------------------------------- */}
         <div className={style.main_total}>
-          <div className={style.main_total_option}>
+          <div className={style.main_total_option}
+          style={{ animationDuration: "0.5s" }}
+          >
             <div className={style.main_total_option_text}>
               <p className={style.main_total_option_text_up}>Total Sales</p>
               <h3 className={style.main_total_option_text_head}>$121,412</h3>
@@ -233,7 +243,9 @@ const Overview: React.FC<IOverview> = (props) => {
             </div>
           </div>
 
-          <div className={style.main_total_option}>
+          <div className={style.main_total_option}
+          style={{ animationDuration: "0.55s" }}
+          >
             <div className={style.main_total_option_text}>
               <p className={style.main_total_option_text_up}>Total Customers</p>
               <h3 className={style.main_total_option_text_head}>4,324</h3>
@@ -278,7 +290,9 @@ const Overview: React.FC<IOverview> = (props) => {
             </div>
           </div>
 
-          <div className={style.main_total_option}>
+          <div className={style.main_total_option}
+          style={{ animationDuration: "0.6s" }}
+          >
             <div className={style.main_total_option_text}>
               <p className={style.main_total_option_text_up}>Total Order</p>
               <h3 className={style.main_total_option_text_head}>5,021</h3>
@@ -303,7 +317,9 @@ const Overview: React.FC<IOverview> = (props) => {
             </div>
           </div>
 
-          <div className={style.main_total_option}>
+          <div className={style.main_total_option}
+          style={{ animationDuration: "0.65s" }}
+          >
             <div className={style.main_total_option_text}>
               <p className={style.main_total_option_text_up}>Total Tip</p>
               <h3 className={style.main_total_option_text_head}>$1,412</h3>
@@ -333,7 +349,10 @@ const Overview: React.FC<IOverview> = (props) => {
           </div>
         </div>
 
+        {/* -------------------------- Transactions -------------------------------- */}
         <div className={style.main_down}>
+
+          {/* -------------------------- Transactions up -------------------------------- */}
           <div className={style.main_down_up}>
             <p className={style.main_down_up_head}>Recent Transaction</p>
             <div className={style.main_down_up_actions}>
@@ -403,7 +422,13 @@ const Overview: React.FC<IOverview> = (props) => {
               </div>
             </div>
           </div>
+
+          {/* -------------------------- Transactions main -------------------------------- */}
+          <div>asdasdasdasd</div>
+
         </div>
+
+        
       </div>
     </div>
   );

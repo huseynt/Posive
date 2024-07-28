@@ -5,13 +5,13 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { IMeal } from "../../../utils/interface/Meal";
 import SearchInput from "../../features/SearchInput/SearchInput";
-// import SearchItem from "../../features/SearchItem/SearchInput";
-
 
 
 import {API} from "../../../utils/API/API";
 import Axios from "axios";
 import {config} from "../../../utils/API/config";
+
+import { useOutletContext } from "react-router-dom";
 
 interface MainProps {
   setBag: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,13 +22,11 @@ interface MainProps {
 }
 
 
-const Main: React.FC<MainProps> = (props) => {
-  const { bag, setBag, setToggleMenu, setNotification, notification } = props;
+const Main= () => {
+  const { bag, setBag, setToggleMenu, setNotification, notification }= useOutletContext<MainProps>();
   const [category, setCategory] = useState<string>("");
   const [mealsFiltered, setMealsFiltered] = useState<IMeal[]>([]);
   const [mobileSearch, setMobileSearch] = useState<boolean>(false);
-  // const [search, setSearch] = useState<string>("");
-  // const [searchResult, setSearchResult] = useState<IMeal[]>([]);
 
 
 
@@ -62,53 +60,12 @@ const Main: React.FC<MainProps> = (props) => {
 
 
 
-
-
-
-
-// // ---------------------- search -----------------------------
-//   const searchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     setSearch(e.target.value);
-//     if (search.length > 0) {
-//       setSearchResult(
-//         meals.filter((meal) =>
-//           meal.name.toLowerCase().includes(search.toLowerCase())
-//         )
-//       );
-//     } else {
-//       setSearchResult([]);
-//     }
-//     console.log(searchResult);
-//   };
-
-//   const searchHandle = () => {
-//     if (searchResult.length > 0) {
-//       setMealsFiltered(searchResult);
-//     }
-//     console.log(searchResult);
-//     setSearch("");
-//     setSearchResult([]);
-//   };
-
-//   const findHandle = (name: string) => {
-//     setMealsFiltered(meals.filter((meal) => meal.name === name));
-//     setSearch("");
-//     setSearchResult([]);
-//   };
-// // ---------------------- --- -----------------------------
-
-
-
   useEffect(() => {
     if (category === "") {
       setMealsFiltered(meals);
     } else {
       setMealsFiltered(meals.filter((meal) => meal.category === category));
     }
-
-    // if (search.length === 0) {
-    //   setSearchResult([]);
-    // }
   }, [category,meals]);
 
 
@@ -127,60 +84,6 @@ const Main: React.FC<MainProps> = (props) => {
 
           {/* ----------------------------------------- */}
           <div className={style.main_up_search}>
-            {/* <input
-              type="text"
-              placeholder="Search"
-              id="search"
-              autoComplete="off"
-              onChange={searchChange}
-              value={search}
-            />
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              onClick={searchHandle}
-            >
-              <path
-                d="M7.66659 14.0002C11.1644 14.0002 13.9999 11.1646 13.9999 7.66683C13.9999 4.16903 11.1644 1.3335 7.66659 1.3335C4.16878 1.3335 1.33325 4.16903 1.33325 7.66683C1.33325 11.1646 4.16878 14.0002 7.66659 14.0002Z"
-                stroke="#1A1C1E"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M14.6666 14.6668L13.3333 13.3335"
-                stroke="#1A1C1E"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-
-            <div
-              className={style.main_up_search_estimated}
-              style={{
-                display:
-                  search.length && searchResult.length > 0
-                    ? "block !important"
-                    : "none",import { meals } from './../../../test/db/cards';
-
-                borderBottom:
-                  search.length && searchResult.length > 0 ? "" : "none",
-              }}
-            >
-              <div>
-                {searchResult.map((meal) => (
-                  <SearchItem
-                    key={meal.id}
-                    name={meal.name}
-                    findHandle={findHandle}
-                  />
-                ))}
-              </div>
-            </div> */}
             <SearchInput meals={meals} 
             setMealsFiltered={setMealsFiltered}
             />
@@ -435,34 +338,6 @@ const Main: React.FC<MainProps> = (props) => {
             className={style.main_mobileUp_down}
             style={{ display: mobileSearch ? "flex" : "none" }}
           >
-            {/* <input
-              className={style.main_mobileUp_down_input}
-              type="text"
-              placeholder="Search..."
-            />
-            <svg
-              className={style.main_mobileUp_down_icon}
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M7.66659 14.0002C11.1644 14.0002 13.9999 11.1646 13.9999 7.66683C13.9999 4.16903 11.1644 1.3335 7.66659 1.3335C4.16878 1.3335 1.33325 4.16903 1.33325 7.66683C1.33325 11.1646 4.16878 14.0002 7.66659 14.0002Z"
-                stroke="#1A1C1E"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M14.6666 14.6668L13.3333 13.3335"
-                stroke="#1A1C1E"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg> */}
             <SearchInput meals={meals} 
             setMealsFiltered={setMealsFiltered}
             />

@@ -13,7 +13,7 @@
         transform: translateY(0);
         z-index: 1;
         opacity: 1;
-        height: 46px;
+        height: 40px;
     }
 }
 
@@ -31,24 +31,6 @@
         transform: translateY(0);
     }
 }
-
-
-// .main_up_search input:focus ~ .main_up_search_estimated,
-// .main_up_search_estimated:focus-within {
-//   display: block !important;
-//   border: 1px solid $main_color;
-//   border-top: none;
-// }
-// .main_up_search_estimated:focus-within {
-//     display: block;
-//   }
-
-// .main_up_search input:not(:focus) ~ .main_up_search_estimated,
-// .main_up_search_estimated:not(:focus-within) {
-//   display: none ;
-//   border: 1px solid $gray;
-//   border-top: none;
-// }
 
 
 .overflow {
@@ -95,46 +77,6 @@
             border-radius: 10px;
             background-color: $white;
             border: 1px solid $gray;
-            
-
-            // input {
-            //     width: 100%;
-            //     @extend %m;
-            //     padding: 8px 20px 8px 50px;
-            //     border-radius: 10px;
-            //     background-color: transparent;
-            //     z-index: 99;
-
-            //     &:focus {
-            //         outline: .5px solid $main_color;
-            //     }
-            // }
-
-            // svg {
-            //     width: 16px;
-            //     height: 16px;
-            //     position: absolute;
-            //     top: 50%;
-            //     left: 23px;
-            //     transform: translateY(-50%);
-            //     cursor: pointer;
-            // }
-
-            // &_estimated {
-            //     width: calc(100% + 2px);
-            //     padding: 2px 25px;
-            //     position: absolute;
-            //     top: 33px;
-            //     left: -1px;
-            //     color: $light_m_gray;
-            //     background-color: $available;
-            //     border-radius: 0 0 10px 10px;
-            //     background-color: $white;
-
-            //     &:hover {
-            //         display: block !important;
-            //     }
-            // }
         }
 
         &_bag {
@@ -231,27 +173,13 @@
         }
 
         &_down {
+            
             position: relative;
             transition: all 0.3s;
             animation: searchOpen 0.3s;
             transition: .3s ease-in-out;
             background-color: $white;
             border-radius: 10px;
-
-            // &_input {
-            //     width: 100%;
-            //     padding: 10px 15px 10px 40px;
-            //     border-radius: 7px;
-            //     border: 1px solid $gray;
-            //     @extend %m;
-            // }
-
-            // &_icon {
-            //     position: absolute;
-            //     top: 50%;
-            //     left: 15px;
-            //     transform: translateY(-50%);
-            // }
         }
     }
 
@@ -354,9 +282,6 @@
     &_meals {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        // display: flex;
-        // flex-wrap: wrap;
-        // justify-content: start;
         column-gap: 16px;
         row-gap: 24px;
 

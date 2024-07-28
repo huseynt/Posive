@@ -1,6 +1,6 @@
 import style from "./home.module.scss";
 import Sidebar from "../features/Sidebar/Sidebar";
-import Pos from "./Pos/Pos";
+// import Pos from "./Pos/Pos";
 import Aside from "../features/Aside/Aside";
 import { useEffect, useState } from "react";
 import QRCode from "../features/QrCode/Qrcode";
@@ -8,13 +8,31 @@ import Table from "../features/Table/Table";
 import SuccessOrder from "../features/SuccessOrder/SuccessOrder";
 import Notify from "../features/Notify/Notify";
 import Notification from "../features/Notification/Notification";
-import Overview from "./Overview/Overview";
-import Product from "./Product/Product";
-import Settings from "./Settings/Settings";
-import HelpCenter from "./HelpCenter/HelpCenter";
-// import AboutMeal from "../features/AboutMeal/AboutMeal";
+// import Overview from "./Overview/Overview";
+// import Product from "./Product/Product";
+// import Settings from "./Settings/Settings";
+// import HelpCenter from "./HelpCenter/HelpCenter";
+import { Outlet } from "react-router-dom";
+
+
+
+// export type AppContextArrayType = [
+//   (value: boolean) => void,  // setToggleMenu
+//   (bag: any[]) => void,      // setBag
+//   (message: string) => void, // setNotification
+//   (path: string) => void,    // setNavigation
+//   string,                    // navigation
+//   (purpose: string) => void, // setNotifyPurpose
+//   (notify: boolean) => void, // setNotify
+//   () => void                 // requestNotify
+// ];
+
+
+
+
 
 const Home = () => {
+
   const [bag, setBag] = useState<boolean>(false);
   const [qrOpen, setQrOpen] = useState<boolean>(false);
   const [table, setTable] = useState<boolean>(false);
@@ -22,8 +40,7 @@ const Home = () => {
   const [successOrder, setSuccessOrder] = useState<boolean>(false);
   const [notification, setNotification] = useState<boolean>(false);
   const [notify, setNotify] = useState<boolean>(false);
-  // const [aboutmeal, setAboutMeal] = useState<boolean>(true);
-  const [navigation, setNavigation] = useState<string>("pos");
+  const [navigation, setNavigation] = useState<string>((window.location.pathname).split("/home")[1]);
 
   const [notifyPurpose, setNotifyPurpose] = useState<string>("");
   const requestNotify = (purpose: string) => {
@@ -63,7 +80,7 @@ const Home = () => {
       ></div>
       {/* ----------------------------- for mobile bg ---------------------------- */}
 
-      {navigation==="pos" && (
+      {/* {navigation==="pos" && (
         <Pos
           bag={bag}
           setBag={setBag}
@@ -71,13 +88,27 @@ const Home = () => {
           setNotification={setNotification}
           notification={notification}
         />
-      )}
-
-      {navigation==="overview" && <Overview setToggleMenu={setToggleMenu}/>}
+      )} */}
+      {/* {navigation==="overview" && <Overview setToggleMenu={setToggleMenu}/>}
       {navigation==="product" && <Product />}
       {navigation==="settings" && <Settings />}
-      {navigation==="help" && <HelpCenter />}
+      {navigation==="help" && <HelpCenter />} */}
 
+
+      {/* <Routes>
+
+              <Route path='/help' element={<HelpCenter />} />
+      </Routes> */}
+
+      <Outlet context={
+        {
+          setToggleMenu: setToggleMenu,
+          bag: bag,
+          notification: notification,
+          setBag: setBag,
+          setNotification: setNotification
+        }
+      }/>
 
       <Aside
         bag={bag}
