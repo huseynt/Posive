@@ -15,14 +15,14 @@
 }
 
 // scrollbar
-::-webkit-scrollbar {
+.aside::-webkit-scrollbar {
     width: 5px;
     height: 300px;
 }
-::-webkit-scrollbar-track {
+.aside::-webkit-scrollbar-track {
     background: #ffffff;
 }
-::-webkit-scrollbar-thumb {
+.aside::-webkit-scrollbar-thumb {
     background: $main_light_color;
     border-radius: 15px;
     height: 10px;

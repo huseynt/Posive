@@ -1,0 +1,176 @@
+@import "../../common/reUseable/variable";
+@import "../../common/reUseable/mixin";
+@import "../../common/reUseable/extend";
+
+@import url('https://db.onlinewebfonts.com/c/9e00143409affcb46a1ae58634aa64be?family=SofiaProRegular');
+
+
+@keyframes fadeElementLeft {
+    0% {
+        opacity: 0;
+        right: 0;
+    }
+
+    100% {
+        opacity: 1;
+        right: 99%;
+    }
+}
+
+
+@keyframes fadeElementRight {
+    0% {
+        opacity: 0;
+        left: 0;
+    }
+
+    100% {
+        opacity: 1;
+        left: 99%;
+    }
+}
+
+
+.home {
+    width: 100%;
+    font-family: 'SofiaProRegular', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 100px;
+
+    &_bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        // background: url('/public/home.png');
+        // background-size: cover;
+        // background-position: center;
+        // background-repeat: no-repeat;
+        z-index: -9;
+
+        &_circle {
+            position: absolute;
+            width: 150vw;
+            height: 180vh;
+            border-radius: 50%;
+            background-color: $main_color;
+            top: -70%;
+            right: 5%;
+            background: linear-gradient(90deg, #f89243, #f89243, #f89044, #f47646);
+        }
+    }
+
+    // &_container {
+    //     width: 100%;
+    //     height: 100vh;
+    //     background-color: #0000005b;
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    //     gap: 20px;
+
+    //     &_element {
+    //         width: 300px;
+    //         height: 200px;
+    //         background: #ffffff;
+    //     }
+    // }
+
+    &_head {
+        margin-top: 100px;
+
+        h1 {
+            width: 100%;
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+
+            @include mobile {
+                font-size: 1.5rem
+            }
+        }
+    }
+
+    &_preview {
+        width: 100%;
+        width: fit-content;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+
+        @include mobile {
+            flex-direction: column;
+            position: unset;
+        }
+
+
+        &_overview {
+            width: 400px;
+            position: absolute;
+            right: 99%;
+            animation: fadeElementLeft 1s ease-in-out;
+            transition: 0.3s ease-in-out;
+
+            @include mobile {
+                position: unset;
+                width: 200px;
+            }
+
+            &:hover {
+                scale: 1.2;
+                z-index: 999;
+            }
+
+            img {
+                border-radius: 7px;
+            }
+        }
+
+        &_pos {
+            width: 430px;
+            z-index: 99;
+            transition: 0.3s ease-in-out;
+
+            @include mobile {
+                position: unset;
+                width: 200px;
+            }
+
+            &:hover {
+                scale: 1.2;
+                z-index: 999;
+            }
+
+            img {
+                border-radius: 7px;
+            }
+        }
+
+        &_login {
+            width: 400px;
+            position: absolute;
+            left: 99%;
+            animation: fadeElementRight 1s ease-in-out;
+            transition: 0.3s ease-in-out;
+
+            @include mobile {
+                position: unset;
+                width: 200px;
+            }
+
+            &:hover {
+                scale: 1.2;
+                z-index: 999;
+            }
+
+            img {
+                border-radius: 7px;
+            }
+        }
+    }
+}

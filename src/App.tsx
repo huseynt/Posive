@@ -16,6 +16,7 @@ import Product from './components/pages/Home/Product/Product'
 import Settings from './components/pages/Home/Settings/Settings'
 import Overview from './components/pages/Home/Overview/Overview'
 import Pos from './components/pages/Home/Pos/Pos'
+import HomePage from './components/pages/HomePage/HomePage'
 
 
 
@@ -68,6 +69,7 @@ function App() {
           <Route path='/registr' element={<Registr />} />
           <Route path='/login' element={<Login />} />
           <Route path='/forgot' element={<Forgot />} />
+          <Route path='/homepage' element={<HomePage />} />
           
           <Route path='/home' element={<Home />}>
             {/* <Route path='/' element={<Pos bag={bag} setBag={setBag} setToggleMenu={setToggleMenu} setNotification={setNotification} notification={notification} />} /> */}
