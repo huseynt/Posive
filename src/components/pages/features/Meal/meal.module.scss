@@ -25,11 +25,16 @@
 .meal {
     width: 100%;
     max-width: 350px;
-    background-color: $white;
     padding: 8px;
     border-radius: 7px;;
-    border: 1px solid $gray;
+    border: 1px solid;
     animation: fadeIn .8s ease-in-out;
+
+    @include themed() {
+        background-color: t(white);
+        border-color: t(gray);
+    }
+
 
     &:hover {
         box-shadow: 0 0 10px 0  $main_light_shadow;
@@ -72,9 +77,16 @@
         h4 {
             @extend %sm_b,%text_overflow;
             margin-bottom: 6px;
+
+            @include themed() {
+                color: t(black);
+            }    
         }
         p {
             @extend %s;
+            @include themed() {
+                color: t(black);
+            }
         }
     }
 
@@ -88,9 +100,15 @@
             width: 37px;
             padding: 0px 10px;
             background-color: transparent;
-            border: 1px solid $gray;
             border-radius: 7px;
+            border: 1px solid;
             @extend %ml_b;
+
+            @include themed() {
+                color: t(black);
+                border-color: t(gray);
+            }
+    
 
             &:hover {
                 background-color: $main_light_two;
@@ -100,6 +118,10 @@
         p {
             @extend %m_b;
             margin: auto 0;
+
+            @include themed() {
+                color: t(black);
+            }
         }
     }
 }

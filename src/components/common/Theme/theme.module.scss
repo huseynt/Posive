@@ -1,40 +1,18 @@
-@import "../../common/reUseable/variable";
+@import "../reUseable/extend";
+@import "../reUseable/mixin";
+@import "../reUseable/variable";
 
-//   --------------------- light / dark mode ---------------------
-body[data-theme='light'] {
-    --dark-blue: #{$dark_blue};
-    --gray: #{$gray};
-    --light-gray: #{$light_gray};
-    --light-m-gray: #{$light_m_gray};
-    --light-bg-gray: #{$light_bg_gray};
-    --main-color-dark: #{$main_color_dark};
-    --main-color: #{$main_color};
-    --main-light-color: #{$main_light_color};
-    --main-light-two: #{$main_light_two};
-    --link-blue: #{$link_blue};
-    --white: #{$white};
-    --black: #{$black};
-    --low-black: #{$low_black};
-    --available: #{$available};
-    --available-soon: #{$available_soon};
-    --reserved: #{$reserved};
-  }
-  
-  body[data-theme='dark'] {
-    --dark-blue: #{$dark_blue};
-    --gray: darken(#{$gray}, 20%);
-    --light-gray: darken(#{$light_gray}, 20%);
-    --light-m-gray: darken(#{$light_m_gray}, 20%);
-    --light-bg-gray: #000;
-    --main-color-dark: #{$main_color_dark};
-    --main-color: #{$main_color_dark};
-    --main-light-color: darken(#{$main_light_color}, 20%);
-    --main-light-two: darken(#{$main_light_two}, 20%);
-    --link-blue: lighten(#{$link_blue}, 20%);
-    --white: #{$black};
-    --black: #{$white};
-    --low-black: lighten(#{$low_black}, 20%);
-    --available: #{$available};
-    --available-soon: #{$available_soon};
-    --reserved: #{$reserved};
-  }
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 700;
+    
+
+    @include themed() {
+        background-color: t(white);
+        color: t(main_color);
+    }
+}

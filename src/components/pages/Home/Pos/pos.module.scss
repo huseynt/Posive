@@ -37,10 +37,16 @@
     width: 100%;
     max-width: 1920px;
     height: 100vh;
-    background-color: $light_bg_gray;
+    // background-color: $light_bg_gray;
     overflow-y:scroll; 
     scrollbar-width: none;
     -ms-overflow-style: none;
+    transition: all 0.3s linear;
+
+
+    @include themed() {
+        background-color: t(light_bg_gray);
+      }
 }
 .overflow::-webkit-scrollbar {
     display: none;
@@ -54,6 +60,10 @@
     flex-direction: column;
     row-gap: 24px;
     transition: all 0.3s linear;
+
+    @include themed() {
+        background-color: t(light_bg_gray);
+      }
 
     @include mobile {
         padding: 3% 3% 30% 3%;
@@ -76,22 +86,39 @@
             padding: 0;
             border-radius: 10px;
             background-color: $white;
-            border: 1px solid $gray;
+            border: 1px solid;
+
+            @include themed() {
+                background-color: t(white);
+                border-color: t(gray);
+              }
         }
 
         &_bag {
             padding: 10px 13px;
-            background-color: $white;
             border-radius: 10px;
-            border: 1px solid $gray;
+            border: 1px solid;
             margin-left: 16px;
 
+            @include themed() {
+                background-color: t(white);
+                border-color: t(gray);
+              }
+
+            svg {
+                path {
+                    @include themed() {
+                        stroke: t(black);
+                      }
+                }
+            }
+
             &:hover {
-                background-color: $main_light_two;
+                background-color: $main_light_two !important;
 
                 svg {
                     path {
-                        stroke: $main_color;
+                        stroke: $main_color !important;
                     }
                 }
             }
@@ -102,15 +129,28 @@
             background-color: $white;
             margin-left: 16px;
             border-radius: 10px;
-            border: 1px solid $gray;
+            border: 1px solid;
             z-index: 9991;
 
+            @include themed() {
+                background-color: t(white);
+                border-color: t(gray);
+              }
+
+            svg {
+                path {
+                    @include themed() {
+                        stroke: t(black);
+                      }
+                }
+            }
+
             &:hover {
-                background-color: $main_light_two;
+                background-color: $main_light_two !important;
 
                 svg {
                     path {
-                        stroke: $main_color;
+                        stroke: $main_color !important;
                     }
                 }
             }
@@ -135,14 +175,25 @@
 
             &_menu {
                 padding: 12px 13px;
-                background-color: $white;
                 border-radius: 7px;
-                border: 1px solid $gray;
+                border: 1px solid;
                 user-select: none;
                 cursor: pointer;
+
+                @include themed() {
+                    background-color: t(white);
+                    border-color: t(gray);
+                  }
+
                 svg {
                     width: 20px;
                     height: 20px;
+
+                    path {
+                        @include themed() {
+                            stroke: t(black);
+                          }
+                    }
                 }
             }
     
@@ -154,20 +205,42 @@
     
                 &_search {
                     padding: 12px;
-                    background-color: $white;
                     border-radius: 7px;
-                    border: 1px solid $gray;
+                    border: 1px solid;
                     user-select: none;
                     cursor: pointer;
+
+                    @include themed() {
+                        background-color: t(white);
+                        border-color: t(gray);
+                      }
+                      svg {
+                        path {
+                            @include themed() {
+                                stroke: t(black);
+                              }
+                        }
+                    }
                 }
     
                 &_setting {
                     padding: 12px;
-                    background-color: $white;
                     border-radius: 7px;
-                    border: 1px solid $gray;
+                    border: 1px solid;
                     user-select: none;
                     cursor: pointer;
+
+                    @include themed() {
+                        background-color: t(white);
+                        border-color: t(gray);
+                      }
+                      svg {
+                        path {
+                            @include themed() {
+                                stroke: t(black);
+                              }
+                        }
+                    }
                 }
             }
         }
@@ -178,8 +251,13 @@
             transition: all 0.3s;
             animation: searchOpen 0.3s;
             transition: .3s ease-in-out;
-            background-color: $white;
+            border: 1px solid;
             border-radius: 10px;
+
+            @include themed() {
+                background-color: t(white);
+                border-color: t(gray);
+              }
         }
     }
 
@@ -208,15 +286,28 @@
             width: 100%;
             max-width: 500px;
             min-width: 160px;
-            background-color: $white;
             padding: 12px;
             border-radius: 7px;
             display: flex;
             flex-direction: column;
             row-gap: 12px;
             cursor: pointer;
-            border: 1px solid $gray;
+            border: 1px solid;
             user-select: none;
+
+            @include themed() {
+                background-color: t(white);
+                border-color: t(gray);
+            }
+
+            svg {
+                path {
+                    @include themed() {
+                        fill: t($black) ;
+                    }
+                }
+            }
+
 
             @include mobile {
                 flex-direction: row;
@@ -239,12 +330,15 @@
 
                 h4 {
                     @extend %sm_b;
-                    color: $black;
+                    @include themed() {
+                        color: t($black);
+                    }
                 }
                 p {
                     @extend %s;
-                    color: $light_m_gray;
-
+                    @include themed() {
+                        color: t($black);
+                    }
                     @include mobile {
                         display: none;
                     }
@@ -296,10 +390,13 @@
         width: 100%;
         height: auto;
         position: fixed;
-        bottom: 0;
+        bottom: -1px;
         left: 0;
         padding: 4%;
-        background-color: $light_bg_gray;
+
+        @include themed() {
+            background-color: t(light_bg_gray);
+        }
 
         @include desktop {
             display: none;
@@ -313,6 +410,12 @@
             border: 1px solid $gray;
             color: $white;
             @extend %m_b;
+
+            @include themed() {
+                background-color: t(main_color);
+                border-color: t(gray);
+                color: t(white);
+            }
         }
     }
 }

@@ -9,15 +9,26 @@
     display: flex;
     flex-direction: column;
     margin-top: 2px;
-    padding-bottom: 2px;
-    border-bottom: 1px solid $gray;
+    padding-block: 5px;
+    border-bottom: 1px solid;
     cursor: pointer;
     user-select: none;
 
+    @include themed() {
+        border-color: t(gray);
+    }
+
     &_head {
         @extend %sm_b;
+
+        @include themed() {
+            color: t(black);
+        }
     }
     &_desc {
         @extend %sm, %text_overflow;
+        @include themed() {
+            color: t(black_light);
+        }
     }
 }

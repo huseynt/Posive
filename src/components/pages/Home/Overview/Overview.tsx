@@ -10,11 +10,13 @@ import {orders} from "../../../test/db/transactions"
 
 interface IOverview {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  setNotification: React.Dispatch<React.SetStateAction<boolean>>;
+  notification: boolean;
 }
 
 const Overview = () => {
   
-  const { setToggleMenu } = useOutletContext<IOverview>();
+  const { setToggleMenu, setNotification, notification } = useOutletContext<IOverview>();
   const [date, setDate] = useState("");
   const [mobileSearch, setMobileSearch] = useState<boolean>(false);
   const [mealsFiltered, setMealsFiltered] = useState<IMeal[]>([]);
@@ -118,7 +120,7 @@ const Overview = () => {
 
               <div
                 className={style.main_mobileUp_actions_right_setting}
-                // onClick={() => setNotification(!notification)}
+                onClick={() => setNotification(!notification)}
               >
                 <svg
                   width="18"

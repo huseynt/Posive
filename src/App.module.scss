@@ -9,9 +9,6 @@
     box-sizing: border-box;
 }
 
-body {
-    background-color: var(--white);
-}
 
 // ---- zoom out ---------
 .app {
@@ -28,4 +25,7 @@ body {
 *::selection {
     color: $main_color;
     background: transparent;
-  }
+}
+
+
+

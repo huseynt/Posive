@@ -30,7 +30,7 @@ const Meal = (props: IMeal) => {
         <div className={style.meal_count}>
           <button onClick={() => setCount(count>0 ? count-1 : count)}>-</button>
           <p
-          style={count !== 0 ? {color: "#EA7E41"} : {color: 'black'}}
+          style={count !== 0 ? {color: "#EA7E41"} : {color: ''}}
           >{count}</p>
           <button onClick={() => setCount(count+1)}>+</button>
         </div>

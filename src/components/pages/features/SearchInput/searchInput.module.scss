@@ -32,6 +32,10 @@
     background-color: transparent;
     z-index: 99;
 
+    @include themed() {
+      color: t($black);
+    }
+
     &:focus {
       outline: 1px solid $main_color;
     }
@@ -45,6 +49,12 @@
     left: 23px;
     transform: translateY(-50%);
     cursor: pointer;
+
+    path {
+      @include themed() {
+        stroke: t($black);
+      }
+    }
   }
 
   &_estimated {
@@ -54,9 +64,12 @@
     top: 31px;
     left: -1px;
     color: $light_m_gray;
-    background-color: $available;
     border-radius: 0 0 10px 10px;
-    background-color: $white;
+
+    @include themed() {
+      background-color: t($white) !important;
+      color: t($black);
+    }
 
     &:hover {
       display: block !important;

@@ -7,6 +7,12 @@
     @extend %m;
     cursor: pointer;
     user-select: none;
+
+    @include themed() {
+        background-color: t($white);
+      }
+
+
     &:hover {
         color: $main_color;
     }

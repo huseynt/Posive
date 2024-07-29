@@ -20,13 +20,41 @@
     }
 }
 
+@keyframes fadeMobile {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+        display: none;
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+        display: block;
+    }
+}
+
+@keyframes fadeMobileOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+        display: block;
+    }
+    to {
+        opacity: 0; 
+        transform: translateX(100%);
+        display: none;
+    }
+}
+
 // scrollbar
 ::-webkit-scrollbar {
     width: 5px;
     height: 300px;
 }
 ::-webkit-scrollbar-track {
-    background: #ffffff;
+    @include themed() {
+        background-color: t(white);
+      }
 }
 ::-webkit-scrollbar-thumb {
     background: $main_light_color;
@@ -34,6 +62,26 @@
     height: 10px;
 }
 // scrollbar end
+
+.mobileIn {
+    @include mobile {
+        animation: fadeMobile 0.3s ease !important;
+        display: block;
+    }
+    @include desktop {
+        display: block;
+    }
+}
+.mobileOut {
+    @include mobile {
+        animation: fadeMobileOut 0.3s ease !important;
+        display: none;
+    }
+    @include desktop {
+        display: none;
+    }
+}
+
 
 
 .notification {
@@ -43,12 +91,13 @@
     position: fixed;
     top: 0;
     left: 0;
-    animation: fadeBg 0.3s ease;
+    animation: fadeBg 0.3s ease-in-out;
     z-index: 999;
 
     @include mobile {
         padding: 3% 2%;
     }
+
 
     &_screen {
         width: 100vw;
@@ -76,13 +125,12 @@
             max-width: 480px;
             min-width: 280px;
             height: 300px;
-            background-color: $white;
             display: flex;
             flex-direction: column;
             align-items: center;
             row-gap: 10px;
             border-radius: 14px;
-            border: 1px solid $gray;
+            border: 1px solid;
             padding: 12px 18px;
             animation: fadeIn 0.3s ease;
             position: absolute;
@@ -90,6 +138,12 @@
             top: 75px;
             z-index: 999999999;
             margin-inline: 2%;
+
+            @include themed() {
+                background-color: t(white);
+                color: t(black);
+                border-color: t(gray);
+              }
     
     
     
@@ -110,6 +164,10 @@
                 display: flex;
                 justify-content: start;
 
+                @include themed() {
+                    background-color: t(white);
+                  }
+
                 @include desktop {
                     display: none;
                 }
@@ -118,8 +176,18 @@
                     width: 44px;
                     height: 41px;
                     padding: 8px 10px;
-                    border: 1px solid $gray;
+                    border: 1px solid;
                     border-radius: 7px;
+
+                    @include themed() {
+                        border-color: t(gray);
+                      }
+
+                    path {
+                        @include themed() {
+                            stroke: t(black);
+                          }
+                    }
                 }
             }
     

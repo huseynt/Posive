@@ -1,4 +1,5 @@
 import style from './App.module.scss'
+import './components/common/reUseable/_variable.scss'
 import './components/common/Theme/theme.module.scss'
 // ---------- import components ----------
 import Login from './components/pages/features/Login/Login'
@@ -20,6 +21,7 @@ import Pos from './components/pages/Home/Pos/Pos'
 
 
 function App() {
+
   // ---------- loader ----------
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
@@ -33,10 +35,14 @@ function App() {
   }, []);
   // ---------- loader ----------
 
+
+
+
   return (
     <div className={style.app}>
       {!loaded && <TriangleLoader /> }
       <div style={{opacity: loaded ? '1' : '0'}}>
+        
         <Routes>
           <Route index element={<Login />} />
           <Route path='/registr' element={<Registr />} />

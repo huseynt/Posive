@@ -1,5 +1,5 @@
-// src/components/ThemeToggle.tsx
 import React, { useEffect, useState } from 'react';
+import style from "./theme.module.scss";
 
 const Theme: React.FC = () => {
   const [theme, setTheme] = useState<string | null>(null);
@@ -20,8 +20,10 @@ const Theme: React.FC = () => {
     console.log('Theme:', newTheme);
   };
 
+  
+
   return (
-    <button onClick={toggleTheme}>
+    <button className={style.btn} onClick={toggleTheme}>
       {theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
     </button>
   );

@@ -4,14 +4,15 @@ import { notifications } from "../../../test/db/notifications";
 
 interface INotification {
   setNotification: React.Dispatch<React.SetStateAction<boolean>>;
+  notification: boolean;
   bag: boolean;
 }
 
 const Notification: React.FC<INotification> = (props) => {
-  const { setNotification, bag } = props;
+  const { setNotification, notification, bag } = props;
 
   return (
-    <div className={style.notification}>
+    <div className={`${style.notification} ${ notification ? style.mobileIn : style.mobileOut}`}>
       <div className={style.notification_screen}>
         <div
           className={style.notification_screen_bg}
@@ -22,15 +23,14 @@ const Notification: React.FC<INotification> = (props) => {
           className={style.notification_screen_block}
           style={{ right: bag ? "328px" : "0" }}
         >
-          <div className={style.notification_screen_block_back}
-          onClick={() => setNotification(false)}
-          >
+          <div className={style.notification_screen_block_back}>
             <svg
               width="24"
               height="25"
               viewBox="0 0 24 25"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              onClick={() => setNotification(false)}
             >
               <path
                 d="M9.57 6.6001L3.5 12.6701L9.57 18.7401"

@@ -60,6 +60,7 @@ const Home = () => {
     setTable(false);
     setSuccessOrder(false);
     setNotification(false);
+    console.log((window.location.pathname).split("/home")[1]);
   }, [navigation]);
 
   return (
@@ -121,7 +122,7 @@ const Home = () => {
       {qrOpen && <QRCode setQrOpen={setQrOpen} />}
       {table && <Table setTable={setTable} />}
       {successOrder && <SuccessOrder setSuccessOrder={setSuccessOrder} />}
-      {notification && <Notification setNotification={setNotification} bag={bag} />}
+      <Notification setNotification={setNotification} notification={notification} bag={bag} />
       {/* {aboutmeal && <AboutMeal setAboutMeal={setAboutMeal} />} */}
       <Notify notify={notify} purpose={notifyPurpose} />
     </div>

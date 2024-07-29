@@ -1,21 +1,126 @@
-$dark_blue:#1C2634;
-$gray: #E0E0E0;
+$dark_blue: #1c2634;
+$gray: #e0e0e0;
 $light_gray: #acafb0;
-$light_m_gray:#6C7278;
-$light_bg_gray: #EDF1F3;
-$main_color_dark:#d4733b;
-$main_color:#EA7E41;
-$main_light_color:#EA7E41;
-$main_light_shadow:#ea7f4163;
-$main_light_two:#FDEFD9;
+$light_m_gray: #6c7278;
+$light_bg_gray: #edf1f3;
+$main_color_dark: #d4733b;
+$main_color: #ea7e41;
+$main_light_color: #ea7e41;
+$main_light_shadow: #ea7f4163;
+$main_light_two: #fdefd9;
 
-$link_blue: #0077FF;
-$white: #FFF;
-$white_transaprent: #ffffffa4;
-
+$link_blue: #0077ff;
+$white: #ffffff;
+$white_transparent: #ffffff46;
 $black: #000000;
-$low_black: #1A1C1E;
+$black_light: #0000006f;
+$low_black: #1a1c1e;
+$available: #12b3a8;
+$available_soon: #4d81e7;
+$reserved: #c65468;
 
-$available: #12B3A8;
-$available_soon: #4D81E7;
-$reserved: #C65468;
+
+
+
+$themes: (
+  light: (
+    dark_blue: $dark_blue,
+    gray: $gray,
+    light_gray: $light_gray,
+    light_m_gray: $light_m_gray,
+    light_bg_gray: $light_bg_gray,
+    main_color: $main_color,
+    main_light_color: $main_light_color,
+    main_light_shadow: $main_light_shadow,
+    main_light_two: $main_light_two,
+    link_blue: $link_blue,
+    white: $white,
+    white_transparent: $white_transparent,
+    black: $black,
+    black_light: $black_light,
+    low_black: $low_black,
+    available: $available,
+    available_soon: $available_soon,
+    reserved: $reserved
+  ),
+  dark: (
+    dark_blue: $dark_blue,
+    gray: $white_transparent,
+    light_gray: $light_m_gray,
+    light_m_gray: $gray,
+    light_bg_gray: $low_black,
+    main_color: $main_color_dark,
+    main_light_color: $main_color_dark,
+    main_light_shadow: rgba($main_color_dark, 0.4),
+    main_light_two: lighten($main_color_dark, 10%),
+    link_blue: lighten($link_blue, 20%),
+    white: $low_black,
+    white_transparent: rgba($low_black, 0.64),
+    black: $white,
+    black_light: $white_transparent,
+    low_black: lighten($dark_blue, 10%),
+    available: darken($available, 20%),
+    available_soon: darken($available_soon, 20%),
+    reserved: darken($reserved, 20%)
+  )
+);
+
+
+
+
+@mixin themed() {
+  @each $theme, $map in $themes {
+    body[data-theme='#{$theme}'] & {
+      $theme-map: () !global;
+      @each $key, $value in $map {
+        $theme-map: map-merge($theme-map, ($key: $value)) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function t($key) {
+  @return map-get($theme-map, $key);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// @mixin themed() {
+//   @each $theme, $map in $themes {
+//     .theme--#{$theme} & {
+//       $theme-map: () !global;
+//       @each $key, $value in $map {
+//         $theme-map: map-merge($theme-map, ($key: $value)) !global;
+//       }
+//       @content;
+//       $theme-map: null !global;
+//     }
+//   }
+// }
+
+// @function t($key) {
+//   @return map-get($theme-map, $key);
+// }
+
+
+
