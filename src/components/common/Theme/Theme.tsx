@@ -9,6 +9,11 @@ const Theme: React.FC = () => {
     if (currentTheme) {
       document.body.setAttribute('data-theme', currentTheme);
       setTheme(currentTheme);
+    } 
+    else {
+      document.body.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+      setTheme('light');
     }
   }, []);
 
@@ -24,7 +29,7 @@ const Theme: React.FC = () => {
 
   return (
     <button className={style.btn} onClick={toggleTheme}>
-      {theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
     </button>
   );
 }

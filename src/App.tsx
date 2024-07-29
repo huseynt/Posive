@@ -16,11 +16,13 @@ import Product from './components/pages/Home/Product/Product'
 import Settings from './components/pages/Home/Settings/Settings'
 import Overview from './components/pages/Home/Overview/Overview'
 import Pos from './components/pages/Home/Pos/Pos'
+import Theme from './components/common/Theme/Theme'
 
 
 
 
 function App() {
+  
 
   // ---------- loader ----------
   const [loaded, setLoaded] = useState(false);
@@ -62,6 +64,7 @@ function App() {
           </Route>
 
         </Routes>
+        <Theme/>
       </div>
     </div>
   );

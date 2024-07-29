@@ -4,11 +4,15 @@
 
 
 .btn {
-    width: 100%;
     padding: 10px;
     cursor: pointer;
     text-align: center;
     font-weight: 700;
+    position: fixed;
+    bottom: 70px;
+    right: 0;
+    @extend %s;
+    border-radius: 10px 0 0 0;
     
 
     @include themed() {
