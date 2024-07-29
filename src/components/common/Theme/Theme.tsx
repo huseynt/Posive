@@ -1,21 +1,12 @@
-import React, { useEffect, useState } from 'react';
 import style from "./theme.module.scss";
 
-const Theme: React.FC = () => {
-  const [theme, setTheme] = useState<string | null>(null);
+interface ThemeProps {
+  theme: string;
+  setTheme: (theme: string) => void;
+}
 
-  useEffect(() => {
-    const currentTheme = localStorage.getItem('theme');
-    if (currentTheme) {
-      document.body.setAttribute('data-theme', currentTheme);
-      setTheme(currentTheme);
-    } 
-    else {
-      document.body.setAttribute('data-theme', 'light');
-      localStorage.setItem('theme', 'light');
-      setTheme('light');
-    }
-  }, []);
+const Theme: React.FC<ThemeProps> = (props) => {
+  const { theme, setTheme } = props;
 
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';

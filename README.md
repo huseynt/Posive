@@ -13,6 +13,8 @@ npm install --save-dev @types/qrcode.react
 npm install --save react-apexcharts apexcharts
 npm install --save @types/react @types/react-dom @types/react-apexcharts
 npm install axios
+npm install react-helmet
+npm install --save-dev @types/react-helmet
 ```
 
 # React + TypeScript + Vite

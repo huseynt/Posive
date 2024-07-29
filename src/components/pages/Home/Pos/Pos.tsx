@@ -6,6 +6,7 @@ import { useState } from "react";
 import { IMeal } from "../../../utils/interface/Meal";
 import SearchInput from "../../features/SearchInput/SearchInput";
 
+import { Helmet } from "react-helmet";
 
 import {API} from "../../../utils/API/API";
 import Axios from "axios";
@@ -77,6 +78,14 @@ const Main= () => {
   
   return (
     <div className={style.overflow}>
+
+      <Helmet>
+        <title>Posive POS</title>
+        <meta name="description" content="POS Dashboard" />
+        <meta name="keywords" content="Posive" />
+      </Helmet>
+
+
       <div className={style.main}>
         {/* ------------------------------up-------------------------------- */}
         <div className={style.main_up}>

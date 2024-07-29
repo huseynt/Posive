@@ -16,12 +16,30 @@ import Product from './components/pages/Home/Product/Product'
 import Settings from './components/pages/Home/Settings/Settings'
 import Overview from './components/pages/Home/Overview/Overview'
 import Pos from './components/pages/Home/Pos/Pos'
-import Theme from './components/common/Theme/Theme'
+
 
 
 
 
 function App() {
+
+
+  // ---------- theme ------------------------------
+  const [theme, setTheme] = useState<string>("");
+  useEffect(() => {
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme) {
+      document.body.setAttribute('data-theme', currentTheme);
+      setTheme(currentTheme);
+    } 
+    else {
+      document.body.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+      setTheme('light');
+    }
+  }, [theme, setTheme]);
+  // ---------- theme ------------------------------
+
   
 
   // ---------- loader ----------
@@ -58,13 +76,11 @@ function App() {
             <Route path='' element={<Pos/>} />
             <Route path='overview' element={<Overview/>} />
             <Route path='product' element={<Product />} />
-            <Route path='settings' element={<Settings />} />
+            <Route path='settings' element={<Settings setTheme={setTheme} theme={theme}/>} />
             <Route path='help' element={<HelpCenter />} />
             <Route path='*' element={<NotFound />} />
           </Route>
-
         </Routes>
-        <Theme/>
       </div>
     </div>
   );

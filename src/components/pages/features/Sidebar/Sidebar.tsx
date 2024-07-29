@@ -31,7 +31,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
     navigate('/login')
   }
   const handleNavigation = (nav: string) => {
-    setNavigation(`/${nav}`)
+    setNavigation(`${nav}`)
     navigate(nav)
   }
 
@@ -89,7 +89,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           style={{
             padding: !toggleMenu ? "12px 0px" : "12px 20px",
             justifyContent: !toggleMenu ? "center" : "unset",
-            backgroundColor: navigation === "" ? "#FDEFD9" : "unset",
+            backgroundColor: navigation === undefined ? "#FDEFD9" : "unset",
           }}
           onClick={() => handleNavigation("")}
         >
@@ -102,7 +102,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           >
             <path
               d="M3.75 7.5H5.25C6.75 7.5 7.5 6.75 7.5 5.25V3.75C7.5 2.25 6.75 1.5 5.25 1.5H3.75C2.25 1.5 1.5 2.25 1.5 3.75V5.25C1.5 6.75 2.25 7.5 3.75 7.5Z"
-              stroke={navigation === "" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === undefined ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeMiterlimit="10"
               strokeLinecap="round"
@@ -110,7 +110,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             />
             <path
               d="M12.75 7.5H14.25C15.75 7.5 16.5 6.75 16.5 5.25V3.75C16.5 2.25 15.75 1.5 14.25 1.5H12.75C11.25 1.5 10.5 2.25 10.5 3.75V5.25C10.5 6.75 11.25 7.5 12.75 7.5Z"
-              stroke={navigation === "" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === undefined ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeMiterlimit="10"
               strokeLinecap="round"
@@ -118,7 +118,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             />
             <path
               d="M12.75 16.5H14.25C15.75 16.5 16.5 15.75 16.5 14.25V12.75C16.5 11.25 15.75 10.5 14.25 10.5H12.75C11.25 10.5 10.5 11.25 10.5 12.75V14.25C10.5 15.75 11.25 16.5 12.75 16.5Z"
-              stroke={navigation === "" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === undefined ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeMiterlimit="10"
               strokeLinecap="round"
@@ -126,7 +126,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             />
             <path
               d="M3.75 16.5H5.25C6.75 16.5 7.5 15.75 7.5 14.25V12.75C7.5 11.25 6.75 10.5 5.25 10.5H3.75C2.25 10.5 1.5 11.25 1.5 12.75V14.25C1.5 15.75 2.25 16.5 3.75 16.5Z"
-              stroke={navigation === "" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === undefined ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeMiterlimit="10"
               strokeLinecap="round"
@@ -137,7 +137,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             style={{
               fontSize: !toggleMenu ? "0rem" : "1rem",
               opacity: !toggleMenu ? "0" : "1",
-              color: navigation === "" ? "#EA7E41" : "#000",
+              color: navigation === undefined ? "#EA7E41" : "#000",
             }}
           >
             POS
@@ -149,7 +149,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           style={{
             padding: !toggleMenu ? "12px 0px" : "12px 20px",
             justifyContent: !toggleMenu ? "center" : "unset",
-            backgroundColor: navigation === "/overview" ? "#FDEFD9" : "unset"
+            backgroundColor: navigation === "overview" ? "#FDEFD9" : "unset"
           }}
           onClick={() => handleNavigation("overview")}
         >
@@ -162,38 +162,38 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           >
             <path
               d="M5.15991 13.6126V12.0601"
-              stroke={navigation === "/overview" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === "overview" ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeLinecap="round"
             />
             <path
               d="M9 13.6123V10.5073"
-              stroke={navigation === "/overview" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === "overview" ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeLinecap="round"
             />
             <path
               d="M12.8401 13.6123V8.94727"
-              stroke={navigation === "/overview" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === "overview" ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeLinecap="round"
             />
             <path
               d="M12.8399 4.3877L12.4949 4.7927C10.5824 7.0277 8.01741 8.6102 5.15991 9.3227"
-              stroke={navigation === "/overview" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === "overview" ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeLinecap="round"
             />
             <path
               d="M10.6426 4.3877H12.8401V6.5777"
-              stroke={navigation === "/overview" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === "overview" ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
             <path
               d="M6.75 16.5H11.25C15 16.5 16.5 15 16.5 11.25V6.75C16.5 3 15 1.5 11.25 1.5H6.75C3 1.5 1.5 3 1.5 6.75V11.25C1.5 15 3 16.5 6.75 16.5Z"
-              stroke={navigation === "/overview" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === "overview" ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -202,7 +202,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           <span
             style={{
               fontSize: !toggleMenu ? "0rem" : "1rem",
-              color: navigation === "/overview" ? "#EA7E41" : "#000",
+              color: navigation === "overview" ? "#EA7E41" : "#000",
             }}
           >
             Overview
@@ -213,7 +213,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           style={{
             padding: !toggleMenu ? "12px 0px" : "12px 20px",
             justifyContent: !toggleMenu ? "center" : "unset",
-            backgroundColor: navigation === "/product" ? "#FDEFD9" : "unset"
+            backgroundColor: navigation === "product" ? "#FDEFD9" : "unset"
           }}
           onClick={() => handleNavigation("product")}
         >
@@ -226,28 +226,28 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           >
             <path
               d="M2.37744 5.58008L8.99993 9.41257L15.5774 5.60255"
-              stroke={navigation === "/product" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === "product" ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
             <path
               d="M9 16.2078V9.40527"
-              stroke={navigation === "/product" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === "product" ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
             <path
               d="M7.44746 1.86L3.44247 4.08752C2.53497 4.59002 1.79248 5.85001 1.79248 6.88501V11.1225C1.79248 12.1575 2.53497 13.4175 3.44247 13.92L7.44746 16.1475C8.30246 16.62 9.70496 16.62 10.56 16.1475L14.565 13.92C15.4725 13.4175 16.215 12.1575 16.215 11.1225V6.88501C16.215 5.85001 15.4725 4.59002 14.565 4.08752L10.56 1.86C9.69746 1.38 8.30246 1.38 7.44746 1.86Z"
-              stroke={navigation === "/product" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === "product" ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
             <path
               d="M12.7501 9.93021V7.18523L5.63257 3.0752"
-              stroke={navigation === "/product" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === "product" ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -256,7 +256,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           <span
             style={{
               fontSize: !toggleMenu ? "0rem" : "1rem",
-              color: navigation === "/product" ? "#EA7E41" : "#000",
+              color: navigation === "product" ? "#EA7E41" : "#000",
             }}
           >
             Product
@@ -267,7 +267,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           style={{
             padding: !toggleMenu ? "12px 0px" : "12px 20px",
             justifyContent: !toggleMenu ? "center" : "unset",
-            backgroundColor: navigation === "/settings" ? "#FDEFD9" : "unset"
+            backgroundColor: navigation === "settings" ? "#FDEFD9" : "unset"
           }}
           onClick={() => handleNavigation("settings")}
         >
@@ -280,14 +280,14 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           >
             <path
               d="M2.25 6.83252V11.16C2.25 12.75 2.25 12.75 3.75 13.7625L7.875 16.1475C8.4975 16.5075 9.51 16.5075 10.125 16.1475L14.25 13.7625C15.75 12.75 15.75 12.75 15.75 11.1675V6.83252C15.75 5.25002 15.75 5.25002 14.25 4.23752L10.125 1.85252C9.51 1.49252 8.4975 1.49252 7.875 1.85252L3.75 4.23752C2.25 5.25002 2.25 5.25002 2.25 6.83252Z"
-              stroke={navigation === "/settings" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === "settings" ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
             <path
               d="M9 11.25C10.2426 11.25 11.25 10.2426 11.25 9C11.25 7.75736 10.2426 6.75 9 6.75C7.75736 6.75 6.75 7.75736 6.75 9C6.75 10.2426 7.75736 11.25 9 11.25Z"
-              stroke={navigation === "/settings" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === "settings" ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -296,7 +296,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           <span
             style={{
               fontSize: !toggleMenu ? "0rem" : "1rem",
-              color: navigation === "/settings" ? "#EA7E41" : "#000",
+              color: navigation === "settings" ? "#EA7E41" : "#000",
             }}
           >
             Settings
@@ -307,7 +307,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           style={{
             padding: !toggleMenu ? "12px 0px" : "12px 20px",
             justifyContent: !toggleMenu ? "center" : "unset",
-            backgroundColor: navigation === "/help" ? "#FDEFD9" : "unset"
+            backgroundColor: navigation === "help" ? "#FDEFD9" : "unset"
           }}
           onClick={() => handleNavigation("help")}
         >
@@ -320,21 +320,21 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           >
             <path
               d="M9 16.5C13.125 16.5 16.5 13.125 16.5 9C16.5 4.875 13.125 1.5 9 1.5C4.875 1.5 1.5 4.875 1.5 9C1.5 13.125 4.875 16.5 9 16.5Z"
-              stroke={navigation === "/help" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === "help" ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
             <path
               d="M9 6V9.75"
-              stroke={navigation === "/help" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === "help" ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
             <path
               d="M8.99585 12H9.00259"
-              stroke={navigation === "/help" ? "#EA7E41" : "#000000ae"}
+              stroke={navigation === "help" ? "#EA7E41" : "#000000ae"}
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -343,7 +343,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           <span
             style={{
               fontSize: !toggleMenu ? "0rem" : "1rem",
-              color: navigation === "/help" ? "#EA7E41" : "#000",
+              color: navigation === "help" ? "#EA7E41" : "#000",
             }}
           >
             Help Center

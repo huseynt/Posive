@@ -7,6 +7,7 @@ import { IMeal } from "../../../utils/interface/Meal";
 import { useOutletContext } from "react-router-dom";
 import OverviewTableItem from "../../features/OverviewTableItem/OverviewTableItem";
 import {orders} from "../../../test/db/transactions"
+import { Helmet } from "react-helmet";
 
 interface IOverview {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -52,6 +53,12 @@ const Overview = () => {
 
   return (
     <div className={style.overflow}>
+      <Helmet>
+        <title>Posive Overview</title>
+        <meta name="description" content="Overview" />
+        <meta name="keywords" content="Posive" />
+      </Helmet>
+
       <div className={style.main}>
 
         {/* ----------------------------- mobile up ---------------------------------- */}

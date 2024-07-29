@@ -40,7 +40,7 @@ const Home = () => {
   const [successOrder, setSuccessOrder] = useState<boolean>(false);
   const [notification, setNotification] = useState<boolean>(false);
   const [notify, setNotify] = useState<boolean>(false);
-  const [navigation, setNavigation] = useState<string>((window.location.pathname).split("/home")[1]);
+  const [navigation, setNavigation] = useState<string>("");
 
   const [notifyPurpose, setNotifyPurpose] = useState<string>("");
   const requestNotify = (purpose: string) => {
@@ -60,8 +60,13 @@ const Home = () => {
     setTable(false);
     setSuccessOrder(false);
     setNotification(false);
-    console.log((window.location.pathname).split("/home")[1]);
+    setNavigation((window.location.pathname).split("/home/")[1]);
   }, [navigation]);
+
+  window.addEventListener("popstate", () => {
+    setNavigation((window.location.pathname).split("/home/")[1]);
+  }
+  );
 
   return (
     <div className={style.home}>
