@@ -33,9 +33,9 @@
 }
 
 
-.main_up_actions_period:hover .main_up_actions_period_down {
-    background-color: $main_light_two;
-}
+// .main_up_actions_period:hover .main_up_actions_period_down {
+//     background-color: $main_light_two;
+// }
 
 .overflow {
     width: 100%;
@@ -125,9 +125,14 @@
                 column-gap: 10px;
                 position: relative;
 
+
                 &_text {
                     min-width: 88px;
                     text-align: center;
+
+                    &:hover {
+                        color: $main_color;
+                    }
                 }
 
                 &_bg {
@@ -163,7 +168,7 @@
                         z-index: 99999;
 
                         &:hover {
-                            background-color: $white;
+                            background-color: $main_light_two;
                         }
                     }
                 }
@@ -369,6 +374,12 @@
                         @extend %sm, %text_overflow;
                         color: $light_m_gray;
                         background-color: $gray;
+
+                        input[type="checkbox"] {
+                            accent-color: $main_color;
+                            width: 15px;
+                            height: 15px;
+                        }
 
                         @include mobile {
                             padding: 7px 5px;
