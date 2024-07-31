@@ -79,7 +79,7 @@ function App() {
             <Route path='overview' element={<Overview/>} />
             <Route path='product' element={<Product />} />
             <Route path='settings' element={<Settings setTheme={setTheme} theme={theme}/>} />
-            <Route path='help' element={<HelpCenter />} />
+            <Route path='help/*' element={<HelpCenter />} />
             <Route path='*' element={<NotFound />} />
           </Route>
         </Routes>

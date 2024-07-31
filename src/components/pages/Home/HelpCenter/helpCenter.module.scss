@@ -2,19 +2,131 @@
 @import "../../../common/reUseable/mixin";
 @import "../../../common/reUseable/extend";
 
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .overflow {
     width: 100%;
     max-width: 1920px;
     height: 100vh;
-    background-color: $light_bg_gray;
     overflow-y:scroll; 
     scrollbar-width: none;
     -ms-overflow-style: none;
+
+    @include themed() {
+        background-color: t(light_bg_gray);
+      }
 }
 .overflow::-webkit-scrollbar {
     display: none;
 }
 
 .main {
-    text-align: center;
+    width: 100%;
+    height: 100%;
+    max-height: 1280px;
+    padding: 20px 2% 1% 2%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+    transition: all 0.3s linear;
+
+    @include themed() {
+        background-color: t(light_bg_gray);
+      }
+
+    @include mobile {
+        padding: 20px 2% 1% 2%;
+    }
+
+    &_up {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        row-gap: 2px;
+        animation: fadeIn 0.3s;
+
+
+        &_head {
+            @extend %ls_b;
+        }
+
+        &_desc {
+            @extend %sm;
+        }
+    }
+
+    &_container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        column-gap: 16px;
+
+        &_navigation {
+            width: 100%;
+            height: 100%;
+            max-width: 210px;
+            min-width: 200px;
+            padding: 16px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            row-gap: 12px;
+            animation: fadeIn 0.3s;
+
+
+            @include themed() {
+                background-color: t(white);
+                border: 1px solid t(gray);
+            }
+
+            &_head {
+                @extend %sm_b;
+            }
+
+            &_option {
+                width: 100%;
+                @extend %sm;
+                display: flex;
+                align-items: center;
+                justify-content: start;
+                column-gap: 10px;
+                padding: 10px 16px;
+                border-radius: 10px;
+                cursor: pointer;
+                animation: fadeIn 0.4s;
+
+                &:hover {
+                    @include themed() {
+                        background-color: t(main_light_two);
+                        color: t(main_color);
+                    }
+                    
+                    svg {
+                        path {
+                            stroke: $main_color;
+                        }
+                    }
+                }
+            }
+        }
+
+
+    }
 }

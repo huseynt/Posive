@@ -307,7 +307,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           style={{
             padding: !toggleMenu ? "12px 0px" : "12px 20px",
             justifyContent: !toggleMenu ? "center" : "unset",
-            backgroundColor: navigation === "help" ? "#FDEFD9" : "unset"
+            backgroundColor: (/^help.*/).test(navigation) ? "#FDEFD9" : "unset"
           }}
           onClick={() => handleNavigation("help")}
         >
@@ -320,21 +320,21 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           >
             <path
               d="M9 16.5C13.125 16.5 16.5 13.125 16.5 9C16.5 4.875 13.125 1.5 9 1.5C4.875 1.5 1.5 4.875 1.5 9C1.5 13.125 4.875 16.5 9 16.5Z"
-              stroke={navigation === "help" ? "#EA7E41" : "#000000ae"}
+              stroke={(/^help.*/).test(navigation) ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
             <path
               d="M9 6V9.75"
-              stroke={navigation === "help" ? "#EA7E41" : "#000000ae"}
+              stroke={(/^help.*/).test(navigation) ? "#EA7E41" : "#000000ae"}
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
             <path
               d="M8.99585 12H9.00259"
-              stroke={navigation === "help" ? "#EA7E41" : "#000000ae"}
+              stroke={(/^help.*/).test(navigation) ? "#EA7E41" : "#000000ae"}
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -343,7 +343,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           <span
             style={{
               fontSize: !toggleMenu ? "0rem" : "1rem",
-              color: navigation === "help" ? "#EA7E41" : "#000",
+              color: (/^help.*/).test(navigation) ? "#EA7E41" : "#000",
             }}
           >
             Help Center
