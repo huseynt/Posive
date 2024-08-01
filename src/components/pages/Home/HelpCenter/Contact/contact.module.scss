@@ -146,6 +146,7 @@
         width: 100%;
         padding: 20px;
         border-radius: 12px;
+        animation: fadeIn 0.4s;
 
         @include themed() {
           border: 1px solid t(gray);
