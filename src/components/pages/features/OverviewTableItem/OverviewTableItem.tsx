@@ -33,8 +33,8 @@ const OverviewTableItem:React.FC<Order> = (props) => {
         </td>
         <td>{orderId}</td>
         <td className={style.tr_desktop}>{receiptNo}</td>
-        <td className={style.tr_desktop}>{menu}</td>
-        <td className={style.tr_desktop}>{collectedBy}</td>
+        <td className={style.tr_desktop} style={{maxWidth: "100px"}}>{menu}</td>
+        <td className={style.tr_desktop} style={{maxWidth: "80px"}}>{collectedBy}</td>
         <td>{dateTime}</td>
         <td className={style.tr_desktop}>
           <div className={style.tr_desktop_payment}>{paymentMethod}</div>

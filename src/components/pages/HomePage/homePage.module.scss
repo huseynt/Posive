@@ -4,40 +4,50 @@
 
 @import url('https://db.onlinewebfonts.com/c/9e00143409affcb46a1ae58634aa64be?family=SofiaProRegular');
 
-
-@keyframes fadeElementLeft {
+@keyframes headerFade {
     0% {
         opacity: 0;
-        right: 0;
+        transform: translateY(-50px);
     }
-
     100% {
         opacity: 1;
-        right: 99%;
+        transform: translateY(0);
     }
 }
 
-
-@keyframes fadeElementRight {
+@keyframes LeftFade {
     0% {
         opacity: 0;
-        left: 0;
+        transform: translateX(-100%);
     }
-
     100% {
         opacity: 1;
-        left: 99%;
+        transform: translateX(0);
     }
 }
+
+@keyframes RightFade {
+    0% {
+        opacity: 0;
+        transform: translateX(10%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 
 
 .home {
     width: 100%;
+    height: 80vh;
     font-family: 'SofiaProRegular', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
     row-gap: 100px;
+
 
     &_bg {
         position: fixed;
@@ -45,11 +55,7 @@
         left: 0;
         width: 100%;
         height: 100vh;
-        // background: url('/public/home.png');
-        // background-size: cover;
-        // background-position: center;
-        // background-repeat: no-repeat;
-        z-index: -9;
+        
 
         &_circle {
             position: absolute;
@@ -63,113 +69,154 @@
         }
     }
 
-    // &_container {
-    //     width: 100%;
-    //     height: 100vh;
-    //     background-color: #0000005b;
-    //     display: flex;
-    //     justify-content: center;
-    //     align-items: center;
-    //     gap: 20px;
-
-    //     &_element {
-    //         width: 300px;
-    //         height: 200px;
-    //         background: #ffffff;
-    //     }
-    // }
-
-    &_head {
-        margin-top: 100px;
-
-        h1 {
-            width: 100%;
-            text-align: center;
-            font-size: 3rem;
-            font-weight: 700;
-            color: white;
-
-            @include mobile {
-                font-size: 1.5rem
-            }
-        }
-    }
-
-    &_preview {
+    &_main {
         width: 100%;
-        width: fit-content;
+        height: 100%;
+        max-width: 1920px;
+        padding: 50px 5%;
+        z-index: 9;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
-        position: relative;
+        row-gap: 85px;
 
-        @include mobile {
-            flex-direction: column;
-            position: unset;
+        &_header {
+            width: 80%;
+            margin-inline: 10%;
+            padding: 17px 35px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: $white;
+            border-radius: 35px;
+            transition: 0.8s ease-in-out;
+            animation: headerFade 1.5s ease-in-out;
+
+            &:hover {
+                box-shadow:  0 0 10px 0 inset $main_color; 
+            }
+
+
+            &_text {
+                @extend %ml_b;
+            }
+
+            &_button {
+                @extend %sm_b;
+                padding: 8px 20px;
+                background-color: $main_light_color;
+                color: $white;
+                border-radius: 20px;
+                border: 1px solid $gray;
+                cursor: pointer;
+                user-select: none;
+                transition: background-color 0.2s;
+
+                &:hover {
+                    background-color: $main_color_dark;
+                    box-shadow: 0 0 10px 0 $light_bg_gray;
+                }
+            }
         }
 
 
-        &_overview {
-            width: 400px;
-            position: absolute;
-            right: 99%;
-            animation: fadeElementLeft 1s ease-in-out;
-            transition: 0.3s ease-in-out;
+        &_container {
+            width: 100%;
+            min-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
 
-            @include mobile {
-                position: unset;
-                width: 200px;
+
+            &_left {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                animation: LeftFade 1.5s ease-in-out;
+
+                &_logo {
+                    max-width: 210px;
+                    width: 100%;
+                    padding: 12px 20px;
+                    margin-bottom: 30px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    column-gap: 10px;
+                    background-color: $white;
+                    border-radius: 20px;
+                    border: 1px solid $gray;
+
+                    &_icon {
+                        width: 50px;
+                    }
+
+                    &_title {
+                        @extend %l_b;
+                        color: $main_color;
+                    }
+                }
+
+                &_text {
+                    @extend %extra_b;
+                    color: $white;
+                }
+
+                &_actions {
+                    width: 100%;
+                    margin-top: 4%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: start;
+
+                    button {
+                        @extend %ml_b;
+                        padding: 8px 30px;
+                        background-color: $white;
+                        color: $main_color;
+                        border-radius: 12px;
+                        border: 1px solid $gray;
+                        cursor: pointer;
+                        user-select: none;
+                        transition: background-color 0.2s;
+
+                        &:hover {
+                            background-color: $main_light_shadow;
+                            box-shadow: 0 0 10px 0 $light_bg_gray;
+                            color: $white;
+                        }
+                    }
+                }
             }
 
-            &:hover {
-                scale: 1.2;
-                z-index: 999;
-            }
+            &_describtion {
+                width: 100%;
+                position: relative;
 
-            img {
-                border-radius: 7px;
-            }
-        }
+                &_iphone {
+                    position: absolute;
+                    width: 10vw;
+                    max-width: 220px;
+                    // right: 90px;
+                    right: -2vw;
+                    top: -110px;
+                    z-index: 9;
+                    animation: RightFade 1.5s ease-in-out;
+                }
 
-        &_pos {
-            width: 430px;
-            z-index: 99;
-            transition: 0.3s ease-in-out;
+                &_mac {
+                    position: absolute;
+                    width: 50vw;
+                    // max-width: 500px;
+                    right: 2vw;
+                    top: -150px;
+                    z-index: 5;
+                    animation: RightFade 1.5s ease-in-out;
+                }
 
-            @include mobile {
-                position: unset;
-                width: 200px;
-            }
-
-            &:hover {
-                scale: 1.2;
-                z-index: 999;
-            }
-
-            img {
-                border-radius: 7px;
-            }
-        }
-
-        &_login {
-            width: 400px;
-            position: absolute;
-            left: 99%;
-            animation: fadeElementRight 1s ease-in-out;
-            transition: 0.3s ease-in-out;
-
-            @include mobile {
-                position: unset;
-                width: 200px;
-            }
-
-            &:hover {
-                scale: 1.2;
-                z-index: 999;
-            }
-
-            img {
-                border-radius: 7px;
             }
         }
     }
