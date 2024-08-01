@@ -59,7 +59,7 @@ const HelpCenter = () => {
               onClick={() => handleSub("contact")}
               style={{
                 backgroundColor:
-                  sub === "contact" || sub === "" ? "#fdefd9" : "",
+                  sub === "contact" || sub === undefined ? "#fdefd9" : "",
               }}
             >
               <svg
@@ -72,7 +72,7 @@ const HelpCenter = () => {
                 <path
                   d="M12.75 14.3223H9.75L6.41249 16.5423C5.91749 16.8723 5.25 16.5198 5.25 15.9198V14.3223C3 14.3223 1.5 12.8223 1.5 10.5723V6.07227C1.5 3.82227 3 2.32227 5.25 2.32227H12.75C15 2.32227 16.5 3.82227 16.5 6.07227V10.5723C16.5 12.8223 15 14.3223 12.75 14.3223Z"
                   stroke={
-                    sub === "contact" || sub === "" ? "#EA7E41" : "#000000ae"
+                    sub === "contact" || sub === undefined ? "#EA7E41" : "#000000ae"
                   }
                   strokeWidth="1.5"
                   strokeMiterlimit="10"
@@ -82,7 +82,7 @@ const HelpCenter = () => {
                 <path
                   d="M9.00011 9.01953V8.86206C9.00011 8.35206 9.31513 8.08205 9.63013 7.86455C9.93763 7.65455 10.2451 7.38456 10.2451 6.88956C10.2451 6.19956 9.69011 5.64453 9.00011 5.64453C8.31011 5.64453 7.75513 6.19956 7.75513 6.88956"
                   stroke={
-                    sub === "contact" || sub === "" ? "#EA7E41" : "#000000ae"
+                    sub === "contact" || sub === undefined ? "#EA7E41" : "#000000ae"
                   }
                   strokeWidth="1.5"
                   strokeLinecap="round"
@@ -91,7 +91,7 @@ const HelpCenter = () => {
                 <path
                   d="M8.99662 10.8125H9.00337"
                   stroke={
-                    sub === "contact" || sub === "" ? "#EA7E41" : "#000000ae"
+                    sub === "contact" || sub === undefined ? "#EA7E41" : "#000000ae"
                   }
                   strokeWidth="1.5"
                   strokeLinecap="round"
@@ -100,7 +100,7 @@ const HelpCenter = () => {
               </svg>
               <p
                 style={{
-                  color: sub === "contact" || sub === "" ? "#EA7E41" : "",
+                  color: sub === "contact" || sub === undefined ? "#EA7E41" : "",
                 }}
               >
                 Contact & FAQ
