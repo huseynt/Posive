@@ -172,7 +172,9 @@ const HelpCenter = () => {
 
         <div className={style.main_container}>
 
-          <div className={style.main_container_navigation}>
+          <div className={style.main_container_navigation}
+          style={{borderColor: mobileSelect ? "#d4733b" : ""}}
+          >
             
             <h3 className={style.main_container_navigation_head}>
               Sub settings
