@@ -92,6 +92,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             backgroundColor: navigation === undefined ? "#FDEFD9" : "unset",
           }}
           onClick={() => handleNavigation("")}
+          title="POS"
         >
           <svg
             width="18"
@@ -152,6 +153,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             backgroundColor: navigation === "overview" ? "#FDEFD9" : "unset"
           }}
           onClick={() => handleNavigation("overview")}
+          title="Overview"
         >
           <svg
             width="18"
@@ -216,6 +218,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             backgroundColor: navigation === "product" ? "#FDEFD9" : "unset"
           }}
           onClick={() => handleNavigation("product")}
+          title="Product"
         >
           <svg
             width="18"
@@ -270,6 +273,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             backgroundColor: navigation === "settings" ? "#FDEFD9" : "unset"
           }}
           onClick={() => handleNavigation("settings")}
+          title="Settings"
         >
           <svg
             width="18"
@@ -310,6 +314,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             backgroundColor: (/^help.*/).test(navigation) ? "#FDEFD9" : "unset"
           }}
           onClick={() => handleNavigation("help")}
+          title="Help Center"
         >
           <svg
             width="18"

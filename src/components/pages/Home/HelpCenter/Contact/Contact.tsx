@@ -1,8 +1,18 @@
 import style from "./contact.module.scss";
+// import SearcInput from "../../../features/SearchInput/SearchInput";
 
-const Contact = () => {
+interface IContact {
+  setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Contact: React.FC<IContact> = (props) => {
+  const {setMobileSelect} = props;
+
+
   return (
-    <div className={style.parent}>
+    <div className={style.parent}
+    onClick={() => setMobileSelect(false)}
+    >
       <h2 className={style.parent_head}>Contact & FAQ</h2>
 
       <div className={style.parent_frame}>
@@ -119,7 +129,57 @@ const Contact = () => {
         </div>
       </div>
 
-      <div className={style.parent_line}>contact</div>
+      <div className={style.parent_line}></div>
+
+      <div className={style.parent_main}>
+
+        <div className={style.parent_main_up}>
+          <div className={style.parent_main_up_head}>Frequently Asked Questions</div>
+
+          <div className={style.parent_main_up_search}>
+            {/* <SearcInput /> */}
+          </div>
+        </div>
+
+
+        <details className={style.parent_main_details}>
+          <summary className={style.parent_main_details_summary}>Can a new user integrate the POS Dashboard with other business systems ?</summary>
+          <p className={style.parent_main_details_text}>
+            Yes, many POS Dashboards offer integration capabilities with accounting software, inventory management systems, customer relationship management (CRM) tools, and other business applications. Integration can streamline operations and improve data accuracy.
+          </p>
+        </details>
+
+        <details className={style.parent_main_details}>
+          <summary className={style.parent_main_details_summary}>What features do event organizer websites typically offer ?</summary>
+          <p className={style.parent_main_details_text}>
+            Yes, many POS Dashboards offer integration capabilities with accounting software, inventory management systems, customer relationship management (CRM) tools, and other business applications. Integration can streamline operations and improve data accuracy.
+          </p>
+        </details>
+
+        <details className={style.parent_main_details}>
+          <summary className={style.parent_main_details_summary}>How does a POS Dashboard help in improving customer service for new users ?</summary>
+          <p className={style.parent_main_details_text}>
+            Yes, many POS Dashboards offer integration capabilities with accounting software, inventory management systems, customer relationship management (CRM) tools, and other business applications. Integration can streamline operations and improve data accuracy.
+          </p>
+        </details>
+
+        <details className={style.parent_main_details}>
+          <summary className={style.parent_main_details_summary}>What kind of support and training are available for new users of a POS Dashboard?</summary>
+          <p className={style.parent_main_details_text}>
+            Yes, many POS Dashboards offer integration capabilities with accounting software, inventory management systems, customer relationship management (CRM) tools, and other business applications. Integration can streamline operations and improve data accuracy.
+          </p>
+        </details>
+
+        <details className={style.parent_main_details}>
+          <summary className={style.parent_main_details_summary}>Why is a POS Dashboard beneficial for new users?</summary>
+          <p className={style.parent_main_details_text}>
+            Yes, many POS Dashboards offer integration capabilities with accounting software, inventory management systems, customer relationship management (CRM) tools, and other business applications. Integration can streamline operations and improve data accuracy.
+          </p>
+        </details>
+
+
+
+      </div>
     </div>
   );
 };

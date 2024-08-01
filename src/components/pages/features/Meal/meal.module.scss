@@ -68,7 +68,7 @@
 
         &:hover {
             h4 {
-                color: $main_light_color;
+                color: $main_color !important;
                 transition: 0.3s ease-in-out;
             }
         }
