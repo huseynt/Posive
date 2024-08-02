@@ -32,10 +32,18 @@
     }
 }
 
-
-// .main_up_actions_period:hover .main_up_actions_period_down {
-//     background-color: $main_light_two;
+// .main_down_actions_setting:hover .main_down_actions_setting_down {
+//     background-color: red !important;
 // }
+.main_down_actions_setting:hover .main_down_actions_setting_down {
+    display: flex;
+    background-color: $main_light_two;
+    border: 1px solid $main_color;
+}
+.main_down_up_actions_setting_down {
+    background-color: $available ;
+}
+
 
 .overflow {
     width: 100%;
@@ -335,6 +343,21 @@
                     }
                 }
 
+                &_delete {
+                    padding: 11px 10px;
+                    border-radius: 8px;
+                    transition: background-color 0.1s ease-in-out;
+        
+                    &:hover {
+                        background-color: darken(#868686a9, 30%) !important; 
+                    }
+
+                    svg {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+
                 &_setting {
                     padding: 8px 10px;
                     display: flex;
@@ -344,10 +367,48 @@
                     border-radius: 10px;
                     cursor: pointer;
                     user-select: none;
+                    position: relative;
 
                     &:hover {
-                        background-color: $main_light_two;
-                        border: 1px solid $main_color;
+                        svg {
+                            path {
+                                stroke: $main_color;
+                            }
+                        }
+                    }
+
+
+
+                    &_down {
+                        width: calc(100% + 2px);
+                        padding-top: 10px;
+                        position: absolute;
+                        top: 29px;
+                        left: -1px;
+                        display: flex;
+                        flex-direction: column;
+                        // row-gap: 10px;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: $white;
+                        border: 1px solid $gray;
+                        border-radius: 0 0 10px 10px;
+                        border-top: none;
+
+                        &_btn {
+                            width: 100%;
+                            background-color: transparent;
+                            border-radius: 10px;
+                            
+
+                            &:hover {
+                                background-color: $main_light_two;
+                            }
+                            svg {
+                                width: 18px;
+                                margin: 0 auto;
+                            }
+                        }
                     }
                 }
             }

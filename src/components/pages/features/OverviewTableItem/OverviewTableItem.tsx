@@ -9,15 +9,24 @@ interface Order {
   dateTime: string;
   paymentMethod: string;
   checked: boolean;
+  setMultiCheck: React.Dispatch<React.SetStateAction<number>>;
+  multiCheck: number;
 }
 
 const OverviewTableItem:React.FC<Order> = (props) => {
-  const { orderId, receiptNo, menu, collectedBy, dateTime, paymentMethod, checked } = props;
+  const { orderId, receiptNo, menu, collectedBy, dateTime, paymentMethod, checked, setMultiCheck, multiCheck } = props;
   const [isChecked, setIsChecked] = useState<boolean>(checked);
 
   useEffect(() => {
     setIsChecked(checked);
   }, [checked]);
+
+  useEffect(() => {
+    if (isChecked) {
+      setMultiCheck(multiCheck+1);
+    } else {
+      setMultiCheck(multiCheck-1);
+    }}, [isChecked]);
 
   return (
     <>
@@ -103,6 +112,7 @@ const OverviewTableItem:React.FC<Order> = (props) => {
             className={style.tr_actions_option}
             style={{
               backgroundColor: "#C65468",
+              display: isChecked ? "none" : "block",
             }}
           >
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">

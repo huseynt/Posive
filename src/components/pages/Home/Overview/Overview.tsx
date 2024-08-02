@@ -6,7 +6,7 @@ import { meals } from "../../../test/db/cards";
 import { IMeal } from "../../../utils/interface/Meal";
 import { useOutletContext } from "react-router-dom";
 import OverviewTableItem from "../../features/OverviewTableItem/OverviewTableItem";
-import {orders} from "../../../test/db/transactions"
+import { orders } from "../../../test/db/transactions";
 import { Helmet } from "react-helmet";
 
 interface IOverview {
@@ -15,15 +15,50 @@ interface IOverview {
   notification: boolean;
 }
 
+interface IOrder {
+  orderId: string;
+  receiptNo: string;
+  menu: string[];
+  collectedBy: string;
+  dateTime: string;
+  paymentMethod: string;
+  action: string;
+  totalPrice: number;
+}
+
 const Overview = () => {
-  
-  const { setToggleMenu, setNotification, notification } = useOutletContext<IOverview>();
+  const { setToggleMenu, setNotification, notification } =
+    useOutletContext<IOverview>();
   const [date, setDate] = useState("");
   const [mobileSearch, setMobileSearch] = useState<boolean>(false);
   const [mealsFiltered, setMealsFiltered] = useState<IMeal[]>([]);
   const [periodDown, setPeriodDown] = useState<boolean>(false);
-  const [period, setPeriod] = useState<string>("This week");
+  const [period, setPeriod] = useState<string>("All time");
   const [checked, setChecked] = useState<boolean>(false);
+  const [multiCheck, setMultiCheck] = useState<number>(1);
+  const [ordersFiltered, setOrdersFiltered] = useState<IOrder[]>([]);
+  const [ordersSetting, setOrdersSetting] = useState<boolean>(false);
+  const [ascend, setAscend] = useState<boolean>(false);
+
+  const ascendingOrderDate = () => {
+    const sortedOrders = ordersFiltered.sort((a, b) => {
+      const dateA = new Date(a.dateTime);
+      const dateB = new Date(b.dateTime);
+      return dateA.getTime() - dateB.getTime();
+    });
+    setOrdersFiltered([...sortedOrders]);
+    setAscend(false);
+  };
+
+  const descendingOrderDate = () => {
+    const sortedOrders = ordersFiltered.sort((a, b) => {
+      const dateA = new Date(a.dateTime);
+      const dateB = new Date(b.dateTime);
+      return dateB.getTime() - dateA.getTime();
+    });
+    setOrdersFiltered([...sortedOrders]);
+    setAscend(true);
+  };
 
   useEffect(() => {
     const today = new Date();
@@ -36,18 +71,47 @@ const Overview = () => {
     console.log(mealsFiltered);
   }, [mealsFiltered]);
 
-
   useEffect(() => {
+    if (period!=="All time") {
+    const filteredOrders = orders.filter((order) => {
+      if (period === "This week") {
+        const today = new Date();
+        const date = new Date(order.dateTime);
+        const startOfWeek = new Date(
+          today.setDate(today.getDate() - today.getDay())
+        );
+        const endOfWeek = new Date(
+          today.setDate(today.getDate() - today.getDay() + 6)
+        );
+        return date >= startOfWeek && date <= endOfWeek;
+      } else if (period === "This month") {
+        const today = new Date();
+        const date = new Date(order.dateTime);
+        return (
+          date.getMonth() === today.getMonth() &&
+          date.getFullYear() === today.getFullYear()
+        );
+      } else if (period === "This year") {
+        const today = new Date();
+        const date = new Date(order.dateTime);
+        return date.getFullYear() === today.getFullYear();
+      } else {
+        return order;
+      }
+    });
+    setOrdersFiltered(filteredOrders);
+    setOrdersSetting(false)
     console.log(period);
+    } else {
+      const sortedOrders = orders.sort((a, b) => {
+        const dateA = new Date(a.dateTime);
+        const dateB = new Date(b.dateTime);
+        return dateB.getTime() - dateA.getTime();
+      });
+      setOrdersFiltered([...sortedOrders]);
+      setAscend(true)
+    }
   }, [period]);
-
-
-
-
-
-
-
-
 
 
 
@@ -60,7 +124,6 @@ const Overview = () => {
       </Helmet>
 
       <div className={style.main}>
-
         {/* ----------------------------- mobile up ---------------------------------- */}
         <div className={style.main_mobileUp}>
           <div className={style.main_mobileUp_actions}>
@@ -170,8 +233,6 @@ const Overview = () => {
           </div>
         </div>
 
-
-        
         {/* ------------------------------ up ----------------------------------------- */}
         <div className={style.main_up}>
           <div className={style.main_up_overview}>
@@ -217,9 +278,12 @@ const Overview = () => {
             </div>
 
             <div className={style.main_up_actions_period}>
-              <p className={style.main_up_actions_period_text}
-              onClick={() => setPeriodDown(!periodDown)}
-              >{period}</p>
+              <p
+                className={style.main_up_actions_period_text}
+                onClick={() => setPeriodDown(!periodDown)}
+              >
+                {period}
+              </p>
               <svg
                 width="16"
                 height="17"
@@ -238,48 +302,68 @@ const Overview = () => {
                 />
               </svg>
 
-              <div className={style.main_up_actions_period_bg}
-              onClick={() => setPeriodDown(false)}
-              style={{ display: periodDown ? "block" : "none" }}
+              <div
+                className={style.main_up_actions_period_bg}
+                onClick={() => setPeriodDown(false)}
+                style={{ display: periodDown ? "block" : "none" }}
               ></div>
 
-              <div className={style.main_up_actions_period_down}
-              style={{ display: periodDown ? "block" : "none" }}
+              <div
+                className={style.main_up_actions_period_down}
+                style={{ display: periodDown ? "block" : "none" }}
               >
-                <div className={style.main_up_actions_period_down_option}
-                onClick={() => {setPeriod("This week")
-                setPeriodDown(false)}
-                }
-                >This week</div>
-                <div className={style.main_up_actions_period_down_option}
-                onClick={() => {setPeriod("This month")
-                  setPeriodDown(false)}
-                }
-                >This month</div>
-                <div className={style.main_up_actions_period_down_option}
-                onClick={() => {setPeriod("This year")
-                  setPeriodDown(false)}
-                }
-                >This year</div>
-                <div className={style.main_up_actions_period_down_option}
-                onClick={() => {setPeriod("All time")
-                  setPeriodDown(false)}
-                }
-                >All time</div>
+                <div
+                  className={style.main_up_actions_period_down_option}
+                  onClick={() => {
+                    setPeriod("This week");
+                    setPeriodDown(false);
+                  }}
+                >
+                  This week
+                </div>
+                <div
+                  className={style.main_up_actions_period_down_option}
+                  onClick={() => {
+                    setPeriod("This month");
+                    setPeriodDown(false);
+                  }}
+                >
+                  This month
+                </div>
+                <div
+                  className={style.main_up_actions_period_down_option}
+                  onClick={() => {
+                    setPeriod("This year");
+                    setPeriodDown(false);
+                  }}
+                >
+                  This year
+                </div>
+                <div
+                  className={style.main_up_actions_period_down_option}
+                  onClick={() => {
+                    setPeriod("All time");
+                    setPeriodDown(false);
+                  }}
+                >
+                  All time
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-
         {/* -------------------------- total review -------------------------------- */}
         <div className={style.main_total}>
-          <div className={style.main_total_option}
-          style={{ animationDuration: "0.5s" }}
+          <div
+            className={style.main_total_option}
+            style={{ animationDuration: "0.5s" }}
           >
             <div className={style.main_total_option_text}>
               <p className={style.main_total_option_text_up}>Total Sales</p>
-              <h3 className={style.main_total_option_text_head}>$121,412</h3>
+              <h3 className={style.main_total_option_text_head}>
+                ${ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0)}
+              </h3>
             </div>
 
             <div
@@ -305,12 +389,13 @@ const Overview = () => {
             </div>
           </div>
 
-          <div className={style.main_total_option}
-          style={{ animationDuration: "0.55s" }}
+          <div
+            className={style.main_total_option}
+            style={{ animationDuration: "0.55s" }}
           >
             <div className={style.main_total_option_text}>
               <p className={style.main_total_option_text_up}>Total Customers</p>
-              <h3 className={style.main_total_option_text_head}>4,324</h3>
+              <h3 className={style.main_total_option_text_head}>{ordersFiltered.length}</h3>
             </div>
 
             <div
@@ -352,12 +437,13 @@ const Overview = () => {
             </div>
           </div>
 
-          <div className={style.main_total_option}
-          style={{ animationDuration: "0.6s" }}
+          <div
+            className={style.main_total_option}
+            style={{ animationDuration: "0.6s" }}
           >
             <div className={style.main_total_option_text}>
               <p className={style.main_total_option_text_up}>Total Order</p>
-              <h3 className={style.main_total_option_text_head}>5,021</h3>
+              <h3 className={style.main_total_option_text_head}>{ordersFiltered.length}</h3>
             </div>
 
             <div
@@ -379,12 +465,15 @@ const Overview = () => {
             </div>
           </div>
 
-          <div className={style.main_total_option}
-          style={{ animationDuration: "0.65s" }}
+          <div
+            className={style.main_total_option}
+            style={{ animationDuration: "0.65s" }}
           >
             <div className={style.main_total_option_text}>
               <p className={style.main_total_option_text_up}>Total Tip</p>
-              <h3 className={style.main_total_option_text_head}>$1,412</h3>
+              <h3 className={style.main_total_option_text_head}>
+                ${ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0)}
+              </h3>
             </div>
 
             <div
@@ -413,7 +502,6 @@ const Overview = () => {
 
         {/* -------------------------- Transactions -------------------------------- */}
         <div className={style.main_down}>
-
           {/* -------------------------- Transactions up -------------------------------- */}
           <div className={style.main_down_up}>
             <p className={style.main_down_up_head}>Recent Transaction</p>
@@ -424,6 +512,64 @@ const Overview = () => {
                   setMealsFiltered={setMealsFiltered}
                 />
               </div>
+
+              {/* --------------------- delete multiselect ----------------------------------- */}
+              <div
+                className={style.main_down_up_actions_delete}
+                style={{
+                  backgroundColor: "#C65468",
+                  display: multiCheck > 0 ? "block" : "none",
+                }}
+              >
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10.5 2.99023C8.835 2.82523 7.16 2.74023 5.49 2.74023C4.5 2.74023 3.51 2.79023 2.52 2.89023L1.5 2.99023"
+                    fill="white"
+                  />
+                  <path
+                    d="M10.5 2.99023C8.835 2.82523 7.16 2.74023 5.49 2.74023C4.5 2.74023 3.51 2.79023 2.52 2.89023L1.5 2.99023"
+                    stroke="white"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M4.25 2.485L4.36 1.83C4.44 1.355 4.5 1 5.345 1H6.655C7.5 1 7.565 1.375 7.64 1.835L7.75 2.485"
+                    stroke="white"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M9.42495 4.57031L9.09995 9.60531C9.04495 10.3903 8.99995 11.0003 7.60495 11.0003H4.39495C2.99995 11.0003 2.95495 10.3903 2.89995 9.60531L2.57495 4.57031"
+                    stroke="white"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M5.16504 8.25H6.83004"
+                    stroke="white"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M4.75 6.25H7.25"
+                    stroke="white"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+
               <div className={style.main_down_up_actions_setting}>
                 <svg
                   width="18"
@@ -431,6 +577,7 @@ const Overview = () => {
                   viewBox="0 0 18 18"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  onClick={() => setOrdersSetting(!ordersSetting)}
                 >
                   <path
                     d="M16.5 4.875H12"
@@ -481,38 +628,106 @@ const Overview = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
+
+                <div className={style.main_down_up_actions_setting_down}
+                style={{display: ordersSetting ? "flex" : "none"}}
+                >
+                  <button className={style.main_down_up_actions_setting_down_btn}
+                  onClick={() => ascendingOrderDate()}
+                  style={{backgroundColor: !ascend ? "#fdefd9" : ""}}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="24px"
+                      viewBox="0 -960 960 960"
+                      width="24px"
+                      fill="#6c7278"
+                    >
+                      <path d="M400-240v-80h160v80H400ZM240-440v-80h480v80H240ZM120-640v-80h720v80H120Z" />
+                    </svg>
+                  </button>
+
+                  <button className={style.main_down_up_actions_setting_down_btn}
+                  onClick={() => descendingOrderDate()} 
+                  style={{backgroundColor: ascend ? "#fdefd9" : ""}}
+                  >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="24px"
+                        viewBox="0 -960 960 960"
+                        width="24px"
+                        fill="#6c7278"
+                        style={{rotate: "180deg"}}
+                      >
+                        <path d="M400-240v-80h160v80H400ZM240-440v-80h480v80H240ZM120-640v-80h720v80H120Z" />
+                      </svg>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
 
           {/* -------------------------- Transactions main -------------------------------- */}
-          <div className={style.main_down_transactions}>
+          <div className={style.main_down_transactions}
+          onClick={() => setOrdersSetting(false)}
+          >
             <table className={style.main_down_transactions_table}>
-
               <thead className={style.main_down_transactions_table_head}>
                 <tr className={style.main_down_transactions_table_head_th}>
-                  <th style={{textAlign : "center"}}><input type="checkbox" onClick={() => setChecked(!checked)}/></th>
+                  <th style={{ textAlign: "center" }}>
+                    <input
+                      type="checkbox"
+                      onClick={() => setChecked(!checked)}
+                    />
+                  </th>
                   <th>Order ID</th>
-                  <th className={style.main_down_transactions_table_head_th_desktop}>Receipt No</th>
-                  <th className={style.main_down_transactions_table_head_th_desktop}>Menu</th>
-                  <th className={style.main_down_transactions_table_head_th_desktop}>Collected/Cashier</th>
+                  <th
+                    className={
+                      style.main_down_transactions_table_head_th_desktop
+                    }
+                  >
+                    Receipt No
+                  </th>
+                  <th
+                    className={
+                      style.main_down_transactions_table_head_th_desktop
+                    }
+                  >
+                    Menu
+                  </th>
+                  <th
+                    className={
+                      style.main_down_transactions_table_head_th_desktop
+                    }
+                  >
+                    Collected/Cashier
+                  </th>
                   <th>Date & Time</th>
-                  <th className={style.main_down_transactions_table_head_th_desktop}>Payment method</th>
+                  <th
+                    className={
+                      style.main_down_transactions_table_head_th_desktop
+                    }
+                  >
+                    Payment method
+                  </th>
                   <th>Action</th>
                 </tr>
               </thead>
 
               <tbody>
-                {orders.map((order, index) => (
-                  <OverviewTableItem key={index} checked={checked} {...order} />
+                {ordersFiltered.map((order, index) => (
+                  <OverviewTableItem
+                    key={index}
+                    checked={checked}
+                    {...order}
+                    setMultiCheck={setMultiCheck}
+                    multiCheck={multiCheck}
+                  />
                 ))}
               </tbody>
             </table>
           </div>
-
         </div>
-
-        
       </div>
     </div>
   );
