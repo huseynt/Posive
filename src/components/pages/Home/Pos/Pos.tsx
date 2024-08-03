@@ -24,7 +24,7 @@ interface MainProps {
 
 
 const Main= () => {
-  const { bag, setBag, setToggleMenu, setNotification, notification }= useOutletContext<MainProps>();
+  const { bag, setBag, setToggleMenu, setNotification, notification } = useOutletContext<MainProps>();
   const [category, setCategory] = useState<string>("");
   const [mealsFiltered, setMealsFiltered] = useState<IMeal[]>([]);
   const [mobileSearch, setMobileSearch] = useState<boolean>(false);

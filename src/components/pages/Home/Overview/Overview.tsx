@@ -40,6 +40,17 @@ const Overview = () => {
   const [ordersSetting, setOrdersSetting] = useState<boolean>(false);
   const [ascend, setAscend] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (checked == false) {
+      setMultiCheck(0);
+    }
+  }, [checked]);
+
+  useEffect(() => { 
+    setChecked(false);
+    setMultiCheck(0);
+  }, [ordersFiltered, period]);
+
   const ascendingOrderDate = () => {
     const sortedOrders = ordersFiltered.sort((a, b) => {
       const dateA = new Date(a.dateTime);
@@ -362,7 +373,7 @@ const Overview = () => {
             <div className={style.main_total_option_text}>
               <p className={style.main_total_option_text_up}>Total Sales</p>
               <h3 className={style.main_total_option_text_head}>
-                ${ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0)}
+                ${ordersFiltered ? ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0) : "0"}
               </h3>
             </div>
 
@@ -395,7 +406,7 @@ const Overview = () => {
           >
             <div className={style.main_total_option_text}>
               <p className={style.main_total_option_text_up}>Total Customers</p>
-              <h3 className={style.main_total_option_text_head}>{ordersFiltered.length}</h3>
+              <h3 className={style.main_total_option_text_head}>{ordersFiltered ? ordersFiltered.length: "0"}</h3>
             </div>
 
             <div
@@ -443,7 +454,7 @@ const Overview = () => {
           >
             <div className={style.main_total_option_text}>
               <p className={style.main_total_option_text_up}>Total Order</p>
-              <h3 className={style.main_total_option_text_head}>{ordersFiltered.length}</h3>
+              <h3 className={style.main_total_option_text_head}>{ordersFiltered ? ordersFiltered.length: "0"}</h3>
             </div>
 
             <div
@@ -472,7 +483,7 @@ const Overview = () => {
             <div className={style.main_total_option_text}>
               <p className={style.main_total_option_text_up}>Total Tip</p>
               <h3 className={style.main_total_option_text_head}>
-                ${ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0)}
+                ${ordersFiltered ? ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0) : "0"}
               </h3>
             </div>
 
@@ -677,7 +688,8 @@ const Overview = () => {
                   <th style={{ textAlign: "center" }}>
                     <input
                       type="checkbox"
-                      onClick={() => setChecked(!checked)}
+                      onChange={() => setChecked(!checked)}
+                      checked={checked}
                     />
                   </th>
                   <th>Order ID</th>
@@ -722,6 +734,8 @@ const Overview = () => {
                     {...order}
                     setMultiCheck={setMultiCheck}
                     multiCheck={multiCheck}
+                    period={period}
+                    ascend={ascend}
                   />
                 ))}
               </tbody>

@@ -11,11 +11,13 @@ interface Order {
   checked: boolean;
   setMultiCheck: React.Dispatch<React.SetStateAction<number>>;
   multiCheck: number;
+  period: string;
+  ascend: boolean;
 }
 
 const OverviewTableItem:React.FC<Order> = (props) => {
-  const { orderId, receiptNo, menu, collectedBy, dateTime, paymentMethod, checked, setMultiCheck, multiCheck } = props;
-  const [isChecked, setIsChecked] = useState<boolean>(checked);
+  const { orderId, receiptNo, menu, collectedBy, dateTime, paymentMethod, checked, setMultiCheck, multiCheck, period, ascend } = props;
+  const [isChecked, setIsChecked] = useState<boolean>(false);
 
   useEffect(() => {
     setIsChecked(checked);
@@ -24,9 +26,13 @@ const OverviewTableItem:React.FC<Order> = (props) => {
   useEffect(() => {
     if (isChecked) {
       setMultiCheck(multiCheck+1);
-    } else {
+    } else if (multiCheck > 0) {
       setMultiCheck(multiCheck-1);
     }}, [isChecked]);
+
+    useEffect(() => {
+      setIsChecked(false);
+    }, [period, ascend]);
 
   return (
     <>
