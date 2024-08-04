@@ -143,15 +143,16 @@
                     }
                 }
 
-                &_bg {
-                    background-color: transparent;
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100vw;
-                    height: 100vh;
-                    z-index: 9;
-                }
+                // &_bg {
+                //     // background-color: transparent;
+                //     position: fixed;
+                //     top: 0;
+                //     left: 0;
+                //     width: 100vw;
+                //     height: 100dvh;
+                //     z-index: 9;
+                //     cursor: default;
+                // }
                 
 
                 &_down {

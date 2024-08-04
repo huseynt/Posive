@@ -313,11 +313,11 @@ const Overview = () => {
                 />
               </svg>
 
-              <div
+              {/* <div
                 className={style.main_up_actions_period_bg}
                 onClick={() => setPeriodDown(false)}
                 style={{ display: periodDown ? "block" : "none" }}
-              ></div>
+              ></div> */}
 
               <div
                 className={style.main_up_actions_period_down}
@@ -365,7 +365,9 @@ const Overview = () => {
         </div>
 
         {/* -------------------------- total review -------------------------------- */}
-        <div className={style.main_total}>
+        <div className={style.main_total}
+        onClick={() => setPeriodDown(false)}
+        >
           <div
             className={style.main_total_option}
             style={{ animationDuration: "0.5s" }}
@@ -512,7 +514,9 @@ const Overview = () => {
         </div>
 
         {/* -------------------------- Transactions -------------------------------- */}
-        <div className={style.main_down}>
+        <div className={style.main_down}
+        onClick={() => setPeriodDown(false)}
+        >
           {/* -------------------------- Transactions up -------------------------------- */}
           <div className={style.main_down_up}>
             <p className={style.main_down_up_head}>Recent Transaction</p>
