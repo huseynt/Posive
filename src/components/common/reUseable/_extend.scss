@@ -1,5 +1,6 @@
 @import "variable";
 
+
 %s {
   font-family: "Manrope", sans-serif;
   font-size: 0.75rem; //12px
@@ -137,13 +138,7 @@
   z-index: -1;
 }
 
--------------------
-  for
-  chage
-  login
-  and
-  register
-  -------------------
+------------------- for change login and register -------------------
   %rightChange {
   @keyframes load {
     from {
@@ -170,7 +165,7 @@
   }
 }
 
-// ----------------- for text overflow (...) -----------------
+// ----------------- for text overflow -----------------
 %text_overflow {
   white-space: nowrap;
   overflow: hidden;

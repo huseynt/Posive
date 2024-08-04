@@ -248,7 +248,7 @@ const Overview = () => {
         <div className={style.main_up}>
           <div className={style.main_up_overview}>
             <h3 className={style.main_up_overview_head}>Overview</h3>
-            <p className={style.main_up_overview_date}>{date}</p>
+            <p className={style.main_up_overview_date}>{date ? date : "Jan 01,2024" }</p>
           </div>
 
           <div className={style.main_up_actions}>
@@ -585,7 +585,9 @@ const Overview = () => {
                 </svg>
               </div>
 
-              <div className={style.main_down_up_actions_setting}>
+              <div className={style.main_down_up_actions_setting}
+              title="Sorting Date"
+              >
                 <svg
                   width="18"
                   height="18"
@@ -650,6 +652,7 @@ const Overview = () => {
                   <button className={style.main_down_up_actions_setting_down_btn}
                   onClick={() => ascendingOrderDate()}
                   style={{backgroundColor: !ascend ? "#fdefd9" : ""}}
+                  title="Ascending Date"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -665,6 +668,7 @@ const Overview = () => {
                   <button className={style.main_down_up_actions_setting_down_btn}
                   onClick={() => descendingOrderDate()} 
                   style={{backgroundColor: ascend ? "#fdefd9" : ""}}
+                  title="Descending Date"
                   >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

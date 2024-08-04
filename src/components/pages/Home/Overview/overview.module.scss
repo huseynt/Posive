@@ -1,6 +1,7 @@
 @import "../../../common/reUseable/variable";
 @import "../../../common/reUseable/mixin";
 @import "../../../common/reUseable/extend";
+@import "../../../common/reUseable/theme";
 
 @keyframes searchOpen {
     from {
@@ -86,6 +87,7 @@
         &_overview {
             display: flex;
             flex-direction: column;
+            animation: fadeIn 0.3s;
 
             @include mobile {
                 width: 100%;
@@ -102,6 +104,7 @@
             &_date {
                 @extend %sm;
                 color: $light_m_gray;
+                min-width: 21.609px;
             }
         }
 

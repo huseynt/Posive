@@ -8,15 +8,17 @@ import Forgot from './components/pages/features/Forgot/Forgot'
 import Home from './components/pages/Home/Home'
 import NotFound from './components/pages/features/NotFound/NotFound'
 import TriangleLoader from './components/common/Loader/Triangle'
-// ---------- import components ----------
-import { Routes, Route } from 'react-router-dom'
-import { useEffect, useState } from 'react'
 import HelpCenter from './components/pages/Home/HelpCenter/HelpCenter'
 import Product from './components/pages/Home/Product/Product'
 import Settings from './components/pages/Home/Settings/Settings'
 import Overview from './components/pages/Home/Overview/Overview'
 import Pos from './components/pages/Home/Pos/Pos'
 import HomePage from './components/pages/HomePage/HomePage'
+// ---------- import components ----------
+
+import { Routes, Route } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+
 
 
 
@@ -63,7 +65,6 @@ function App() {
     <div className={style.app}>
       {!loaded && <TriangleLoader /> }
       <div style={{opacity: loaded ? '1' : '0'}}>
-        
         <Routes>
           <Route index element={<Login />} />
           <Route path='/registr' element={<Registr />} />
@@ -72,8 +73,6 @@ function App() {
           <Route path='/homepage' element={<HomePage />} />
           
           <Route path='/home' element={<Home />}>
-            {/* <Route path='/' element={<Pos bag={bag} setBag={setBag} setToggleMenu={setToggleMenu} setNotification={setNotification} notification={notification} />} /> */}
-            {/* <Route path='/overview' element={<Overview setToggleMenu={setToggleMenu} />} /> */}
             <Route index element={<Pos/>} />
             <Route path='' element={<Pos/>} />
             <Route path='overview' element={<Overview/>} />
