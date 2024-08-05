@@ -1,13 +1,17 @@
 import style from './product.module.scss'
 import { Helmet } from 'react-helmet'
 import { useOutletContext } from "react-router-dom";
-import ReactChart from '../../features/ReactChart/ReactChart'
+// import ReactChart from '../../features/ReactChart/ReactChart'
+import  Charte  from '../../features/ReactChart/Chart';
+// import { orders } from '../../../test/db/transactions';
+import { cardReport } from '../../../test/db/transactions';
 
 interface IProduct {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
   setNotification: React.Dispatch<React.SetStateAction<boolean>>;
   notification: boolean;
 }
+
 
 
 const Product = () => {
@@ -338,10 +342,13 @@ const Product = () => {
 
       <div style={{
         width: '100%',
-        padding: "0 20%",
+        padding: "20px 5%",
         backgroundColor: 'white',
+        borderRadius: '10px',
+        border: '1px solid #E5E5E5',
       }}>
-        <ReactChart/>
+        {/* <ReactChart/> */}
+        <Charte duration='1Y' data={cardReport} />
       </div>
 
 
