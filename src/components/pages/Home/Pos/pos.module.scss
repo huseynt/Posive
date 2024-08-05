@@ -297,6 +297,12 @@
             border: 1px solid;
             user-select: none;
 
+            background: linear-gradient(90deg, $main_color 50%, transparent 50%);
+            transition: 0.4s ease-out;
+            background-size: 205% 100%;
+            background-position: 100% 0;
+
+
             @include themed() {
                 background-color: t(white);
                 border-color: t(gray);
@@ -307,6 +313,29 @@
                     @include themed() {
                         fill: t($black) ;
                     }
+                }
+            }
+
+            @include desktop {
+                &:hover {
+                    background-position: 0 0;                    
+    
+                    svg {
+                        path {
+                            fill: $white !important;
+                            transition: fill 0.5s ease-out;
+                        }
+                    }
+                    
+                    h4 {
+                        color: $white !important;
+                        transition: color 0.5s ease-out;
+                    }
+                    p {
+                        color: $white !important;
+                        transition: color 0.5s ease-out;
+                    }
+    
                 }
             }
 
@@ -347,26 +376,7 @@
                 }
             }
 
-            @include desktop {
-                &:hover {
-                    background-color: $main_color !important;
-                    transition: all 0.2s linear;
-    
-                    svg {
-                        path {
-                            fill: $white !important;
-                        }
-                    }
-                    
-                    h4 {
-                        color: $white !important;
-                    }
-                    p {
-                        color: $white !important;
-                    }
-    
-                }
-            }
+            
 
             
 

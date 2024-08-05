@@ -1,6 +1,7 @@
 import style from './product.module.scss'
 import { Helmet } from 'react-helmet'
 import { useOutletContext } from "react-router-dom";
+import ReactChart from '../../features/ReactChart/ReactChart'
 
 interface IProduct {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -335,6 +336,13 @@ const Product = () => {
 
 
 
+      <div style={{
+        width: '100%',
+        padding: "0 20%",
+        backgroundColor: 'white',
+      }}>
+        <ReactChart/>
+      </div>
 
 
 

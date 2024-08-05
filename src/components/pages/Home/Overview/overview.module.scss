@@ -136,6 +136,10 @@
                 column-gap: 10px;
                 position: relative;
 
+                &:hover .main_up_actions_period_down {
+                    display: flex;
+                }
+
 
                 &_text {
                     min-width: 88px;
@@ -169,12 +173,13 @@
                     padding: 7px 0px;
                     border-radius: 0 0 10px 10px;
                     z-index: 9;
-                    display: flex;
+                    display: none;
                     flex-direction: column;
                     align-items: center;
 
 
                     &_option {
+                        width: 100%;
                         padding: 0 20px;
                         text-align: center;
                         z-index: 99999;
@@ -376,6 +381,11 @@
                     position: relative;
 
                     &:hover {
+
+                        div {
+                            display: flex;
+                        }
+
                         svg {
                             path {
                                 stroke: $main_color;
@@ -383,15 +393,13 @@
                         }
                     }
 
-
-
                     &_down {
                         width: calc(100% + 2px);
                         padding-top: 10px;
                         position: absolute;
                         top: 29px;
                         left: -1px;
-                        display: flex;
+                        display: none;
                         flex-direction: column;
                         // row-gap: 10px;
                         align-items: center;

@@ -321,7 +321,7 @@ const Overview = () => {
 
               <div
                 className={style.main_up_actions_period_down}
-                style={{ display: periodDown ? "block" : "none" }}
+                // style={{ display: periodDown ? "block" : "none" }}
               >
                 <div
                   className={style.main_up_actions_period_down_option}
@@ -647,7 +647,7 @@ const Overview = () => {
                 </svg>
 
                 <div className={style.main_down_up_actions_setting_down}
-                style={{display: ordersSetting ? "flex" : "none"}}
+                // style={{display: ordersSetting ? "flex" : "none"}}
                 >
                   <button className={style.main_down_up_actions_setting_down_btn}
                   onClick={() => ascendingOrderDate()}

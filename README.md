@@ -15,6 +15,8 @@ npm install --save @types/react @types/react-dom @types/react-apexcharts
 npm install axios
 npm install react-helmet
 npm install --save-dev @types/react-helmet
+npm install chart.js react-chartjs-2
+npm install @types/chart.js
 ```
 
 # React + TypeScript + Vite
