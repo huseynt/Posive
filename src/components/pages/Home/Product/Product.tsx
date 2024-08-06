@@ -2,9 +2,9 @@ import style from './product.module.scss'
 import { Helmet } from 'react-helmet'
 import { useOutletContext } from "react-router-dom";
 // import ReactChart from '../../features/ReactChart/ReactChart'
-import  Charte  from '../../features/ReactChart/Chart';
+// import  Charte  from '../../features/ReactChart/Chart';
 // import { orders } from '../../../test/db/transactions';
-import { cardReport } from '../../../test/db/transactions';
+// import { cardReport } from '../../../test/db/transactions';
 
 interface IProduct {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -348,7 +348,7 @@ const Product = () => {
         border: '1px solid #E5E5E5',
       }}>
         {/* <ReactChart/> */}
-        <Charte duration='1Y' data={cardReport} />
+        {/* <Charte duration='1Y' data={cardReport} /> */}
       </div>
 
 
