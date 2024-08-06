@@ -734,7 +734,7 @@ const Overview = () => {
                 </tr>
               </thead>
 
-              <tbody>
+              <tbody className={style.main_down_transactions_table_tbody}>
                 {ordersFiltered.map((order, index) => (
                   <OverviewTableItem
                     key={index}

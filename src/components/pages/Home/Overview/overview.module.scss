@@ -21,9 +21,13 @@
 @keyframes fadeIn {
     0% {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(40px);
     }
     50% {
+        opacity: 0;
+    }
+
+    75% {
         opacity: 1;
     }
 
@@ -33,9 +37,28 @@
     }
 }
 
-// .main_down_actions_setting:hover .main_down_actions_setting_down {
-//     background-color: red !important;
-// }
+@keyframes fadeTbody {
+    0% {
+        display: none;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    
+    50% {
+        opacity: 0;
+    }
+
+    75% {
+        opacity: 0;
+    }
+
+    100% {
+        display: table-row-group;
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .main_down_actions_setting:hover .main_down_actions_setting_down {
     display: flex;
     background-color: $main_light_two;
@@ -318,7 +341,7 @@
         background-color: $white;
         border-radius: 7px;
         border: 1px solid $gray;
-        animation: fadeIn .7s ease-in-out;
+        animation: fadeIn .8s ease-in-out;
         display: flex;
         flex-direction: column;
         row-gap: 20px;
@@ -434,6 +457,7 @@
         &_transactions {
             width: 100%;
             background-color: $white;
+            animation: fadeIn 0.3s;
 
             &_table {
                 width: 100%;
@@ -450,6 +474,7 @@
                         color: $light_m_gray;
                         background-color: $gray;
 
+
                         input[type="checkbox"] {
                             accent-color: $main_color;
                             width: 15px;
@@ -462,7 +487,7 @@
                     }
 
                     td {
-                        max-width: 300px;
+                        // max-width: 300px;
                         text-align: left;
                         padding: 7px 12px;
                         @extend %sm, %text_overflow;
@@ -487,10 +512,11 @@
                         display: none;
                     }
                 }
+                &_tbody {
+                    width: 100%;
+                    animation: fadeTbody 0.4s;
+                }
             }
         }
     }
-
-
-
 }
