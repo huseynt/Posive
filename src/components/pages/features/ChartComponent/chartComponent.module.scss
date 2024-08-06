@@ -20,6 +20,9 @@
 
         &_head {
             @extend %ml_b;
+            @include themed {
+                color: t(black);
+            }
         }
 
         &_actions {
@@ -41,6 +44,7 @@
 
                 @include themed {
                     background-color: t(light_bg_gray);
+                    border: 1px solid t(gray);
                 }
 
                 &:hover .chartComp_up_actions_year_down {
@@ -49,6 +53,7 @@
                 &:hover .chartComp_up_actions_year_selected {
                     @include themed {
                         background-color: t(white);
+                        color: t(main_color);
                     }
                 }
 
@@ -59,7 +64,8 @@
                     @extend %sm;
 
                     @include themed {
-                        background-color: t(white);
+                        background-color: $white;
+                        color: black;
                     }
 
                     &:hover {
@@ -70,23 +76,27 @@
                 }
 
                 &_down {
-                    width: 100%;
+                    width: calc(100% + 2px);
                     position: absolute;
                     padding: 6px 3px;
-                    top: 32px;
-                    left: 0px;
+                    top: 31px;
+                    left: -1px;
                     display: none;
                     text-align: center;
                     border-radius: 0 0 6px 6px;
+                    color: $light_m_gray;
 
                     @include themed {
                         background-color: t(light_bg_gray);
+                        border: 1px solid t(gray);
+                        border-top: none;
                     }
 
 
                     &_option {
                         width: 100%;
                         @extend %sm;
+
 
                         &:hover {
 
@@ -108,6 +118,7 @@
 
                 @include themed {
                     background-color: t(light_bg_gray);
+                    border: 1px solid t(gray);
                 }
 
                 &_option {

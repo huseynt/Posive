@@ -33,9 +33,6 @@
     }
 }
 
-// .main_down_actions_setting:hover .main_down_actions_setting_down {
-//     background-color: red !important;
-// }
 .main_down_actions_setting:hover .main_down_actions_setting_down {
     display: flex;
     background-color: $main_light_two;
@@ -50,10 +47,13 @@
     width: 100%;
     max-width: 1920px;
     height: 100vh;
-    background-color: $light_bg_gray;
     overflow-y:scroll; 
     scrollbar-width: none;
     -ms-overflow-style: none;
+
+    @include themed() {
+        background-color: t(light_bg_gray);
+      }
 }
 .overflow::-webkit-scrollbar {
     display: none;
@@ -99,12 +99,19 @@
 
             &_head {
                 @extend %ls_b;
+
+                @include themed() {
+                    color: t(black);
+                  }
             }
 
             &_date {
                 @extend %sm;
-                color: $light_m_gray;
                 min-width: 21.609px;
+
+                @include themed() {
+                    color: t(light_m_gray);
+                  }
             }
         }
 
@@ -127,64 +134,6 @@
                 column-gap: 10px;
             }
 
-            &_period {
-                padding: 7px 20px;
-                @extend %btn_main_w;
-                @extend %m;
-                display: flex;
-                align-items: center;
-                column-gap: 10px;
-                position: relative;
-
-
-                &_text {
-                    min-width: 88px;
-                    text-align: center;
-
-                    &:hover {
-                        color: $main_color;
-                    }
-                }
-
-                // &_bg {
-                //     // background-color: transparent;
-                //     position: fixed;
-                //     top: 0;
-                //     left: 0;
-                //     width: 100vw;
-                //     height: 100dvh;
-                //     z-index: 9;
-                //     cursor: default;
-                // }
-                
-
-                &_down {
-                    width: calc(100% + 2px);
-                    position: absolute;
-                    top: 30px;
-                    left: -1px;
-                    background-color: $white;
-                    border: 1px solid $gray;
-                    border-top: none;
-                    padding: 7px 0px;
-                    border-radius: 0 0 10px 10px;
-                    z-index: 9;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-
-
-                    &_option {
-                        padding: 0 20px;
-                        text-align: center;
-                        z-index: 99999;
-
-                        &:hover {
-                            background-color: $main_light_two;
-                        }
-                    }
-                }
-            }
         }
     }
 
@@ -207,15 +156,24 @@
 
             &_menu {
                 padding: 12px 13px;
-                background-color: $white;
                 border-radius: 7px;
-                border: 1px solid $gray;
                 user-select: none;
                 cursor: pointer;
                 svg {
                     width: 20px;
                     height: 20px;
+
+                    @include themed() {
+                        path {
+                            stroke: t(black);
+                        }
+                      }
                 }
+
+                @include themed() {
+                    border: 1px solid t(gray);
+                    background-color: t(white);
+                  }
             }
     
             &_right {
@@ -226,20 +184,32 @@
     
                 &_search {
                     padding: 12px;
-                    background-color: $white;
                     border-radius: 7px;
-                    border: 1px solid $gray;
                     user-select: none;
                     cursor: pointer;
+
+                    @include themed() {
+                        border: 1px solid t(gray);
+                        background-color: t(white);
+                        path {
+                            stroke: t(black);
+                        }
+                      }
                 }
     
                 &_setting {
                     padding: 12px;
-                    background-color: $white;
                     border-radius: 7px;
-                    border: 1px solid $gray;
                     user-select: none;
                     cursor: pointer;
+
+                    @include themed() {
+                        border: 1px solid t(gray);
+                        background-color: t(white);
+                        path {
+                            stroke: t(black);
+                        }
+                      }
                 }
             }
         }
@@ -249,8 +219,11 @@
             transition: all 0.3s;
             animation: searchOpen 0.3s;
             transition: .3s ease-in-out;
-            background-color: $white;
             border-radius: 10px;
+
+            @include themed() {
+                background-color: t(white);
+              }
         }
     }
     // ------------------------------------------
@@ -275,13 +248,16 @@
 
         &_option {
             width: 100%;
-            background-color: $white;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 20px;
             border-radius: 7px;
-            border: 1px solid $gray;
+
+            @include themed() {
+                border: 1px solid t(gray);
+                background-color: t(white);
+              }
 
 
             &_text {
@@ -291,11 +267,16 @@
 
                 &_up {
                     @extend %sm;
-                    color: $light_m_gray;
+                    @include themed() {
+                        color: t(light_m_gray);
+                      }
                 }
 
                 &_head {
                     @extend %ls_b;
+                    @include themed() {
+                        color: t(light_m_gray);
+                      }
                 }
             }
 
@@ -307,182 +288,16 @@
         }
     }
 
-    &_down {
-        width: 100%;
-        padding: 18px 24px 24px 24px;
-        background-color: $white;
-        border-radius: 7px;
-        border: 1px solid $gray;
-        animation: fadeIn .7s ease-in-out;
-        display: flex;
-        flex-direction: column;
-        row-gap: 20px;
-        align-items: center;
-
-        @include mobile {
-            padding-inline: 15px;
-        }
-
-
-        &_up {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            &_head {
-                @extend %ml_b;
-            }
-
-            &_actions {
-                display: flex;
-                align-content: center;
-                column-gap: 12px;
-
-                &_search {
-                    position: relative;
-                    border: 1px solid $gray;
-                    border-radius: 10px;
-
-                    @include mobile {
-                        display: none;
-                    }
-                }
-
-                &_delete {
-                    padding: 11px 10px;
-                    border-radius: 8px;
-                    transition: background-color 0.1s ease-in-out;
-        
-                    &:hover {
-                        background-color: darken(#868686a9, 30%) !important; 
-                    }
-
-                    svg {
-                        width: 20px;
-                        height: 20px;
-                    }
-                }
-
-                &_setting {
-                    padding: 8px 10px;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    border: 1px solid $gray;
-                    border-radius: 10px;
-                    cursor: pointer;
-                    user-select: none;
-                    position: relative;
-
-                    &:hover {
-                        svg {
-                            path {
-                                stroke: $main_color;
-                            }
-                        }
-                    }
-
-
-
-                    &_down {
-                        width: calc(100% + 2px);
-                        padding-top: 10px;
-                        position: absolute;
-                        top: 29px;
-                        left: -1px;
-                        display: flex;
-                        flex-direction: column;
-                        // row-gap: 10px;
-                        align-items: center;
-                        justify-content: center;
-                        background-color: $white;
-                        border: 1px solid $gray;
-                        border-radius: 0 0 10px 10px;
-                        border-top: none;
-
-                        &_btn {
-                            width: 100%;
-                            background-color: transparent;
-                            border-radius: 10px;
-                            
-
-                            &:hover {
-                                background-color: $main_light_two;
-                            }
-                            svg {
-                                width: 18px;
-                                margin: 0 auto;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-
-
-
-        &_transactions {
-            width: 100%;
-            background-color: $white;
-
-            &_table {
-                width: 100%;
-                @extend %text_overflow;
-                border-radius: 10px;
-
-                tr {
-
-                    th {
-                        max-width: 300px;
-                        text-align: left;
-                        padding: 10px 12px;
-                        @extend %sm, %text_overflow;
-                        color: $light_m_gray;
-                        background-color: $gray;
-
-                        input[type="checkbox"] {
-                            accent-color: $main_color;
-                            width: 15px;
-                            height: 15px;
-                        }
-
-                        @include mobile {
-                            padding: 7px 5px;
-                        }
-                    }
-
-                    td {
-                        max-width: 300px;
-                        text-align: left;
-                        padding: 7px 12px;
-                        @extend %sm, %text_overflow;
-
-                        @include mobile {
-                            padding: 7px 5px;
-                        }
-                    }
-                }
-
-
-                &_head_th_desktop {
-
-                    @include mobile {
-                        display: none;
-                    }
-                }
-            }
-        }
-    }
-
     &_chart {
         width: 100%;
-        background-color: $white;
         border-radius: 7px;
-        border: 1px solid $gray;
         padding: 20px;
         animation: fadeIn .9s ease-in-out;
+
+        @include themed() {
+            background-color: t(white);
+            border: 1px solid t(gray);
+          }
     }
 
 

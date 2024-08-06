@@ -117,8 +117,8 @@ const options: ChartOptions<'line'> = {
   },
   elements: {
     line: {
-      tension: 0.6,
-      borderDash: [50, 5],
+      tension: 0.7,
+      borderDash: [40, 5],
     },
     point: {
       radius: 10,

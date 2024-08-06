@@ -3,6 +3,12 @@
 @import "../../../common/reUseable/extend";
 @import "../../../common/reUseable/theme";
 
+.selectedNav {
+    path {
+        stroke: $main_color !important;
+    }
+}
+
 
 .sidebar {
     display: flex;
@@ -14,9 +20,12 @@
     align-items: center;
     flex-shrink: 0;
     align-self: stretch;
-    background-color: $white;
     transform: translateX(0%);
-    border-right: 1px solid $gray;
+
+    @include themed {
+        background-color: t(white);
+        border-right: 1px solid t(gray);
+    }
 
 
     @include mobile {
@@ -32,7 +41,6 @@
         width: 100%;
         height: 50px;
         display: flex;
-        // justify-content: space-between;
         align-items: center;
 
         &_logo {
@@ -42,12 +50,17 @@
             column-gap: 7px;
             cursor: pointer;
 
+            @include themed {
+                color: t(black);
+            }
+
 
             img {
                 width: 28px;
             }
             &_head {
                 @extend %ml_b;
+
             }
         }
 
@@ -63,12 +76,17 @@
         
             .bar_one,.bar_two,.bar_three {
                 height: 1px;
-                border: 1px solid $black;
+                // border: 1px solid $black;
                 width: 18px;
-                background-color: $black;
+                // background-color: $black;
                 display: block;
                 border-radius: 5px;
                 transition: .1s ease-in-out;
+
+                @include themed {
+                    background-color: t(black);
+                    border: 1px solid t(black);
+                }
             }
             
             .bar_one {
@@ -93,12 +111,17 @@
         
             .bar_one,.bar_two,.bar_three {
                 height: 1px;
-                border: 1px solid $black;
+                // border: 1px solid $black;
                 width: 18px;
-                background-color:$black;
+                // background-color:$black;
                 display: block;
                 border-radius: 5px;
                 transition: .1s ease-in-out;
+
+                @include themed {
+                    border: 1px solid t(black);
+                    background-color: t(black);
+                }
             }
         
             .bar_one {
@@ -135,21 +158,34 @@
             transition: .1s ease-in-out;
 
             &:hover {
-                background-color: $main_light_two !important;
+                // background-color: $main_light_two !important;
+
+                @include themed {
+                    background-color: t(main_light_two) !important;
+                }
 
                 span {
                     @extend %sm;
-                    color: $main_color !important;
+                    @include themed {
+                        color: t(main_color);
+                    }
                 }
                 svg {
                     path {
-                        stroke: $main_color !important;
+                        @include themed {
+                            stroke: t(main_color) !important;
+                        }
                     }
                 }
             }
             svg {
                 margin-left: 10px;
                 height: 24px;
+                path {
+                    @include themed {
+                        stroke: t(black_light);
+                    }
+                }
             }
 
             span {
@@ -157,6 +193,10 @@
                 overflow-y: hidden;
                 scrollbar-width: none;
                 height: 24px;
+
+                @include themed {
+                    color: t(black);
+                }
             }
         }
     }
@@ -171,19 +211,23 @@
         cursor: pointer;
         position: relative;
         z-index: 1;
-        background: $white;
+        background-color: transparent;
 
         &_photo {
-            background: $white;
+            background: transparent;
             img {                
                 width: 38px;
             }
         }
 
         &_about {
-            background: $white;
+            background: transparent;
             padding: 0 10px;
             user-select: none;
+
+            @include themed {
+                color: t(black);
+            }
             h4 {
                 @extend %sm_b;
             }
@@ -193,7 +237,7 @@
         }
 
         &_icon {
-            background: $white;
+            background: transparent;
             margin-left: auto;
         }
 
@@ -203,7 +247,6 @@
             top: 0;
             right: 0;
             padding: 8px;
-            background-color: white;
             transition: .2s ease-in-out;
             display: flex;
             flex-direction: column;
@@ -241,9 +284,15 @@
         padding: 1px 0;
         border-radius: 30px;
         @extend %sm;
+
+        @include themed {
+            color: t(black);
+        }
         &:hover {
-            background-color: $main_light_two;
-            color: $main_color;
+            @include themed {
+                color: t(main_color);
+                background-color: t(main_light_two);
+            }
         }
     }
 }

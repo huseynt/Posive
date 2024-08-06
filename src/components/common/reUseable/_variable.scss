@@ -13,7 +13,7 @@ $link_blue: #0077ff;
 $white: #ffffff;
 $white_transparent: #ffffff46;
 $black: #000000;
-$black_light: #0000006f;
+$black_light: #000000ae;
 $low_black: #1a1c1e;
 $available: #12b3a8;
 $available_soon: #4d81e7;
@@ -52,7 +52,7 @@ $themes: (
     main_color: $main_color_dark,
     main_light_color: $main_color_dark,
     main_light_shadow: rgba($main_color_dark, 0.4),
-    main_light_two: lighten($main_color_dark, 10%),
+    main_light_two: $main_light_two,
     link_blue: lighten($link_blue, 20%),
     white: $low_black,
     white_transparent: rgba($low_black, 0.64),

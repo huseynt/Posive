@@ -90,7 +90,9 @@ const ChartComponent: React.FC = () => {
 
                 <div className={style.chartComp_up_actions}>
                     <div className={style.chartComp_up_actions_year}>
+
                         <div className={style.chartComp_up_actions_year_selected}>{selectedYear}</div>
+                        
                         <div className={style.chartComp_up_actions_year_down}>
                             {filteredYears.map((year) => (
                                 <div className={style.chartComp_up_actions_year_down_option} 
