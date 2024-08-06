@@ -375,7 +375,7 @@ const Overview = () => {
             <div className={style.main_total_option_text}>
               <p className={style.main_total_option_text_up}>Total Sales</p>
               <h3 className={style.main_total_option_text_head}>
-                ${ordersFiltered ? ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0) : "0"}
+                ${ordersFiltered ? ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0).toFixed(3) : "0"}
               </h3>
             </div>
 
@@ -485,7 +485,7 @@ const Overview = () => {
             <div className={style.main_total_option_text}>
               <p className={style.main_total_option_text_up}>Total Tip</p>
               <h3 className={style.main_total_option_text_head}>
-                ${ordersFiltered ? ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0) : "0"}
+                ${ordersFiltered ? ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0).toFixed(3) : "0"}
               </h3>
             </div>
 
@@ -722,7 +722,7 @@ const Overview = () => {
                   >
                     Collected/Cashier
                   </th>
-                  <th>Date & Time</th>
+                  <th className={style.main_down_transactions_table_head_th_mobileDate}>Date & Time</th>
                   <th
                     className={
                       style.main_down_transactions_table_head_th_desktop

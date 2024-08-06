@@ -473,6 +473,13 @@
                     }
                 }
 
+                &_head_th_mobileDate {
+                    @extend %text_overflow;
+
+                    @include mobile {
+                        max-width: 100px !important;
+                    }
+                }
 
                 &_head_th_desktop {
 

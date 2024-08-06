@@ -476,6 +476,14 @@
         }
     }
 
+    &_chart {
+        width: 100%;
+        background-color: $white;
+        border-radius: 7px;
+        border: 1px solid $gray;
+        padding: 20px;
+        animation: fadeIn .9s ease-in-out;
+    }
 
 
 }
