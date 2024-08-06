@@ -51,8 +51,8 @@ const generateCardReport = (orders: IOrder[], year: string, period: string): ICa
     if (period === '3M') {
         const months = ['01', '02', '03'];
         return {
-            labels: Array.from({ length: 90 }, (_, i) => `Day ${i + 1}`),
-            datasets: getDailyData(months)
+            labels: ["Jan", "Feb", "Mar"],
+            datasets: getMonthlyData(months)
         };
     }
 

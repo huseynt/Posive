@@ -2,7 +2,7 @@ import style from './product.module.scss'
 import { Helmet } from 'react-helmet'
 import { useOutletContext } from "react-router-dom";
 
-import ChartComponent from '../../features/ReactChart/ChartComponent';
+import ChartComponent from '../../features/ChartComponent/ChartComponent';
 
 interface IProduct {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
