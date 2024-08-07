@@ -165,6 +165,7 @@ const HelpCenter = () => {
           </div>
         </div>
 
+        {/* --------------------------- up ------------------------------- */}
         <div className={style.main_up}>
           <h2 className={style.main_up_head}>Help & Center</h2>
           <p className={style.main_up_desc}>We will help you 24 hours here</p>
@@ -534,13 +535,15 @@ const HelpCenter = () => {
 
 
 
-          <Routes>
-            <Route index element={<Contact setMobileSelect={setMobileSelect}/>} />
-            <Route path="contact" element={<Contact setMobileSelect={setMobileSelect} />} />
-            <Route path="privacy" element={<PrivacyPolicy setMobileSelect={setMobileSelect} />} />
-            <Route path="term" element={<Term setMobileSelect={setMobileSelect} />} />
-            <Route path="information" element={<Information setMobileSelect={setMobileSelect} />} />
-          </Routes>
+          <div style={{ width: "100%", height: "100%",}}>
+            <Routes>
+              <Route index element={<Contact setMobileSelect={setMobileSelect}/>} />
+              <Route path="contact" element={<Contact setMobileSelect={setMobileSelect} />} />
+              <Route path="privacy" element={<PrivacyPolicy setMobileSelect={setMobileSelect} />} />
+              <Route path="term" element={<Term setMobileSelect={setMobileSelect} />} />
+              <Route path="information" element={<Information setMobileSelect={setMobileSelect} />} />
+            </Routes>
+          </div>
         </div>
       </div>
     </div>
