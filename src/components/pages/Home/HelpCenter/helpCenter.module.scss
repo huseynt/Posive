@@ -128,7 +128,6 @@
     justify-content: center;
     row-gap: 2px;
     animation: fadeIn 0.3s;
-    background-color: $available_soon;
 
     @include mobile {
       margin-bottom: 20px;
