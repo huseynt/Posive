@@ -43,6 +43,10 @@ const Overview = () => {
   useEffect(() => {
     if (checked == false) {
       setMultiCheck(0);
+    } else {
+      setMultiCheck(
+        ordersFiltered.length-1
+      );
     }
   }, [checked]);
 
@@ -375,7 +379,11 @@ const Overview = () => {
             <div className={style.main_total_option_text}>
               <p className={style.main_total_option_text_up}>Total Sales</p>
               <h3 className={style.main_total_option_text_head}>
-                ${ordersFiltered ? ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0).toFixed(3) : "0"}
+                ${ordersFiltered ? 
+                 Number(ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0).toFixed(3)) > 10000 ?
+                  Math.floor(Number(ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0).toFixed(3))/1000) + "K": 
+                  ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0).toFixed(3)
+                : "0"}
               </h3>
             </div>
 
@@ -485,7 +493,11 @@ const Overview = () => {
             <div className={style.main_total_option_text}>
               <p className={style.main_total_option_text_up}>Total Tip</p>
               <h3 className={style.main_total_option_text_head}>
-                ${ordersFiltered ? ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0).toFixed(3) : "0"}
+                ${ordersFiltered ? 
+                 Number(ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0).toFixed(3)) > 10000 ?
+                  Math.floor(Number(ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0).toFixed(3))/1000) + "K": 
+                  ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0).toFixed(3)
+                : "0"}
               </h3>
             </div>
 
@@ -583,6 +595,9 @@ const Overview = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
+                <div className={style.main_down_up_actions_delete_count}>
+                  {multiCheck}
+                </div>
               </div>
 
               <div className={style.main_down_up_actions_setting}
