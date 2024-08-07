@@ -25,7 +25,7 @@
     td {
         max-width: 300px;
         text-align: left;
-        padding: 7px 12px;
+        padding: 7px 1%;
         @extend %sm, %text_overflow;
 
         input[type="checkbox"] {

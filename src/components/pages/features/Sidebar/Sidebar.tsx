@@ -1,5 +1,5 @@
 import style from "./sidebar.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "/assets/posive_logo.svg";
 import user1 from "/assets/user1.png";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +17,6 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
 
   const handleToggleMenu = () => {
     setToggleMenu(!toggleMenu);
-    setToggleUser(true);
   };
 
   const handleToggleUser = () => {
@@ -35,13 +34,18 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
     navigate(nav)
   }
 
+  useEffect(() => {
+    setToggleUser(true);
+  }, [toggleMenu]);
+
+
   return (
     <div
       className={style.sidebar}
       style={{
-        width: !toggleMenu ? "80px" : "220px",
-        transition: "all 0.3s ease",
-        transform: toggleMenu ? "translateX(0)" : "",
+        width: screen.width>=991 && !toggleMenu ? "80px" : "220px",
+        transition: "0.2s",
+        transform: toggleMenu ? "translateX(0)" : ""
       }}
     >
       {/* ------------------------------- up ------------------------------------------- */}
@@ -51,20 +55,21 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           justifyContent: !toggleMenu ? "center" : "space-between",
         }}
       >
-        <div className={style.sidebar_up_logo}>
+        <div className={style.sidebar_up_logo}
+        >
           <img
             src={logo}
             alt="Posive"
             style={{
-              width: !toggleMenu ? "0px" : "28px",
-              transition: "all 0.3s ease",
+              width: screen.width>=991 && !toggleMenu ? "0px" : "28px",
+              transition: "all 0.1s ease",
             }}
           />
           <h2
             className={style.sidebar_up_logo_head}
             style={{
-              fontSize: !toggleMenu ? "0rem" : "1.25rem",
-              transition: "all 0.3s ease",
+              fontSize: screen.width>=991 && !toggleMenu ? "0rem" : "1.25rem",
+              transition: "all 0.1s ease",
             }}
           >
             Posive
@@ -87,7 +92,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
 
         <div
           style={{
-            padding: !toggleMenu ? "12px 0px" : "12px 20px",
+            padding: screen.width>=991 && !toggleMenu ? "12px 0px" : "12px 20px",
             justifyContent: !toggleMenu ? "center" : "unset",
             backgroundColor: navigation === undefined ? "#FDEFD9" : "",
           }}
@@ -137,7 +142,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           </svg>
           <span
             style={{
-              fontSize: !toggleMenu ? "0rem" : "1rem",
+              fontSize: screen.width>=991 && !toggleMenu ? "0rem" : "1rem",
               opacity: !toggleMenu ? "0" : "1",
               color: navigation === undefined ? "#EA7E41" : "",
             }}
@@ -149,7 +154,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
 
         <div
           style={{
-            padding: !toggleMenu ? "12px 0px" : "12px 20px",
+            padding: screen.width>=991 && !toggleMenu ? "12px 0px" : "12px 20px",
             justifyContent: !toggleMenu ? "center" : "unset",
             backgroundColor: navigation === "overview" ? "#FDEFD9" : "unset"
           }}
@@ -205,7 +210,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           </svg>
           <span
             style={{
-              fontSize: !toggleMenu ? "0rem" : "1rem",
+              fontSize: screen.width>=991 && !toggleMenu ? "0rem" : "1rem",
               color: navigation === "overview" ? "#EA7E41" : "",
             }}
           >
@@ -215,7 +220,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
 
         <div
           style={{
-            padding: !toggleMenu ? "12px 0px" : "12px 20px",
+            padding: screen.width>=991 && !toggleMenu ? "12px 0px" : "12px 20px",
             justifyContent: !toggleMenu ? "center" : "unset",
             backgroundColor: navigation === "product" ? "#FDEFD9" : "unset"
           }}
@@ -261,7 +266,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           </svg>
           <span
             style={{
-              fontSize: !toggleMenu ? "0rem" : "1rem",
+              fontSize: screen.width>=991 && !toggleMenu ? "0rem" : "1rem",
               color: navigation === "product" ? "#EA7E41" : "",
             }}
           >
@@ -271,7 +276,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
 
         <div
           style={{
-            padding: !toggleMenu ? "12px 0px" : "12px 20px",
+            padding: screen.width>=991 && !toggleMenu ? "12px 0px" : "12px 20px",
             justifyContent: !toggleMenu ? "center" : "unset",
             backgroundColor: navigation === "settings" ? "#FDEFD9" : "unset"
           }}
@@ -303,7 +308,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           </svg>
           <span
             style={{
-              fontSize: !toggleMenu ? "0rem" : "1rem",
+              fontSize: screen.width>=991 && !toggleMenu ? "0rem" : "1rem",
               color: navigation === "settings" ? "#EA7E41" : "",
             }}
           >
@@ -313,7 +318,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
 
         <div
           style={{
-            padding: !toggleMenu ? "12px 0px" : "12px 20px",
+            padding: screen.width>=991 && !toggleMenu ? "12px 0px" : "12px 20px",
             justifyContent: !toggleMenu ? "center" : "unset",
             backgroundColor: (/^help.*/).test(navigation) ? "#FDEFD9" : "unset"
           }}
@@ -352,7 +357,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           </svg>
           <span
             style={{
-              fontSize: !toggleMenu ? "0rem" : "1rem",
+              fontSize: screen.width>=991 && !toggleMenu ? "0rem" : "1rem",
               color: (/^help.*/).test(navigation) ? "#EA7E41" : "",
             }}
           >
@@ -417,7 +422,6 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           }
           style={{ display: !toggleMenu ? "none" : "block" }}
         >
-          {/* <div>Settings</div> */}
           <div onClick={handleLogout}>Logout</div>
         </div>
       </div>
