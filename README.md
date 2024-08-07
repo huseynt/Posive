@@ -15,6 +15,8 @@ npm install react-helmet
 npm install --save-dev @types/react-helmet
 npm install chart.js react-chartjs-2
 npm install @types/chart.js
+npm install @tanstack/react-query @tanstack/react-query-devtools react-hook-form
+npm install @tanstack/eslint-plugin-query -D
 ```
 
 # React + TypeScript + Vite

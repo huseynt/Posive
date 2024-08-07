@@ -85,7 +85,7 @@ const Overview = () => {
     setDate(formattedDate);
     console.log(mealsFiltered);
   }, [mealsFiltered]);
-
+``
   useEffect(() => {
     if (period!=="All time") {
     const filteredOrders = orders.filter((order) => {

@@ -19,6 +19,9 @@ import HomePage from './components/pages/HomePage/HomePage'
 import { Routes, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
+import { useGetMealIds } from './components/services/Queries/queries'
+import { useGetMealIdsSlice } from './components/services/Queries/queries'
+
 
 
 
@@ -57,6 +60,18 @@ function App() {
     };
   }, []);
   // ---------- loader ----------
+
+
+
+  
+
+  // ---------- react-query test ----------
+  const getMealIdsQuery = useGetMealIds();
+  const getMealIdsQuerySlice =  useGetMealIdsSlice(50,3);
+  console.log(getMealIdsQuery);
+  console.log(getMealIdsQuerySlice);
+  // ---------- react-query test ----------
+
 
 
 
