@@ -49,7 +49,8 @@
   }
 
   @include mobile {
-    padding: 20px 2% 1% 2%;
+    height: unset;
+    padding: 20px 2% 3% 2%;
     row-gap: 5px;
   }
 
@@ -144,7 +145,6 @@
 
   &_container {
     width: 100%;
-    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -163,7 +163,7 @@
       min-height: 100%;
       max-width: 210px;
       min-width: 200px;
-      padding: 16px;
+      padding: 16px 16px 27% 16px;
       border-radius: 10px;
       display: flex;
       flex-direction: column;
@@ -171,10 +171,11 @@
       animation: fadeIn 0.3s;
 
       @include mobile {
-        // display: none;
+        padding: 16px;
         position: absolute;
         width: 100%;
         height: fit-content;
+         min-height: unset;
         max-width: unset;
         top: 0;
         left: 0;
