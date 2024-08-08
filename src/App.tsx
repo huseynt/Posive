@@ -58,7 +58,7 @@ function App() {
     return () => {
       document.removeEventListener('readystatechange', handleStateChange);
     };
-  }, []);
+  }, [loaded]);
   // ---------- loader ----------
 
 
