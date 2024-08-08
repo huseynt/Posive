@@ -16,19 +16,6 @@ import { Outlet } from "react-router-dom";
 
 
 
-// export type AppContextArrayType = [
-//   (value: boolean) => void,  // setToggleMenu
-//   (bag: any[]) => void,      // setBag
-//   (message: string) => void, // setNotification
-//   (path: string) => void,    // setNavigation
-//   string,                    // navigation
-//   (purpose: string) => void, // setNotifyPurpose
-//   (notify: boolean) => void, // setNotify
-//   () => void                 // requestNotify
-// ];
-
-
-
 
 
 const Home = () => {
@@ -85,26 +72,6 @@ const Home = () => {
         onClick={() => setToggleMenu(false)}
       ></div>
       {/* ----------------------------- for mobile bg ---------------------------- */}
-
-      {/* {navigation==="pos" && (
-        <Pos
-          bag={bag}
-          setBag={setBag}
-          setToggleMenu={setToggleMenu}
-          setNotification={setNotification}
-          notification={notification}
-        />
-      )} */}
-      {/* {navigation==="overview" && <Overview setToggleMenu={setToggleMenu}/>}
-      {navigation==="product" && <Product />}
-      {navigation==="settings" && <Settings />}
-      {navigation==="help" && <HelpCenter />} */}
-
-
-      {/* <Routes>
-
-              <Route path='/help' element={<HelpCenter />} />
-      </Routes> */}
 
       <Outlet context={
         {

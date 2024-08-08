@@ -26,10 +26,7 @@ import { useEffect, useState } from 'react'
 
 
 
-
 function App() {
-
-
   // ---------- theme ------------------------------
   const [theme, setTheme] = useState<string>("");
   useEffect(() => {
@@ -50,27 +47,26 @@ function App() {
 
   // ---------- loader ----------
   const [loaded, setLoaded] = useState(false);
-  useEffect(() => {
-    const handleStateChange = () => {
-        setLoaded(document.readyState === "complete");
-    };
-    document.addEventListener('readystatechange', handleStateChange);
-    return () => {
-      document.removeEventListener('readystatechange', handleStateChange);
-    };
-  }, [loaded]);
+
+  // ---------- error ready state -------------------------------
+  // useEffect(() => {
+  //   const handleStateChange = () => { setLoaded(true)};
+  //   document.addEventListener('readystatechange', handleStateChange);
+  //   return () => {
+  //     document.removeEventListener('readystatechange', handleStateChange);
+  //   };
+  // }, []);
+  // ---------- error ready state -------------------------------
+
+useEffect(() => {
+  const timeoutId = setTimeout(() => {
+    setLoaded(true);
+  }, 1000);
+
+  return () => clearTimeout(timeoutId);
+}, []);
+
   // ---------- loader ----------
-
-
-
-  
-
-  // // ---------- react-query test ----------
-  // const getMealIdsQuery = useGetMealIds();
-  // const getMealIdsQuerySlice =  useGetMealIdsSlice(50,3);
-  // console.log(getMealIdsQuery);
-  // console.log(getMealIdsQuerySlice);
-  // // ---------- react-query test ----------
 
 
 
