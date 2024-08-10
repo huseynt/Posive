@@ -47,7 +47,6 @@ function App() {
 
   // ---------- loader ----------
   const [loaded, setLoaded] = useState(false);
-
   // ---------- error ready state -------------------------------
   // useEffect(() => {
   //   const handleStateChange = () => { setLoaded(true)};
@@ -57,14 +56,13 @@ function App() {
   //   };
   // }, []);
   // ---------- error ready state -------------------------------
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setLoaded(true);
+    }, 1000);
 
-useEffect(() => {
-  const timeoutId = setTimeout(() => {
-    setLoaded(true);
-  }, 1000);
-
-  return () => clearTimeout(timeoutId);
-}, []);
+    return () => clearTimeout(timeoutId);
+  }, []);
 
   // ---------- loader ----------
 
@@ -88,7 +86,7 @@ useEffect(() => {
             <Route path='' element={<Pos/>} />
             <Route path='overview' element={<Overview/>} />
             <Route path='product' element={<Product />} />
-            <Route path='settings' element={<Settings setTheme={setTheme} theme={theme}/>} />
+            <Route path='settings/*' element={<Settings setTheme={setTheme} theme={theme}/>} />
             <Route path='help/*' element={<HelpCenter />} />
             <Route path='*' element={<NotFound />} />
           </Route>
