@@ -20,13 +20,16 @@
 
 // --------------------- autofill color ---------------------
 *:-webkit-autofill{
-    -webkit-text-fill-color: unset !important;
+    -webkit-text-fill-color: transparent unset !important;
     box-shadow: inset 0 0 20px 50px #fff;
 }
 *::selection {
     color: $main_color;
     background: transparent;
 }
+
+
+
 
 
 

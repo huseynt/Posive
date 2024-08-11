@@ -67,6 +67,13 @@ function App() {
   // ---------- loader ----------
 
 
+  // ----------- body title ----------------
+  useEffect(() => {
+    const pathName = window.location.pathname.split('/').pop();
+    document.title = `Posive ${pathName ? pathName : 'Home'}`;
+  }, []); 
+  // ----------- body title ----------------
+
 
 
 

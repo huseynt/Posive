@@ -278,7 +278,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           style={{
             padding: screen.width>=991 && !toggleMenu ? "12px 0px" : "12px 20px",
             justifyContent: !toggleMenu ? "center" : "unset",
-            backgroundColor: navigation === "settings" ? "#FDEFD9" : "unset"
+            backgroundColor: (/^settings.*/).test(navigation) ? "#FDEFD9" : "unset"
           }}
           onClick={() => handleNavigation("settings")}
           title="Settings"
@@ -289,7 +289,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             viewBox="0 0 18 18"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className={navigation === "settings" ? style.selectedNav : ""}
+            className={(/^settings.*/).test(navigation) ? style.selectedNav : ""}
           >
             <path
               d="M2.25 6.83252V11.16C2.25 12.75 2.25 12.75 3.75 13.7625L7.875 16.1475C8.4975 16.5075 9.51 16.5075 10.125 16.1475L14.25 13.7625C15.75 12.75 15.75 12.75 15.75 11.1675V6.83252C15.75 5.25002 15.75 5.25002 14.25 4.23752L10.125 1.85252C9.51 1.49252 8.4975 1.49252 7.875 1.85252L3.75 4.23752C2.25 5.25002 2.25 5.25002 2.25 6.83252Z"
@@ -309,7 +309,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           <span
             style={{
               fontSize: screen.width>=991 && !toggleMenu ? "0rem" : "1rem",
-              color: navigation === "settings" ? "#EA7E41" : "",
+              color: (/^settings.*/).test(navigation) ? "#EA7E41" : "",
             }}
           >
             Settings
@@ -331,7 +331,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             viewBox="0 0 18 18"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className={navigation === "help" ? style.selectedNav : ""}
+            className={(/^help.*/).test(navigation) ? style.selectedNav : ""}
           >
             <path
               d="M9 16.5C13.125 16.5 16.5 13.125 16.5 9C16.5 4.875 13.125 1.5 9 1.5C4.875 1.5 1.5 4.875 1.5 9C1.5 13.125 4.875 16.5 9 16.5Z"

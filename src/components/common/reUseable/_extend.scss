@@ -138,6 +138,7 @@
   z-index: 3;
   position: absolute;
   transition: all 0.3s ease-in-out;
+  border-radius: 8px;
 
   @include themed() {
     color: t(main_color);
