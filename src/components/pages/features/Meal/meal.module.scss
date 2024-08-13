@@ -38,7 +38,7 @@
 
 
     &:hover {
-        box-shadow: 0 0 10px 0  $main_light_shadow;
+        box-shadow: 0 0 10px 5px  $main_light_shadow;
         transition: 0.3s ease-in-out;
 
         .meal_photo {

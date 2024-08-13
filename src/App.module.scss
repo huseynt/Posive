@@ -16,6 +16,7 @@
     max-width: 1920px;
     margin: 0 auto;
     // border: 1px solid $gray;
+    
 }
 
 // --------------------- autofill color ---------------------
@@ -29,6 +30,10 @@
 }
 
 
+body {
+    /* cursor: url("/assets/cursor.svg"), auto; */
+    background: url('/public/bg.jpg') no-repeat center center/cover;
+}
 
 
 

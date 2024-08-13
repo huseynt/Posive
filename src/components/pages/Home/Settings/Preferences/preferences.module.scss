@@ -28,9 +28,54 @@
     flex-direction: column;
     row-gap: 20px;
 
+    @include desktop {
+        position: relative;
+    }
     @include themed() {
         background-color: t(white);
         border: 1px solid t(gray);
+    }
+
+    @include mobile {
+        margin-bottom: 70px;
+    }
+
+    &_buttons {
+        position: absolute;
+        top: -73px;
+        right: 0;
+        display: flex;
+        align-items: center;
+        column-gap: 12px;
+        animation: fadeIn .3s;
+
+        @include mobile {
+            width: 100%;
+            position: fixed;
+            justify-content: center;
+            bottom: 0;
+            top: auto;
+            right: auto;
+            left: 0;
+            z-index: 999;
+            padding: 2%;
+            @include themed() {
+                background-color: t(white);
+                border-top: 1px solid t(gray);
+            }
+        }
+
+        &_save {
+            @extend %btn_main;
+            min-width: 140px;
+            border-radius: 10px;
+        }
+
+        &_cancel {
+            @extend %btn_main_w;
+            min-width: 140px;
+            border-radius: 10px;
+        }
     }
 
     &_up {
@@ -66,6 +111,179 @@
         row-gap: 20px;
         align-items: center;
         justify-content: center;
+
+
+        &_head {
+            width: 100%;
+            @extend %m;
+            @include themed() {
+                color: t(black);
+            }
+        }
+
+        &_mode {
+            width: 100%;
+            display: flex;
+            column-gap: 20px;
+            justify-content: space-between;
+            align-items: center;
+
+            @include mobile {
+                flex-direction: column;
+                row-gap: 20px;
+            }
+
+            &_option {
+                cursor: pointer;
+                user-select: none;
+                @include themed() {
+                    border: 2px solid t(gray);
+                }
+
+                @include mobile {
+                    width: 100%;
+                }
+
+                &_photo {
+                    padding: 18px;
+                    background-color: $light_bg_gray;
+                }
+
+                &_info {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 16px;
+
+                    &_head {
+                        @extend %m_b;
+                        @include themed() {
+                            color: t(black);
+                        }
+                    }
+                }
+            }
+        }
+
+        &_form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            row-gap: 25px;
+            margin-bottom: 50px;
+
+
+            &_parametr {
+                width: 100%;
+                display: flex;
+                column-gap: 20px;
+                justify-content: space-between;
+                align-items: center;
+
+                @include mobile {
+                    flex-direction: column;
+                    align-items: start;
+                    row-gap: 20px;
+                }
+
+                &_head {
+                    @extend %m;
+                    @include themed() {
+                        color: t(black);
+                    }
+                }
+
+                &_select {
+                    width: 100%;
+                    max-width: 500px;
+                    min-width: 110px;
+                    padding: 10px 20px;
+                    border-radius: 10px;
+                    position: relative;
+                    box-sizing: default !important;
+
+                    @include themed() {
+                        border: 1px solid t(gray);
+                    }
+
+                    &:hover {
+                        @include themed() {
+                            border: 1px solid t(main_color);
+                        }
+                    }
+
+                    &:hover .parent_main_form_parametr_select_head_p {
+                        @include themed() {
+                            color: t(main_color);
+                        }
+                    }
+
+                    &:hover .parent_main_form_parametr_select_down {
+                        display: flex;
+                    }
+
+                    &:hover .parent_main_form_parametr_select_head_img {
+                        transform: rotate(180deg);
+                    }
+
+                    &_head {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+
+                        &_p {
+                            @extend %m, %text_overflow;
+                            cursor: pointer;
+                            user-select: none;
+                            @include themed() {
+                                color: t(black);
+                            }
+
+                            @include mobile {
+                                width: 100%;
+                                max-width: 200px;
+                               
+                            }
+                        }
+                    }
+
+                    &_down {
+                        width: calc(100% + 2px);
+                        display: none;
+                        flex-direction: column;
+                        position: absolute;
+                        padding: 10px 0;
+                        left: -1px;
+                        top: 33px;
+                        border-radius: 0 0 10px 10px;
+                        z-index: 99;
+
+                        @include themed() {
+                            background-color: t(white);
+                            border: 1px solid t(main_color);
+                            border-top: none; 
+                        }
+
+
+                        &_option {
+                            padding: 0 20px;
+                            cursor: pointer;
+                            user-select: none;
+                            @extend %m;
+                            @include themed() {
+                                color: t(black);
+                            }
+                            &:hover {
+                                @include themed() {
+                                    background-color: t(main_light_two);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
     }
 
