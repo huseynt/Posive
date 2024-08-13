@@ -146,10 +146,16 @@
 
     &_head {
       @extend %ls_b;
+      @include themed() {
+        color: t(black);
+      }
     }
 
     &_desc {
       @extend %sm;
+      @include themed() {
+        color: t(black);
+      }
     }
   }
 
@@ -196,6 +202,7 @@
       @include themed() {
         background-color: t(white);
         border: 1px solid t(gray);
+        color: t(black);
       }
 
       &_mobileSelect {

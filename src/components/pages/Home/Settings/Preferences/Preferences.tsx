@@ -76,8 +76,8 @@ const Preferences: React.FC<IGeneral> = (props) => {
     </div>
       
     <div className={style.parent_up}>
-      <h2 className={style.parent_up_head}>General</h2>
-      <h5 className={style.parent_up_info}>Update your business persona</h5>
+      <h2 className={style.parent_up_head}>Preferences</h2>
+      <h5 className={style.parent_up_info}>Customization according to your preferences</h5>
     </div>
 
     <div className={style.parent_line}></div>
