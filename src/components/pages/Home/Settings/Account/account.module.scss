@@ -18,6 +18,7 @@
     }
 }
 
+
 .parent {
     width: 100%;
     height: 100%;
@@ -26,17 +27,65 @@
     animation: fadeIn 0.3s;
     display: flex;
     flex-direction: column;
-    row-gap: 20px;
+    row-gap: 25px;
 
+    @include desktop {
+        position: relative;
+    }
     @include themed() {
         background-color: t(white);
         border: 1px solid t(gray);
+    }
+
+    @include mobile {
+        margin-bottom: 70px;
+    }
+
+    &_buttons {
+        position: absolute;
+        top: -73px;
+        right: 0;
+        display: flex;
+        align-items: center;
+        column-gap: 12px;
+        animation: fadeIn .3s;
+
+        @include mobile {
+            width: 100%;
+            position: fixed;
+            justify-content: center;
+            bottom: 0;
+            top: auto;
+            right: auto;
+            left: 0;
+            z-index: 999;
+            padding: 2%;
+            @include themed() {
+                background-color: t(white);
+                border-top: 1px solid t(gray);
+            }
+        }
+
+        &_save {
+            @extend %btn_main;
+            min-width: 140px;
+            border-radius: 10px;
+        }
+
+        &_cancel {
+            @extend %btn_main_w;
+            min-width: 140px;
+            border-radius: 10px;
+        }
     }
 
     &_up {
         width: 100%;
         &_head {
             @extend %ls_b;
+            @include themed() {
+                color: t(black);
+            }
         }
         &_info {
             margin-top: 5px;
@@ -67,7 +116,389 @@
         align-items: center;
         justify-content: center;
 
+        &_business {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            row-gap: 16px;
+
+
+            &_head {
+                @extend %m_b;
+                @include themed() {
+                    color: t(black);
+                }
+            }
+
+            &_block {
+                display: flex;
+                align-items: start;
+                justify-content: center;
+                flex-direction: column;
+                row-gap: 16px;
+
+                &_descMobile {
+                    @extend %sm;
+                    @include themed() {
+                        color: t(light_m_gray);
+                    }
+                    @include desktop {
+                        display: none;
+                    }
+                }
+
+                &_photo {
+                    display: flex;
+                    align-items: center;
+                    justify-content: start;
+                    column-gap: 20px;
+
+
+                    &_icon {
+                        padding: 12px;
+                        border-radius: 50%;
+                        @include themed() {
+                            background-color: t(main_light_two);
+                        }
+
+                        &_image {
+                            width: 56px;
+                            height: 57px;
+                            object-fit: cover;
+                            border-radius: 50%;
+                        }
+                    }
+
+                    &_upload {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: start;
+                        row-gap: 12px;
+
+                        &_label {
+                            padding: 7px 24px;
+                            @extend %m;
+                            border-radius: 10px;
+                            cursor: pointer;
+                            @include themed() {
+                                background-color: t(main_color);
+                                color: t(white);
+                            }
+                            &:hover {
+                                @include themed() {
+                                    background-color: t(main_color_dark);
+                                }
+                            }
+                        }
+
+                        &_input {
+                            display: none;
+                        }
+
+                        &_path {
+                            @extend %ex_s;
+                            @include themed() {
+                                color: t(light_m_gray);
+                            }
+                        }
+
+                        &_desc {
+                            @extend %sm;
+                            @include themed() {
+                                color: t(light_m_gray);
+                            }
+                            @include mobile {
+                                display: none;
+                            }
+                        }
+                    }
+
+                    &_delete {
+                        @extend %sm;
+                        @include themed() {
+                            color: t(black);
+                        }
+                        cursor: pointer;
+                        &:hover {
+                            @include themed() {
+                                color: t(main_color);
+                            }
+                        }
+                    }
+                }
+
+                &_form {
+                    width: 100%;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 20px;
+                    background-color: transparent;
+
+                    @include mobile {
+                        grid-template-columns: 1fr;
+                    }
+
+                    
+                
+                        &_block {
+                            position: relative;
+                                            
+                            input {
+                                width: 100%;
+                                padding: 7px 13px;
+                                border: none;
+                                border-radius: 10px;
+                                outline: none;
+                                background-color: transparent;
+                                border: 1px solid $light_gray;
+                                @extend %m;
+                                z-index: 9;
+
+                                @include themed() {
+                                    border: 1px solid t(gray);
+                                    color: t(black);
+                                }
+                            }
+                            &:focus-within {
+                                .label {
+                                    @extend %label_focus;
+                                }
+                            }
+                            .label_focus {
+                                @extend %label_focus;
+                            }
+                
+                            .label {
+                                @extend %label_unset;
+                                pointer-events: none;
+                            }
+                            .label_birth {
+                                @extend %label_unset;
+                                pointer-events: none;
+                                opacity: 0;
+                            }
+
+                            &_visibility {
+                                position: absolute;
+                                top: 50%;
+                                right: 10px;
+                                transform: translateY(-50%);
+                                z-index: 10;
+                                cursor: pointer;
+                                svg {
+                                    width: 15px;
+                                    height: 15px;
+
+                                    path {
+                                        @include themed() {
+                                        stroke: t(black);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                   
+                        &_select {
+                            width: 100%;
+                            min-width: 110px;
+                            padding: 10px 20px;
+                            border-radius: 10px;
+                            position: relative;
+                            box-sizing: default !important;
+        
+                            @include themed() {
+                                border: 1px solid t(gray);
+                            }
+        
+                            @include mobile {
+                                max-width: unset;
+                            }
+        
+                            &:hover {
+                                @include themed() {
+                                    border: 1px solid t(main_color);
+                                }
+                            }
+        
+                            &:hover .parent_main_business_block_form_select_head_p {
+                                @include themed() {
+                                    color: t(main_color);
+                                }
+                            }
+        
+                            &:hover .parent_main_business_block_form_select_down {
+                                display: flex;
+                            }
+        
+                            &:hover .parent_main_business_block_form_select_head_img {
+                                transform: rotate(180deg);
+                            }
+        
+                            &_head {
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+        
+                                &_p {
+                                    @extend %m, %text_overflow;
+                                    cursor: pointer;
+                                    user-select: none;
+                                    @include themed() {
+                                        color: t(main_color);
+                                    }
+        
+                                    @include mobile {
+                                        width: 100%;
+                                        max-width: 200px;
+                                        
+                                    }
+                                }
+                            }
+        
+                            &_down {
+                                width: calc(100% + 2px);
+                                display: none;
+                                flex-direction: column;
+                                position: absolute;
+                                padding: 10px 0;
+                                left: -1px;
+                                top: 33px;
+                                border-radius: 0 0 10px 10px;
+                                z-index: 99;
+        
+                                @include themed() {
+                                    background-color: t(white);
+                                    border: 1px solid t(main_color);
+                                    border-top: none; 
+                                }
+        
+        
+                                &_option {
+                                    padding: 0 20px;
+                                    cursor: pointer;
+                                    user-select: none;
+                                    @extend %m;
+                                    @include themed() {
+                                        color: t(black);
+                                    }
+                                    &:hover {
+                                        @include themed() {
+                                            background-color: t(main_light_two);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+
+                }
+            }
+
+        }
+
+        &_line {
+            margin: 15px 0;
+            width: 100%;
+            height: 1px;
+            @include themed() {
+                border-bottom: 1px solid t(gray);
+            }
+        }
+
+        // ---------------------------- delete account ----------------------------
+        &_deleteAccount {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            row-gap: 10px;
+
+            &_head {
+                @extend %m_b;
+                @include themed() {
+                    color: t(black);
+                }
+            }
+
+            &_down {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                column-gap: 12px;
+
+                @include mobile {
+                    flex-direction: column;
+                    row-gap: 12px;
+                }
+
+                &_text {
+                    @extend %sm;
+                    @include themed() {
+                        color: t(light_m_gray);
+                    }
+                }
+
+                &_actions {
+                    display: flex;
+                    column-gap: 12px;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    @include mobile {
+                        flex-direction: column;
+                        width: 100%;
+                        row-gap: 12px;
+                    }
+
+                    &_btn {
+                        padding: 7px 20px;
+                        min-width: 170px;
+                        @extend %m_b;
+                        border-radius: 10px;
+                        @include themed() {
+                            background-color: t(warning);
+                            color: t(white);
+                        }
+                        &:hover {
+                            @include themed() {
+                                background-color: lighten(t(warning), 10%);
+                            }
+                        }
+
+                        @include mobile {
+                            width: 100%;
+                            padding: 10px 20px;
+                        }
+                    }
+
+                    &_btnW   {
+                        padding: 7px 20px;
+                        min-width: 150px;
+                        @extend %m_b;
+                        border-radius: 10px;
+                        background-color: transparent;
+                        @include themed() {
+                            color: t(black);
+                            border: 1px solid t(gray);
+                        }
+                        &:hover {
+                            @include themed() {
+                                color: t(main_color);
+                                border: 1px solid t(main_color);
+                            }
+                        }
+
+                        @include mobile {
+                            width: 100%;
+                            padding: 10px 20px;
+                        }
+                    }
+                }
+            }
+
+        }
+
+        
     }
-
-
 }

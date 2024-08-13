@@ -1,5 +1,6 @@
 @import "../../../common/reUseable/mixin";
-
+@import '../../../common/reUseable/variable';
+@import '../../../common/reUseable/theme';
 
 .login {
     width: 100%;
@@ -11,6 +12,10 @@
 
     @include mobile {
         grid-template-columns: 1fr;
+    }
+
+    @include themed {
+        background-color: t(white);
     }
 }
 

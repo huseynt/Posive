@@ -18,6 +18,8 @@ $low_black: #1a1c1e;
 $available: #12b3a8;
 $available_soon: #4d81e7;
 $reserved: #c65468;
+$warning: #AA3D5A;
+
 
 
 
@@ -42,7 +44,8 @@ $themes: (
     low_black: $low_black,
     available: $available,
     available_soon: $available_soon,
-    reserved: $reserved
+    reserved: $reserved,
+    warning: $warning
   ),
   dark: (
     dark_blue: $dark_blue,
@@ -63,7 +66,8 @@ $themes: (
     low_black: lighten($dark_blue, 10%),
     available: darken($available, 20%),
     available_soon: darken($available_soon, 20%),
-    reserved: darken($reserved, 20%)
+    reserved: darken($reserved, 20%),
+    warning: $warning
   )
 );
 

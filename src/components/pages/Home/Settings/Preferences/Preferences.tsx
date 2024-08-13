@@ -1,5 +1,5 @@
 import style from './preferences.module.scss'
-import Theme from '../../../../common/Theme/Theme'
+// import Theme from '../../../../common/Theme/Theme'
 import { useState } from 'react'
 
 import lightMode from '/public/assets/lightmode.png'
@@ -14,11 +14,21 @@ interface IGeneral {
   setTheme: (theme: string) => void;
 }
 
-const Preferences: React.FC<IGeneral> = (props) => {
-  const { setMobileSelect, theme, setTheme } = props
+interface IPereferencesData{
+  theme: string | null;
+  language: string;
+  currency: string;
+  timeZone: string;
+  sidebarSize: string;
+  iconsSize: string;
+}
 
-  const [pereferencesData, setPereferencesData] = useState({
-    theme: "light",
+const Preferences: React.FC<IGeneral> = (props) => {
+  const { setMobileSelect, setTheme } = props
+  const localTheme = localStorage.getItem('theme');
+
+  const [pereferencesData, setPereferencesData] = useState<IPereferencesData>({
+    theme: localTheme,
     language: "English (US)",
     currency: "United States dollar (USD)",
     timeZone: "(UTC - 08:00) Pacific Times ( Los Angles )",
@@ -28,7 +38,7 @@ const Preferences: React.FC<IGeneral> = (props) => {
 
   const resetData = () => {
     setPereferencesData({
-      theme: "light",
+      theme: localTheme,
       language: "English (US)",
       currency: "United States dollar (USD)",
       timeZone: "(UTC - 04:00) Baku Times",
@@ -39,7 +49,7 @@ const Preferences: React.FC<IGeneral> = (props) => {
 
   const sendData = () => {
     console.log(pereferencesData)
-    toggleTheme(pereferencesData.theme)
+    toggleTheme(pereferencesData.theme??'light')
   }
 
   const toggleTheme = (mode: string) => {
@@ -92,15 +102,15 @@ const Preferences: React.FC<IGeneral> = (props) => {
           </div>
 
           <div className={style.parent_main_mode_option_info}>
-            <p className={style.parent_main_mode_option_info_head}>Light Mode {pereferencesData.theme === "light" && "Active"}</p>
+            <p className={style.parent_main_mode_option_info_head}>Light Mode {localTheme === "light" && "(Active)"}</p>
             {
-              pereferencesData.theme === "light" ?
+              localTheme === "light" ?
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#EA7E41"/>
               </svg>
               :
               <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12.6667 21C17.6373 21 21.6667 16.9706 21.6667 12C21.6667 7.02944 17.6373 3 12.6667 3C7.69619 3 3.66675 7.02944 3.66675 12C3.66675 16.9706 7.69619 21 12.6667 21Z" stroke="#ACB5BB" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12.6667 21C17.6373 21 21.6667 16.9706 21.6667 12C21.6667 7.02944 17.6373 3 12.6667 3C7.69619 3 3.66675 7.02944 3.66675 12C3.66675 16.9706 7.69619 21 12.6667 21Z" stroke="#ACB5BB" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             }
           </div>
@@ -119,15 +129,15 @@ const Preferences: React.FC<IGeneral> = (props) => {
           </div>
 
           <div className={style.parent_main_mode_option_info}>
-            <p className={style.parent_main_mode_option_info_head}>Dark Mode {pereferencesData.theme === "dark" && "Active"}</p>
+            <p className={style.parent_main_mode_option_info_head}>Dark Mode {localTheme === "dark" && "(Active)"}</p>
             {
-              pereferencesData.theme === "dark" ?
+              localTheme === "dark" ?
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#EA7E41"/>
               </svg>
               :
               <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12.6667 21C17.6373 21 21.6667 16.9706 21.6667 12C21.6667 7.02944 17.6373 3 12.6667 3C7.69619 3 3.66675 7.02944 3.66675 12C3.66675 16.9706 7.69619 21 12.6667 21Z" stroke="#ACB5BB" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12.6667 21C17.6373 21 21.6667 16.9706 21.6667 12C21.6667 7.02944 17.6373 3 12.6667 3C7.69619 3 3.66675 7.02944 3.66675 12C3.66675 16.9706 7.69619 21 12.6667 21Z" stroke="#ACB5BB" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             }
           </div>
@@ -145,20 +155,24 @@ const Preferences: React.FC<IGeneral> = (props) => {
             <img src={customMode} alt="custom mode" />
           </div>
           <div className={style.parent_main_mode_option_info}>
-            <p className={style.parent_main_mode_option_info_head}>Custom Mode {pereferencesData.theme === "custom" && "Active"}</p>
+            <p className={style.parent_main_mode_option_info_head}>Custom Mode {localTheme === "custom" && "(Active)"}</p>
             {
-              pereferencesData.theme === "custom" ?
+              localTheme === "custom" ?
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#EA7E41"/>
               </svg>
               :
               <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12.6667 21C17.6373 21 21.6667 16.9706 21.6667 12C21.6667 7.02944 17.6373 3 12.6667 3C7.69619 3 3.66675 7.02944 3.66675 12C3.66675 16.9706 7.69619 21 12.6667 21Z" stroke="#ACB5BB" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12.6667 21C17.6373 21 21.6667 16.9706 21.6667 12C21.6667 7.02944 17.6373 3 12.6667 3C7.69619 3 3.66675 7.02944 3.66675 12C3.66675 16.9706 7.69619 21 12.6667 21Z" stroke="#ACB5BB" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             }
           </div>
         </div>
       </div>
+
+      {/* ------------- line ----------------- */}
+      <div className={style.parent_line}></div>
+
 
       {/* --------------- form ---------------- */}
       <div className={style.parent_main_form}>
@@ -311,7 +325,7 @@ const Preferences: React.FC<IGeneral> = (props) => {
     </div>
 
 
-    <Theme setTheme={setTheme} theme={theme}/>
+    {/* <Theme setTheme={setTheme} theme={theme}/> */}
 
   </div>
   )

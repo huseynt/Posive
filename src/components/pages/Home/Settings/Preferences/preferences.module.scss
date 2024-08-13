@@ -82,6 +82,9 @@
         width: 100%;
         &_head {
             @extend %ls_b;
+            @include themed() {
+                color: t(black);
+            }
         }
         &_info {
             margin-top: 5px;
@@ -136,6 +139,7 @@
             &_option {
                 cursor: pointer;
                 user-select: none;
+                border-radius: 10px;
                 @include themed() {
                     border: 2px solid t(gray);
                 }
@@ -146,7 +150,15 @@
 
                 &_photo {
                     padding: 18px;
-                    background-color: $light_bg_gray;
+                    border-radius: 8px;
+                    
+                    @include themed() {
+                        background-color: t(gray);
+                    }
+
+                    img {
+                        margin: 0 auto;
+                    }
                 }
 
                 &_info {
@@ -205,6 +217,10 @@
 
                     @include themed() {
                         border: 1px solid t(gray);
+                    }
+
+                    @include mobile {
+                        max-width: unset;
                     }
 
                     &:hover {
