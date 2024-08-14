@@ -1,5 +1,5 @@
 import style from "./pos.module.scss";
-// import { meals } from "../../../test/db/cards";
+import { meals } from "../../../test/db/cards";
 import Meal from "../../features/Meal/Meal";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -8,9 +8,9 @@ import SearchInput from "../../features/SearchInput/SearchInput";
 
 import { Helmet } from "react-helmet";
 
-import {API} from "../../../utils/API/API";
-import Axios from "axios";
-import {config} from "../../../utils/API/config";
+// import {API} from "../../../utils/API/API";
+// import Axios from "axios";
+// import {config} from "../../../utils/API/config";
 
 import { useOutletContext } from "react-router-dom";
 
@@ -34,29 +34,29 @@ const Main= () => {
 
 
 // ---------------------- api test ------------------------
-  const [meals, setMeals] = useState<IMeal[]>([]);
-  async function getMeals() {
-    try {
-      Axios.get(
-        API,
-        config
-      ).then (
-        (response) => {
-          setMeals(response.data.content);
-          setMealsFiltered(response.data.content);
-          console.log(response.data.content);
-        }
-      )
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // const [meals, setMeals] = useState<IMeal[]>([]);
+  // async function getMeals() {
+  //   try {
+  //     Axios.get(
+  //       API,
+  //       config
+  //     ).then (
+  //       (response) => {
+  //         setMeals(response.data.content);
+  //         setMealsFiltered(response.data.content);
+  //         console.log(response.data.content);
+  //       }
+  //     )
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
   
-  useEffect(() => {
-    if (meals.length === 0) {
-      getMeals();
-    }
-  }, [meals.length]);
+  // useEffect(() => {
+  //   if (meals.length === 0) {
+  //     getMeals();
+  //   }
+  // }, [meals.length]);
 // ---------------------------------------------------
 
 
