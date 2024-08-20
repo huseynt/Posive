@@ -3,11 +3,18 @@ $gray: #e0e0e0;
 $light_gray: #acafb0;
 $light_m_gray: #6c7278;
 $light_bg_gray: #edf1f3;
+
 $main_color_dark: #d4733b;
 $main_color: #ea7e41;
 $main_light_color: #ea7e41;
 $main_light_shadow: #ea7f4163;
 $main_light_two: #fdefd9;
+
+$main_color_dark_blue: #31928a;
+$main_color_blue: #3ab4a9;
+$main_light_color_blue: #46d8cc;
+$main_light_shadow_blue: #3ab4aa7e;
+$main_light_two_blue: #c3f5f1;
 
 $link_blue: #0077ff;
 $white: #ffffff;
@@ -67,6 +74,30 @@ $themes: (
     available: darken($available, 20%),
     available_soon: darken($available_soon, 20%),
     reserved: darken($reserved, 20%),
+    warning: $warning
+  ),
+  customBlue: (
+    dark_blue: $dark_blue,
+    gray: $gray,
+    light_gray: $light_gray,
+    light_m_gray: $light_m_gray,
+    light_bg_gray: $light_bg_gray,
+
+    main_color_dark: $main_color_dark_blue,
+    main_color: $main_color_blue,
+    main_light_color: $main_light_color_blue,
+    main_light_shadow: $main_light_shadow_blue,
+    main_light_two: $main_light_two_blue,
+
+    link_blue: $link_blue,
+    white: $white,
+    white_transparent: $white_transparent,
+    black: $black,
+    black_light: $black_light,
+    low_black: $low_black,
+    available: $available,
+    available_soon: $available_soon,
+    reserved: $reserved,
     warning: $warning
   )
 );
