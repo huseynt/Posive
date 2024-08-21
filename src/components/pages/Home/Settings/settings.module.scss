@@ -218,6 +218,14 @@
         @include desktop {
           display: none;
         }
+
+        svg {
+          path {
+            @include themed() {
+              stroke: t(black_light);
+            }
+          }
+        }
       }
 
       &_head {

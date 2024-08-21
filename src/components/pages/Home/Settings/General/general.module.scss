@@ -177,17 +177,18 @@
 
                         &_label {
                             padding: 7px 24px;
-                                @extend %m;
-                                border-radius: 10px;
+                            cursor: pointer;
+                            @extend %m;
+                            border-radius: 10px;
+                            @include themed() {
+                                background-color: t(main_color);
+                                color: t(white);
+                            }
+                            &:hover {
                                 @include themed() {
-                                    background-color: t(main_color);
-                                    color: t(white);
+                                    background-color: t(main_color_dark);
                                 }
-                                &:hover {
-                                    @include themed() {
-                                        background-color: t(main_color_dark);
-                                    }
-                                }
+                            }
                         }
 
                         &_input {

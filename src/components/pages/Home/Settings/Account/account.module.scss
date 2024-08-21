@@ -322,9 +322,10 @@
                             }
         
                             &:hover .parent_main_business_block_form_select_head_p {
-                                @include themed() {
-                                    color: t(main_color);
-                                }
+                                display: none;
+                                // @include themed() {
+                                //     color: t(main_color);
+                                // }
                             }
         
                             &:hover .parent_main_business_block_form_select_down {
@@ -333,12 +334,14 @@
         
                             &:hover .parent_main_business_block_form_select_head_img {
                                 transform: rotate(180deg);
+                                display: none;
                             }
         
                             &_head {
                                 display: flex;
                                 align-items: center;
                                 justify-content: space-between;
+                                min-height: 24px;
         
                                 &_p {
                                     @extend %m, %text_overflow;
@@ -363,7 +366,7 @@
                                 position: absolute;
                                 padding: 10px 0;
                                 left: -1px;
-                                top: 33px;
+                                top: 7px;
                                 border-radius: 0 0 10px 10px;
                                 z-index: 99;
         

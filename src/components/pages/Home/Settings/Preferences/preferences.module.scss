@@ -136,10 +136,19 @@
                 row-gap: 20px;
             }
 
+            .selectOption {
+                @include themed() {
+                    border: 2px solid t(main_color);
+                }
+            }
+
             &_option {
                 cursor: pointer;
                 user-select: none;
                 border-radius: 10px;
+                transition: all 0.4s;
+
+
                 @include themed() {
                     border: 2px solid t(gray);
                 }
@@ -158,6 +167,7 @@
 
                     img {
                         margin: 0 auto;
+                        animation: fadeIn 0.3s;
                     }
                 }
 
@@ -172,6 +182,13 @@
                         @extend %m_b;
                         @include themed() {
                             color: t(black);
+                        }
+                    }
+                    &_selected {
+                        path {
+                            @include themed() {
+                                fill: t(main_color);
+                            }
                         }
                     }
                 }
@@ -230,9 +247,7 @@
                     }
 
                     &:hover .parent_main_form_parametr_select_head_p {
-                        @include themed() {
-                            color: t(main_color);
-                        }
+                        display: none;
                     }
 
                     &:hover .parent_main_form_parametr_select_down {
@@ -240,13 +255,15 @@
                     }
 
                     &:hover .parent_main_form_parametr_select_head_img {
-                        transform: rotate(180deg);
+                        // transform: rotate(180deg);
+                        display: none;
                     }
 
                     &_head {
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
+                        min-height: 24px;
 
                         &_p {
                             @extend %m, %text_overflow;
@@ -271,7 +288,7 @@
                         position: absolute;
                         padding: 10px 0;
                         left: -1px;
-                        top: 33px;
+                        top: 7px;
                         border-radius: 0 0 10px 10px;
                         z-index: 99;
 
@@ -292,8 +309,14 @@
                             }
                             &:hover {
                                 @include themed() {
-                                    background-color: t(main_light_two);
+                                    background-color: t(light_bg_gray);
                                 }
+                            }
+                        }
+                        .down_selectOption {
+                            @include themed() {
+                                // background-color: t(main_light_two);
+                                color: t(main_color);
                             }
                         }
                     }

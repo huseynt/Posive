@@ -197,29 +197,38 @@
 // ----------------- button -----------------
 %btn_main {
   padding: 7px 30px;
-  background-color: $main_color;
   border-radius: 10px;
   @extend %m_b;
-  color: $white;
   user-select: none;
   cursor: pointer;
   white-space: nowrap;
+  color: $white;
+
+
+  @include themed() {
+    background-color: t(main_color);
+  }
 
   &:hover {
-    background-color: $main_color_dark;
+    @include themed {
+      background-color: t(main_color_dark);
+    }
   }
 }
 
 %btn_main_w {
   padding: 7px 30px;
-  background-color: $white;
   border-radius: 10px;
   @extend %m_b;
-  color: $black;
   user-select: none;
   cursor: pointer;
   white-space: nowrap;
-  border: 1px solid $gray;
+
+  @include themed() {
+    background-color: t(white);
+    color: t(black);
+    border: 1px solid t(gray);
+  }
 
   &:hover {
     // background-color: $main_light_two;
@@ -228,6 +237,8 @@
     // path {
     //   stroke: $black;
     // }
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+    @include themed() {
+      box-shadow: 0 0 5px 0 t(black_light);
+    }
   }
 }

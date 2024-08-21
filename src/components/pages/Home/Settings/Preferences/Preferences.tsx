@@ -90,12 +90,11 @@ const Preferences: React.FC<IGeneral> = (props) => {
       {/* --------------- mode ---------------- */}
       <div className={style.parent_main_mode}>
         {/* -------------------- light mode ------------------- */}
-        <div className={style.parent_main_mode_option}
+        <div className={`${style.parent_main_mode_option} ${pereferencesData.theme==="light" && style.selectOption}`}
         onClick={() => setPereferencesData({
           ...pereferencesData,
           theme: "light"
         })}
-        style={{border: pereferencesData.theme==="light" ? "2px solid #EA7E41" : ""}}
         >
           <div className={style.parent_main_mode_option_photo}>
             <img src={lightMode} alt="light mode" />
@@ -105,7 +104,7 @@ const Preferences: React.FC<IGeneral> = (props) => {
             <p className={style.parent_main_mode_option_info_head}>Light Mode {localTheme === "light" && "(Active)"}</p>
             {
               localTheme === "light" ?
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className={style.parent_main_mode_option_info_selected} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#EA7E41"/>
               </svg>
               :
@@ -117,12 +116,11 @@ const Preferences: React.FC<IGeneral> = (props) => {
         </div>
 
         {/* -------------------- dark mode ------------------- */}
-        <div className={style.parent_main_mode_option}
+        <div className={`${style.parent_main_mode_option} ${pereferencesData.theme==="dark" && style.selectOption}`}
         onClick={() => setPereferencesData({
           ...pereferencesData,
           theme: "dark"
         })}
-        style={{border: pereferencesData.theme==="dark" ? "2px solid #EA7E41" : ""}}
         >
           <div className={style.parent_main_mode_option_photo}>
             <img src={darkMode} alt="dark mode" />
@@ -132,7 +130,7 @@ const Preferences: React.FC<IGeneral> = (props) => {
             <p className={style.parent_main_mode_option_info_head}>Dark Mode {localTheme === "dark" && "(Active)"}</p>
             {
               localTheme === "dark" ?
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className={style.parent_main_mode_option_info_selected} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#EA7E41"/>
               </svg>
               :
@@ -144,12 +142,11 @@ const Preferences: React.FC<IGeneral> = (props) => {
         </div>
 
         {/* -------------------- custom mode ------------------- */}
-        <div className={style.parent_main_mode_option}
+        <div className={`${style.parent_main_mode_option} ${pereferencesData.theme==="customBlue" && style.selectOption}`}
         onClick={() => setPereferencesData({
           ...pereferencesData,
           theme: "customBlue"
         })}
-        style={{border: pereferencesData.theme==="customBlue" ? "2px solid #EA7E41" : ""}}
         >
           <div className={style.parent_main_mode_option_photo}>
             <img src={customMode} alt="custom mode" />
@@ -158,7 +155,7 @@ const Preferences: React.FC<IGeneral> = (props) => {
             <p className={style.parent_main_mode_option_info_head}>Custom Mode {localTheme === "customBlue" && "(Active)"}</p>
             {
               localTheme === "customBlue" ?
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg className={style.parent_main_mode_option_info_selected} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#EA7E41"/>
               </svg>
               :
@@ -186,26 +183,23 @@ const Preferences: React.FC<IGeneral> = (props) => {
               <img className={style.parent_main_form_parametr_select_head_img} src={arrowdown} alt="arrowdown" />
             </div>
             <div className={style.parent_main_form_parametr_select_down}>
-              <p className={style.parent_main_form_parametr_select_down_option}
+              <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.language==="Azərbaycan" && style.down_selectOption}`}
               onClick={() => setPereferencesData({
                 ...pereferencesData,
                 language: "Azərbaycan"
               })}
-              style={{color: pereferencesData.language==="Azərbaycan" ? "#EA7E41" : ""}}
               >{"Azərbaycan"}</p>
-              <p className={style.parent_main_form_parametr_select_down_option}
+              <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.language==="Русский" && style.down_selectOption}`}
               onClick={() => setPereferencesData({
                 ...pereferencesData,
                 language: "Русский"
               })}
-              style={{color: pereferencesData.language==="Русский" ? "#EA7E41" : ""}}
               >{"Русский"}</p>
-              <p className={style.parent_main_form_parametr_select_down_option}
+              <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.language==="English (US)" && style.down_selectOption}`}
               onClick={() => setPereferencesData({
                 ...pereferencesData,
                 language: "English (US)"
               })}
-              style={{color: pereferencesData.language==="English (US)" ? "#EA7E41" : ""}}
               >{"English (US)"}</p>
             </div>
           </div>
@@ -220,19 +214,17 @@ const Preferences: React.FC<IGeneral> = (props) => {
               <img className={style.parent_main_form_parametr_select_head_img} src={arrowdown} alt="arrowdown" />
             </div>
             <div className={style.parent_main_form_parametr_select_down}>
-              <p className={style.parent_main_form_parametr_select_down_option}
+              <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.currency==="United States dollar (USD)" && style.down_selectOption}`}
               onClick={() => setPereferencesData({
                 ...pereferencesData,
                 currency: "United States dollar (USD)"
               })}
-              style={{color: pereferencesData.currency==="United States dollar (USD)" ? "#EA7E41" : ""}}
               >{"United States dollar (USD)"}</p>
-              <p className={style.parent_main_form_parametr_select_down_option}
+              <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.currency==="Azerbaijan Manat (AZN)" && style.down_selectOption}`}
               onClick={() => setPereferencesData({
                 ...pereferencesData,
                 currency: "Azerbaijan Manat (AZN)"
               })}
-              style={{color: pereferencesData.currency==="Azerbaijan Manat (AZN)" ? "#EA7E41" : ""}}
               >{"Azerbaijan Manat (AZN)"}</p>
             </div>
           </div>
@@ -247,19 +239,17 @@ const Preferences: React.FC<IGeneral> = (props) => {
               <img className={style.parent_main_form_parametr_select_head_img} src={arrowdown} alt="arrowdown" />
             </div>
             <div className={style.parent_main_form_parametr_select_down}>
-              <p className={style.parent_main_form_parametr_select_down_option}
+              <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.timeZone==="(UTC - 08:00) Pacific Times ( Los Angles )" && style.down_selectOption}`}
               onClick={() => setPereferencesData({
                 ...pereferencesData,
                 timeZone: "(UTC - 08:00) Pacific Times ( Los Angles )"
               })}
-              style={{color: pereferencesData.timeZone==="(UTC - 08:00) Pacific Times ( Los Angles )" ? "#EA7E41" : ""}}
               >{"(UTC - 08:00) Pacific Times ( Los Angles )"}</p>
-              <p className={style.parent_main_form_parametr_select_down_option}
+              <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.timeZone==="(UTC - 04:00) Baku Times" && style.down_selectOption}`}
               onClick={() => setPereferencesData({
                 ...pereferencesData,
                 timeZone: "(UTC - 04:00) Baku Times"
               })}
-              style={{color: pereferencesData.timeZone==="(UTC - 04:00) Baku Times" ? "#EA7E41" : ""}}
               >{"(UTC - 04:00) Baku Times"}</p>
             </div>
           </div>
@@ -274,19 +264,17 @@ const Preferences: React.FC<IGeneral> = (props) => {
               <img className={style.parent_main_form_parametr_select_head_img} src={arrowdown} alt="arrowdown" />
             </div>
             <div className={style.parent_main_form_parametr_select_down}>
-              <p className={style.parent_main_form_parametr_select_down_option}
+              <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.sidebarSize==="Medium (220px)" && style.down_selectOption}`}
               onClick={() => setPereferencesData({
                 ...pereferencesData,
                 sidebarSize: "Medium (220px)"
               })}
-              style={{color: pereferencesData.sidebarSize==="Medium (220px)" ? "#EA7E41" : ""}}
               >{"Medium (220px)"}</p>
-              <p className={style.parent_main_form_parametr_select_down_option}
+              <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.sidebarSize==="Big (240px)" && style.down_selectOption}`}
               onClick={() => setPereferencesData({
                 ...pereferencesData,
                 sidebarSize: "Big (240px)"
               })}
-              style={{color: pereferencesData.sidebarSize==="Big (240px)" ? "#EA7E41" : ""}}
               >{"Big (240px)"}</p>
             </div>
           </div>
@@ -301,19 +289,17 @@ const Preferences: React.FC<IGeneral> = (props) => {
               <img className={style.parent_main_form_parametr_select_head_img} src={arrowdown} alt="arrowdown" />
             </div>
             <div className={style.parent_main_form_parametr_select_down}>
-              <p className={style.parent_main_form_parametr_select_down_option}
+              <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.iconsSize==="Small (24px)" && style.down_selectOption}`}
               onClick={() => setPereferencesData({
                 ...pereferencesData,
                 iconsSize: "Small (24px)"
               })}
-              style={{color: pereferencesData.iconsSize==="Small (24px)" ? "#EA7E41" : ""}}
               >{"Small (24px)"}</p>
-              <p className={style.parent_main_form_parametr_select_down_option}
+              <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.iconsSize==="Medium (27px)" && style.down_selectOption}`}
               onClick={() => setPereferencesData({
                 ...pereferencesData,
                 iconsSize: "Medium (27px)"
               })}
-              style={{color: pereferencesData.iconsSize==="Medium (27px)" ? "#EA7E41" : ""}}
               >{"Medium (27px)"}</p>
             </div>
           </div>
