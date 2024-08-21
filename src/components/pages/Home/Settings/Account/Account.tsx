@@ -1,8 +1,6 @@
 import style from './account.module.scss'
 import { useState } from 'react'
 import arrowdown from '/public/assets/arrow-down.png'
-import { color } from '../../../../common/reUseable/variable'
-
 
 interface IGeneral {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>
