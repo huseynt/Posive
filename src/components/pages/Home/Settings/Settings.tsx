@@ -293,8 +293,11 @@ const Settings: React.FC<ThemeProps> = (props) => {
 
               {
                 sub === "privacy" ? "Privacy Policy" : 
-                sub === "term" ? "Term & Condition" : 
-                sub === "information" ? "App Information" : "General"
+                sub === "preferences" ? "Preferences" : 
+                sub === "userpermissions" ? "User Permissions" : 
+                sub === "account" ? "Account" : 
+                sub === "notifications" ? "Notifications" :  
+                sub === "billings" ? "Billings" : "General"
               }
               <p style={{marginLeft: "auto"}}>
                 <svg width="14" 
