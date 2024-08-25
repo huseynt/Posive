@@ -27,16 +27,58 @@
     display: flex;
     flex-direction: column;
     row-gap: 20px;
+    position: relative;
 
     @include themed() {
         background-color: t(white);
         border: 1px solid t(gray);
     }
 
+    &_buttons {
+        position: absolute;
+        top: -73px;
+        right: 0;
+        display: flex;
+        align-items: center;
+        column-gap: 12px;
+        animation: fadeIn .3s;
+
+        @include mobile {
+            width: 100%;
+            position: fixed;
+            justify-content: center;
+            bottom: 0;
+            top: auto;
+            right: auto;
+            left: 0;
+            z-index: 999;
+            padding: 2%;
+            @include themed() {
+                background-color: t(white);
+                border-top: 1px solid t(gray);
+            }
+        }
+
+        &_save {
+            @extend %btn_main;
+            min-width: 140px;
+            border-radius: 10px;
+        }
+
+        &_cancel {
+            @extend %btn_main_w;
+            min-width: 140px;
+            border-radius: 10px;
+        }
+    }
+
     &_up {
         width: 100%;
         &_head {
             @extend %ls_b;
+            @include themed() {
+                color: t(black);
+            }
         }
         &_info {
             margin-top: 5px;
@@ -66,6 +108,137 @@
         row-gap: 20px;
         align-items: center;
         justify-content: center;
+
+
+        &_block {
+            width: 100%;
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            column-gap: 30px;
+
+            @include mobile {
+                flex-direction: column;
+                row-gap: 20px;
+            }
+
+            &_header {
+                width: 30%;
+
+                @include mobile {
+                    width: 100%;
+                }
+
+                &_head {
+                    @extend %m_b;
+                    @include themed() {
+                        color: t(black);
+                    }
+                }
+
+                &_desc {
+                    @extend %sm;
+                    @include themed() {
+                        color: t(light_m_gray);
+                    }
+                }
+            }
+
+            &_actions {
+                width: 70%;
+                display: flex;
+                flex-direction: column;
+                row-gap: 15px;
+                
+                @include mobile {
+                    width: 100%;
+                }
+
+                &_turn {
+                    display: flex;
+                    column-gap: 10px;
+
+                    &_icon {
+                        width: 45px;
+                        height: 25px;
+                        border-radius: 100px;
+                        position: relative;
+                        cursor: pointer;
+
+                        @include themed() {
+                            background-color: t(main_color);
+                        }
+
+                        &_ball {
+                            width: 19px;
+                            height: 19px;
+                            margin: 3px;
+                            border-radius: 100px;
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            transition: all 0.2s ease-out;
+                            @include themed() {
+                                background-color: t(white);
+                            }
+                        }
+                    }
+                    
+                    &_span {
+                        @extend %m_b;
+                        @include themed() {
+                            color: t(black);
+                        }
+                    }
+                }
+
+                &_option {
+                    display: flex;
+                    column-gap: 13px;
+                    align-items: start;
+                    cursor: pointer;
+                    user-select: none;
+                    transition: all 0.3s ease-out;
+
+                    &_select {
+                        min-width: 19px;
+                        width: 19px;
+                        height: 19px;
+                        margin: 5px 0;
+                        border-radius: 50%;
+                        @include themed() {
+                            border: 1px solid t(light_gray);
+                        }
+
+                        &_icon {
+                            width: 21px;
+                            height: 21px;
+                        }
+                    }
+
+                    &_info {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        row-gap: 3px;
+
+                        &_head {
+                            @extend %m;
+                            @include themed() {
+                                color: t(black);
+                            }
+                        }
+
+                        &_desc {
+                            @extend %sm;
+                            @include themed() {
+                                color: t(light_m_gray);
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
     }
 
