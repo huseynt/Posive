@@ -38,6 +38,11 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
     setToggleUser(true);
   }, [toggleMenu]);
 
+  
+  useEffect(() => {
+    screen.width<=991 && setToggleMenu(false);
+  }, [navigation]);
+
 
   return (
     <div
