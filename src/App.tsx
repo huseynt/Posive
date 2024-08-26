@@ -75,6 +75,20 @@ function App() {
   // ----------- body title ----------------
 
 
+  // ----------- system mode ----------------    
+  useEffect(() => {
+    if(theme === 'system') {
+      const matchMediaDark = window.matchMedia('(prefers-color-scheme: dark)');
+      const updateTheme = () => document.body.setAttribute('data-theme', matchMediaDark.matches ? 'dark' : 'light');
+      updateTheme();
+      matchMediaDark.addEventListener('change', updateTheme);
+      return () => matchMediaDark.removeEventListener('change', updateTheme);
+    }
+  }, [theme]);
+  // ----------- system mode ----------------
+
+
+
 
 
   return (
