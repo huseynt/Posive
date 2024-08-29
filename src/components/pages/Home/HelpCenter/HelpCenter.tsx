@@ -41,6 +41,10 @@ const HelpCenter = () => {
     navigate(path);
   };
 
+  useEffect(() => {
+    setMobileSelect(false);
+  }, [sub]);
+
 
 
 

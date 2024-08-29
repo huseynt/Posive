@@ -48,6 +48,11 @@ const Settings: React.FC<ThemeProps> = (props) => {
     console.log(sub);
   }, [sub]);
 
+  useEffect(() => {
+    setMobileSelect(false);
+  }, [sub]);
+
+
 
   const handleSub = (path: string) => {
     setSub(path);
