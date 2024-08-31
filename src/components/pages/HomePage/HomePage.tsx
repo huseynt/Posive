@@ -1,10 +1,41 @@
+import { useEffect, useState } from "react";
 import style from "./homePage.module.scss";
 import iphone from "/public/iPhone13pro.png";
 import mac from "/public/MacbookAir.png";
 import { useNavigate } from "react-router-dom";
 
+interface ICovers {
+  [key: number]: string;
+}
+
 const HomePage = () => {
   const navigate = useNavigate()
+  const [I, setI] = useState<number>(0)
+  const covers: ICovers ={
+    0: "/public/assets/login_wall_person.png",
+    1: "/public/assets/login_wall.png"
+  }
+
+  const changeI = () => {
+    if(I === 0) setI(1)
+    else setI(0)
+  }
+
+  useEffect(() => {
+    let i = I
+    const interval = setInterval(() => {
+      setI(i)
+      i++
+      if(i > 1) i = 0
+    }, 7000)
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
+
+
+
+  
 
   return (
     <div className={style.home}>
@@ -59,8 +90,61 @@ const HomePage = () => {
             <img className={style.home_main_container_describtion_iphone} src={iphone} alt="iphone13pro" />
             <img className={style.home_main_container_describtion_mac} src={mac} alt="macbook" />
           </div>
+          
         </div>
 
+      </div>
+
+      {/* ------------------- mobile -------------------- */}
+      <div className={style.home_mobile}>
+
+        <div className={style.home_mobile_up}>
+          <div className={style.home_mobile_up_photo}
+          style={{
+            background: `url(${covers[I]}) no-repeat center center / cover`
+          }}
+          onClick={changeI}
+          >
+            <div className={style.home_mobile_up_photo_circle}>
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clipPath="url(#clip0_18_1769)">
+                <rect width="28" height="28" rx="6.37934" fill="#EF8421"/>
+                <path d="M8.05193 8.29166C8.3442 8.03071 8.7223 7.88647 9.11412 7.88647H18.3406C19.2214 7.88647 19.9354 8.60051 19.9354 9.48131V18.9979C19.9354 19.5291 19.6709 20.0254 19.23 20.3217L4.05944 30.5144C3.40609 30.9534 2.53019 30.85 1.99694 30.2711L-5.28209 22.3681C-5.88535 21.7132 -5.83542 20.6911 -5.1712 20.098L8.05193 8.29166Z" fill="black" fillOpacity="0.2"/>
+                <rect x="7.44263" y="7.62061" width="12.7587" height="12.7587" rx="2.12645" fill="url(#paint0_linear_18_1769)"/>
+                </g>
+                <defs>
+                <linearGradient id="paint0_linear_18_1769" x1="13.822" y1="7.62061" x2="13.822" y2="20.3793" gradientUnits="userSpaceOnUse">
+                <stop stopColor="white"/>
+                <stop offset="1" stopColor="#CFCFCF"/>
+                </linearGradient>
+                <clipPath id="clip0_18_1769">
+                <rect width="28" height="28" rx="6.37934" fill="white"/>
+                </clipPath>
+                </defs>
+              </svg>
+            </div>
+          </div>
+
+          <div className={style.home_mobile_up_desc}>
+            <div className={style.home_mobile_up_desc_head}>
+              <span>Posive</span>
+              <span className={style.home_mobile_up_desc_head_b}>POS</span>
+            </div>
+
+            <div className={style.home_mobile_up_desc_more}>Admin Dashboard</div>
+
+            <div className={style.home_mobile_up_desc_info}>Experience the future of retail with our user-friendly POS platform. Increase your sales, streamline operations, and delight your customers with a modern and efficient checkout process</div>
+          </div>
+        </div>
+
+        <div className={style.home_mobile_actions}>
+          <button className={style.home_mobile_actions_btn}
+          onClick={() => navigate('/login')}
+          >Login</button>
+          <button className={style.home_mobile_actions_btnW}
+          onClick={() => navigate('/registr')}
+          >Create an Account</button>
+        </div>
 
       </div>
 

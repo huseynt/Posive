@@ -1,7 +1,7 @@
 @import "../../common/reUseable/variable";
 @import "../../common/reUseable/mixin";
 @import "../../common/reUseable/extend";
-@import "../../common/reUseable//theme";
+@import "../../common/reUseable/theme";
 
 @import url('https://db.onlinewebfonts.com/c/9e00143409affcb46a1ae58634aa64be?family=SofiaProRegular');
 
@@ -38,6 +38,59 @@
     }
 }
 
+@keyframes LeftFadeM {
+    0% {
+        opacity: 0;
+        transform: translateX(-10%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes RightFadeM {
+    0% {
+        opacity: 0;
+        transform: translateX(10%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeDown {
+    0% {
+        opacity: 0;
+        transform: translateY(50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomOut {
+    0% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 
 
 .home {
@@ -49,6 +102,10 @@
     align-items: center;
     row-gap: 100px;
 
+    @include mobile {
+        height: 100svh;
+    }
+
 
     &_bg {
         position: fixed;
@@ -56,6 +113,10 @@
         left: 0;
         width: 100%;
         height: 100vh;
+
+        @include mobile {
+            display: none;
+        }
         
 
         &_circle {
@@ -81,6 +142,10 @@
         align-items: center;
         row-gap: 85px;
 
+        @include mobile {
+            display: none;
+        }
+
         &_header {
             width: 80%;
             margin-inline: 10%;
@@ -93,6 +158,16 @@
             transition: 0.8s ease-in-out;
             animation: headerFade 1.5s ease-in-out;
 
+            @include mobile {
+                width: 100%;
+                margin-inline: 0;
+                padding: 17px 20px;
+                // flex-direction: column;
+                align-items: start;
+                row-gap: 15px;
+                background-color: transparent;
+            }
+
             &:hover {
                 box-shadow:  0 0 10px 0 inset $main_color; 
             }
@@ -100,11 +175,17 @@
 
             &_text {
                 @extend %ml_b;
+                color: $black;
+
+                @include mobile {
+                    color: $white;
+                }
             }
 
             &_button {
                 @extend %sm_b;
                 padding: 8px 20px;
+                min-width: 35px;
                 background-color: $main_light_color;
                 color: $white;
                 border-radius: 20px;
@@ -112,6 +193,11 @@
                 cursor: pointer;
                 user-select: none;
                 transition: background-color 0.2s;
+
+                @include mobile {
+                    padding: 7px 10px;
+                    border-radius: 10px;
+                }
 
                 &:hover {
                     background-color: $main_color_dark;
@@ -129,6 +215,11 @@
             justify-content: space-between;
             padding: 0 5%;
 
+            @include mobile {
+                flex-direction: column;
+                row-gap: 50px;
+            }
+
 
             &_left {
                 width: 100%;
@@ -137,6 +228,11 @@
                 flex-direction: column;
                 justify-content: center;
                 animation: LeftFade 1.5s ease-in-out;
+
+                @include mobile {
+                    height: fit-content;
+
+                }
 
                 &_logo {
                     max-width: 210px;
@@ -164,6 +260,12 @@
                 &_text {
                     @extend %extra_b;
                     color: $white;
+
+                    @include mobile {
+                        font-family: "Manrope", sans-serif;
+                        font-size: 2.25rem;
+                        font-weight: 700;
+                    }
                 }
 
                 &_actions {
@@ -197,11 +299,16 @@
                 width: 100%;
                 position: relative;
 
+                @include mobile {
+                    display: none;
+                    min-width: 100%;
+                    height: 200px;
+                }
+
                 &_iphone {
                     position: absolute;
                     width: 10vw;
                     max-width: 220px;
-                    // right: 90px;
                     right: -2vw;
                     top: -110px;
                     z-index: 9;
@@ -211,7 +318,6 @@
                 &_mac {
                     position: absolute;
                     width: 50vw;
-                    // max-width: 500px;
                     right: 2vw;
                     top: -150px;
                     z-index: 5;
@@ -219,6 +325,172 @@
                 }
 
             }
+        }
+    }
+
+    // ------------------ mobile ------------------
+    &_mobile {
+        width: 100%;
+        height: 100svh;
+        background-color: $white;
+        padding: 4%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        @include desktop {
+            display: none;
+        }
+
+
+        &_up {
+
+            &_photo {
+                width: 100%;
+                height: 300px;
+                border-radius: 20px;
+                position: relative;
+                transition: all .5s;
+                animation: fadeIn 1.7s ease-in-out;
+    
+                &_circle {
+                    width: 150px;
+                    height: 150px;
+                    border-radius: 50%;
+                    background: linear-gradient(180deg, #ffffff 60%, transparent 60%);
+                    position: absolute;
+                    bottom: -65px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    display: grid;
+                    place-items: center;
+    
+                    svg {
+                        width: 50px;
+                        height: 50px;
+                    }
+                }
+    
+                &_circle::after {
+                    content: "";
+                    box-sizing: content-box;
+                    width: 40px;
+                    height: 40px;
+                    border: 15px solid transparent;
+                    border-right: 15px solid rgb(255, 255, 255);
+                    border-radius: 50%;
+                    background-color: transparent;
+                    position: absolute;
+                    bottom: 25.5px;
+                    left: -29.4px;
+                    transform: translateX(-50%);
+                    rotate: 45deg;
+                }
+    
+                &_circle::before {
+                    content: "";
+                    box-sizing: content-box;
+                    width: 40px;
+                    height: 40px;
+                    border: 15px solid transparent;
+                    border-bottom: 15px solid rgb(255, 255, 255);
+                    // border-right: 15px solid yellow;
+                    border-radius: 50%;
+                    background-color: transparent;
+                    position: absolute;
+                    bottom: 25.5px;
+                    left: 159px;
+                    transform: translateX(-50%);
+                    rotate: 45deg;
+                }
+            }
+    
+            &_desc {
+                width: 100%;
+    
+                &_head {
+                    @extend %xl_b;
+                    color: $logo_color;
+                    margin-top: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    column-gap: 10px;
+                    animation: zoomOut 3s ease-in-out;
+    
+                    &_b {
+                        color: $black;
+                    }
+                }
+    
+                &_more {
+                    @extend %m_b;
+                    color: $black;
+                    margin-top: 5px;
+                    text-align: center;
+                }
+    
+                &_info {
+                    @extend %sm_b;
+                    color: $light_m_gray;
+                    margin-top: 10px;
+                    text-align: center;
+                    animation: fadeDown 1.7s ease-in-out;
+                }
+            }
+        }
+
+
+        
+
+        &_actions {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            
+
+            &_btn {
+                width: 100%;
+                @extend %m_b;
+                padding: 15px 30px;
+                background-color: $logo_color;
+                color: $white;
+                border-radius: 20px;
+                border: 1px solid $gray;
+                cursor: pointer;
+                user-select: none;
+                transition: background-color 0.2s;
+                margin-top: 20px;
+                animation: LeftFadeM 1.7s ease-in-out;
+
+                &:hover {
+                    background-color: $main_color_dark;
+                    box-shadow: 0 0 10px 0 $light_bg_gray;
+                }
+            }
+
+            &_btnW {
+                width: 100%;
+                @extend %m_b;
+                padding: 15px 30px;
+                background-color: transparent;
+                color: $logo_color;
+                border-radius: 20px;
+                border: 2px solid $logo_color;
+                cursor: pointer;
+                user-select: none;
+                transition: background-color 0.2s;
+                margin-top: 20px;
+                animation: RightFadeM 1.7s ease-in-out;
+
+                &:hover {
+                    background-color: $main_color_dark;
+                    box-shadow: 0 0 10px 0 $light_bg_gray;
+                }
+            }
+
         }
     }
 }

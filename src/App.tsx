@@ -96,7 +96,7 @@ function App() {
       {!loaded && <TriangleLoader /> }
       <div style={{opacity: loaded ? '1' : '0'}}>
         <Routes>
-          <Route index element={<Login />} />
+          <Route index element={<HomePage />} />
           <Route path='/registr' element={<Registr />} />
           <Route path='/login' element={<Login />} />
           <Route path='/forgot' element={<Forgot />} />
