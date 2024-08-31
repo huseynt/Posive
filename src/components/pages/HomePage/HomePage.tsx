@@ -3,6 +3,8 @@ import style from "./homePage.module.scss";
 import iphone from "/public/iPhone13pro.png";
 import mac from "/public/MacbookAir.png";
 import { useNavigate } from "react-router-dom";
+import img_person from "/public/assets/login_wall_person.png";
+import img_wall from "/public/assets/login_wall.png";
 
 interface ICovers {
   [key: number]: string;
@@ -12,8 +14,8 @@ const HomePage = () => {
   const navigate = useNavigate()
   const [I, setI] = useState<number>(0)
   const covers: ICovers ={
-    0: "/public/assets/login_wall_person.png",
-    1: "/public/assets/login_wall.png"
+    0: img_person,
+    1: img_wall
   }
 
   const changeI = () => {
