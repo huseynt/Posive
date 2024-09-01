@@ -1,0 +1,76 @@
+@import '../../../common/reUseable/extend';
+@import '../../../common/reUseable/mixin';
+@import '../../../common/reUseable/theme';
+@import '../../../common/reUseable/variable';
+
+.row {
+    width: 100%;
+    padding: 8px 15px;
+    display: grid;
+    grid-template-columns: 24px 35px 1fr 1fr 1fr 1fr 1fr;
+    cursor: pointer;
+    column-gap: 5px;
+
+    @include mobile() {
+        grid-template-columns: 24px 35px 1fr 1fr 1fr;
+    }
+
+    &:hover {
+        @include themed() {
+            background-color: t(main_light_two);
+        }
+    }
+
+    &_item {
+        padding-right: 3px;
+        text-align: start;
+        @extend %sm_b;
+        @extend %text_overflow;
+        @include themed() {
+            color: t(black);
+        }
+    }
+}
+
+.hide {
+    @include mobile() {
+        display: none;
+    }
+}
+
+
+.actions {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+
+    .row_item_edit {
+        padding: 10px;
+        background-color: #54A6FF;
+        border-radius: 8px;
+
+        &:hover {
+            background-color: #3e79b8;
+        }
+
+        svg {
+            width: 12px;
+            height: 12px;
+        }
+    }
+
+    .row_item_delete {
+        padding: 10px;
+        background-color: #CE2C60;
+        border-radius: 8px;
+
+        &:hover {
+            background-color: #a5264e;
+        }
+
+        svg {
+            width: 12px;
+            height: 12px;
+        }
+    }
+}

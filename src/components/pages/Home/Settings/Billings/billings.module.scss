@@ -37,11 +37,13 @@
         width: 100%;
         &_head {
             @extend %ls_b;
+            @include themed() {
+                color: t(black);
+            }
         }
         &_info {
             margin-top: 5px;
             @extend %sm;
-
             @include themed() {
                 color: t(light_m_gray);
             }
@@ -67,7 +69,159 @@
         align-items: center;
         justify-content: center;
 
+
+        &_plans {
+            width: 100%;
+            display: flex;
+            column-gap: 20px;
+            justify-content: space-between;
+            align-items: center;
+
+            @include mobile() {
+                flex-direction: column;
+                row-gap: 20px;
+            }
+
+            &_option {
+                width: 100%;
+                padding: 20px;
+                border-radius: 12px;
+                display: flex;
+                flex-direction: column;
+                row-gap: 20px;
+                
+                @include themed() {
+                    background-color: t(white);
+                    border: 1px solid t(gray);
+                }
+
+                &_name {
+                    @extend %m_b;
+                    @include themed() {
+                        color: t(black);
+                    }
+                }
+
+                &_price {
+                    display: flex;
+                    align-items: center;
+                    column-gap: 8px;
+
+                    &_number {
+                        @extend %lm_b;
+
+                        &_integer {
+                            @include themed() {
+                                color: t(black);
+                            }
+                        }
+
+                        &_reminder {
+                            @include themed() {
+                                color: t(light_gray);
+                            }
+                        }
+                    }
+
+                    &_period {
+                        @include themed() {
+                            color: t(light_m_gray);
+                        }
+                    }
+                }
+
+                &_desc {
+                    @extend %sm;
+                    @include themed() {
+                        color: t(light_m_gray);
+                    }
+                }
+
+                &_advantages {
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: 10px;
+
+                    &_feature {
+                        display: flex;
+                        align-items: center;
+                        column-gap: 5px;
+
+                        &_icon {
+                            width: 20px;
+                            height: 20px;
+                        }
+
+                        &_name {
+                            @extend %sm_b;
+                            @include themed() {
+                                color: t(black);
+                            }
+                        }
+                    }
+                }
+
+                &_btn {
+                    padding: 12px 24px;
+                    @extend %btn_main;
+                }
+            }
+        }
+
     }
 
 
+}
+
+
+
+
+
+
+.active_option {
+    @include themed() {
+        background-color: t(black);
+        border: 1px solid t(gray);
+    }
+
+    .parent_main_plans_option_name {
+        @include themed() {
+            color: t(white);
+        }
+    }
+
+    .parent_main_plans_option_price {
+        &_number {
+            &_integer {
+                @include themed() {
+                    color: t(white);
+                }
+            }
+            &_reminder {
+                @include themed() {
+                    color: t(light_gray);
+                }
+            }
+        }
+        &_period {
+            @include themed() {
+                color: t(light_m_gray);
+            }
+        }
+    }
+    .parent_main_plans_option_desc {
+        @include themed() {
+            color: t(light_m_gray);
+        }
+    }
+
+    .parent_main_plans_option_advantages {
+        &_feature {
+            &_name {
+                @include themed() {
+                    color: t(white);
+                }
+            }
+        }
+    }
 }
