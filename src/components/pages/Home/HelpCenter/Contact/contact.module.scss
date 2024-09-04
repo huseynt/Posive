@@ -36,6 +36,7 @@
   @include themed() {
     background-color: t(white);
     border: 1px solid t(gray);
+    color: t(black);
   }
 
   &_head {
@@ -90,6 +91,12 @@
         svg {
           width: 24px;
           height: 24px;
+          
+          path {
+            @include themed() {
+              stroke: t(black);
+            }
+          }
         }
       }
 
@@ -166,7 +173,8 @@
 
 
         @include mobile {
-            max-width: 350px;
+            // max-width: 350px;
+            white-space: unset;
         }
 
         &:hover {
@@ -196,11 +204,6 @@
     details[open] > summary::after {
         transform: rotate(180deg);
         }
-
-
-
-
-
 
   }
 }

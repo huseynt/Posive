@@ -91,6 +91,16 @@
         svg {
           width: 20px;
           height: 20px;
+
+          @include themed() {
+              path {
+                  stroke: t(black);
+              }
+            }
+        }
+        @include themed() {
+          border: 1px solid t(gray);
+          background-color: t(white);
         }
       }
 
@@ -107,6 +117,13 @@
           border: 1px solid $gray;
           user-select: none;
           cursor: pointer;
+          @include themed() {
+            border: 1px solid t(gray);
+            background-color: t(white);
+            path {
+                stroke: t(black);
+            }
+          }
         }
 
         &_setting {
@@ -116,6 +133,13 @@
           border: 1px solid $gray;
           user-select: none;
           cursor: pointer;
+          @include themed() {
+            border: 1px solid t(gray);
+            background-color: t(white);
+            path {
+                stroke: t(black);
+            }
+          }
         }
       }
     }
@@ -154,7 +178,7 @@
     &_desc {
       @extend %sm;
       @include themed() {
-        color: t(black);
+        color: t(light_m_gray);
       }
     }
   }

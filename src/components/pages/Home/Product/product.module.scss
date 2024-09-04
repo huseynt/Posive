@@ -53,7 +53,10 @@
 
     @include themed() {
         background-color: t(light_bg_gray);
-      }
+    }
+    @include mobile {
+        height: 100svh;
+    }
 }
 .overflow::-webkit-scrollbar {
     display: none;
@@ -275,7 +278,7 @@
                 &_head {
                     @extend %ls_b;
                     @include themed() {
-                        color: t(light_m_gray);
+                        color: t(black);
                       }
                 }
             }

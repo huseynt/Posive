@@ -14,9 +14,12 @@
 
 
 .tr {
-    background-color: $white;
     animation: fadeIn 0.5s ease-in-out;
     cursor: pointer;
+
+    @include themed() {
+        background-color: t(white);
+    }
 
     &:hover {
         background-color: $main_light_two;
@@ -37,6 +40,10 @@
         @include mobile {
             padding: 7px 5px;
         }
+
+        @include themed() {
+            color: t(black);
+        }
     }
 
     &_desktop {
@@ -52,6 +59,7 @@
             border-radius: 4px;
             background-color: $light_bg_gray;
             text-align: center;
+            color: $black;
         }
     }
 
@@ -78,5 +86,13 @@
         @include mobile {
             max-width: 100px !important;
         }
+    }
+}
+
+.tr_checked {
+    background-color: $main_light_two !important;
+
+    td {
+        color: $black !important;
     }
 }

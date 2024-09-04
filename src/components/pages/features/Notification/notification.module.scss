@@ -86,7 +86,7 @@
 
 .notification {
     width: 100vw;
-    height: 100vh;
+    height: 100svh;
     background-color: #00000008;
     position: fixed;
     top: 0;
@@ -95,13 +95,13 @@
     z-index: 999;
 
     @include mobile {
-        padding: 3% 2%;
+        padding: 2% 2%;
     }
 
 
     &_screen {
         width: 100vw;
-        height: 97vh;
+        height: 98svh;
         max-width: 1920px;
         margin: 0 auto; 
         position: relative;

@@ -22,6 +22,7 @@ $white_transparent: #ffffff46;
 $black: #000000;
 $black_light: #000000ae;
 $low_black: #1a1c1e;
+$darker_black: #353d3f;
 $available: #12b3a8;
 $available_soon: #4d81e7;
 $reserved: #c65468;
@@ -54,7 +55,9 @@ $themes: (
     available: $available,
     available_soon: $available_soon,
     reserved: $reserved,
-    warning: $warning
+    warning: $warning,
+    darker_black: $light_bg_gray,
+    table_header: $gray,
   ),
   dark: (
     dark_blue: $dark_blue,
@@ -76,7 +79,9 @@ $themes: (
     available: darken($available, 20%),
     available_soon: darken($available_soon, 20%),
     reserved: darken($reserved, 20%),
-    warning: $warning
+    warning: $warning,
+    darker_black: $darker_black,
+    table_header: $white_transparent,
   ),
   customBlue: (
     dark_blue: $dark_blue,
@@ -100,7 +105,9 @@ $themes: (
     available: $available,
     available_soon: $available_soon,
     reserved: $reserved,
-    warning: $warning
+    warning: $warning,
+    darker_black: $darker_black,
+    table_header: $gray,
   )
 );
 

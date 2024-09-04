@@ -18,6 +18,12 @@
   }
 }
 
+.selectedSub {
+  path {
+      stroke: $main_color !important;
+  }
+}
+
 .overflow {
   width: 100%;
   max-width: 1920px;
@@ -85,6 +91,16 @@
         svg {
           width: 20px;
           height: 20px;
+
+          @include themed() {
+              path {
+                  stroke: t(black);
+              }
+            }
+        }
+        @include themed() {
+          border: 1px solid t(gray);
+          background-color: t(white);
         }
       }
 
@@ -101,6 +117,14 @@
           border: 1px solid $gray;
           user-select: none;
           cursor: pointer;
+
+          @include themed() {
+            border: 1px solid t(gray);
+            background-color: t(white);
+            path {
+                stroke: t(black);
+            }
+          }
         }
 
         &_setting {
@@ -110,6 +134,14 @@
           border: 1px solid $gray;
           user-select: none;
           cursor: pointer;
+
+          @include themed() {
+            border: 1px solid t(gray);
+            background-color: t(white);
+            path {
+                stroke: t(black);
+            }
+          }
         }
       }
     }
@@ -140,10 +172,16 @@
 
     &_head {
       @extend %ls_b;
+      @include themed() {
+        color: t(black);
+      }
     }
 
     &_desc {
       @extend %sm;
+      @include themed() {
+        color: t(light_m_gray);
+      }
     }
   }
 
@@ -190,6 +228,7 @@
       @include themed() {
         background-color: t(white);
         border: 1px solid t(gray);
+        color: t(black);
       }
 
       &_mobileSelect {
@@ -204,6 +243,13 @@
 
         @include desktop {
           display: none;
+        }
+        svg {
+          path {
+            @include themed() {
+              stroke: t(black_light);
+            }
+          }
         }
       }
 
@@ -237,11 +283,32 @@
             color: t(main_color);
           }
 
+          p {
+            @extend %sm;
+            @include themed {
+                color: t(main_color);
+            }
+          } 
+
           svg {
             path {
-              stroke: $main_color;
+              stroke: $main_color !important;
             }
           }
+        }
+
+        svg {
+          path {
+              @include themed {
+                  stroke: t(black_light);
+              }
+          }
+        }
+        p {
+            @extend %sm;
+            @include themed {
+                color: t(black);
+            }
         }
       }
     }

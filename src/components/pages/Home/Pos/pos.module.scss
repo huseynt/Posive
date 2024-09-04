@@ -38,17 +38,18 @@
 .overflow {
     width: 100%;
     max-width: 1920px;
-    height: 100vh;
-    // background-color: $light_bg_gray;
+    height: 100svh;
     overflow-y:scroll; 
     scrollbar-width: none;
     -ms-overflow-style: none;
     transition: all 0.3s linear;
 
-
     @include themed() {
         background-color: t(light_bg_gray);
       }
+    @include mobile {
+        height: 95svh;
+    }
 }
 .overflow::-webkit-scrollbar {
     display: none;
@@ -68,7 +69,7 @@
       }
 
     @include mobile {
-        padding: 3% 3% 30% 3%;
+        padding: 3% 3% 25% 3%;
     }
 
     // ---------------- up --------------------------

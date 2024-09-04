@@ -322,8 +322,7 @@ const Settings: React.FC<ThemeProps> = (props) => {
               className={style.main_container_navigation_option}
               onClick={() => handleSub("general")}
               style={{
-                backgroundColor:
-                  sub === "general" || sub === undefined ? "#fdefd9" : "",
+                backgroundColor: sub === "general" || sub === undefined ? "#fdefd9" : "",
                 display: mobileSelect ? "flex" : "",
               }}
               title="General"

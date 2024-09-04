@@ -36,11 +36,7 @@ const OverviewTableItem:React.FC<Order> = (props) => {
 
   return (
     <>
-      <tr className={style.tr}
-      style={{
-        backgroundColor: isChecked ? "#fdefd9" : "",
-      }}
-      >
+      <tr className={`${style.tr} ${isChecked && style.tr_checked}`}>
         <td style={{textAlign : "center"}}>
           <input type="checkbox" 
           className={style.tr_checkbox}

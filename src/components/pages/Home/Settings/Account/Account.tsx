@@ -214,7 +214,7 @@ const General: React.FC<IGeneral> = (props) => {
               </div>
             </div>
 
-            <div className={style.parent_main_business_block_form_block}>
+            <div className={`${style.parent_main_business_block_form_block} ${style.dateOnMobile}`} >
               <input 
               type="date" 
               id="birthOfDate" 

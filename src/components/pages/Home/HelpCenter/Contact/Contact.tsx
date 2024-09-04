@@ -135,10 +135,6 @@ const Contact: React.FC<IContact> = (props) => {
 
         <div className={style.parent_main_up}>
           <div className={style.parent_main_up_head}>Frequently Asked Questions</div>
-
-          <div className={style.parent_main_up_search}>
-            {/* <SearcInput /> */}
-          </div>
         </div>
 
 

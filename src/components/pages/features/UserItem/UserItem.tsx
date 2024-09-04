@@ -14,9 +14,8 @@ const UserItem: React.FC<IUsers> = (props) => {
 
 
   return (
-    <tr className={style.row}
+    <tr className={`${style.row} ${checked && style.tr_checked}`}
     onClick={() => setChecked(!checked)}
-    style={{backgroundColor: checked ? '#fdefd9' : ''}}
     >
         <td className={style.row_item}>
             <input type="checkbox" 

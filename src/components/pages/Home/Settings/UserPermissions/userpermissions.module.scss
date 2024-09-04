@@ -37,6 +37,9 @@
         width: 100%;
         &_head {
             @extend %ls_b;
+            @include themed() {
+                color: t(black);
+            }
         }
         &_info {
             margin-top: 5px;
@@ -85,7 +88,8 @@
                     }
                         
                     @include themed() {
-                        background-color: t(light_bg_gray);
+                        color: t(light_m_gray);
+                        background-color: t(table_header);
                     }
 
                     &_item {
@@ -133,3 +137,4 @@
         display: none;
     }
 }
+

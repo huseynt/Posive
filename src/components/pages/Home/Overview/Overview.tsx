@@ -306,6 +306,7 @@ const Overview = () => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 onClick={() => setPeriodDown(!periodDown)}
+                className={style.main_up_actions_period_icon}
               >
                 <path
                   d="M13.28 6.4668L8.9333 10.8135C8.41997 11.3268 7.57997 11.3268 7.06664 10.8135L2.71997 6.4668"
@@ -600,6 +601,7 @@ const Overview = () => {
                 </div>
               </div>
 
+              {/* --------------------- setting ----------------------------------- */}
               <div className={style.main_down_up_actions_setting}
               title="Sorting Date"
               >
@@ -610,6 +612,7 @@ const Overview = () => {
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   onClick={() => setOrdersSetting(!ordersSetting)}
+                  className={style.main_down_up_actions_setting_icon}
                 >
                   <path
                     d="M16.5 4.875H12"

@@ -15,11 +15,11 @@
         grid-template-columns: 24px 35px 1fr 1fr 1fr;
     }
 
-    &:hover {
-        @include themed() {
-            background-color: t(main_light_two);
-        }
-    }
+    // &:hover {
+    //     @include themed() {
+    //         background-color: t(main_light_two);
+    //     }
+    // }
 
     &_item {
         padding-right: 3px;
@@ -72,5 +72,13 @@
             width: 12px;
             height: 12px;
         }
+    }
+}
+
+.tr_checked {
+    background-color: $main_light_two !important;
+
+    td {
+        color: $black !important;
     }
 }

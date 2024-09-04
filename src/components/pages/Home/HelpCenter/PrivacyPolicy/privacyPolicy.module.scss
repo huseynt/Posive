@@ -31,7 +31,8 @@
     @include themed() {
         background-color: t(white);
         border: 1px solid t(gray);
-    }
+        color: t(black);
+      }
 
     &_head {
         @extend %ls_b;
