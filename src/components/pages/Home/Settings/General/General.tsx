@@ -2,11 +2,12 @@ import style from './general.module.scss'
 import { useState } from 'react'
 
 interface IGeneral {
-  setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>
+  setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
+  requestNotify: (purpose: string) => void;
 }
 
 const General: React.FC<IGeneral> = (props) => {
-  const { setMobileSelect } = props
+  const { setMobileSelect, requestNotify } = props
   const [data, setData] = useState({
     imgFile: "",
     storeName: "",
@@ -68,6 +69,7 @@ const General: React.FC<IGeneral> = (props) => {
 
   const sendData = () => {
     console.log(data)
+    requestNotify("done")
   }
 
 

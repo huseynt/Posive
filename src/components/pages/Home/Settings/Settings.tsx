@@ -25,11 +25,12 @@ interface IProduct {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
   setNotification: React.Dispatch<React.SetStateAction<boolean>>;
   notification: boolean;
+  requestNotify: (purpose: string) => void;
 }
 
 const Settings: React.FC<ThemeProps> = (props) => {
   const { setTheme, theme} = props;
-  const { setToggleMenu, setNotification, notification } = useOutletContext<IProduct>();
+  const { setToggleMenu, setNotification, notification, requestNotify } = useOutletContext<IProduct>();
 
 
   const [mobileSelect, setMobileSelect] = useState<boolean>(false);
@@ -502,13 +503,39 @@ const Settings: React.FC<ThemeProps> = (props) => {
           {/* ---------------------- right parent components ------------------------ */}
           <div style={{ width: "100%", height: "100%",}}>
             <Routes>
-              <Route index element={<General setMobileSelect={setMobileSelect}/>} />
-              <Route path="general" element={<General setMobileSelect={setMobileSelect} />} />
-              <Route path="preferences" element={<Preferences setMobileSelect={setMobileSelect} setTheme={setTheme} theme={theme} />} />
-              <Route path="userpermissions" element={<UserPermissions setMobileSelect={setMobileSelect} />} />
-              <Route path="account" element={<Account setMobileSelect={setMobileSelect} />} />
-              <Route path="notifications" element={<Notifications setMobileSelect={setMobileSelect} />} />
-              <Route path="billings" element={<Billings setMobileSelect={setMobileSelect} />} />
+              <Route index element={<General 
+              setMobileSelect={setMobileSelect}
+              requestNotify={requestNotify}
+              />} />
+              <Route path="general" element={
+                <General 
+                setMobileSelect={setMobileSelect} 
+                requestNotify={requestNotify} />} />
+
+              <Route path="preferences" element={
+                <Preferences 
+                setMobileSelect={setMobileSelect} 
+                setTheme={setTheme} theme={theme} 
+                requestNotify={requestNotify} />} />
+
+              <Route path="userpermissions" element={
+                <UserPermissions 
+                setMobileSelect={setMobileSelect} />} />
+
+              <Route path="account" element={
+                <Account 
+                setMobileSelect={setMobileSelect} 
+                requestNotify={requestNotify} />} />
+
+              <Route path="notifications" element={
+                <Notifications 
+                setMobileSelect={setMobileSelect} 
+                requestNotify={requestNotify} />} />
+
+              <Route path="billings" element={
+                <Billings 
+                setMobileSelect={setMobileSelect} 
+                requestNotify={requestNotify} />} />
             </Routes>
           </div>
         </div>

@@ -1,13 +1,22 @@
 import style from './billings.module.scss'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface IGeneral {
-  setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>
+  setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
+  requestNotify: (purpose: string) => void;
 }
 
 const Billings: React.FC<IGeneral> = (props) => {
-  const { setMobileSelect } = props
+  const { setMobileSelect, requestNotify } = props
   const [plan, setPlan] = useState('Professional Plan')
+
+  
+  useEffect(() => {
+    // test notification
+    if (plan === '0') {
+      requestNotify('done')
+    }
+  }, [plan])
 
 
 

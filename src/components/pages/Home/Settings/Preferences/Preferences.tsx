@@ -8,10 +8,11 @@ import customMode from '/public/assets/system_mode.png'
 import arrowdown from '/public/assets/arrow-down.png'
 
 
-interface IGeneral {
+interface IPreferences {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
   theme: string;
   setTheme: (theme: string) => void;
+  requestNotify: (purpose: string) => void;
 }
 
 interface IPereferencesData{
@@ -23,8 +24,8 @@ interface IPereferencesData{
   iconsSize: string;
 }
 
-const Preferences: React.FC<IGeneral> = (props) => {
-  const { setMobileSelect, setTheme } = props
+const Preferences: React.FC<IPreferences> = (props) => {
+  const { setMobileSelect, setTheme, requestNotify } = props
   const localTheme = localStorage.getItem('theme');
 
   const [pereferencesData, setPereferencesData] = useState<IPereferencesData>({
@@ -50,6 +51,7 @@ const Preferences: React.FC<IGeneral> = (props) => {
   const sendData = () => {
     console.log(pereferencesData)
     toggleTheme(pereferencesData.theme??'light')
+    requestNotify("done")
   }
 
   const toggleTheme = (mode: string) => {

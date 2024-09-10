@@ -4,10 +4,11 @@ import React, { useEffect } from "react";
 
 interface IQRCodeComponentProps {
   setQrOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  requestNotify: (purpose: string) => void;
 }
 
 const QRCodeComponent: React.FC<IQRCodeComponentProps> = (props) => {
-  const { setQrOpen } = props;
+  const { setQrOpen, requestNotify } = props;
   const [code, setCode] = React.useState<string>("");
   // const id: string = "LK21-121KL-12UI-78HY-FGA8";
 
@@ -62,7 +63,11 @@ const QRCodeComponent: React.FC<IQRCodeComponentProps> = (props) => {
         <div className={style.qrcode_block_manual}>
           <p className={style.qrcode_block_manual_id}>{code}</p>
           <div className={style.qrcode_block_manual_copy}
-          onClick={() => navigator.clipboard.writeText(code)}
+          onClick={() => {
+            navigator.clipboard.writeText(code)
+            requestNotify("done");
+          }
+          }
           >
             <svg
               width="17"

@@ -3,7 +3,8 @@ import { useState } from 'react'
 import arrowdown from '/public/assets/arrow-down.png'
 
 interface IGeneral {
-  setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>
+  setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
+  requestNotify: (message: string) => void;
 }
 
 interface IData {
@@ -21,7 +22,7 @@ interface IData {
 
 
 const General: React.FC<IGeneral> = (props) => {
-  const { setMobileSelect } = props
+  const { setMobileSelect, requestNotify } = props
   const [visibility, setVisibility] = useState<boolean>(false);
   const [data, setData] = useState<IData>({
     imgFile: "",
@@ -90,6 +91,7 @@ const General: React.FC<IGeneral> = (props) => {
   const sendData = () => {
     console.log(data)
     resetData()
+    requestNotify("done")
   }
 
 

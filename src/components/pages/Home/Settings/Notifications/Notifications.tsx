@@ -2,11 +2,12 @@ import style from './notifications.module.scss'
 import { useEffect, useState } from 'react'
 
 interface IGeneral {
-  setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>
+  setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
+  requestNotify: (purpose: string) => void;
 }
 
 const Notifications: React.FC<IGeneral> = (props) => {
-  const { setMobileSelect } = props
+  const { setMobileSelect, requestNotify } = props
   const [ emailNotifications, setEmailNotifications ] = useState(false)
   const [ moreActivity, setMoreActivity ] = useState(false)
 
@@ -56,6 +57,7 @@ const Notifications: React.FC<IGeneral> = (props) => {
 
   const sendData = () => {
     console.log(data)
+    requestNotify("done")
   }
 
 

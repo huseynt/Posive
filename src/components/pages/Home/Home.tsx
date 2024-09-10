@@ -26,9 +26,11 @@ const Home = () => {
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
   const [successOrder, setSuccessOrder] = useState<boolean>(false);
   const [notification, setNotification] = useState<boolean>(false);
-  const [notify, setNotify] = useState<boolean>(false);
   const [navigation, setNavigation] = useState<string>("");
 
+
+  //  ----------------------------- for notify ----------------------------
+  const [notify, setNotify] = useState<boolean>(false);
   const [notifyPurpose, setNotifyPurpose] = useState<string>("");
   const requestNotify = (purpose: string) => {
     setNotifyPurpose(purpose);
@@ -40,6 +42,8 @@ const Home = () => {
       clearTimeout(timeout);
     };
   };
+  //  ----------------------------- for notify ----------------------------
+
 
   useEffect(() => {
     setBag(false);
@@ -79,7 +83,8 @@ const Home = () => {
           bag: bag,
           notification: notification,
           setBag: setBag,
-          setNotification: setNotification
+          setNotification: setNotification,
+          requestNotify: requestNotify
         }
       }/>
 
@@ -91,7 +96,7 @@ const Home = () => {
         setSuccessOrder={setSuccessOrder}
         requestNotify={requestNotify}
       />
-      {qrOpen && <QRCode setQrOpen={setQrOpen} />}
+      {qrOpen && <QRCode setQrOpen={setQrOpen} requestNotify={requestNotify} />}
       {table && <Table setTable={setTable} />}
       {successOrder && <SuccessOrder setSuccessOrder={setSuccessOrder} />}
       <Notification setNotification={setNotification} notification={notification} bag={bag} />
