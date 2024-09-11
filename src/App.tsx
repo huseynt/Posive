@@ -22,6 +22,8 @@ import { useEffect, useState } from 'react'
 // import { useGetMealIds } from './components/services/Queries/queries'
 // import { useGetMealIdsSlice } from './components/services/Queries/queries'
 
+// ---------- google auth ------------------------------
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
 
@@ -92,28 +94,30 @@ function App() {
 
 
   return (
-    <div className={style.app}>
-      {!loaded && <TriangleLoader /> }
-      <div style={{opacity: loaded ? '1' : '0'}}>
-        <Routes>
-          <Route index element={<HomePage />} />
-          <Route path='/registr' element={<Registr />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/forgot' element={<Forgot />} />
-          <Route path='/homepage' element={<HomePage />} />
-          
-          <Route path='/home' element={<Home />}>
-            <Route index element={<Pos/>} />
-            <Route path='' element={<Pos/>} />
-            <Route path='overview' element={<Overview/>} />
-            <Route path='product' element={<Product />} />
-            <Route path='settings/*' element={<Settings setTheme={setTheme} theme={theme}/>} />
-            <Route path='help/*' element={<HelpCenter />} />
-            <Route path='*' element={<NotFound />} />
-          </Route>
-        </Routes>
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GCLIENT_ID as string}>
+      <div className={style.app}>
+        {!loaded && <TriangleLoader /> }
+        <div style={{opacity: loaded ? '1' : '0'}}>
+          <Routes>
+            <Route index element={<HomePage />} />
+            <Route path='/registr' element={<Registr />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/forgot' element={<Forgot />} />
+            <Route path='/homepage' element={<HomePage />} />
+            
+            <Route path='/home' element={<Home />}>
+              <Route index element={<Pos/>} />
+              <Route path='' element={<Pos/>} />
+              <Route path='overview' element={<Overview/>} />
+              <Route path='product' element={<Product />} />
+              <Route path='settings/*' element={<Settings setTheme={setTheme} theme={theme}/>} />
+              <Route path='help/*' element={<HelpCenter />} />
+              <Route path='*' element={<NotFound />} />
+            </Route>
+          </Routes>
+        </div>
       </div>
-    </div>
+    </GoogleOAuthProvider>
   );
 }
 

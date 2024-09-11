@@ -2,9 +2,17 @@ import style from "./loginForm.module.scss";
 import logo from "/assets/posive_logo.svg";
 import eye_hide from '/assets/eye-hide.svg'
 import eye_show from '/assets/eye-open.svg'
-import google from '/assets/google.svg'
+// import google from '/assets/google.svg'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+
+// ---------- google auth ------------------------------
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode';
+// ---------- google auth ------------------------------
+
+
 
 const LoginForm = () => {
 
@@ -37,6 +45,17 @@ const LoginForm = () => {
   const handleHome = () => {
     navigate('/home')
   }
+
+  // ---------- google auth ------------------------------
+  const handleSuccess = (response: any) => {
+    const userObject = jwtDecode(response.credential);
+    console.log("User Info:", userObject);
+  };
+
+  const handleError = () => {
+    console.log('Login Failed');
+  };
+  // ---------- google auth ------------------------------
 
 
   return (
@@ -100,9 +119,14 @@ const LoginForm = () => {
         <span>or</span>
       </div>
 
+
       <button className={style.login_google}>
-      <span><img src={google} alt="google" /></span>
-      Login with Google
+        <GoogleLogin 
+          onSuccess={handleSuccess} 
+          onError={handleError}
+        />
+      {/* <span><img src={google} alt="google" /></span>
+      Login with Google */}
       </button>
 
       <div className={style.login_registr}>
