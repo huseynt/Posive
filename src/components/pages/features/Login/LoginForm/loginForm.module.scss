@@ -209,19 +209,22 @@
         align-items: center;
         column-gap: 10px;
         animation: load 1s ease-in-out;
-        text-align: center;
+
+        // g login
+        display: flex;
+        align-items: center;
+        justify-content: center;
         
-        &:hover {
-            transition: .2s ease-in-out;
-            border: 1px solid $light_m_gray;
-            box-shadow: 0 0 5px 0 inset $light_gray;
-        }
+        // &:hover {
+        //     transition: .2s ease-in-out;
+        //     border: 1px solid $light_m_gray;
+        //     box-shadow: 0 0 5px 0 inset $light_gray;
+        // }
 
         div {
             width: 100%;
             background-color: transparent;
             border: none;
-            margin: 0 auto;
         }
     }
     &_registr {
