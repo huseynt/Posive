@@ -200,7 +200,7 @@
         max-width: 416px;
         // padding: 7px 24px;
         border-radius: 10px;
-        border: 1px solid $light_gray;
+        // border: 1px solid $light_gray;
         @extend %sm;
         color: $black;
         cursor: pointer;
@@ -209,6 +209,7 @@
         align-items: center;
         column-gap: 10px;
         animation: load 1s ease-in-out;
+        text-align: center;
         
         &:hover {
             transition: .2s ease-in-out;
@@ -220,6 +221,7 @@
             width: 100%;
             background-color: transparent;
             border: none;
+            margin: 0 auto;
         }
     }
     &_registr {
