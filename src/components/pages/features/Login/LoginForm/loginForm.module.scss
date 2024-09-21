@@ -198,28 +198,12 @@
     &_google {
         width: 100%;
         max-width: 416px;
-        // padding: 7px 24px;
         border-radius: 10px;
-        // border: 1px solid $light_gray;
+        border: 1px solid $light_gray;
         @extend %sm;
         color: $black;
         cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        column-gap: 10px;
         animation: load 1s ease-in-out;
-
-        // g login
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        
-        // &:hover {
-        //     transition: .2s ease-in-out;
-        //     border: 1px solid $light_m_gray;
-        //     box-shadow: 0 0 5px 0 inset $light_gray;
-        // }
 
         div {
             width: 100%;

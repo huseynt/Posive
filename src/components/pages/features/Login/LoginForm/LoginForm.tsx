@@ -124,10 +124,7 @@ const LoginForm = () => {
         <GoogleLogin 
           onSuccess={handleSuccess} 
           onError={handleError}
-          
         />
-      {/* <span><img src={google} alt="google" /></span>
-      Login with Google */}
       </button>
 
       <div className={style.login_registr}>
