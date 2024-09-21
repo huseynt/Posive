@@ -199,17 +199,17 @@
         width: 100%;
         max-width: 416px;
         border-radius: 10px;
-        border: 1px solid $light_gray;
+        // border: 1px solid $light_gray;
         @extend %sm;
         color: $black;
         cursor: pointer;
         animation: load 1s ease-in-out;
 
-        div {
-            width: 100%;
-            background-color: transparent;
-            border: none;
-        }
+        // div {
+        //     width: 100%;
+        //     background-color: transparent;
+        //     border: none;
+        // }
     }
     &_registr {
         width: 100%;

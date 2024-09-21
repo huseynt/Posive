@@ -124,6 +124,7 @@ const LoginForm = () => {
         <GoogleLogin 
           onSuccess={handleSuccess} 
           onError={handleError}
+          width={'100%'}
         />
       </button>
 
