@@ -198,15 +198,22 @@
     &_google {
         width: 100%;
         max-width: 416px;
+        height: 38px;
         border-radius: 10px;
-        // border: 1px solid $light_gray;
+        border: 1px solid $light_gray;
         @extend %sm;
         color: $black;
         cursor: pointer;
         animation: load 1s ease-in-out;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: 10px;
+        position: relative;
 
-        iframe {
-            width: 100% !important;
+        &:hover {
+            transition: .2s ease-in-out;
+            background-color: $light_bg_gray;
         }
     }
     &_registr {

@@ -2,7 +2,7 @@ import style from "./loginForm.module.scss";
 import logo from "/assets/posive_logo.svg";
 import eye_hide from '/assets/eye-hide.svg'
 import eye_show from '/assets/eye-open.svg'
-// import google from '/assets/google.svg'
+import google from '/assets/google.svg'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -120,12 +120,23 @@ const LoginForm = () => {
       </div>
 
 
-      <button className={style.login_google}>
-        <GoogleLogin 
+      <button className={style.login_google}
+        // onClick={handleSuccess}
+      >
+        <div style={{
+          position: "absolute",
+          left: "50%",
+          top: "-2px",
+          transform: "translateX(-50%)",
+          opacity: "0"
+        }}>
+          <GoogleLogin 
           onSuccess={handleSuccess} 
           onError={handleError}
-          // width={'100%'}
         />
+        </div>
+        <span><img src={google} alt="google" /></span>
+        <span>Login with Google</span>
       </button>
 
       <div className={style.login_registr}>
