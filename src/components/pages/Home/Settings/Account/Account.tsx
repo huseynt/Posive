@@ -1,6 +1,7 @@
 import style from './account.module.scss'
 import { useState } from 'react'
 import arrowdown from '/public/assets/arrow-down.png'
+import uploadImage from '../../../../services/Firebase/Firebase'
 
 interface IGeneral {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
@@ -46,18 +47,25 @@ const General: React.FC<IGeneral> = (props) => {
     const { id, value, files } = e.target;
 
     if (id === "imgFile" && files && files.length > 0) {
-        const file = files[0];
-        const reader = new FileReader();
-        
-        reader.onloadend = () => {
-            setImagePreview(reader.result as string);
+        const Imgfile = files[0];
+        // const reader = new FileReader();
+        // reader.onloadend = () => {
+        //     setImagePreview(reader.result as string);
 
-            setData({
-                ...data,
-                [id]: reader.result as string,
-            });
-        };
-        reader.readAsDataURL(file);
+        //     setData({
+        //         ...data,
+        //         [id]: reader.result as string,
+        //     });
+        // };
+        // reader.readAsDataURL(file);
+        // upload Firebase storage
+        uploadImage(Imgfile).then((downloadURL) => {
+          setImagePreview(URL.createObjectURL(Imgfile));
+          setData({
+            ...data,
+            [id]: downloadURL as string | null,
+          });
+        });
         e.target.value = "";
     } else {
         setData({
@@ -89,9 +97,17 @@ const General: React.FC<IGeneral> = (props) => {
   }
 
   const sendData = () => {
-    console.log(data)
-    resetData()
-    requestNotify("done")
+    if (data.imgFile && 
+      data.fullName && 
+      data.emailAddress && 
+      data.phoneNumber) {
+      console.log(data)
+      resetData()
+      requestNotify("done")
+    }
+    else {
+      requestNotify("important")
+    }
   }
 
 
@@ -142,7 +158,9 @@ const General: React.FC<IGeneral> = (props) => {
             </div>
 
             <div className={style.parent_main_business_block_photo_upload}>
-              <label htmlFor="imgFile" className={style.parent_main_business_block_photo_upload_label}>
+              <label htmlFor="imgFile" className={style.parent_main_business_block_photo_upload_label}
+              style={{backgroundColor: data.imgFile ? "#029802" : ""}}
+              >
                 {data.imgFile ? "Selected" : "Upload New"}
               </label>
               <input type="file" 
