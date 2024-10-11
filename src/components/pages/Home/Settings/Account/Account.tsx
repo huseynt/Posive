@@ -36,36 +36,30 @@ const General: React.FC<IGeneral> = (props) => {
   });
 
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  // const changeData = (e: React.ChangeEvent<HTMLInputElement>) => { 
-  //   setData({
-  //     ...data,
-  //     [e.target.id]: e.target.value,
-  //   });
-  // }
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
 
   const changeData = (e: React.ChangeEvent<HTMLInputElement>) => { 
     const { id, value, files } = e.target;
 
     if (id === "imgFile" && files && files.length > 0) {
         const Imgfile = files[0];
-        // const reader = new FileReader();
-        // reader.onloadend = () => {
-        //     setImagePreview(reader.result as string);
 
-        //     setData({
-        //         ...data,
-        //         [id]: reader.result as string,
-        //     });
-        // };
-        // reader.readAsDataURL(file);
         // upload Firebase storage
-        uploadImage(Imgfile).then((downloadURL) => {
+        uploadImage(Imgfile, (progress) => {
+          setUploadProgress(progress); 
+        })
+        .then((downloadURL) => {
           setImagePreview(URL.createObjectURL(Imgfile));
           setData({
             ...data,
-            [id]: downloadURL as string | null,
+            [id]: downloadURL.downloadURL as unknown as string, 
           });
-        });
+          setUploadProgress(0); 
+        })
+        .catch((error) => {
+          console.error("Yükləmə zamanı xəta baş verdi: ", error);
+          setUploadProgress(0);
+        })
         e.target.value = "";
     } else {
         setData({
@@ -109,8 +103,6 @@ const General: React.FC<IGeneral> = (props) => {
       requestNotify("important")
     }
   }
-
-
 
   return (
     <div className={style.parent}
@@ -161,7 +153,7 @@ const General: React.FC<IGeneral> = (props) => {
               <label htmlFor="imgFile" className={style.parent_main_business_block_photo_upload_label}
               style={{backgroundColor: data.imgFile ? "#029802" : ""}}
               >
-                {data.imgFile ? "Selected" : "Upload New"}
+                {!uploadProgress && (data.imgFile ? "Selected" : "Upload New")} {uploadProgress ? `(${uploadProgress}%)` : ""}
               </label>
               <input type="file" 
               accept="image/png, image/jpeg"

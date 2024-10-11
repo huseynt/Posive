@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -10,16 +10,44 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
+
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 
-export default async function uploadImage(file: File): Promise<string | void> {
-    if (!file) return;
+export interface UploadProgressResult {
+  progress: number;
+  downloadURL?: string;
+}
+
+export default function uploadImage(file: File, onProgress: (progress: number) => void): Promise<UploadProgressResult> {
+  return new Promise((resolve, reject) => {
+    if (!file) {
+      reject("No file provided");
+      return;
+    }
 
     const storageRef = ref(storage, `images/${file.name}`);
-    await uploadBytes(storageRef, file);
+    const uploadTask = uploadBytesResumable(storageRef, file);
 
-    const downloadURL = await getDownloadURL(storageRef);
-    return downloadURL;
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        onProgress(progress);  
+      },
+      (error) => {
+        reject(error);
+      },
+      async () => {
+        try {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          resolve({ progress: 100, downloadURL });
+        } catch (error) {
+          reject(error);
+        }
+      }
+    );
+  });
 }
+
   

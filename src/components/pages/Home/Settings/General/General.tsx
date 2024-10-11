@@ -1,5 +1,6 @@
 import style from './general.module.scss'
 import { useState } from 'react'
+import uploadImage from '../../../../services/Firebase/Firebase'
 
 interface IGeneral {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,6 +24,7 @@ const General: React.FC<IGeneral> = (props) => {
   });
 
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
   // const changeData = (e: React.ChangeEvent<HTMLInputElement>) => { 
   //   setData({
   //     ...data,
@@ -34,20 +36,31 @@ const General: React.FC<IGeneral> = (props) => {
     const { id, value, files } = e.target;
 
     if (id === "imgFile" && files && files.length > 0) {
-      const file = files[0];
-      const reader = new FileReader();
-      
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-      };
-      
-      reader.readAsDataURL(file);
-    }
+      const Imgfile = files[0];
 
-    setData({
-      ...data,
-      [id]: value,
-    });
+      // upload Firebase storage
+      uploadImage(Imgfile, (progress) => {
+        setUploadProgress(progress); 
+      })
+      .then((downloadURL) => {
+        setImagePreview(URL.createObjectURL(Imgfile));
+        setData({
+          ...data,
+          [id]: downloadURL.downloadURL as unknown as string,
+        });
+        setUploadProgress(0); 
+      })
+      .catch((error) => {
+        console.error("Yükləmə zamanı xəta baş verdi: ", error);
+        setUploadProgress(0);
+      })
+      e.target.value = "";
+  } else {
+      setData({
+          ...data,
+          [id]: value,
+      });
+  }
   }
 
   const resetData = () => {
@@ -120,8 +133,10 @@ const General: React.FC<IGeneral> = (props) => {
             </div>
 
             <div className={style.parent_main_business_block_photo_upload}>
-              <label htmlFor="imgFile" className={style.parent_main_business_block_photo_upload_label}>
-                {data.imgFile ? "Selected" : "Upload Photo"}
+              <label htmlFor="imgFile" className={style.parent_main_business_block_photo_upload_label}
+              style={{backgroundColor: data.imgFile ? "#029802" : ""}}
+              >
+                {!uploadProgress && (data.imgFile ? "Selected" : "Upload Photo")} {uploadProgress ? `(${uploadProgress}%)` : ""}
               </label>
               <input type="file" 
               accept="image/png, image/jpeg"
