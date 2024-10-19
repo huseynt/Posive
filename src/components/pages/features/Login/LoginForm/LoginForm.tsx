@@ -12,6 +12,8 @@ import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 // ---------- google auth ------------------------------
 
+import { useMutation } from '@tanstack/react-query'
+import { createPostAuthenticate } from '../../../../utils/API/API'
 
 
 const LoginForm = () => {
@@ -25,6 +27,47 @@ const LoginForm = () => {
     email: '',
     password: ''
   });
+  const [rememberMe, setRememberMe] = useState<boolean>(false);
+
+  //  --------------------- tanstack ---------------------
+  const {
+    mutate: createPostAuthenticateMutation,
+  } = useMutation({
+    mutationFn: createPostAuthenticate,
+    onSuccess: (data) => {
+      console.log('Success');
+      handleHome();
+  
+      if (rememberMe) {
+        // Email-i localStorage-də saxlamaq (əgər lazım olarsa)
+        localStorage.setItem('email', data.email);
+        // Access və refresh tokenləri cookie-də saxlamaq, müddətini 7 gün təyin etmək
+        const tokenExpiry = 7;
+        const resfreshTokenExpiry = 60;
+        // Helper funksiyası - Cookie təyin etmək
+        const setCookie = (name: string, value: string, days: number) => {
+          const date = new Date();
+          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+          const expires = `; expires=${date.toUTCString()}`;
+          document.cookie = `${name}=${value || ""}${expires}; path=/`;
+        };
+        // Access və refresh tokenləri cookie-lərə yazmaq
+        setCookie('access_token', data.access_token, tokenExpiry);
+        setCookie('refresh_token', data.refresh_token, resfreshTokenExpiry);
+  
+        console.log('Tokens saved in cookies:', {
+          access_token: data.access_token,
+          refresh_token: data.refresh_token,
+        });
+      }
+    },
+    onError: (error) => {
+      console.log('Login error:', error);
+    },
+  });
+  // --------------------- tanstack ---------------------
+
+
 
 
   // ----------- form ------------------------------
@@ -40,7 +83,8 @@ const LoginForm = () => {
     e.preventDefault();
     if (data.email && data.password && !validate.email && !validate.password) {
       console.log('Data:', data);
-      handleHome()
+      // handleHome()
+      createPostAuthenticateMutation(data)
     }
     if (!data.email && !data.password) {
       setValidate({
@@ -98,7 +142,7 @@ const LoginForm = () => {
 
   // ----------- validation ------------------------------
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/;
+  // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/;
 
   const checkValidation = (e: React.ChangeEvent<HTMLInputElement>) => {
     if ( e.target.id === 'email' && data.email.length > 0 ) {
@@ -117,23 +161,27 @@ const LoginForm = () => {
     }
 
     if ( e.target.id === 'password' && data.password.length > 0 ) {
-      if (!passwordRegex.test(data.password)) {
-        setValidate({
-          ...validate,
-          password: "Password must contain including letters and numbers"
-        })
-      } else if (data.password.length < 7) {
-        setValidate({
-          ...validate,
-          password: 'Password must contain at least 8 characters'
-        })
-      }
-       else {
-        setValidate({
-          ...validate,
-          password: ''
-        })
-      }
+      // if (!passwordRegex.test(data.password)) {
+      //   setValidate({
+      //     ...validate,
+      //     password: "Password must contain including letters and numbers"
+      //   })
+      // } else if (data.password.length < 7) {
+      //   setValidate({
+      //     ...validate,
+      //     password: 'Password must contain at least 8 characters'
+      //   })
+      // }
+      //  else {
+      //   setValidate({
+      //     ...validate,
+      //     password: ''
+      //   })
+      // }
+      setValidate({
+        ...validate,
+        password: ''
+      })
       console.log('password', data.password);
     }
   }
@@ -174,6 +222,7 @@ const LoginForm = () => {
           id="email" 
           onChange={change} 
           value={data.email}
+          autoComplete="current-password"
           className={`${style.login_form_email_input} ${validate.email ? style.forWrongValidate: null}`}
           style={{
             borderColor: validate.email ? 'red' : ''
@@ -199,6 +248,7 @@ const LoginForm = () => {
           id="password"
           onChange={change}
           value={data.password}
+          autoComplete="current-password"
           className={`${style.login_form_password_input} ${validate.password ? style.forWrongValidate: null}`}
           style={{
             borderColor: validate.password ? 'red' : ''
@@ -226,7 +276,9 @@ const LoginForm = () => {
 
         <div className={style.login_form_actions}>
           <div className={style.login_form_actions_save}>
-            <input type="checkbox" name="remember" id="remember"/>
+            <input type="checkbox" name="remember" id="remember" checked={rememberMe} onChange={() => 
+              setRememberMe(!rememberMe)
+            }/>
             <label htmlFor="remember"> Remember me</label>
           </div>
 
