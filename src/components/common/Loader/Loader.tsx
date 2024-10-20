@@ -1,28 +1,11 @@
-// import styles from "./loader.module.scss";
-// import {useState,useEffect} from "react";
+import style from "./loader.module.scss";
 
-// export const Loader = () => {
-//     const [dots, setDots] = useState("")
+const Loader = () => {
+  return (
+    <div className={style.loader}>
+      <div className={style.loader_ball}></div>
+    </div>
+  )
+}
 
-
-//     useEffect(() => {
-//         const interval = setInterval(() => {
-//             setDots(prev => {
-//                 if (prev.length >= 3) return "";
-//                 return prev + ".";
-//             });
-//         }, 500);
-
-//         return () => clearInterval(interval);
-//     }, []);
-
-
-//     return (
-//         <div className={styles.loaderWrapper}>
-//             <div className={styles.loaderContent}>
-//                 {/* <img src="/images/food.gif" alt="Loader"/> */}
-//                 <p>Loading{dots}</p>
-//             </div>
-//         </div>
-//     )
-// }
+export default Loader

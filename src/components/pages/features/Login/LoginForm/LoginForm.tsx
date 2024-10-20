@@ -10,62 +10,29 @@ import { useNavigate } from "react-router-dom";
 // ---------- google auth ------------------------------
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
+import Loader from "../../../../common/Loader/Loader";
 // ---------- google auth ------------------------------
 
-import { useMutation } from '@tanstack/react-query'
-import { createPostAuthenticate } from '../../../../utils/API/API'
 
+interface LoginFormProps {
+  Authenticate: (data: { email: string; password: string }) => void;
+  rememberMe: boolean;
+  setRememberMe: (value: boolean) => void;
+  isLoginPending: boolean;
+}
 
-const LoginForm = () => {
+const LoginForm: React.FC<LoginFormProps> = (props) => {
 
+  const { Authenticate, setRememberMe, rememberMe, isLoginPending } = props;
   const [hide, setHide] = useState(false);
   const [data, setData] = useState({
-    email: "",
-    password: "",
+    email: "enebiyeva@std.beu.edu.az",
+    password: "1234567898765432",
   });
   const [validate, setValidate] = useState({
     email: '',
     password: ''
   });
-  const [rememberMe, setRememberMe] = useState<boolean>(false);
-
-  //  --------------------- tanstack ---------------------
-  const {
-    mutate: createPostAuthenticateMutation,
-  } = useMutation({
-    mutationFn: createPostAuthenticate,
-    onSuccess: (data) => {
-      console.log('Success');
-      handleHome();
-  
-      if (rememberMe) {
-        // Email-i localStorage-də saxlamaq (əgər lazım olarsa)
-        localStorage.setItem('email', data.email);
-        // Access və refresh tokenləri cookie-də saxlamaq, müddətini 7 gün təyin etmək
-        const tokenExpiry = 7;
-        const resfreshTokenExpiry = 60;
-        // Helper funksiyası - Cookie təyin etmək
-        const setCookie = (name: string, value: string, days: number) => {
-          const date = new Date();
-          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-          const expires = `; expires=${date.toUTCString()}`;
-          document.cookie = `${name}=${value || ""}${expires}; path=/`;
-        };
-        // Access və refresh tokenləri cookie-lərə yazmaq
-        setCookie('access_token', data.access_token, tokenExpiry);
-        setCookie('refresh_token', data.refresh_token, resfreshTokenExpiry);
-  
-        console.log('Tokens saved in cookies:', {
-          access_token: data.access_token,
-          refresh_token: data.refresh_token,
-        });
-      }
-    },
-    onError: (error) => {
-      console.log('Login error:', error);
-    },
-  });
-  // --------------------- tanstack ---------------------
 
 
 
@@ -83,8 +50,7 @@ const LoginForm = () => {
     e.preventDefault();
     if (data.email && data.password && !validate.email && !validate.password) {
       console.log('Data:', data);
-      // handleHome()
-      createPostAuthenticateMutation(data)
+      Authenticate(data)
     }
     if (!data.email && !data.password) {
       setValidate({
@@ -117,9 +83,9 @@ const LoginForm = () => {
   const handleForgot = () => {
     navigate('/forgot')
   }
-  const handleHome = () => {
-    navigate('/home')
-  }
+  // const handleHome = () => {
+  //   navigate('/home')
+  // }
 
 
   // ---------- google auth ------------------------------
@@ -288,12 +254,27 @@ const LoginForm = () => {
         </div>
 
 
-        <input
-          className={style.login_form_submit}
-          type="submit"
-          value="Login"
-          onClick={sumbit}
-        />
+        
+        <div className={style.login_form_submit}>
+          {/* <input
+            className={style.login_form_submit_input}
+            type="submit"
+            value="Login"
+            onClick={sumbit}
+          /> */}
+          {isLoginPending ? 
+            <Loader/> 
+            :
+            <input
+            className={style.login_form_submit_input}
+            type="submit"
+            value="Login"
+            onClick={sumbit}
+            />
+          }
+        </div>
+
+        
       </form>
 
       <div className={style.login_or}>

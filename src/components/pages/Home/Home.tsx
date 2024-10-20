@@ -13,8 +13,8 @@ import Notification from "../features/Notification/Notification";
 // import Settings from "./Settings/Settings";
 // import HelpCenter from "./HelpCenter/HelpCenter";
 import { Outlet } from "react-router-dom";
-
-
+import { useNavigate } from "react-router-dom";
+import { useToken } from "../../utils/Hooks/useToken"
 
 
 
@@ -27,6 +27,18 @@ const Home = () => {
   const [successOrder, setSuccessOrder] = useState<boolean>(false);
   const [notification, setNotification] = useState<boolean>(false);
   const [navigation, setNavigation] = useState<string>("");
+  const navigate = useNavigate()
+
+  // ----------------------------- for token ----------------------------
+  const token = useToken();
+  useEffect(() => {
+    if (!token) {
+      setTimeout(() => {
+        navigate("/login");
+      }, 1700);
+    }
+  }, [token, navigate]);
+  // ----------------------------- for token ----------------------------
 
 
   //  ----------------------------- for notify ----------------------------
@@ -58,6 +70,16 @@ const Home = () => {
     setNavigation((window.location.pathname).split("/home/")[1]);
   }
   );
+
+  if (token === null) {
+    return <div style={{
+      height: "100svh",
+      display: "grid",
+      placeItems: "center",
+    }}>
+      <h1>Redirecting to login...</h1>
+    </div>;
+  }
 
   return (
     <div className={style.home}>

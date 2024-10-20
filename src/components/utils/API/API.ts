@@ -1,10 +1,16 @@
 import { IcreatePostAuthenticate } from './types';
+
 // test
 export const API = import.meta.env.VITE_API_URL
 
 
 
-// with port
+
+
+// One Times Use
+// export const [token, setToken] = useState<object>({});
+
+// Authenticate User
 export const createPostAuthenticate = async (body: IcreatePostAuthenticate) => {
     const res = await fetch(`${import.meta.env.VITE_BASE}/v1/auth/authenticate`, {
         method: 'POST',
