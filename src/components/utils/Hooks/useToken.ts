@@ -18,7 +18,7 @@ export const useToken = () => {
 }
 
 
-export const useResetToken = () => {
+export const resetToken = () => {
     deleteCookie("access_token");
     deleteCookie("refresh_token");
     sessionStorage.removeItem("access_token");

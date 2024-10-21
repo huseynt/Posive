@@ -4,6 +4,7 @@ import logo from "/assets/posive_logo.svg";
 import user1 from "/assets/user1.png";
 import { useNavigate } from "react-router-dom";
 
+import { resetToken } from "../../../utils/Hooks/useToken";
 interface ISidebarProps {
   toggleMenu: boolean;
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -25,14 +26,17 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
     }
   };
 
-  const navigate = useNavigate()
-  const handleLogout = () => {
-    navigate('/login')
-  }
+  const navigate = useNavigate();
+
   const handleNavigation = (nav: string) => {
     setNavigation(`${nav}`)
     navigate(nav)
   }
+
+  const handleLogout = () => {
+    resetToken();
+    navigate("/login");
+  };
 
   useEffect(() => {
     setToggleUser(true);

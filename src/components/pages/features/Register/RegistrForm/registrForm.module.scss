@@ -14,6 +14,18 @@
     }
 }
 
+@keyframes validationAnimate {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(2px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
 
 .login {
     width: 100%;
@@ -80,6 +92,7 @@
 
         &_email {
             position: relative;
+            margin-bottom: 12px;
 
             input {
                 width: 100%;
@@ -111,6 +124,7 @@
 
         &_password {
             position: relative;
+            margin-bottom: 12px;
 
             input {
                 width: 100%;
@@ -178,7 +192,9 @@
         }
         &_submit {
             width: 100%;
-            padding: 7px 13px;
+            min-height: 40px;
+            padding: 7px 24px;
+            margin-top: 10px;
             border-radius: 10px;
             border: 1px solid $light_gray;
             @extend %m;
@@ -186,11 +202,38 @@
             cursor: pointer;
             background-color: $main_color;
             animation: load 1s ease-in-out;
-
+            text-align: center;
 
             &:hover {
                 transition: .2s ease-in-out;
                 background-color: darken($main_color, 7%);
+            }
+
+            &_input {
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+            }
+        }
+
+        &_validation {
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            width: 100%;
+            max-width: 416px;
+            @extend %s;
+            color: red;
+            animation: load 1s ease-in-out;
+            transition: all .3s ease-in-out;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            column-gap: 5px;
+
+            svg {
+                width: 14px;
+                height: 14px;
             }
         }
     }
@@ -283,9 +326,15 @@
 
 
 
+.forWrongValidate {
+    &:focus {
+        border: 1px solid red;
+    }
+}
 
-
-
+.shake {
+    animation: validationAnimate .3s ease-in-out 4;
+}
 
 
 // --------------------- autofill color ---------------------
