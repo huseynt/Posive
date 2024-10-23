@@ -123,7 +123,7 @@ const Home = () => {
       {successOrder && <SuccessOrder setSuccessOrder={setSuccessOrder} />}
       <Notification setNotification={setNotification} notification={notification} bag={bag} />
       {/* {aboutmeal && <AboutMeal setAboutMeal={setAboutMeal} />} */}
-      <Notify notify={notify} purpose={notifyPurpose} />
+      <Notify notify={notify} purpose={notifyPurpose} describtion=""/>
     </div>
   );
 };
