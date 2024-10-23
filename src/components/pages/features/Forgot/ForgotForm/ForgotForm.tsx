@@ -3,17 +3,21 @@ import logo from "/assets/posive_logo.svg";
 import previous from '/assets/arrow-left.svg'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../../../common/Loader/Loader";
 
 
 interface ForgotFormProps {
   setEmail: (email: string) => void;
   ResetPassword: (email: string) => void;
-  setStep: (step: string) => void;
+  isResetPasswordPending: boolean;
+  // setStep: (step: string) => void;
+  // requestNotify: (purpose: string) => void;
+  // setDescribtion: (describtion: string) => void;
 }
 
 const ForgotForm: React.FC<ForgotFormProps>  = (props) => {
 
-  const { setEmail, ResetPassword, setStep } = props;
+  const { setEmail, ResetPassword, isResetPasswordPending } = props;
   const [data, setData] = useState({email: ""});
   const [validate, setValidate] = useState({
     email: "",
@@ -36,7 +40,9 @@ const ForgotForm: React.FC<ForgotFormProps>  = (props) => {
       console.log(data);
       setEmail(data.email)
       ResetPassword(data.email)
-      setStep('verify')
+      // setStep('verify')
+      // requestNotify('done')
+      // setDescribtion('Email sent successfully')
     }
     else { 
       if (data.email === "") {
@@ -98,6 +104,8 @@ const ForgotForm: React.FC<ForgotFormProps>  = (props) => {
               borderColor: validate.email ? 'red' : ''
             }}
           />
+
+
           <p className={data.email ? style.label_focus : style.label}>Email</p>
           {/* -- validation -- */}
           <div className={`${style.login_form_validation} ${validate.email && style.shake}`}>
@@ -114,12 +122,26 @@ const ForgotForm: React.FC<ForgotFormProps>  = (props) => {
 
 
 
-        <input
+        {/* <input
           className={style.login_form_submit}
           type="submit"
           value="Continue"
           onClick={sumbit}
-        />
+        /> */}
+
+        <div className={style.login_form_submit}>
+          {isResetPasswordPending ? 
+            <Loader/> 
+            :
+            <input
+            className={style.login_form_submit_input}
+            type="submit"
+            value="Continue"
+            onClick={sumbit}
+            />
+          }
+        </div>
+
       </form>
 
 

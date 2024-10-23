@@ -4,21 +4,25 @@ import previous from '/assets/arrow-left.svg'
 import eye_hide from '/assets/eye-hide.svg'
 import eye_show from '/assets/eye-open.svg'
 import { useEffect, useState } from "react";
+import Loader from "../../../../common/Loader/Loader";
 // import { useNavigate } from "react-router-dom";
 
 interface ChangePasswordProps {
   email: string;
   setStep: (step: string) => void;
-  Change: (data:{email: string, password: string}) => void;
+  Change: (data:{email: string, newPassword: string}) => void;
+  isChangePasswordPending: boolean;
+  // requestNotify: (purpose: string) => void;
+  // setDescribtion: (describtion: string) => void;
 }
 
 const ChangePassword: React.FC<ChangePasswordProps> = (props) => {
 
   const [hide, setHide] = useState(false);
-  const { email, setStep, Change } = props;
+  const { email, Change, setStep, isChangePasswordPending } = props;
   const [data, setData] = useState({
     email: email,
-    password: ""
+    newPassword: ""
   });
   const [repeatPassword, setRepeatPassword] = useState('');
   const [validate, setValidate] = useState({
@@ -37,16 +41,18 @@ const ChangePassword: React.FC<ChangePasswordProps> = (props) => {
   
   const sumbit = (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
-    if (data.password!== "" && repeatPassword==data.password && data.password.length > 7) {
+    if (data.newPassword!== "" && repeatPassword==data.newPassword && data.newPassword.length > 7) {
       console.log(data, email);
-      setStep('succesful');
+      // setStep('succesful');
       Change(data)
+      // requestNotify("done")
+      // setDescribtion("Password changed successfully")
       // navigate('/login')
     }
     else { 
       setValidate({
         ...validate,
-        password: !data.password ? "Please enter the verification code": "",
+        password: !data.newPassword ? "Please enter the verification code": "",
         repeatPassword: !repeatPassword ? "Please enter the verification code": "",
       });
     }
@@ -81,18 +87,18 @@ const ChangePassword: React.FC<ChangePasswordProps> = (props) => {
     // write all validation one setValidate
     setValidate({
       ...validate,
-      password: data.password.length < 8 && data.password.length > 0 ? "Password must be at least 8 characters": "",
-      repeatPassword: repeatPassword !== data.password && repeatPassword.length > 0 ? "Passwords do not match": "",
+      password: data.newPassword.length < 8 && data.newPassword.length > 0 ? "Password must be at least 8 characters": "",
+      repeatPassword: repeatPassword !== data.newPassword && repeatPassword.length > 0 ? "Passwords do not match": "",
     });
   }
 
   useEffect(() => {
     checkValidation();
-  }, [data.password]);
+  }, [data.newPassword]);
 
   useEffect(() => {
     checkValidation();
-  }, [repeatPassword, data.password]);
+  }, [repeatPassword, data.newPassword]);
 
 
 
@@ -144,16 +150,16 @@ const ChangePassword: React.FC<ChangePasswordProps> = (props) => {
         <div className={style.login_form_password}>
           <input 
           type={hide ? "text" : "password"} 
-          id="password"
+          id="newPassword"
           onChange={change}
-          value={data.password}
+          value={data.newPassword}
           autoComplete="current-password"
           className={`${style.login_form_password_input} ${validate.password ? style.forWrongValidate: null}`}
           style={{
             borderColor: validate.password ? 'red' : ''
           }}
           />
-          <p className={data.password ? style.label_focus: style.label}>Password</p>
+          <p className={data.newPassword ? style.label_focus: style.label}>Password</p>
           <span 
           className={style.login_form_password_eye}
           onClick={() => setHide(!hide)}
@@ -207,14 +213,20 @@ const ChangePassword: React.FC<ChangePasswordProps> = (props) => {
         </div>
 
 
-        <input
-          className={style.login_form_submit}
-          type="submit"
-          value="Continue"
-          onClick={sumbit}
-        />
+        <div className={style.login_form_submit}>
+          {isChangePasswordPending ? 
+            <Loader/> 
+            :
+            <input
+            className={style.login_form_submit_input}
+            type="submit"
+            value="Continue"
+            onClick={sumbit}
+            />
+          }
+        </div>
 
-
+        
       </form>
 
       <div className={style.login_footer}>

@@ -114,6 +114,8 @@ function App() {
               <Route path='help/*' element={<HelpCenter />} />
               <Route path='*' element={<NotFound />} />
             </Route>
+
+            <Route path='*' element={<NotFound />} />
           </Routes>
         </div>
       </div>

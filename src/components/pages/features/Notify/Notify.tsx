@@ -5,6 +5,7 @@ import '../SuccessOrder/forprint.scss'
 interface INotify {
   notify: boolean;
   purpose: string;
+  describtion: string;
 }
 interface InotifyData {
   color: string;
@@ -13,7 +14,7 @@ interface InotifyData {
 }
 
 const Notify: React.FC<INotify> = (props) => {
-  const { notify, purpose } = props;
+  const { notify, purpose, describtion } = props;
   const [data, setData] = React.useState<InotifyData>({
     color: "",
     text: "",
@@ -25,19 +26,19 @@ const Notify: React.FC<INotify> = (props) => {
       setData({
         color: "#12B3A8",
         text: "SUCCESS !",
-        desc: "Your changes have been successfully saved.",
+        desc: !describtion ? "Your changes have been successfully saved.": describtion,
       });
     } else if (purpose === "important") {
       setData({
         color: "#b4ac3a",
         text: "IMPORTANT !",
-        desc: "This change is important, please check it again.",
+        desc: !describtion ? "This change is important, please check it again.": describtion,
       });
     } else if (purpose === "undone") {
       setData({
         color: "#C65468",
         text: "ERROR !",
-        desc: "There was an error saving your changes.",
+        desc: !describtion ? "There was an error saving your changes.": describtion,
       });
     }
   }, [purpose]);

@@ -27,7 +27,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
   const [hide, setHide] = useState(false);
   const [data, setData] = useState({
     email: "huseyn.tapdiqli.i@gmail.com",
-    password: "12345678",
+    password: "11111111",
   });
   const [validate, setValidate] = useState({
     email: '',
@@ -262,12 +262,6 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 
         
         <div className={style.login_form_submit}>
-          {/* <input
-            className={style.login_form_submit_input}
-            type="submit"
-            value="Login"
-            onClick={sumbit}
-          /> */}
           {isLoginPending ? 
             <Loader/> 
             :

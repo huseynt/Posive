@@ -6,10 +6,10 @@ export interface IcreatePostAuthenticate {
 
 export interface IVerifyEmail {
     email: string;
-    verifyPassword: string;
+    confirmPassword: string;
   }
 
 export interface IChangePassword {
     email: string;
-    password: string;
+    newPassword: string;
   }
