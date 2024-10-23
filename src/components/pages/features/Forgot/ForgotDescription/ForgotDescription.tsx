@@ -1,4 +1,4 @@
-import style from "./registrDescription.module.scss";
+import style from "./forgotDescription.module.scss";
 import login_wall from '/assets/login_wall.png';
 import login_person from '/assets/login_wall_person.png';
 
@@ -8,7 +8,7 @@ import "swiper/css/pagination";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import { useEffect, useRef } from "react";
 
-export default function Test() {
+export default function ForgotDescription() {
   
   const swiperRef = useRef<any>(null);
 
