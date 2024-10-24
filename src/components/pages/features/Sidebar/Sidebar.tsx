@@ -1,19 +1,22 @@
 import style from "./sidebar.module.scss";
 import { useEffect, useState } from "react";
 import logo from "/assets/posive_logo.svg";
-import user1 from "/assets/user1.png";
+// import user1 from "/assets/user1.png";
 import { useNavigate } from "react-router-dom";
 
 import { resetToken } from "../../../utils/Hooks/useToken";
+import { IgetUser } from "../../../utils/API/types";
+import { deleteUser } from "../../../utils/reUse/user";
 interface ISidebarProps {
   toggleMenu: boolean;
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
   setNavigation: React.Dispatch<React.SetStateAction<string>>;
   navigation: string;
+  userData: IgetUser | undefined;
 }
 
 const Sidebar: React.FC<ISidebarProps> = (props) => {
-  const { toggleMenu, setToggleMenu, setNavigation, navigation } = props;
+  const { toggleMenu, setToggleMenu, setNavigation, navigation, userData } = props;
   const [toggleUser, setToggleUser] = useState(true);
 
   const handleToggleMenu = () => {
@@ -35,6 +38,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
 
   const handleLogout = () => {
     resetToken();
+    deleteUser();
     navigate("/login");
   };
 
@@ -389,7 +393,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
         onClick={handleToggleUser}
       >
         <div className={style.sidebar_user_photo}>
-          <img src={user1} alt="" />
+          <img src={userData?.imageUrl} alt="user" />
         </div>
 
         <div
@@ -398,8 +402,11 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             display: !toggleMenu ? "none" : "block",
           }}
         >
-          <h4>Jane</h4>
-          <p>Staff</p>
+          <h4>{userData?.firstname}</h4>
+          <p>
+            {/* Staff */}
+            {userData?.role}
+          </p>
         </div>
 
         <div

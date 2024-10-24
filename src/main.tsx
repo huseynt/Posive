@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 import { store } from './components/redux/store.ts';
 
 const queryClient = new QueryClient({ 
-  defaultOptions: { queries: { retry: 5 },}
+  defaultOptions: { queries: { retry: 3 },}
     })
 
 

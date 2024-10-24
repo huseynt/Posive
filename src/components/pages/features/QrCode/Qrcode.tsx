@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 
 interface IQRCodeComponentProps {
   setQrOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  requestNotify: (purpose: string) => void;
+  requestNotify: (purpose: string, description: string | undefined) => void;
 }
 
 const QRCodeComponent: React.FC<IQRCodeComponentProps> = (props) => {
@@ -65,7 +65,7 @@ const QRCodeComponent: React.FC<IQRCodeComponentProps> = (props) => {
           <div className={style.qrcode_block_manual_copy}
           onClick={() => {
             navigator.clipboard.writeText(code)
-            requestNotify("done");
+            requestNotify("done", "");
           }
           }
           >

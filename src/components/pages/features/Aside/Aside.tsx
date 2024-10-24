@@ -7,7 +7,7 @@ interface AsideProps {
   setTable: React.Dispatch<React.SetStateAction<boolean>>;
   setBag: React.Dispatch<React.SetStateAction<boolean>>;
   setSuccessOrder: React.Dispatch<React.SetStateAction<boolean>>;
-  requestNotify: (purpose: string) => void;
+  requestNotify: (purpose: string, description: string | undefined) => void;
 }
 
 const Aside: React.FC<AsideProps> = (props) => {
@@ -27,9 +27,9 @@ const Aside: React.FC<AsideProps> = (props) => {
 
   const handleOrder = () => {
     if (data.name === "") {
-      requestNotify("important");
+      requestNotify("important", "");
     } else {
-      requestNotify("done");
+      requestNotify("done", "");
       setSuccessOrder(true);
     }
   }
