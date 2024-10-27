@@ -139,6 +139,27 @@ export const createSaveUser = async (data: ISaveUserData) => {
     }
 }
 
+// Delete User
+export const createDeleteUser = async () => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/account/deleteByEmail`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 
 

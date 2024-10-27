@@ -4,7 +4,9 @@ import arrowdown from '/public/assets/arrow-down.png'
 import uploadImage from '../../../../services/Firebase/Firebase'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 // import { IgetUser } from '../../../../utils/API/types';
-import { createGetUser, createSaveUser } from '../../../../utils/API/API';
+import { createDeleteUser, createGetUser, createSaveUser } from '../../../../utils/API/API';
+import { useNavigate } from 'react-router-dom';
+import { resetToken } from '../../../../utils/Hooks/useToken';
 
 interface IGeneral {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
@@ -112,11 +114,39 @@ const General: React.FC<IGeneral> = (props) => {
       queryClient.invalidateQueries({queryKey: ["getUsers"]})
       }
     }, [isCreatePostSuccess, isPostsPending, queryClient])
-  
-
-
-
   // ------------------- save user ------------------------
+
+
+  // ------------------- delete user ------------------------
+  const navigate = useNavigate();
+  const {
+    mutate: DeleteUser,
+    isSuccess: isDeleteUserSuccess,
+    isPending: isDeleteUserPending
+  } = useMutation({
+    mutationFn: createDeleteUser,
+    onSuccess: (data) => {
+      if (data === 'Delete oldu') {
+        console.log('Deleted');
+        navigate('/login')
+        resetToken()  
+        console.log('Success');
+      }
+    },
+    onError: (error) => {
+      console.log('Delete error:', error);
+    },
+  });
+  // useEffect(() => {
+  //   if (isDeleteUserSuccess && !isDeleteUserPending) {
+  //       console.log('Deleted');
+  //       navigate('/login')
+  //       resetToken()
+  //     }
+  //   }, [isDeleteUserSuccess, isDeleteUserPending, navigate])
+  // ------------------- delete user ------------------------
+
+
 
 
 
@@ -392,7 +422,9 @@ const General: React.FC<IGeneral> = (props) => {
         <div className={style.parent_main_deleteAccount_down}>
           <p className={style.parent_main_deleteAccount_down_text}>When you delete your account, you lose access to Front account services, and we permanently delete your personal data. You can cancel the deletion for 14 days.</p>
           <div className={style.parent_main_deleteAccount_down_actions}>
-            <button className={style.parent_main_deleteAccount_down_actions_btn}>Delete account</button>
+            <button className={style.parent_main_deleteAccount_down_actions_btn}
+            onClick={() => DeleteUser()}
+            >Delete account</button>
             <button className={style.parent_main_deleteAccount_down_actions_btnW}>Learn more</button>
           </div>
         </div>

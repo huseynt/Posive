@@ -1,4 +1,5 @@
 import { getCookie, deleteCookie } from '../reUse/cookie';
+import { deleteUser } from '../reUse/user';
 
 export interface IToken {
     accessToken: string;
@@ -29,6 +30,7 @@ export const resetToken = () => {
     deleteCookie("refresh_token");
     sessionStorage.removeItem("access_token");
     sessionStorage.removeItem("refresh_token");
+    deleteUser();
 };
 
 
