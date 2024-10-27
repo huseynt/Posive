@@ -8,6 +8,9 @@ import { useOutletContext } from "react-router-dom";
 import OverviewTableItem from "../../features/OverviewTableItem/OverviewTableItem";
 import { orders } from "../../../test/db/transactions";
 import { Helmet } from "react-helmet";
+import { useQuery } from "@tanstack/react-query";
+import { createGetOrders } from "../../../utils/API/API";
+import { IGetOrdersResponse } from "../../../utils/API/types";
 
 interface IOverview {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -40,6 +43,33 @@ const Overview = () => {
   const [ordersSetting, setOrdersSetting] = useState<boolean>(false);
   const [ascend, setAscend] = useState<boolean>(false);
 
+
+
+  // ------------------- get meals ------------------------
+  const {
+    data: m,
+  } = useQuery<IGetOrdersResponse | undefined>({
+    queryKey: ["getOrders", { page: 1, size: 10, date: "Next_week" }],
+    queryFn: () => createGetOrders({ page: 1, size: 10, date: "Next_week" }),
+  });
+
+  useEffect(() => {
+    return () => {
+      if (m) {
+        console.log(m);
+      }
+    }
+  }, [m]);
+  //  ----------------- get meals ---------------------------
+
+
+
+
+
+
+
+
+  
   useEffect(() => {
     if (checked == false) {
       setMultiCheck(0);

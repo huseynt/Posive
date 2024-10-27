@@ -1,5 +1,5 @@
 import { getToken } from '../reUse/getToken';
-import { IcreatePostAuthenticate, IVerifyEmail, IChangePassword } from './types';
+import { IcreatePostAuthenticate, IVerifyEmail, IChangePassword, ISaveUserData } from './types';
 
 // test
 export const API = import.meta.env.VITE_API_URL
@@ -27,6 +27,8 @@ export const createPostAuthenticate = async (body: IcreatePostAuthenticate) => {
     }
     return Promise.reject(res);
 }
+
+
 // Register User
 export const createPostRegister = async (body: IcreatePostAuthenticate) => {
     const res = await fetch(`${base}/v1/auth/register`, {
@@ -93,20 +95,97 @@ export const createPostChangePassword = async (body: IChangePassword) => {
 
 // Get User
 export const createGetUser = async () => {
-    const token = await getToken();
-    const accessToken = token?.accessToken;
-    const res = await fetch(`${base}/v1/auth/getUser`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/v1/auth/getUser`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+        if (res.ok) {
+            return res.json();
         }
-    });
-    if (res.ok) {
-        return res.json();
+        // return Promise.reject(res);
+        else {
+            return "Error";
+        }
+    } catch (error) {
+        console.log(error);
     }
-    return Promise.reject(res);
+}
+
+// Save User
+export const createSaveUser = async (data: ISaveUserData) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/account/save`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            body: JSON.stringify(data)
+        });
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 
 
+
+// Get meals
+export const createGetMeals = async () => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/product/get`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+//  Get orders
+interface GetOrdersParams {
+    page?: number;
+    size?: number;
+    date?: string;
+}
+export const createGetOrders = async ({ page, size, date }: GetOrdersParams) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/order/get?page=${page}&size=${size}&date=${date}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}

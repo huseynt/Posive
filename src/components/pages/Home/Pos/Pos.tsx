@@ -8,11 +8,11 @@ import SearchInput from "../../features/SearchInput/SearchInput";
 
 import { Helmet } from "react-helmet";
 
-// import {API} from "../../../utils/API/API";
-// import Axios from "axios";
-// import {config} from "../../../utils/API/config";
 
 import { useOutletContext } from "react-router-dom";
+import { createGetMeals } from "../../../utils/API/API";
+import { useQuery } from "@tanstack/react-query";
+import { IGetMeals } from "../../../utils/API/types";
 
 interface MainProps {
   setBag: React.Dispatch<React.SetStateAction<boolean>>;
@@ -57,7 +57,32 @@ const Main= () => {
   //     getMeals();
   //   }
   // }, [meals.length]);
-// ---------------------------------------------------
+  //  ---------------------------------------------------
+
+
+
+
+  // ------------------- get meals ------------------------
+  const {
+    data: m,
+  } = useQuery<IGetMeals | undefined>({
+    queryKey: ["getMeals"],
+    queryFn: createGetMeals,
+  });
+
+  useEffect(() => {
+    return () => {
+      if (m) {
+        console.log(m);
+      }
+    }
+  }, [m]);
+  //  ----------------- get meals ---------------------------
+
+
+
+
+
 
 
 
@@ -68,12 +93,6 @@ const Main= () => {
       setMealsFiltered(meals.filter((meal) => meal.category === category));
     }
   }, [category,meals]);
-
-
-
-
-
-
 
   
   return (

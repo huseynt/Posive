@@ -1,7 +1,10 @@
 import style from './account.module.scss'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import arrowdown from '/public/assets/arrow-down.png'
 import uploadImage from '../../../../services/Firebase/Firebase'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+// import { IgetUser } from '../../../../utils/API/types';
+import { createGetUser, createSaveUser } from '../../../../utils/API/API';
 
 interface IGeneral {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
@@ -9,39 +12,145 @@ interface IGeneral {
 }
 
 interface IData {
-  imgFile: string | null,
-  fullName: string,
-  emailAddress: string,
+  imageUrl: string | null,
+  name: string,
+  email: string,
   phoneNumber: string,
   gender: string,
-  birthOfDate: string,
+  birthDate: string,
   password: string,
+  account?: {
+    gender: string,
+    birthDate: string,
+  }
+}
+
+// "name": "Huseyn hesenov",
+  //       "password": "",
+  //       "phoneNumber": "23456786543",
+  //       "email": "huseyn.tapdiqli.i@gmail.com",
+  //       "birthDate": "1999-01-12T00:00:00.000+00:00",
+  //       "gender": "Female",
+  //       "imageUrl": "https://fire
+interface IGetUser {
+  imageUrl: string | null | undefined,
+  firstname: string | null | undefined,
+  lastname: string | null | undefined,
+  name: string | null | undefined,
+  email: string | null | undefined,
+  phoneNumber: string | null | undefined,
+  gender: string | null | undefined,
+  birthDate: string | null | undefined,
+  password: string,
+  account?: {
+    gender: string | null | undefined,
+    birthDate: string | null | undefined,
+  }
 }
 
 
 
 
-
 const General: React.FC<IGeneral> = (props) => {
+
+  // ------------------- get user ------------------------
+  const {
+    data: userData,
+  } = useQuery<IGetUser | undefined>({
+    queryKey: ["getUser"],
+    queryFn: createGetUser,
+  });
+  useEffect(() => {
+    if (userData) {
+      setData({
+        imageUrl: userData.imageUrl ? userData.imageUrl : "",
+        name: userData.firstname ? `${userData.firstname} ${userData.lastname}` : "",
+        email: userData.email ? userData.email : "",
+        phoneNumber: userData.phoneNumber ? userData.phoneNumber : "",
+        gender: userData?.account?.gender ? userData.account.gender : "",
+        birthDate: userData?.account?.birthDate ? new Date(userData.account.birthDate).toISOString().split('T')[0] : "",
+        password: "",
+      });
+    }
+  }, [userData]);
+  //  ----------------- get user ---------------------------
+
+
+  // ------------------- save user ------------------------
+  const queryClient = useQueryClient()
+  const {
+    mutate: SaveUser,
+    isSuccess: isCreatePostSuccess,
+    isPending: isPostsPending
+  } = useMutation({
+    mutationFn: createSaveUser,
+    onSuccess: () => {
+      console.log('Success');
+      // request get user
+      queryClient.invalidateQueries({queryKey: ["getUsers"]})
+      // console.log(data.statusCode);
+      
+      // if (data.statusCode === 200) {
+      //   setDescribtion('Login successfully')
+      //   requestNotify('done')
+      // } 
+      // else if (data === 'Error') {
+      //   setDescribtion('Email is not registered')
+      //   requestNotify('important')
+      // }
+    },
+    onError: (error) => {
+      console.log('Login error:', error);
+      // setDescribtion('Email or password is incorrect')
+      // requestNotify('important')
+    },
+  });
+
+  useEffect(() => {
+    if (isCreatePostSuccess && !isPostsPending) {
+      // queryClient.invalidateQueries({queryKey: ["getPosts"]})
+      queryClient.invalidateQueries({queryKey: ["getUsers"]})
+      }
+    }, [isCreatePostSuccess, isPostsPending, queryClient])
+  
+
+
+
+  // ------------------- save user ------------------------
+
+
+
+
+
+
   const { setMobileSelect, requestNotify } = props
   const [visibility, setVisibility] = useState<boolean>(false);
   const [data, setData] = useState<IData>({
-    imgFile: "",
-    fullName: "",
-    emailAddress: "",
+    imageUrl: "",
+    name: "",
+    email: "",
     phoneNumber: "",
     gender: "Male",
-    birthOfDate: "",
+    birthDate: "",
     password: "",
   });
 
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>("");
   const [uploadProgress, setUploadProgress] = useState<number>(0);
+
+
+
+
+
+
+
+
+
 
   const changeData = (e: React.ChangeEvent<HTMLInputElement>) => { 
     const { id, value, files } = e.target;
 
-    if (id === "imgFile" && files && files.length > 0) {
+    if (id === "imageUrl" && files && files.length > 0) {
         const Imgfile = files[0];
 
         // upload Firebase storage
@@ -70,34 +179,36 @@ const General: React.FC<IGeneral> = (props) => {
   };
 
   const deletePhoto = () => {
-    setImagePreview(null);
+    setImagePreview("");
     setData({
         ...data,
-        imgFile: null,
+        imageUrl: null,
     });
   };
 
   const resetData = () => {
     setData({
-      imgFile: null,
-      fullName: "",
-      emailAddress: "",
+      imageUrl: null,
+      name: "",
+      email: "",
       phoneNumber: "",
       gender: "Male",
-      birthOfDate: "",
+      birthDate: "",
       password: "",
     });
-    setImagePreview(null);
+
+    setImagePreview("");
   }
 
   const sendData = () => {
-    if (data.imgFile && 
-      data.fullName && 
-      data.emailAddress && 
+    if (data.imageUrl && 
+      data.name && 
+      data.email && 
       data.phoneNumber) {
       console.log(data)
-      resetData()
+      // resetData()
       requestNotify("done")
+      SaveUser(data)
     }
     else {
       requestNotify("important")
@@ -136,9 +247,9 @@ const General: React.FC<IGeneral> = (props) => {
           <div className={style.parent_main_business_block_photo}>
             <div className={style.parent_main_business_block_photo_icon}>
             {
-              imagePreview ?
+              data.imageUrl || imagePreview ?
               <img 
-                src={imagePreview} 
+                {...(data.imageUrl ? {src: data.imageUrl} : {src: imagePreview})}
                 alt="Uploaded Preview" 
                 className={style.parent_main_business_block_photo_icon_image}
               /> :
@@ -150,15 +261,15 @@ const General: React.FC<IGeneral> = (props) => {
             </div>
 
             <div className={style.parent_main_business_block_photo_upload}>
-              <label htmlFor="imgFile" className={style.parent_main_business_block_photo_upload_label}
-              style={{backgroundColor: data.imgFile ? "#029802" : ""}}
+              <label htmlFor="imageUrl" className={style.parent_main_business_block_photo_upload_label}
+              style={{backgroundColor: data.imageUrl ? "#029802" : ""}}
               >
-                {!uploadProgress && (data.imgFile ? "Selected" : "Upload New")} {uploadProgress ? `(${uploadProgress}%)` : ""}
+                {!uploadProgress && (data.imageUrl ? "Selected" : "Upload New")} {uploadProgress ? `(${uploadProgress}%)` : ""}
               </label>
               <input type="file" 
               accept="image/png, image/jpeg"
               multiple = {false}
-              id="imgFile" 
+              id="imageUrl" 
               className={style.parent_main_business_block_photo_upload_input} 
               onChange={changeData}/>
             </div>
@@ -172,23 +283,23 @@ const General: React.FC<IGeneral> = (props) => {
             <div className={style.parent_main_business_block_form_block}>
               <input 
               type="text" 
-              id="fullName" 
+              id="name" 
               onChange={changeData} 
-              value={data.fullName}
+              value={data.name}
               className={style.parent_main_business_block_form_email_block_input}
               />
-              <p className={data.fullName ? style.label_focus: style.label}>Full Name</p>
+              <p className={data.name ? style.label_focus: style.label}>Full Name</p>
             </div>
 
             <div className={style.parent_main_business_block_form_block}>
               <input 
               type="text" 
-              id="emailAddress" 
+              id="emailDontChange" 
               onChange={changeData} 
-              value={data.emailAddress}
+              value={data.email}
               className={style.parent_main_business_block_form_email_block_input}
               />
-              <p className={data.emailAddress ? style.label_focus: style.label}>Email Address</p>
+              <p className={data.email ? style.label_focus: style.label}>Email Address</p>
             </div>
 
             <div className={style.parent_main_business_block_form_block}>
@@ -229,12 +340,12 @@ const General: React.FC<IGeneral> = (props) => {
             <div className={`${style.parent_main_business_block_form_block} ${style.dateOnMobile}`} >
               <input 
               type="date" 
-              id="birthOfDate" 
+              id="birthDate" 
               onChange={changeData} 
-              value={data.birthOfDate}
+              value={data.birthDate}
               className={style.parent_main_business_block_form_email_block_input}
               />
-              <p className={data.birthOfDate ? style.label_focus: style.label_birth}>Birth of Date</p>
+              <p className={data.birthDate ? style.label_focus: style.label_birth}>Birth of Date</p>
             </div>
 
             <div className={style.parent_main_business_block_form_block}>

@@ -14,14 +14,12 @@ import Notification from "../features/Notification/Notification";
 // import HelpCenter from "./HelpCenter/HelpCenter";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useToken } from "../../utils/Hooks/useToken"
-// import { useMutation } from "@tanstack/react-query";
+import { useToken } from "../../utils/Hooks/useToken";
 import { createGetUser } from "../../utils/API/API";
 import { useQuery } from "@tanstack/react-query";
 import { IgetUser } from "../../utils/API/types";
 import { saveUser } from "../../utils/reUse/user";
 // import { createRefreshToken } from "../../utils/API/refreshToken";
-// import { setCookie } from "../../utils/reUse/cookie";
 
 
 
@@ -68,55 +66,29 @@ const Home = () => {
 
 
 // ----------------------------- get user ----------------------------
-// const queryClient = useQueryClient();
-
 const {
   data: userData,
-  // error: userError,
-  // refetch: refetchGetUser,
 } = useQuery<IgetUser | undefined>({
   queryKey: ["getUser"],
   queryFn: createGetUser,
 });
 
 useEffect(() => {
-  if (userData) {
-    console.log(userData);
-    saveUser(userData);
-  }
+  const handleUserData = async () => {
+    if (userData) {
+      console.log(userData);
+      saveUser(userData);
+    } 
+    // else if (!userData) {
+    //   const refreshToken = await createRefreshToken();
+    //   if (refreshToken == "ok") {
+    //     userData && saveUser(userData);
+    //   }
+    // }
+  };
+  handleUserData();
 }, [userData]);
-
-// useEffect(() => {
-//   if (userError) {
-//     console.error("Failed to get user:", userError);
-//     // Refresh token-i işə salırıq
-//     // refreshTokens();
-//   }
-// }, [userError]);
-
-// ----------------------------- refresh token ----------------------------
-// interface IRefreshData {
-//   access_token: string | undefined | null; 
-//   refresh_token: string | undefined | null;
-// }
-// const { mutate: refreshTokens } = useMutation<IRefreshData>(
-//   createRefreshToken, 
-//   {
-//   onSuccess: (refreshData: { access_token: string; refresh_token: string }) => {
-//     if (refreshData) {
-//       setCookie("access_token", refreshData.access_token, 7);
-//       setCookie("refresh_token", refreshData.refresh_token, 7);
-//       sessionStorage.setItem("access_token", refreshData.access_token);
-//       sessionStorage.setItem("refresh_token", refreshData.refresh_token);
-
-//       refetchGetUser();
-//     }
-//   },
-//   // onError: (error) => {
-//   //   console.error("Failed to refresh token:", error);
-//   // },
-// });
-// ----------------------------- refresh token ----------------------------
+// ----------------------------- get user ----------------------------
 
 
 

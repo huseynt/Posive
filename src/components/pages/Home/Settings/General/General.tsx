@@ -32,6 +32,20 @@ const General: React.FC<IGeneral> = (props) => {
   //   });
   // }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const changeData = (e: React.ChangeEvent<HTMLInputElement>) => { 
     const { id, value, files } = e.target;
 
@@ -84,6 +98,10 @@ const General: React.FC<IGeneral> = (props) => {
     console.log(data)
     requestNotify("done")
   }
+
+
+
+
 
 
 
