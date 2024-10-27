@@ -45,7 +45,7 @@ export interface IChangePassword {
     created: string | null | undefined;
     phoneNumber: string | null | undefined;
     password: string  | null | undefined;
-    imageUrl: string | null | undefined;
+    imageUrl: string | undefined;
     role: string  | null | undefined;
     products: [] | null | undefined;
     orders: [] | null | undefined;
