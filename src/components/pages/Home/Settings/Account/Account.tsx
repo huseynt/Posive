@@ -121,8 +121,8 @@ const General: React.FC<IGeneral> = (props) => {
   const navigate = useNavigate();
   const {
     mutate: DeleteUser,
-    isSuccess: isDeleteUserSuccess,
-    isPending: isDeleteUserPending
+    // isSuccess: isDeleteUserSuccess,
+    // isPending: isDeleteUserPending
   } = useMutation({
     mutationFn: createDeleteUser,
     onSuccess: (data) => {
