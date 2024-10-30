@@ -7,6 +7,10 @@ import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Provider } from 'react-redux'
 import { store } from './components/redux/store.ts';
+import './components/utils/languages/i18n.ts'
+
+
+
 
 const queryClient = new QueryClient({ 
   defaultOptions: { queries: { retry: 3 },}

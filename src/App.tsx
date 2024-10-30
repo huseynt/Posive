@@ -24,6 +24,8 @@ import { useEffect, useState } from 'react'
 
 // ---------- google auth ------------------------------
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { getCookie } from './components/utils/reUse/cookie'
+import { changeLanguage } from 'i18next'
 // import { createRefreshToken } from './components/utils/API/refreshToken'
 
 
@@ -69,6 +71,16 @@ function App() {
 
   // ---------- loader ----------
 
+  // ---------- language -------------------
+  useEffect(() => {
+    const lang = getCookie('i18next');
+    if(lang) {
+      changeLanguage(lang);
+    }
+    else {
+      changeLanguage('en');
+    }})
+  // ---------- language -------------------
 
   // ----------- body title ----------------
   useEffect(() => {

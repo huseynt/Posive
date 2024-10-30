@@ -26,14 +26,6 @@ interface IData {
     birthDate: string,
   }
 }
-
-// "name": "Huseyn hesenov",
-  //       "password": "",
-  //       "phoneNumber": "23456786543",
-  //       "email": "huseyn.tapdiqli.i@gmail.com",
-  //       "birthDate": "1999-01-12T00:00:00.000+00:00",
-  //       "gender": "Female",
-  //       "imageUrl": "https://fire
 interface IGetUser {
   imageUrl: string | null | undefined,
   firstname: string | null | undefined,
@@ -82,38 +74,19 @@ const General: React.FC<IGeneral> = (props) => {
   const queryClient = useQueryClient()
   const {
     mutate: SaveUser,
-    isSuccess: isCreatePostSuccess,
-    isPending: isPostsPending
+    // isSuccess: isCreatePostSuccess,
+    // isPending: isPostsPending
   } = useMutation({
     mutationFn: createSaveUser,
     onSuccess: () => {
       console.log('Success');
-      // request get user
-      queryClient.invalidateQueries({queryKey: ["getUsers"]})
-      // console.log(data.statusCode);
-      
-      // if (data.statusCode === 200) {
-      //   setDescribtion('Login successfully')
-      //   requestNotify('done')
-      // } 
-      // else if (data === 'Error') {
-      //   setDescribtion('Email is not registered')
-      //   requestNotify('important')
-      // }
+      requestNotify("done")
+      queryClient.invalidateQueries({queryKey: ["getUser"]})
     },
     onError: (error) => {
       console.log('Login error:', error);
-      // setDescribtion('Email or password is incorrect')
-      // requestNotify('important')
     },
   });
-
-  useEffect(() => {
-    if (isCreatePostSuccess && !isPostsPending) {
-      // queryClient.invalidateQueries({queryKey: ["getPosts"]})
-      queryClient.invalidateQueries({queryKey: ["getUsers"]})
-      }
-    }, [isCreatePostSuccess, isPostsPending, queryClient])
   // ------------------- save user ------------------------
 
 
@@ -121,29 +94,18 @@ const General: React.FC<IGeneral> = (props) => {
   const navigate = useNavigate();
   const {
     mutate: DeleteUser,
-    // isSuccess: isDeleteUserSuccess,
-    // isPending: isDeleteUserPending
   } = useMutation({
     mutationFn: createDeleteUser,
-    onSuccess: (data) => {
-      if (data === 'Delete oldu') {
+    onSuccess: (response) => {
+      console.log('Delete success:', response);
         console.log('Deleted');
         navigate('/login')
         resetToken()  
-        console.log('Success');
-      }
     },
     onError: (error) => {
-      console.log('Delete error:', error);
+      console.log('Delete error:', error);  
     },
   });
-  // useEffect(() => {
-  //   if (isDeleteUserSuccess && !isDeleteUserPending) {
-  //       console.log('Deleted');
-  //       navigate('/login')
-  //       resetToken()
-  //     }
-  //   }, [isDeleteUserSuccess, isDeleteUserPending, navigate])
   // ------------------- delete user ------------------------
 
 
@@ -231,13 +193,11 @@ const General: React.FC<IGeneral> = (props) => {
   }
 
   const sendData = () => {
-    if (data.imageUrl && 
-      data.name && 
+    if (data.name && 
       data.email && 
       data.phoneNumber) {
       console.log(data)
       // resetData()
-      requestNotify("done")
       SaveUser(data)
     }
     else {

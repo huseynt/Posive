@@ -34,4 +34,5 @@ export const deleteUser = () => {
     deleteCookie("userImage");
     deleteCookie("userRole");
     deleteCookie("userTheme");
+    deleteCookie("i18next");
 }

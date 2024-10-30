@@ -20,21 +20,23 @@ export interface IChangePassword {
   }
 
   interface ISetting {
-    id: number | null | undefined;
-    theme: string | null | undefined;
-    language: string | null | undefined;
-    currency: string | null | undefined;
-    timeZone: string | null | undefined;
-    size: string | null | undefined;
-    icons: string | null | undefined;
+    id: number | null;
+    theme: string | null;
+    language: string | null;
+    currency: string | null;
+    timeZone: string | null;
+    size: string | null;
+    icons: string | null;
   }
 
   interface IAccount {
     name: string | null | undefined;
+    password: string | null | undefined;
     phoneNumber: string | null | undefined;
     email: string | null | undefined;
     birthDate: string | null | undefined;
-    sex: string | null | undefined;
+    gender: string | null | undefined;
+    imageUrl: string | null | undefined;
   }
   
   export interface IgetUser {
@@ -114,4 +116,20 @@ export interface IGetOrders {
 export interface IGetOrdersResponse {
     orders: IGetOrders[];
     countOrders: number;
+}
+
+export interface ISavePreferences {
+    theme: string | null;
+    language: string | null;
+    currency: string | null;
+    timeZone: string | null;
+    size: string | null;
+    icons: string | null;
+}
+
+export interface ISavePlans {
+  subscriptionId: string | null, 
+  plan: {
+    name: string | null,
+  }
 }

@@ -1,5 +1,7 @@
+import { useMutation } from '@tanstack/react-query';
 import style from './billings.module.scss'
 import { useEffect, useState } from 'react'
+import { createPostPlans } from '../../../../utils/API/API';
 
 interface IGeneral {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,11 +12,27 @@ const Billings: React.FC<IGeneral> = (props) => {
   const { setMobileSelect, requestNotify } = props
   const [plan, setPlan] = useState('Professional Plan')
 
+  // ------------------- save user ------------------------
+  // const queryClient = useQueryClient()
+  const {
+    mutate: SavePlans,
+  } = useMutation({
+    mutationFn: createPostPlans,
+    onSuccess: () => {
+      console.log('Success');
+      requestNotify("done")
+      // queryClient.invalidateQueries({queryKey: ["getUser"]})
+    },
+    onError: (error) => {
+      console.log('Login error:', error);
+    },
+  });
+  // ------------------- save user ------------------------
   
   useEffect(() => {
     // test notification
-    if (plan === '0') {
-      requestNotify('done')
+    return () => {
+      SavePlans({subscriptionId: "1", plan: {name: plan}})
     }
   }, [plan])
 

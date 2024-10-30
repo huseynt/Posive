@@ -1,5 +1,5 @@
 import { getToken } from '../reUse/getToken';
-import { IcreatePostAuthenticate, IVerifyEmail, IChangePassword, ISaveUserData } from './types';
+import { IcreatePostAuthenticate, IVerifyEmail, IChangePassword, ISaveUserData, ISavePreferences, ISavePlans } from './types';
 
 // test
 export const API = import.meta.env.VITE_API_URL
@@ -152,7 +152,7 @@ export const createDeleteUser = async () => {
             }
         });
         if (res.ok) {
-            return res.json();
+            return "Success";
         }
         return Promise.reject(res);
     } catch (error) {
@@ -201,6 +201,51 @@ export const createGetOrders = async ({ page, size, date }: GetOrdersParams) => 
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${accessToken}`
             }
+        });
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+// Save Preferences
+export const createSavePreferences = async (data: ISavePreferences) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/setting/save`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            body: JSON.stringify(data)
+        });
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Post Plans 
+export const createPostPlans = async (data: ISavePlans) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/subscriptions/create`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            body: JSON.stringify(data)
         });
         if (res.ok) {
             return res.json();

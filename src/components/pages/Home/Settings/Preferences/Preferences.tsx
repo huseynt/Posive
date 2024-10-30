@@ -1,12 +1,16 @@
 import style from './preferences.module.scss'
 // import Theme from '../../../../common/Theme/Theme'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import lightMode from '/public/assets/lightmode.png'
 import darkMode from '/public/assets/darkmode.png'
 import customMode from '/public/assets/system_mode.png'
 import arrowdown from '/public/assets/arrow-down.png'
-
+import { useTranslation } from 'react-i18next'
+import { getCookie, setCookie } from '../../../../utils/reUse/cookie'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { createGetUser, createSavePreferences } from '../../../../utils/API/API'
+import { IgetUser } from '../../../../utils/API/types'
 
 interface IPreferences {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,34 +21,92 @@ interface IPreferences {
 
 interface IPereferencesData{
   theme: string | null;
-  language: string;
-  currency: string;
-  timeZone: string;
-  sidebarSize: string;
-  iconsSize: string;
+  language: string | null;
+  currency: string | null;
+  timeZone: string | null;
+  size: string | null;
+  icons: string | null;
 }
 
 const Preferences: React.FC<IPreferences> = (props) => {
   const { setMobileSelect, setTheme, requestNotify } = props
   const localTheme = localStorage.getItem('theme');
+  const { t, i18n } = useTranslation();
+  const language = getCookie("i18next") || "en";
+
+  // ------------------- get user ------------------------
+  const {
+    data: userData,
+  } = useQuery<IgetUser | undefined>({
+    queryKey: ["getUser"],
+    queryFn: createGetUser,
+  });
+  useEffect(() => {
+    if (userData) {
+      console.log(userData);
+      setPereferencesData({
+        theme: userData?.setting?.theme ? userData?.setting?.theme : "light",
+        language: userData?.setting?.language ? userData?.setting?.language : language==="az" ? "Azərbaycan" : "English (US)",
+        currency: userData?.setting?.currency ? userData?.setting?.currency : "United States dollar (USD)",
+        timeZone: userData?.setting?.timeZone ? userData?.setting?.timeZone : "(UTC - 08:00) Pacific Times ( Los Angles )",
+        size: userData?.setting?.size ? userData?.setting?.size : "Medium (220px)",
+        icons: userData?.setting?.icons ? userData?.setting?.icons : "Small (24px)"
+      })
+      localStorage.setItem('theme', userData?.setting?.theme ? userData?.setting?.theme : "light");
+      setTheme(userData?.setting?.theme ? userData?.setting?.theme : "light");
+      changeLanguage(userData?.setting?.language ? userData?.setting?.language==="Azərbaycan" ? "az" : "en" : "en")
+      setCookie("i18next", userData?.setting?.language ? userData?.setting?.language==="Azərbaycan" ? "az" : "en" : "en", 7);
+    }
+  }, [userData, language, setTheme ]);
+    //  ----------------- get user ---------------------------
 
   const [pereferencesData, setPereferencesData] = useState<IPereferencesData>({
     theme: localTheme,
-    language: "English (US)",
+    language:  "English (US)",
     currency: "United States dollar (USD)",
     timeZone: "(UTC - 08:00) Pacific Times ( Los Angles )",
-    sidebarSize: "Medium (220px)",
-    iconsSize: "Small (24px)"
+    size: "Medium (220px)",
+    icons: "Small (24px)"
   })
+
+  // ----------------- languages ---------------------
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+    setCookie("i18next", lng, 7);
+  };
+  // ----------------- languages ---------------------
+
+
+
+
+  // ------------------- save user ------------------------
+  const queryClient = useQueryClient()
+  const {
+    mutate: SavePreferences,
+  } = useMutation({
+    mutationFn: createSavePreferences,
+    onSuccess: () => {
+      console.log('Success');
+      requestNotify("done")
+      queryClient.invalidateQueries({queryKey: ["getUser"]})
+    },
+    onError: (error) => {
+      console.log('Login error:', error);
+    },
+  });
+  // ------------------- save user ------------------------
+
+
 
   const resetData = () => {
     setPereferencesData({
       theme: localTheme,
-      language: "English (US)",
+      language: language==="az" ? "Azərbaycan" : "English (US)",
       currency: "United States dollar (USD)",
       timeZone: "(UTC - 04:00) Baku Times",
-      sidebarSize: "Medium (220px)",
-      iconsSize: "Small (24px)"
+      size: "Medium (220px)",
+      icons: "Small (24px)"
     })
   }
 
@@ -52,6 +114,17 @@ const Preferences: React.FC<IPreferences> = (props) => {
     console.log(pereferencesData)
     toggleTheme(pereferencesData.theme??'light')
     requestNotify("done")
+    changeLanguage(
+      pereferencesData.language === "Azərbaycan" ? "az" : "en"
+    )
+    SavePreferences({
+      theme: pereferencesData.theme,
+      language: pereferencesData.language,
+      currency: pereferencesData.currency,
+      timeZone: pereferencesData.timeZone,
+      size: pereferencesData.size,
+      icons: pereferencesData.icons
+    })
   }
 
   const toggleTheme = (mode: string) => {
@@ -71,22 +144,22 @@ const Preferences: React.FC<IPreferences> = (props) => {
     <div className={style.parent_buttons}>
       <button className={style.parent_buttons_cancel}
       onClick={resetData}
-      >Cancel</button>
+      >{t("cancel")}</button>
       <button className={style.parent_buttons_save}
       onClick={sendData}
-      >Save</button>
+      >{t("save")}</button>
     </div>
       
     <div className={style.parent_up}>
-      <h2 className={style.parent_up_head}>Preferences</h2>
-      <h5 className={style.parent_up_info}>Customization according to your preferences</h5>
+      <h2 className={style.parent_up_head}>{t("preferences")}</h2>
+      <h5 className={style.parent_up_info}>{t("customization according to your preferences")}</h5>
     </div>
 
     <div className={style.parent_line}></div>
 
 
     <div className={style.parent_main}>
-      <h4 className={style.parent_main_head}>Select Themes</h4>
+      <h4 className={style.parent_main_head}>{t("select themes")}</h4>
 
       
       {/* --------------- mode ---------------- */}
@@ -103,7 +176,7 @@ const Preferences: React.FC<IPreferences> = (props) => {
           </div>
 
           <div className={style.parent_main_mode_option_info}>
-            <p className={style.parent_main_mode_option_info_head}>Light Mode {localTheme === "light" && "(Active)"}</p>
+            <p className={style.parent_main_mode_option_info_head}>{t("Light Mode")} {localTheme === "light" && t("(Active)")}</p>
             {
               localTheme === "light" ?
               <svg className={style.parent_main_mode_option_info_selected} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -129,7 +202,7 @@ const Preferences: React.FC<IPreferences> = (props) => {
           </div>
 
           <div className={style.parent_main_mode_option_info}>
-            <p className={style.parent_main_mode_option_info_head}>Dark Mode {localTheme === "dark" && "(Active)"}</p>
+            <p className={style.parent_main_mode_option_info_head}>{t("Dark Mode")} {localTheme === "dark" && t("(Active)")}</p>
             {
               localTheme === "dark" ?
               <svg className={style.parent_main_mode_option_info_selected} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -151,10 +224,10 @@ const Preferences: React.FC<IPreferences> = (props) => {
         })}
         >
           <div className={style.parent_main_mode_option_photo}>
-            <img style={{width: "100%"}} src={customMode} alt="system mode" />
+            <img style={{width: "100%", maxWidth: "270px"}} src={customMode} alt="system mode" />
           </div>
           <div className={style.parent_main_mode_option_info}>
-            <p className={style.parent_main_mode_option_info_head}>System Mode {localTheme === "system" && "(Active)"}</p>
+            <p className={style.parent_main_mode_option_info_head}>{t("System Mode")} {localTheme === "system" && t("(Active)")}</p>
             {
               localTheme === "system" ?
               <svg className={style.parent_main_mode_option_info_selected} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -177,7 +250,7 @@ const Preferences: React.FC<IPreferences> = (props) => {
       <div className={style.parent_main_form}>
 
         <div className={style.parent_main_form_parametr}>
-          <h3 className={style.parent_main_form_parametr_head}>Language</h3>
+          <h3 className={style.parent_main_form_parametr_head}>{t("Language")}</h3>
 
           <div className={style.parent_main_form_parametr_select}>
             <div className={style.parent_main_form_parametr_select_head}>
@@ -191,12 +264,6 @@ const Preferences: React.FC<IPreferences> = (props) => {
                 language: "Azərbaycan"
               })}
               >{"Azərbaycan"}</p>
-              <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.language==="Русский" && style.down_selectOption}`}
-              onClick={() => setPereferencesData({
-                ...pereferencesData,
-                language: "Русский"
-              })}
-              >{"Русский"}</p>
               <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.language==="English (US)" && style.down_selectOption}`}
               onClick={() => setPereferencesData({
                 ...pereferencesData,
@@ -208,7 +275,7 @@ const Preferences: React.FC<IPreferences> = (props) => {
         </div>
 
         <div className={style.parent_main_form_parametr}>
-          <h3 className={style.parent_main_form_parametr_head}>Currency</h3>
+          <h3 className={style.parent_main_form_parametr_head}>{t("Currency")}</h3>
 
           <div className={style.parent_main_form_parametr_select}>
             <div className={style.parent_main_form_parametr_select_head}>
@@ -233,7 +300,7 @@ const Preferences: React.FC<IPreferences> = (props) => {
         </div>
 
         <div className={style.parent_main_form_parametr}>
-          <h3 className={style.parent_main_form_parametr_head}>Time Zone</h3>
+          <h3 className={style.parent_main_form_parametr_head}>{t("Time Zone")}</h3>
 
           <div className={style.parent_main_form_parametr_select}>
             <div className={style.parent_main_form_parametr_select_head}>
@@ -258,24 +325,24 @@ const Preferences: React.FC<IPreferences> = (props) => {
         </div>
 
         <div className={style.parent_main_form_parametr}>
-          <h3 className={style.parent_main_form_parametr_head}>Sidebar Size</h3>
+          <h3 className={style.parent_main_form_parametr_head}>{t("Sidebar Size")}</h3>
 
           <div className={style.parent_main_form_parametr_select}>
             <div className={style.parent_main_form_parametr_select_head}>
-              <p className={style.parent_main_form_parametr_select_head_p}>{pereferencesData.sidebarSize}</p>
+              <p className={style.parent_main_form_parametr_select_head_p}>{pereferencesData.size}</p>
               <img className={style.parent_main_form_parametr_select_head_img} src={arrowdown} alt="arrowdown" />
             </div>
             <div className={style.parent_main_form_parametr_select_down}>
-              <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.sidebarSize==="Medium (220px)" && style.down_selectOption}`}
+              <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.size==="Medium (220px)" && style.down_selectOption}`}
               onClick={() => setPereferencesData({
                 ...pereferencesData,
-                sidebarSize: "Medium (220px)"
+                size: "Medium (220px)"
               })}
               >{"Medium (220px)"}</p>
-              <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.sidebarSize==="Big (240px)" && style.down_selectOption}`}
+              <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.size==="Big (240px)" && style.down_selectOption}`}
               onClick={() => setPereferencesData({
                 ...pereferencesData,
-                sidebarSize: "Big (240px)"
+                size: "Big (240px)"
               })}
               >{"Big (240px)"}</p>
             </div>
@@ -283,24 +350,24 @@ const Preferences: React.FC<IPreferences> = (props) => {
         </div>
 
         <div className={style.parent_main_form_parametr}>
-          <h3 className={style.parent_main_form_parametr_head}>Icons Size</h3>
+          <h3 className={style.parent_main_form_parametr_head}>{t("Icons Size")}</h3>
 
           <div className={style.parent_main_form_parametr_select}>
             <div className={style.parent_main_form_parametr_select_head}>
-              <p className={style.parent_main_form_parametr_select_head_p}>{pereferencesData.iconsSize}</p>
+              <p className={style.parent_main_form_parametr_select_head_p}>{pereferencesData.icons}</p>
               <img className={style.parent_main_form_parametr_select_head_img} src={arrowdown} alt="arrowdown" />
             </div>
             <div className={style.parent_main_form_parametr_select_down}>
-              <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.iconsSize==="Small (24px)" && style.down_selectOption}`}
+              <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.icons==="Small (24px)" && style.down_selectOption}`}
               onClick={() => setPereferencesData({
                 ...pereferencesData,
-                iconsSize: "Small (24px)"
+                icons: "Small (24px)"
               })}
               >{"Small (24px)"}</p>
-              <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.iconsSize==="Medium (27px)" && style.down_selectOption}`}
+              <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.icons==="Medium (27px)" && style.down_selectOption}`}
               onClick={() => setPereferencesData({
                 ...pereferencesData,
-                iconsSize: "Medium (27px)"
+                icons: "Medium (27px)"
               })}
               >{"Medium (27px)"}</p>
             </div>
