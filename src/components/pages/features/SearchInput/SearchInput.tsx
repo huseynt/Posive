@@ -1,11 +1,21 @@
 import style from "./searchInput.module.scss";
 import { useEffect, useState } from "react";
-import { IMeal } from "../../../utils/interface/Meal";
+// import { IMeal } from "../../../utils/interface/Meal";
 import SearchItem from "../SearchItem/SearchItem";
 
 interface ISearchInput {
   meals: IMeal[];
   setMealsFiltered: (meals: IMeal[]) => void;
+}
+
+interface IMeal { 
+  key?: string;
+  id?: string;
+  name: string;
+  category: string;
+  imageUrl: string;
+  price: number;
+  description: string,
 }
 
 const Searchİnput: React.FC<ISearchInput> = (props) => {
