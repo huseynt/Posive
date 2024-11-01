@@ -1,5 +1,5 @@
 export interface IMeal { 
-    key?: string | number | null | undefined;
+    key?: string | undefined;
     id?: string | number | null | undefined;
     name: string | null | undefined;
     category: string | null | undefined;

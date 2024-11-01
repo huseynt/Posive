@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import style from "./overview.module.scss";
 import { useState } from "react";
-import SearchInput from "../../features/SearchInput/SearchInput";
-import { meals } from "../../../test/db/cards";
+// import SearchInput from "../../features/SearchInput/SearchInput";
+// import { meals } from "../../../test/db/cards";
 import { IMeal } from "../../../utils/interface/Meal";
 import { useOutletContext } from "react-router-dom";
 import OverviewTableItem from "../../features/OverviewTableItem/OverviewTableItem";
@@ -59,7 +59,7 @@ const Overview = () => {
         console.log(m);
       }
     }
-  }, [m]);
+  }, [m, setMealsFiltered]);
   //  ----------------- get meals ---------------------------
 
 
@@ -274,7 +274,7 @@ const Overview = () => {
             className={style.main_mobileUp_down}
             style={{ display: mobileSearch ? "flex" : "none" }}
           >
-            <SearchInput meals={meals} setMealsFiltered={setMealsFiltered} />
+            {/* <SearchInput meals={meals} setMealsFiltered={setMealsFiltered} /> */}
           </div>
         </div>
 
@@ -565,10 +565,10 @@ const Overview = () => {
             <p className={style.main_down_up_head}>Recent Transaction</p>
             <div className={style.main_down_up_actions}>
               <div className={style.main_down_up_actions_search}>
-                <SearchInput
+                {/* <SearchInput
                   meals={meals}
                   setMealsFiltered={setMealsFiltered}
-                />
+                /> */}
               </div>
 
               {/* --------------------- delete multiselect ----------------------------------- */}
