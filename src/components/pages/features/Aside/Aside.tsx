@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import style from "./aside.module.scss";
-import { changename, changePlace, deleteOrderById, resetTable } from "../../../redux/slice/mealSlice";
+import { changename, changePlace, deleteOrderById, resetDefaultState, resetTable } from "../../../redux/slice/mealSlice";
 import { useEffect } from "react";
 import { IOrderState } from "../../../redux/type";
 import { useMutation } from "@tanstack/react-query";
@@ -59,6 +59,7 @@ const Aside: React.FC<AsideProps> = (props) => {
         paymentMethod: "Master Card",
       });
 
+      // ------------ post data --------------
       PostOrders(
         {
           ordeId,
@@ -75,6 +76,7 @@ const Aside: React.FC<AsideProps> = (props) => {
           paymentMethod: "Master Card",
         }
       )
+      dispatch(resetDefaultState())
     }
   }
   useEffect(() => {

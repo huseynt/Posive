@@ -72,6 +72,14 @@ const orderSlice = createSlice({
 
         changename: (state, action) => {
             state.name = action.payload
+        },
+        resetDefaultState: (state) => {
+            state.orders = state.orders.map((order) => {
+                return { ...order, order: 0 };
+            });
+            state.place = "Dine In";
+            state.tables = [];
+            state.name = "";
         }
     }
 });
@@ -86,5 +94,6 @@ export const {
     changePlace,
     changeTable,
     changename,
-    resetTable
+    resetTable,
+    resetDefaultState
  } = orderSlice.actions;
