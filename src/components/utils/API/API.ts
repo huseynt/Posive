@@ -44,12 +44,6 @@ export const createPostRegister = async (body: IcreatePostAuthenticate) => {
     return Promise.reject(res);
 }
 
-
-
-
-
-
-
 // Reset Password
 export const createResetPassword = async (email: string) => {
     const res = await fetch(`${base}/mail/verifyEmail?email=${email}`, {
@@ -67,16 +61,13 @@ export const createResetPassword = async (email: string) => {
 export const createVerifyEmail = async (data: IVerifyEmail) => {
     const res = await fetch(`${base}/mail/verifyPassword?email=${data.email}&confirmPassword=${data.confirmPassword}`, {
         method: 'GET',
-        // headers: {
-        //     'Content-Type': 'application/json',
-        // },
-        // body: JSON.stringify(body)
     });
     if (res.ok) {
         return "Success";
     }
     return "Error";
 }
+
 // Change Password
 export const createPostChangePassword = async (body: IChangePassword) => {
     const res = await fetch(`${base}/v1/auth/changePassword`, {
@@ -92,6 +83,7 @@ export const createPostChangePassword = async (body: IChangePassword) => {
     return "Error";
 }
 
+//---------------------------------------------------------------------------------------------------------------
 
 // Get User
 export const createGetUser = async () => {
@@ -160,7 +152,7 @@ export const createDeleteUser = async () => {
     }
 }
 
-
+//---------------------------------------------------------------------------------------------------------------
 
 
 // Get meals
@@ -234,7 +226,7 @@ export const createSavePreferences = async (data: ISavePreferences) => {
     }
 }
 
-// Post Plans 
+// Save Plans 
 export const createPostPlans = async (data: ISavePlans) => {
     try {
         const token = await getToken();

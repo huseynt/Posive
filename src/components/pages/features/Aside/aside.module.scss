@@ -15,6 +15,18 @@
     }
 }
 
+.selectedPlace {
+    border: 1px solid $main_color !important;
+    background-color: $main_light_two !important;
+    color: $main_color;
+
+    svg {
+        path {
+            fill: $main_color;
+        }
+    }
+}
+
 // scrollbar
 .aside::-webkit-scrollbar {
     width: 5px;
@@ -212,17 +224,17 @@
                 @extend %sm;
 
     
-                &:hover {
-                    border: 1px solid $main_color;
-                    background-color: $main_light_two;
-                    color: $main_color;
+                // &:hover {
+                //     border: 1px solid $main_color;
+                //     background-color: $main_light_two;
+                //     color: $main_color;
     
-                    svg {
-                        path {
-                            fill: $main_color;
-                        }
-                    }
-                }
+                //     svg {
+                //         path {
+                //             fill: $main_color;
+                //         }
+                //     }
+                // }
     
                 &_name {
                     @extend %sm;

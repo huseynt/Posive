@@ -1,23 +1,25 @@
 import style from './meal.module.scss'
-import { IMeal } from '../../../utils/interface/Meal'
 import { useState } from 'react'
 
 import AboutMeal from "../AboutMeal/AboutMeal";
-
+import { IMeal } from '../../../utils/interface/Meal';
+import { useDispatch, useSelector } from 'react-redux';
+import { ascendingOrder, desascendingOrder } from '../../../redux/slice/mealSlice';
+import { IGetMeals } from '../../../redux/type';
 
 const Meal = (props: IMeal) => {
   const { id, name, price, description, imageUrl } = props;
-  const [count, setCount] = useState(0);
-
-
   const [aboutmeal, setAboutMeal] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const thisMeal = useSelector((state: { orders: IGetMeals[] }) => state.orders.find((meal) => meal.id === id));
+
 
 
 
   return (
       <div className={style.meal} id={`${id}`}>
         <div className={style.meal_photo}>
-          <img src={imageUrl} alt={description} />
+          <img src={imageUrl? imageUrl: ""} alt={description} />
         </div>
         
         <div className={style.meal_information}
@@ -28,18 +30,19 @@ const Meal = (props: IMeal) => {
         </div>
 
         <div className={style.meal_count}>
-          <button onClick={() => setCount(count>0 ? count-1 : count)}>-</button>
+          <button onClick={() => dispatch(desascendingOrder(id))}>-</button>
           <p
-          style={count !== 0 ? {color: "#EA7E41"} : {color: ''}}
-          >{count}</p>
-          <button onClick={() => setCount(count+1)}>+</button>
+          style={thisMeal?.order !== 0 ? {color: "#EA7E41"} : {color: ''}}
+          >{thisMeal?.order}</p>
+          <button onClick={() => dispatch(ascendingOrder(id))}>+</button>
         </div>
+
         {aboutmeal && <AboutMeal 
         setAboutMeal={setAboutMeal} 
         name={name}
         price={price}
         description={description}
-        imageUrl={imageUrl}
+        imageUrl={imageUrl? imageUrl: ""}
         />}
         
       </div>

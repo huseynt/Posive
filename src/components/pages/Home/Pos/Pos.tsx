@@ -1,10 +1,10 @@
 import style from "./pos.module.scss";
-import { meals } from "../../../test/db/cards";
+// import { meals } from "../../../test/db/cards";
 import Meal from "../../features/Meal/Meal";
 import { useEffect } from "react";
 import { useState } from "react";
-import { IMeal } from "../../../utils/interface/Meal";
-import SearchInput from "../../features/SearchInput/SearchInput";
+// import { IMeal } from "../../../utils/interface/Meal";
+// import SearchInput from "../../features/SearchInput/SearchInput";
 
 import { Helmet } from "react-helmet";
 
@@ -13,6 +13,12 @@ import { useOutletContext } from "react-router-dom";
 import { createGetMeals } from "../../../utils/API/API";
 import { useQuery } from "@tanstack/react-query";
 import { IGetMeals } from "../../../utils/API/types";
+
+
+import { useDispatch, useSelector } from "react-redux";
+import { addMeal } from "../../../redux/slice/mealSlice";
+
+
 
 interface MainProps {
   setBag: React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,73 +32,59 @@ interface MainProps {
 const Main= () => {
   const { bag, setBag, setToggleMenu, setNotification, notification } = useOutletContext<MainProps>();
   const [category, setCategory] = useState<string>("");
-  const [mealsFiltered, setMealsFiltered] = useState<IMeal[]>([]);
+  // const [mealsFiltered, setMealsFiltered] = useState<IGetMeals[]>([]);
   const [mobileSearch, setMobileSearch] = useState<boolean>(false);
 
 
 
+  // ------------------------- Redux -----------------------------
+  const dispatch = useDispatch();
+  const reduxMeals: IGetMeals[] = useSelector(
+  (state: { orders: IGetMeals[] }) => state.orders);
 
-
-// ---------------------- api test ------------------------
-  // const [meals, setMeals] = useState<IMeal[]>([]);
-  // async function getMeals() {
-  //   try {
-  //     Axios.get(
-  //       API,
-  //       config
-  //     ).then (
-  //       (response) => {
-  //         setMeals(response.data.content);
-  //         setMealsFiltered(response.data.content);
-  //         console.log(response.data.content);
-  //       }
-  //     )
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-  
   // useEffect(() => {
-  //   if (meals.length === 0) {
-  //     getMeals();
-  //   }
-  // }, [meals.length]);
-  //  ---------------------------------------------------
-
+  //   console.log(reduxMeals);
+  // }, [reduxMeals]);
+  // ------------------------- Redux -----------------------------
 
 
 
   // ------------------- get meals ------------------------
   const {
-    data: m,
-  } = useQuery<IGetMeals | undefined>({
+    data: getMealsData,
+    isLoading: isMealsLoading,
+  } = useQuery<IGetMeals[]>({
     queryKey: ["getMeals"],
     queryFn: createGetMeals,
   });
-
+  
   useEffect(() => {
-    return () => {
-      if (m) {
-        console.log(m);
-      }
+    if (!isMealsLoading && getMealsData) {
+      getMealsData.forEach((meal) => dispatch(addMeal(meal)));
     }
-  }, [m]);
+  }, [getMealsData, isMealsLoading, dispatch]);
+  
+  // useEffect(() => {
+  //   if (reduxMeals) {
+  //     if (category === "") {
+  //       setMealsFiltered(reduxMeals);
+  //     } else {
+  //       setMealsFiltered(reduxMeals.filter((meal) => meal.category === category));
+  //     }
+  //   }
+  // }, [category, reduxMeals]);
   //  ----------------- get meals ---------------------------
 
 
+  // useEffect(() => {
+  //   console.log("mealFiltered",mealsFiltered);
+  // }, [mealsFiltered]);
 
 
 
 
 
 
-  useEffect(() => {
-    if (category === "") {
-      setMealsFiltered(meals);
-    } else {
-      setMealsFiltered(meals.filter((meal) => meal.category === category));
-    }
-  }, [category,meals]);
 
   
   return (
@@ -112,9 +104,9 @@ const Main= () => {
 
           {/* ----------------------------------------- */}
           <div className={style.main_up_search}>
-            <SearchInput meals={meals} 
+            {/* <SearchInput meals={meals} 
             setMealsFiltered={setMealsFiltered}
-            />
+            /> */}
           </div>
 
 
@@ -366,9 +358,9 @@ const Main= () => {
             className={style.main_mobileUp_down}
             style={{ display: mobileSearch ? "flex" : "none" }}
           >
-            <SearchInput meals={meals} 
+            {/* <SearchInput meals={meals} 
             setMealsFiltered={setMealsFiltered}
-            />
+            /> */}
           </div>
         </div>
 
@@ -412,7 +404,7 @@ const Main= () => {
                   color: category === "Main Course" ? "white" : "",
                 }}
               >
-                {meals.filter((meal) => meal.category === "Main Course").length}
+                {reduxMeals.filter((meal) => meal.category === "Main Course").length}
               </p>
             </div>
           </div>
@@ -450,7 +442,7 @@ const Main= () => {
               <p
                 style={{ color: category === "Rice Bowl" ? "white" : "" }}
               >
-                {meals.filter((meal) => meal.category === "Rice Bowl").length}
+                {reduxMeals.filter((meal) => meal.category === "Rice Bowl").length}
               </p>
             </div>
           </div>
@@ -494,7 +486,7 @@ const Main= () => {
               <p
                 style={{ color: category === "Fast Food" ? "white" : "" }}
               >
-                {meals.filter((meal) => meal.category === "Fast Food").length}
+                {reduxMeals.filter((meal) => meal.category === "Fast Food").length}
               </p>
             </div>
           </div>
@@ -539,7 +531,7 @@ const Main= () => {
                 }}
               >
                 {
-                  meals.filter((meal) => meal.category === "Healthy Food")
+                  reduxMeals.filter((meal) => meal.category === "Healthy Food")
                     .length
                 }
               </p>
@@ -549,17 +541,35 @@ const Main= () => {
 
         {/* -------------------------- cards ---------------------------------- */}
         <div className={style.main_meals}>
-          {mealsFiltered.map((meal) => (
-            <Meal
-              key={meal.id}
-              id={meal.id}
-              name={meal.name}
-              price={meal.price}
-              description={meal.description}
-              imageUrl={meal.imageUrl}
-              category={meal.category}
-            />
-          ))}
+          {reduxMeals && reduxMeals.map((meal) => {
+            if (category === meal.category) {
+              return (
+                <Meal
+                    key={`meal-${meal.id}`}
+                    id={meal.id}
+                    name={meal.name}
+                    price={Number(meal.price)}
+                    description={meal.description}
+                    imageUrl={meal.imageUrl}
+                    category={meal.category}
+                  />
+              );
+            }
+            else if (category === "") {
+              return (
+                <Meal
+                    key={`meal-${meal.id}`}
+                    id={meal.id}
+                    name={meal.name}
+                    price={Number(meal.price)}
+                    description={meal.description}
+                    imageUrl={meal.imageUrl}
+                    category={meal.category}
+                  />
+              );
+            }
+            return null;
+          })}
         </div>
 
         {/* ------------------------ for mobile continue ------------------ */}

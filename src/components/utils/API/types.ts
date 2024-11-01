@@ -81,16 +81,18 @@ export interface IChangePassword {
   
 
   export interface IGetMeals {
-    id: number | null | undefined;
+    id: string | null | undefined;
     name: string | null | undefined;
     receiptNo: string | null | undefined;
     orderofDay: number | null | undefined;
     category: string | null | undefined;
-    imageUrl: string | null | undefined;
-    price: number | null | undefined;
-    stock: number | null | undefined;
-    tax: number | null | undefined;
-    discount: number | null | undefined;
+    imageUrl: string | null;
+    price: number ;
+    stock: number | null;
+    tax: number | null;
+    discount: number | null;
+    description: string;
+    order: number;
   }
 
 

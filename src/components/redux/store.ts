@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import tokenSlice from "./authenticate/token";
+import orderSlice from "./slice/mealSlice";
 import { useDispatch } from "react-redux";
 
 export const store = configureStore({
-    reducer: tokenSlice,
+    reducer: orderSlice,
 });
 
 export type AppDispatch = typeof store.dispatch

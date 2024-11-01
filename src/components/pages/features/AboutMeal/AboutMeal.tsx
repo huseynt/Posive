@@ -2,7 +2,7 @@ import style from "./aboutMeal.module.scss";
 
 interface IQRCodeComponentProps {
   setAboutMeal: React.Dispatch<React.SetStateAction<boolean>>;
-  name: string;
+  name: string | null | undefined;
   price: number;
   description: string;
   imageUrl: string;

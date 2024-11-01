@@ -1,5 +1,8 @@
+import { useDispatch, useSelector } from "react-redux";
 import style from "./aside.module.scss";
-import { useState } from "react";
+import { changename, changePlace } from "../../../redux/slice/mealSlice";
+import { useEffect } from "react";
+import { IOrderState } from "../../../redux/type";
 
 interface AsideProps {
   bag: boolean;
@@ -12,27 +15,34 @@ interface AsideProps {
 
 const Aside: React.FC<AsideProps> = (props) => {
   const { bag, setQrOpen, setTable, setBag, setSuccessOrder, requestNotify } = props;
-  const id: string = "#123456";
+  const dispatch = useDispatch();
+  const { name, place, tables, orders } = useSelector((state: IOrderState) => state);
 
-  const [data, setData] = useState({
-    name: ""
-  });
 
-  const change = (e: React.ChangeEvent<HTMLInputElement>) => { 
-    setData({
-      ...data,
-      [e.target.id]: e.target.value,
-    });
-  }
 
+// ------------ aside --------------
+  const id = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
+  
   const handleOrder = () => {
-    if (data.name === "") {
+    console.log(name, place, tables, orders.forEach((m) => m.order>0 && console.log(m)) );
+
+    if (name === "") {
       requestNotify("important", "");
     } else {
       requestNotify("done", "");
       setSuccessOrder(true);
     }
   }
+  useEffect(() => {
+    console.log(name, place);
+  }, [name, place]);
+// ------------ aside --------------
+
+
+
+
+
+
 
   return (
     <div
@@ -151,11 +161,11 @@ const Aside: React.FC<AsideProps> = (props) => {
         <input 
           type="text" 
           id="name" 
-          onChange={change} 
-          value={data.name}
+          onChange={(e) => dispatch(changename(e.target.value))} 
+          value={name}
           className={style.aside_customer_name}
         />
-        <p className={data.name ? style.label_focus : style.label}>Customer Name</p>
+        <p className={name ? style.label_focus : style.label}>Customer Name</p>
         <svg
           className={style.aside_customer_icon}
           width="16"
@@ -192,7 +202,9 @@ const Aside: React.FC<AsideProps> = (props) => {
       >
         <h3 className={style.aside_place_head}>Where will you eat :</h3>
         <div className={style.aside_place_selection}>
-          <div className={style.aside_place_selection_option}>
+
+          <div className={`${style.aside_place_selection_option} ${place === "Dine In" && style.selectedPlace}`}
+          onClick={() => dispatch(changePlace("Dine In"))}>
             <svg
               className={style.aside_place_selection_option_icon}
               width="24"
@@ -213,7 +225,9 @@ const Aside: React.FC<AsideProps> = (props) => {
             <p className={style.aside_place_selection_option_name}>Dine in</p>
           </div>
 
-          <div className={style.aside_place_selection_option}>
+          <div className={`${style.aside_place_selection_option} ${place === "Take Away" && style.selectedPlace}`}
+          onClick={() => dispatch(changePlace("Take Away"))}
+          >
             <svg
               className={style.aside_place_selection_option_icon}
               width="24"
@@ -247,7 +261,7 @@ const Aside: React.FC<AsideProps> = (props) => {
       >
         <h3 className={style.aside_table_head}>Table :</h3>
         <div
-          className={style.aside_table_select}
+          className={`${style.aside_table_select} ${tables && style.selectedPlace}`}
           onClick={() => setTable(true)}
         >
           <p className={style.aside_table_select_name}>Select Table</p>
