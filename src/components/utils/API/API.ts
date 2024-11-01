@@ -1,5 +1,5 @@
 import { getToken } from '../reUse/getToken';
-import { IcreatePostAuthenticate, IVerifyEmail, IChangePassword, ISaveUserData, ISavePreferences, ISavePlans } from './types';
+import { IcreatePostAuthenticate, IVerifyEmail, IChangePassword, ISaveUserData, ISavePreferences, ISavePlans, IPostOrders } from './types';
 
 // test
 export const API = import.meta.env.VITE_API_URL
@@ -48,9 +48,6 @@ export const createPostRegister = async (body: IcreatePostAuthenticate) => {
 export const createResetPassword = async (email: string) => {
     const res = await fetch(`${base}/mail/verifyEmail?email=${email}`, {
         method: 'GET',
-        // headers: {
-        //     'Content-Type': 'application/json',
-        // }
     });
     if (res.ok) {
         return "Success";
@@ -232,6 +229,29 @@ export const createPostPlans = async (data: ISavePlans) => {
         const token = await getToken();
         const accessToken = token?.accessToken;
         const res = await fetch(`${base}/subscriptions/create`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            body: JSON.stringify(data)
+        });
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+//  Post Orders
+export const createPostOrders = async (data: IPostOrders) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/order/add`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

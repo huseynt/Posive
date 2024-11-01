@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import style from "./aside.module.scss";
-import { changename, changePlace } from "../../../redux/slice/mealSlice";
+import { changename, changePlace, deleteOrderById, resetTable } from "../../../redux/slice/mealSlice";
 import { useEffect } from "react";
 import { IOrderState } from "../../../redux/type";
+import { useMutation } from "@tanstack/react-query";
+import { createPostOrders } from "../../../utils/API/API";
 
 interface AsideProps {
   bag: boolean;
@@ -18,25 +20,70 @@ const Aside: React.FC<AsideProps> = (props) => {
   const dispatch = useDispatch();
   const { name, place, tables, orders } = useSelector((state: IOrderState) => state);
 
-
+  // ------------ post data --------------
+  const {
+    mutate: PostOrders,
+    // isPending: isLoginPending,
+  } = useMutation({
+    mutationFn: createPostOrders,
+    onSuccess: () => {
+      console.log('Success');
+    },
+    onError: (error) => {
+      console.log('Login error:', error);
+    },
+  });
+  // ------------ post data --------------
 
 // ------------ aside --------------
-  const id = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
+  const ordeId = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
   
   const handleOrder = () => {
-    console.log(name, place, tables, orders.forEach((m) => m.order>0 && console.log(m)) );
-
-    if (name === "") {
-      requestNotify("important", "");
-    } else {
+    if (name === "" || 
+      place === "" ||
+      place === "Dine In" && tables.length === 0 || 
+      orders.reduce((acc, m) => acc + m.order, 0) === 0) { 
+      requestNotify("important", "Please fill in the required fields");
+    }  else {
       requestNotify("done", "");
       setSuccessOrder(true);
+      console.log({
+        ordeId,
+        name,
+        place,
+        tables,
+        productsSet: orders.filter((m) => m.order > 0).map((m) => 
+        ({
+          receiptNo: m.receiptNo,
+        })),
+        paymentMethod: "Master Card",
+      });
+
+      PostOrders(
+        {
+          ordeId,
+          name,
+          place,
+          tables: tables ? tables.map((m) => (
+            { number: m }
+          ))
+           : [],
+          productsSet: orders ? orders.filter((m) => m.order > 0).map((m) => 
+          ({
+            receiptNo: m.receiptNo,
+          })) : [],
+          paymentMethod: "Master Card",
+        }
+      )
     }
   }
   useEffect(() => {
-    console.log(name, place);
-  }, [name, place]);
-// ------------ aside --------------
+    if (place === "Take Away") {
+      dispatch(resetTable())
+    }
+  },[place, dispatch])
+  // ------------ aside --------------
+
 
 
 
@@ -66,10 +113,10 @@ const Aside: React.FC<AsideProps> = (props) => {
         <div className={style.aside_up_order}>
           <h4>Current Order</h4>
           <p
-            onClick={() => navigator.clipboard.writeText(id)}
+            onClick={() => navigator.clipboard.writeText(ordeId)}
             title="Copy Current Order ID"
           >
-            {id}
+            {ordeId}
             <svg
               width="17"
               height="16"
@@ -251,18 +298,18 @@ const Aside: React.FC<AsideProps> = (props) => {
       </div>
 
       {/* ------------ select table -------------- */}
-      <div
+        <div
         className={style.aside_table}
         style={{
           display: bag ? "flex" : "none",
-          // height: bag ? 'auto' : '0',
           transition: "all 0.1s ease-in-out",
+          opacity: place === "Take Away" ? "0.5" : "",
         }}
       >
         <h3 className={style.aside_table_head}>Table :</h3>
         <div
-          className={`${style.aside_table_select} ${tables && style.selectedPlace}`}
-          onClick={() => setTable(true)}
+          className={`${style.aside_table_select} ${place !== "Take Away"? style.dinein: ""} ${tables.length>0 && style.selectedPlace}`}
+          onClick={() => place !== "Take Away" && setTable(true)}
         >
           <p className={style.aside_table_select_name}>Select Table</p>
           <svg
@@ -297,7 +344,8 @@ const Aside: React.FC<AsideProps> = (props) => {
         <h3 className={style.aside_order_head}>Your Order :</h3>
 
         <div className={style.aside_order_list}>
-          <div className={style.aside_order_list_select}>
+
+          {/* <div className={style.aside_order_list_select}>
             <div className={style.aside_order_list_select_left}>
               <p className={style.aside_order_list_select_left_number}>1</p>
               <p className={style.aside_order_list_select_left_name}>
@@ -305,61 +353,34 @@ const Aside: React.FC<AsideProps> = (props) => {
               </p>
             </div>
             <p className={style.aside_order_select_price}>$12.00</p>
-          </div>
-          <div className={style.aside_order_list_select}>
-            <div className={style.aside_order_list_select_left}>
-              <p className={style.aside_order_list_select_left_number}>1</p>
-              <p className={style.aside_order_list_select_left_name}>
-                Health Salad (1)
-              </p>
-            </div>
-            <p className={style.aside_order_select_price}>$12.00</p>
-          </div>
-          <div className={style.aside_order_list_select}>
-            <div className={style.aside_order_list_select_left}>
-              <p className={style.aside_order_list_select_left_number}>1</p>
-              <p className={style.aside_order_list_select_left_name}>
-                Health Salad (1)
-              </p>
-            </div>
-            <p className={style.aside_order_select_price}>$12.00</p>
-          </div>
-          <div className={style.aside_order_list_select}>
-            <div className={style.aside_order_list_select_left}>
-              <p className={style.aside_order_list_select_left_number}>1</p>
-              <p className={style.aside_order_list_select_left_name}>
-                Health Salad (1)
-              </p>
-            </div>
-            <p className={style.aside_order_select_price}>$12.00</p>
-          </div>
-          <div className={style.aside_order_list_select}>
-            <div className={style.aside_order_list_select_left}>
-              <p className={style.aside_order_list_select_left_number}>1</p>
-              <p className={style.aside_order_list_select_left_name}>
-                Health Salad (1)
-              </p>
-            </div>
-            <p className={style.aside_order_select_price}>$12.00</p>
-          </div>
-          <div className={style.aside_order_list_select}>
-            <div className={style.aside_order_list_select_left}>
-              <p className={style.aside_order_list_select_left_number}>1</p>
-              <p className={style.aside_order_list_select_left_name}>
-                Health Salad (1)
-              </p>
-            </div>
-            <p className={style.aside_order_select_price}>$12.00</p>
-          </div>
-          <div className={style.aside_order_list_select}>
-            <div className={style.aside_order_list_select_left}>
-              <p className={style.aside_order_list_select_left_number}>1</p>
-              <p className={style.aside_order_list_select_left_name}>
-                Health Salad (1)
-              </p>
-            </div>
-            <p className={style.aside_order_select_price}>$12.00</p>
-          </div>
+          </div> */}
+
+          {
+            orders.filter((m) => m.order > 0).map((m, i) => (
+              <div key={i} className={style.aside_order_list_select}
+              onClick={() => dispatch(deleteOrderById(m.id))}
+              >
+
+                <div className={style.aside_order_list_select_delete}>x</div>
+
+                <div className={style.aside_order_list_select_left}>
+                  <p className={style.aside_order_list_select_left_number}>
+                    {i + 1}
+                  </p>
+                  <p className={style.aside_order_list_select_left_name}>
+                    {
+                      m.name && m.name.length > 15
+                        ? m.name.slice(0, 15) + "..."
+                        : m.name
+                    } ({m.order})
+                  </p>
+                </div>
+                <p className={style.aside_order_select_price}>
+                  ${(m.price + (m.tax ?? 0) * m.order).toFixed(2)}
+                </p>
+              </div>
+            ))
+          }
         </div>
       </div>
 
@@ -375,18 +396,24 @@ const Aside: React.FC<AsideProps> = (props) => {
         <div className={style.aside_detail_orders}>
           <div className={style.aside_detail_orders_subtotal}>
             <p className={style.aside_detail_orders_subtotal_name}>
-              Subtotal (2)
+              Subtotal
             </p>
-            <p className={style.aside_detail_orders_subtotal_price}>$96.00</p>
+            <p className={style.aside_detail_orders_subtotal_price}>$
+              {orders.reduce((acc, m) => acc + (m.price - (m.price * ((m.discount ?? 0) * 0.01))) * m.order, 0).toFixed(2)}
+            </p>
           </div>
           <div className={style.aside_detail_orders_tax}>
             <p className={style.aside_detail_orders_tax_name}>Service Tax</p>
-            <p className={style.aside_detail_orders_tax_price}>$7.68</p>
+            <p className={style.aside_detail_orders_tax_price}>$
+              {orders.reduce((acc, m) => acc + (m.tax ?? 0) * m.order, 0).toFixed(2)}
+            </p>
           </div>
         </div>
         <div className={style.aside_detail_total}>
           <p className={style.aside_detail_total_name}>Total Payment</p>
-          <p className={style.aside_detail_total_price}>$103.68</p>
+          <p className={style.aside_detail_total_price}>$
+            {orders.reduce((acc, m) => acc + ((m.price - (m.price * ((m.discount ?? 0) * 0.01))) + (m.tax ?? 0)) * m.order, 0).toFixed(2)}
+          </p>
         </div>
       </div>
 

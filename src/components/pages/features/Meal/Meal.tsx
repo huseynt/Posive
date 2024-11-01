@@ -19,6 +19,7 @@ const Meal = (props: IMeal) => {
   return (
       <div className={style.meal} id={`${id}`}>
         <div className={style.meal_photo}>
+          <div className={style.meal_photo_discount}>{thisMeal?.discount}%</div>
           <img src={imageUrl? imageUrl: ""} alt={description} />
         </div>
         
@@ -43,6 +44,7 @@ const Meal = (props: IMeal) => {
         price={price}
         description={description}
         imageUrl={imageUrl? imageUrl: ""}
+        thisMeal={thisMeal}
         />}
         
       </div>

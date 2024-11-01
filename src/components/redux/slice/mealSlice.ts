@@ -11,7 +11,7 @@ const orderSlice = createSlice({
     initialState: <IOrderState>{
         orders: [],
         place: "Dine In",
-        tables: "",
+        tables: [],
         name: "",
     },
     reducers: {
@@ -22,6 +22,14 @@ const orderSlice = createSlice({
                         order: 0
                     }];
             }
+        },
+        deleteOrderById: (state, action) => {
+            state.orders = state.orders.map((order) => {
+                if (order.id === action.payload) {
+                    return { ...order, order: 0 };
+                }
+                return order;
+            });
         },
         resetState: (state) => {
             state.orders = [];
@@ -42,25 +50,41 @@ const orderSlice = createSlice({
                 return meal;
             });
         },
+
+
         changePlace: (state, action) => {
             state.place = action.payload;
         },
+
+
         changeTable: (state, action) => {
-            state.tables = action.payload
+            if (!state.tables.includes(action.payload)) {
+                state.tables.push(action.payload);
+            }
+            else {
+                state.tables = state.tables.filter((table) => table !== action.payload);
+            }
         },
+        resetTable: (state) => {
+            state.tables = [];
+        },
+
+
         changename: (state, action) => {
             state.name = action.payload
-        },
+        }
     }
 });
 
 export default orderSlice.reducer;
 export const { 
     addMeal, 
+    deleteOrderById,
     resetState, 
     ascendingOrder, 
     desascendingOrder,
     changePlace,
     changeTable,
-    changename
+    changename,
+    resetTable
  } = orderSlice.actions;

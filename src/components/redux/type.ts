@@ -1,9 +1,10 @@
 export interface IOrderState {
   orders: IGetMeals[],
   place: string,
-  tables: string,
+  tables: string[],
   name: string
 }
+
 export interface IGetMeals {
   id: string | null | undefined;
   name: string | null;

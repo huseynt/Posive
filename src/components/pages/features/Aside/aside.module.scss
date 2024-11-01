@@ -27,6 +27,18 @@
     }
 }
 
+.dinein:hover {
+    border: 1px solid $main_color;
+    background-color: $main_light_two;
+    color: $main_color;
+
+    svg {
+        path {
+            fill: $main_color;
+        }
+    }
+}
+
 // scrollbar
 .aside::-webkit-scrollbar {
     width: 5px;
@@ -268,18 +280,6 @@
             cursor: pointer;
             @extend %sm;
 
-            &:hover {
-                border: 1px solid $main_color;
-                background-color: $main_light_two;
-                color: $main_color;
-
-                svg {
-                    path {
-                        fill: $main_color;
-                    }
-                }
-            }
-
             &_name {
                 @extend %sm;
             }
@@ -301,6 +301,7 @@
             width: 100%;
             height: 110px;
             display: flex;
+            padding: 5px 0 1px;
             flex-direction: column;
             row-gap: 7px;
             overflow-y: scroll;
@@ -321,6 +322,7 @@
                 border: 1px solid $gray;
                 cursor: pointer;
                 @extend %s;
+                position: relative;
 
     
                 &:hover {
@@ -333,6 +335,16 @@
                             fill: $main_color;
                         }
                     }
+                }
+
+                &_delete {
+                    position: absolute;
+                    top: -5px;
+                    right: -1px;
+                    background-color: $reserved;
+                    padding: 0px 6px 1px;
+                    border-radius: 50%;
+                    color: $white;
                 }
     
                 &_left {

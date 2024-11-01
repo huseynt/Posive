@@ -135,3 +135,20 @@ export interface ISavePlans {
     name: string | null,
   }
 }
+
+export interface IPostOrders {
+  ordeId: string;
+  name: string;
+  place: string;
+  tables: IPostTables[] | null;
+  productsSet: IPostOrder[] | null;
+  paymentMethod: string;
+}
+
+export interface IPostOrder {
+  receiptNo: string | null | undefined; 
+}
+
+export interface IPostTables {
+  number: string | null | undefined; 
+}
