@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import style from './mastercard.module.scss';
+import style from './masterCard.module.scss';
 
 interface MasterCardProps {
     setMastercard: React.Dispatch<React.SetStateAction<boolean>>;
