@@ -113,6 +113,14 @@ const Main= () => {
           {/* ----------------------------------------- */}
 
           <button className={style.main_up_bag} onClick={() => setBag(!bag)}>
+
+            { reduxMeals.reduce((acc, meal) => acc + meal.order, 0) > 0 &&
+              <div className={style.main_up_bag_count}>
+              {
+              reduxMeals.reduce((acc, meal) => acc + meal.order, 0)
+              }
+              </div>
+            }
             <svg
               width="18"
               height="18"

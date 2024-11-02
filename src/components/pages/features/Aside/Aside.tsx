@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import style from "./aside.module.scss";
 import { changename, changePlace, deleteOrderById, resetDefaultState, resetTable } from "../../../redux/slice/mealSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { IOrderState } from "../../../redux/type";
 import { useMutation } from "@tanstack/react-query";
 import { createPostOrders } from "../../../utils/API/API";
+import MasterCard from "../MasterCard/MasterCard";
 
 interface AsideProps {
   bag: boolean;
@@ -18,8 +19,13 @@ interface AsideProps {
 const Aside: React.FC<AsideProps> = (props) => {
   const { bag, setQrOpen, setTable, setBag, setSuccessOrder, requestNotify } = props;
   const dispatch = useDispatch();
+  const [orderId] = useState<string>(
+    Math.random().toString(36).substring(2, 10) +
+      Math.random().toString(36).substring(2, 10)
+  );
   const { name, place, tables, orders } = useSelector((state: IOrderState) => state);
-
+  const [mastercard, setMastercard] = useState<boolean>(false);
+  const [paymentMethod, setPaymentMethod] = useState<string>("");
   // ------------ post data --------------
   const {
     mutate: PostOrders,
@@ -36,7 +42,7 @@ const Aside: React.FC<AsideProps> = (props) => {
   // ------------ post data --------------
 
 // ------------ aside --------------
-  const ordeId = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
+  // const orderId = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
   
   const handleOrder = () => {
     if (name === "" || 
@@ -48,7 +54,7 @@ const Aside: React.FC<AsideProps> = (props) => {
       requestNotify("done", "");
       setSuccessOrder(true);
       console.log({
-        ordeId,
+        orderId,
         name,
         place,
         tables,
@@ -62,8 +68,8 @@ const Aside: React.FC<AsideProps> = (props) => {
       // ------------ post data --------------
       PostOrders(
         {
-          ordeId,
-          name,
+          orderId,
+          userName: name,
           place,
           tables: tables ? tables.map((m) => (
             { number: m }
@@ -84,6 +90,11 @@ const Aside: React.FC<AsideProps> = (props) => {
       dispatch(resetTable())
     }
   },[place, dispatch])
+  useEffect(() => {
+    if (paymentMethod === "Master Card") {
+      handleOrder()
+      }
+    },[paymentMethod])
   // ------------ aside --------------
 
 
@@ -104,6 +115,17 @@ const Aside: React.FC<AsideProps> = (props) => {
         zIndex: bag ? "100" : "-1",
       }}
     >
+
+      { 
+        mastercard &&
+        <MasterCard 
+          setMastercard={setMastercard}
+          setPaymentMethod={setPaymentMethod}
+        />
+      }
+
+
+
       {/* ------------ aside_up -------------- */}
       <div
         className={style.aside_up}
@@ -115,10 +137,10 @@ const Aside: React.FC<AsideProps> = (props) => {
         <div className={style.aside_up_order}>
           <h4>Current Order</h4>
           <p
-            onClick={() => navigator.clipboard.writeText(ordeId)}
+            onClick={() => navigator.clipboard.writeText(orderId)}
             title="Copy Current Order ID"
           >
-            {ordeId}
+            {orderId}
             <svg
               width="17"
               height="16"
@@ -346,43 +368,39 @@ const Aside: React.FC<AsideProps> = (props) => {
         <h3 className={style.aside_order_head}>Your Order :</h3>
 
         <div className={style.aside_order_list}>
-
-          {/* <div className={style.aside_order_list_select}>
-            <div className={style.aside_order_list_select_left}>
-              <p className={style.aside_order_list_select_left_number}>1</p>
-              <p className={style.aside_order_list_select_left_name}>
-                Health Salad (1)
-              </p>
-            </div>
-            <p className={style.aside_order_select_price}>$12.00</p>
-          </div> */}
-
-          {
-            orders.filter((m) => m.order > 0).map((m, i) => (
-              <div key={i} className={style.aside_order_list_select}
-              onClick={() => dispatch(deleteOrderById(m.id))}
-              >
-
-                <div className={style.aside_order_list_select_delete}>x</div>
-
-                <div className={style.aside_order_list_select_left}>
-                  <p className={style.aside_order_list_select_left_number}>
-                    {i + 1}
-                  </p>
-                  <p className={style.aside_order_list_select_left_name}>
-                    {
-                      m.name && m.name.length > 15
-                        ? m.name.slice(0, 15) + "..."
-                        : m.name
-                    } ({m.order})
+          { orders.reduce((acc, m) => acc + m.order, 0) === 0 ? (
+              <p className={style.aside_order_list_empty}>Your order is empty</p>
+            )
+            :
+            (
+              orders.filter((m) => m.order > 0).map((m, i) => (
+                <div key={i} className={style.aside_order_list_select}
+                onClick={() => dispatch(deleteOrderById(m.id))}
+                >
+  
+                  <div className={style.aside_order_list_select_delete}>x</div>
+  
+                  <div className={style.aside_order_list_select_left}>
+                    <p className={style.aside_order_list_select_left_number}>
+                      {i + 1}
+                    </p>
+                    <p className={style.aside_order_list_select_left_name}>
+                      {
+                        m.name && m.name.length > 15
+                          ? m.name.slice(0, 15) + "..."
+                          : m.name
+                      } ({m.order})
+                    </p>
+                  </div>
+                  <p className={style.aside_order_select_price}>
+                    ${(m.price * m.order).toFixed(2)}
                   </p>
                 </div>
-                <p className={style.aside_order_select_price}>
-                  ${(m.price + (m.tax ?? 0) * m.order).toFixed(2)}
-                </p>
-              </div>
-            ))
+              ))
+            )
           }
+
+
         </div>
       </div>
 
@@ -407,14 +425,14 @@ const Aside: React.FC<AsideProps> = (props) => {
           <div className={style.aside_detail_orders_tax}>
             <p className={style.aside_detail_orders_tax_name}>Service Tax</p>
             <p className={style.aside_detail_orders_tax_price}>$
-              {orders.reduce((acc, m) => acc + (m.tax ?? 0) * m.order, 0).toFixed(2)}
+              {orders.reduce((acc, m) => acc + (m.price * ((m.tax ?? 0) * 0.01)) * m.order, 0).toFixed(2)}
             </p>
           </div>
         </div>
         <div className={style.aside_detail_total}>
           <p className={style.aside_detail_total_name}>Total Payment</p>
           <p className={style.aside_detail_total_price}>$
-            {orders.reduce((acc, m) => acc + ((m.price - (m.price * ((m.discount ?? 0) * 0.01))) + (m.tax ?? 0)) * m.order, 0).toFixed(2)}
+            {orders.reduce((acc, m) => acc + ((m.price - (m.price * ((m.discount ?? 0) * 0.01))) + (m.price + (m.price * ((m.tax ?? 0) * 0.01)))) * m.order, 0).toFixed(2)}
           </p>
         </div>
       </div>
@@ -430,8 +448,15 @@ const Aside: React.FC<AsideProps> = (props) => {
       >
         <h3 className={style.aside_payment_head}>Payment Method :</h3>
         <div className={style.aside_payment_select}>
-          <div className={style.aside_payment_select_option}>
-            <div className={style.aside_payment_select_option_icon}>
+
+          <div className={style.aside_payment_select_option}
+          onClick={() => setMastercard(true)}
+          >
+            <div className={style.aside_payment_select_option_icon}
+            style={{
+              border: paymentMethod === "mastercard" ? "1px solid #F79E1B" : "",
+            }}
+            >
               <svg
                 width="25"
                 height="25"

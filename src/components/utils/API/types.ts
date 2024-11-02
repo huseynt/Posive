@@ -137,8 +137,8 @@ export interface ISavePlans {
 }
 
 export interface IPostOrders {
-  ordeId: string;
-  name: string;
+  orderId: string;
+  userName: string;
   place: string;
   tables: IPostTables[] | null;
   productsSet: IPostOrder[] | null;

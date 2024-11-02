@@ -102,11 +102,25 @@
             border-radius: 10px;
             border: 1px solid;
             margin-left: 16px;
+            position: relative;
 
             @include themed() {
                 background-color: t(white);
                 border-color: t(gray);
               }
+
+            &_count {
+                min-width: 23px;
+                position: absolute;
+                top: -7px;
+                right: -9px;
+                padding: 2px 5px;
+                border-radius: 50%;
+                background-color: $main_color;
+                color: $white;
+                @extend %s;
+                font-weight: 600;
+            }
 
             svg {
                 path {
