@@ -461,7 +461,7 @@ const Overview = () => {
           >
             <div className={style.main_total_option_text}>
               <p className={style.main_total_option_text_up}>Total Customers</p>
-              <h3 className={style.main_total_option_text_head}>{ordersFiltered ? ordersFiltered.length: "0"}</h3>
+              <h3 className={style.main_total_option_text_head}>{m?.countOrders ? m.countOrders: "0"}</h3>
             </div>
 
             <div
@@ -509,7 +509,7 @@ const Overview = () => {
           >
             <div className={style.main_total_option_text}>
               <p className={style.main_total_option_text_up}>Total Order</p>
-              <h3 className={style.main_total_option_text_head}>{ordersFiltered ? ordersFiltered.length: "0"}</h3>
+              <h3 className={style.main_total_option_text_head}>{m?.countOrders ? m.countOrders: "0"}</h3>
             </div>
 
             <div
