@@ -47,6 +47,7 @@
     }
 
     &_desktop {
+        @extend %text_overflow;
 
         @include mobile {
             display: none;

@@ -2,12 +2,17 @@ import style from "./overviewTableItem.module.scss";
 import { useEffect, useState } from "react";
 
 interface Order {
-  orderId: string;
-  receiptNo: string;
-  menu: string[];
-  collectedBy: string;
-  dateTime: string;
+  orderId: number;
+  receiptNumber: string[] | null;
+  cashier: string | null;
+  menu: string[] | null;
+  price: number;
+  place: string | null;
+  table: string[] | null;
+  orderDate: string;
   paymentMethod: string;
+
+
   checked: boolean;
   setMultiCheck: React.Dispatch<React.SetStateAction<number>>;
   multiCheck: number;
@@ -16,7 +21,7 @@ interface Order {
 }
 
 const OverviewTableItem:React.FC<Order> = (props) => {
-  const { orderId, receiptNo, menu, collectedBy, dateTime, paymentMethod, checked, setMultiCheck, multiCheck, period, ascend } = props;
+  const { orderId, receiptNumber, menu, cashier, orderDate, paymentMethod, checked, setMultiCheck, multiCheck, period, ascend } = props;
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
   useEffect(() => {
@@ -36,17 +41,21 @@ const OverviewTableItem:React.FC<Order> = (props) => {
 
   return (
     <>
-      <tr className={`${style.tr} ${isChecked && style.tr_checked}`}>
+      <tr className={`${style.tr} ${isChecked && style.tr_checked}`}
+      onChange={()=> setIsChecked(!isChecked)}
+      >
         <td style={{textAlign : "center"}}>
           <input type="checkbox" 
           className={style.tr_checkbox}
           onChange={()=> setIsChecked(!isChecked)} checked={isChecked} />
         </td>
         <td>{orderId}</td>
-        <td className={style.tr_desktop}>{receiptNo}</td>
+        <td className={style.tr_desktop}
+        style={{maxWidth: "80px"}}
+        >{receiptNumber?.join('')}</td>
         <td className={style.tr_desktop} style={{maxWidth: "100px"}}>{menu}</td>
-        <td className={style.tr_desktop} style={{maxWidth: "80px"}}>{collectedBy}</td>
-        <td className={style.tr_mobileDate}>{dateTime}</td>
+        <td className={style.tr_desktop} style={{maxWidth: "80px"}}>{cashier}</td>
+        <td className={style.tr_mobileDate}>{orderDate}</td>
         <td className={style.tr_desktop}>
           <div className={style.tr_desktop_payment}>{paymentMethod}</div>
         </td>

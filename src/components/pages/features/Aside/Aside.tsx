@@ -20,8 +20,7 @@ const Aside: React.FC<AsideProps> = (props) => {
   const { bag, setQrOpen, setTable, setBag, setSuccessOrder, requestNotify } = props;
   const dispatch = useDispatch();
   const [orderId] = useState<string>(
-    Math.random().toString(36).substring(2, 10) +
-      Math.random().toString(36).substring(2, 10)
+    Math.floor(Math.random() * 1000000000).toString()
   );
   const { name, place, tables, orders } = useSelector((state: IOrderState) => state);
   const [mastercard, setMastercard] = useState<boolean>(false);
@@ -71,10 +70,7 @@ const Aside: React.FC<AsideProps> = (props) => {
           orderId,
           userName: name,
           place,
-          tables: tables ? tables.map((m) => (
-            { number: m }
-          ))
-           : [],
+          tables: tables ? tables: [],
           productsSet: orders ? orders.filter((m) => m.order > 0).map((m) => 
           ({
             receiptNo: m.receiptNo,

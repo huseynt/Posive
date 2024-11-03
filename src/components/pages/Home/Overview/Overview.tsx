@@ -3,10 +3,10 @@ import style from "./overview.module.scss";
 import { useState } from "react";
 // import SearchInput from "../../features/SearchInput/SearchInput";
 // import { meals } from "../../../test/db/cards";
-import { IMeal } from "../../../utils/interface/Meal";
+// import { IMeal } from "../../../utils/interface/Meal";
 import { useOutletContext } from "react-router-dom";
 import OverviewTableItem from "../../features/OverviewTableItem/OverviewTableItem";
-import { orders } from "../../../test/db/transactions";
+// import { orders } from "../../../test/db/transactions";
 import { Helmet } from "react-helmet";
 import { useQuery } from "@tanstack/react-query";
 import { createGetOrders } from "../../../utils/API/API";
@@ -19,22 +19,24 @@ interface IOverview {
 }
 
 interface IOrder {
-  orderId: string;
-  receiptNo: string;
-  menu: string[];
-  collectedBy: string;
-  dateTime: string;
+  orderId: number;
+  receiptNumber: string[] | null;
+  cashier: string | null;
+  menu: string[] | null;
+  price: number;
+  place: string | null;
+  table: string[] | null;
+  orderDate: string;
   paymentMethod: string;
-  action: string;
-  totalPrice: number;
 }
 
 const Overview = () => {
+
   const { setToggleMenu, setNotification, notification } =
     useOutletContext<IOverview>();
   const [date, setDate] = useState("");
   const [mobileSearch, setMobileSearch] = useState<boolean>(false);
-  const [mealsFiltered, setMealsFiltered] = useState<IMeal[]>([]);
+  // const [mealsFiltered, setMealsFiltered] = useState<IMeal[]>([]);
   const [periodDown, setPeriodDown] = useState<boolean>(false);
   const [period, setPeriod] = useState<string>("All time");
   const [checked, setChecked] = useState<boolean>(false);
@@ -44,25 +46,37 @@ const Overview = () => {
   const [ascend, setAscend] = useState<boolean>(false);
 
 
+  const [pagination, setPagination] = useState<number>(1);
+  const [page, setPage] = useState<number>(1);
+  const [itemperpage, setItemPerPage] = useState<number>(10);
+  const [countOrders, setCountOrders] = useState<number>(1);
 
+  useEffect(() => {
+    console.log(pagination, page);
+  }, [pagination, page]);
+
+  useEffect(() => {
+    setPage(1)
+  }, [itemperpage]);
   // ------------------- get meals ------------------------
   const {
     data: m,
+    isPending
   } = useQuery<IGetOrdersResponse | undefined>({
-    queryKey: ["getOrders", { page: 1, size: 10, date: "Next_week" }],
-    queryFn: () => createGetOrders({ page: 1, size: 10, date: "Next_week" }),
+    queryKey: ["getOrders", { page: page-1, size: itemperpage, date: period }],
+    queryFn: () => createGetOrders({ page: page-1, size: itemperpage, date: period }),
   });
-
   useEffect(() => {
-    return () => {
-      if (m) {
-        console.log(m);
-      }
+    if (m && !isPending) {
+      setCountOrders(
+        m.countOrders % itemperpage === 0
+          ? m.countOrders / itemperpage
+          : Math.floor(m.countOrders / itemperpage) + 1
+        
+      );
     }
-  }, [m, setMealsFiltered]);
+  }, [m, isPending, itemperpage]);
   //  ----------------- get meals ---------------------------
-
-
 
 
 
@@ -78,7 +92,7 @@ const Overview = () => {
         ordersFiltered.length-1
       );
     }
-  }, [checked]);
+  }, [checked, m]);
 
   useEffect(() => { 
     setChecked(false);
@@ -87,8 +101,8 @@ const Overview = () => {
 
   const ascendingOrderDate = () => {
     const sortedOrders = ordersFiltered.sort((a, b) => {
-      const dateA = new Date(a.dateTime);
-      const dateB = new Date(b.dateTime);
+      const dateA = new Date(a.orderDate);
+      const dateB = new Date(b.orderDate);
       return dateA.getTime() - dateB.getTime();
     });
     setOrdersFiltered([...sortedOrders]);
@@ -97,8 +111,8 @@ const Overview = () => {
 
   const descendingOrderDate = () => {
     const sortedOrders = ordersFiltered.sort((a, b) => {
-      const dateA = new Date(a.dateTime);
-      const dateB = new Date(b.dateTime);
+      const dateA = new Date(a.orderDate);
+      const dateB = new Date(b.orderDate);
       return dateB.getTime() - dateA.getTime();
     });
     setOrdersFiltered([...sortedOrders]);
@@ -113,15 +127,15 @@ const Overview = () => {
       day: "numeric",
     });
     setDate(formattedDate);
-    console.log(mealsFiltered);
-  }, [mealsFiltered]);
+    // console.log(mealsFiltered);
+  }, []);
 ``
   useEffect(() => {
     if (period!=="All time") {
-    const filteredOrders = orders.filter((order) => {
+    const filteredOrders = m?.orders.filter((order) => {
       if (period === "This week") {
         const today = new Date();
-        const date = new Date(order.dateTime);
+        const date = new Date(order.orderDate);
         const startOfWeek = new Date(
           today.setDate(today.getDate() - today.getDay())
         );
@@ -131,32 +145,32 @@ const Overview = () => {
         return date >= startOfWeek && date <= endOfWeek;
       } else if (period === "This month") {
         const today = new Date();
-        const date = new Date(order.dateTime);
+        const date = new Date(order.orderDate);
         return (
           date.getMonth() === today.getMonth() &&
           date.getFullYear() === today.getFullYear()
         );
       } else if (period === "This year") {
         const today = new Date();
-        const date = new Date(order.dateTime);
+        const date = new Date(order.orderDate);
         return date.getFullYear() === today.getFullYear();
       } else {
         return order;
       }
     });
-    setOrdersFiltered(filteredOrders);
+    setOrdersFiltered(filteredOrders ? filteredOrders : []);
     setOrdersSetting(false)
     console.log(period);
     } else {
-      const sortedOrders = orders.sort((a, b) => {
-        const dateA = new Date(a.dateTime);
-        const dateB = new Date(b.dateTime);
+      const sortedOrders = m?.orders.sort((a, b) => {
+        const dateA = new Date(a.orderDate);
+        const dateB = new Date(b.orderDate);
         return dateB.getTime() - dateA.getTime();
       });
-      setOrdersFiltered([...sortedOrders]);
+      setOrdersFiltered([...sortedOrders? sortedOrders: []]);
       setAscend(true)
     }
-  }, [period]);
+  }, [period, m]);
 
 
 
@@ -411,9 +425,9 @@ const Overview = () => {
               <p className={style.main_total_option_text_up}>Total Sales</p>
               <h3 className={style.main_total_option_text_head}>
                 ${ordersFiltered ? 
-                 Number(ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0).toFixed(3)) > 10000 ?
-                  Math.floor(Number(ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0).toFixed(3))/1000) + "K": 
-                  ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0).toFixed(3)
+                 Number(ordersFiltered.reduce((acc, order) => acc + order.price, 0).toFixed(3)) > 10000 ?
+                  Math.floor(Number(ordersFiltered.reduce((acc, order) => acc + order.price, 0).toFixed(3))/1000) + "K": 
+                  ordersFiltered.reduce((acc, order) => acc + order.price, 0).toFixed(3)
                 : "0"}
               </h3>
             </div>
@@ -525,9 +539,9 @@ const Overview = () => {
               <p className={style.main_total_option_text_up}>Total Tip</p>
               <h3 className={style.main_total_option_text_head}>
                 ${ordersFiltered ? 
-                 Number(ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0).toFixed(3)) > 10000 ?
-                  Math.floor(Number(ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0).toFixed(3))/1000) + "K": 
-                  ordersFiltered.reduce((acc, order) => acc + order.totalPrice, 0).toFixed(3)
+                 Number(ordersFiltered.reduce((acc, order) => acc + order.price, 0).toFixed(3)) > 10000 ?
+                  Math.floor(Number(ordersFiltered.reduce((acc, order) => acc + order.price, 0).toFixed(3))/1000) + "K": 
+                  ordersFiltered.reduce((acc, order) => acc + order.price, 0).toFixed(3)
                 : "0"}
               </h3>
             </div>
@@ -748,7 +762,7 @@ const Overview = () => {
                       checked={checked}
                     />
                   </th>
-                  <th>Order ID</th>
+                  <th>ID</th>
                   <th
                     className={
                       style.main_down_transactions_table_head_th_desktop
@@ -797,6 +811,111 @@ const Overview = () => {
               </tbody>
             </table>
           </div>
+
+
+          <div className={style.main_down_pagination}>
+            
+            <div className={style.main_down_pagination_pages}>
+
+              {/* left button */}
+              <div className={style.main_down_pagination_pages_left}
+              onClick={() => {
+                setPage(page> 1 ? page - 1 : page)
+                page === pagination && setPagination(pagination > 1 ? pagination - 1 : pagination)
+              }}
+              >
+                <svg width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 12.2797L1.65333 7.93306C1.14 7.41973 1.14 6.57973 1.65333 6.06639L6 1.71973" stroke="#292D32" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+
+              {/* pages */}
+              <div className={style.main_down_pagination_pages_page}
+              style={{border: page === pagination ? "1px solid #6c7278" : ""}}
+              onClick={() => setPage(pagination)}
+              >
+                {pagination}
+              </div>
+              
+              {countOrders >1 && <div className={style.main_down_pagination_pages_page}
+              style={{border: page === pagination + 1 ? "1px solid #6c7278" : ""}}
+              onClick={() => setPage(pagination + 1)}
+              >
+                {pagination + 1}
+              </div>}
+              
+              {countOrders >2 && <div className={style.main_down_pagination_pages_page}
+              style={{border: page === pagination + 2 ? "1px solid #6c7278" : ""}}
+              onClick={() => setPage(pagination + 2)}
+              >
+                {pagination + 2}
+              </div>}
+
+              {countOrders >3 && <div className={`${style.main_down_pagination_pages_dots} 
+              ${pagination + 4 === countOrders ? style.main_down_pagination_pages_dots_hover : ""}`}
+              style={{
+                border: page === pagination + 3 ? "1px solid #6c7278" : "",
+              }}
+              onClick={() => setPage(pagination + 4 === countOrders ? countOrders -1 : page)}
+              >
+                {pagination + 4 === countOrders ? countOrders -1 : "..." }
+              </div>}
+
+              {countOrders >4 && <div className={style.main_down_pagination_pages_page}
+              style={{
+                border: page === countOrders || pagination + 9 === page  ? "1px solid #6c7278" : "",
+              }}
+              onClick={() => {
+                setPage(
+                pagination + 9 <= countOrders ? pagination + 9 : countOrders
+              )
+                setPagination(countOrders - 4 > pagination + 9 ? pagination + 9 : countOrders - 4)
+              }}
+              >
+                {
+                  pagination + 9 <= countOrders ? pagination + 9 : countOrders
+                }
+              </div>}
+
+              {/* right button */}
+              <div className={style.main_down_pagination_pages_right}
+              onClick={() => {
+                setPage(countOrders > page ? page + 1 : page)
+                page - 2 === pagination && setPagination(pagination + 4 < countOrders ? pagination + 1 : pagination)
+              }}
+              >
+                <svg width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0.940002 12.2797L5.28667 7.93306C5.8 7.41973 5.8 6.57973 5.28667 6.06639L0.940002 1.71973" stroke="#292D32" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+
+            </div>
+
+            <div className={style.main_down_pagination_itemperpage}>
+                
+                <div className={style.main_down_pagination_itemperpage_info}>
+                  Showing {page === 1 ? 1 : page * itemperpage - itemperpage + 1} to {page * itemperpage > countOrders ? countOrders : page * itemperpage} of {countOrders} entries
+                </div>
+                
+                <div className={style.main_down_pagination_itemperpage_action}>
+                  <select
+                    className={style.main_down_pagination_itemperpage_action_select}
+                    onChange={(e) =>
+                      setItemPerPage(Number(e.target.value))
+                    }
+                    value={itemperpage}
+                  >
+                    <option value="8">Show 8</option>
+                    <option value="10">Show 10</option>
+                    <option value="20">Show 20</option>
+                  </select>
+                </div>
+
+            </div>
+          </div>
+
+
+
         </div>
       </div>
     </div>

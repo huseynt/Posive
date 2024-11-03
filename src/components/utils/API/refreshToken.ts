@@ -1,5 +1,8 @@
 import { deleteCookie, getCookie } from '../reUse/cookie';
-import { base } from './API';
+// import { base } from './API';
+
+// indi lazim deyil
+const base = 'http://localhost:3001';
 
 
 export const createRefreshToken = async () => {

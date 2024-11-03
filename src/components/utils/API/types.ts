@@ -95,31 +95,6 @@ export interface IChangePassword {
     order: number;
   }
 
-
-
-export interface IGetOrderProduct {
-    name: string;
-    receiptNo: string;
-    orderofDay: number;
-    category: string;
-    imageUrl: string;
-    price: number;
-    stock: number | null;
-    tax: number;
-    discount: number;
-}
-
-export interface IGetOrders {
-    orderId: string;
-    productsSet: IGetOrderProduct[];
-    paymentMethod: string;
-}
-
-export interface IGetOrdersResponse {
-    orders: IGetOrders[];
-    countOrders: number;
-}
-
 export interface ISavePreferences {
     theme: string | null;
     language: string | null;
@@ -140,7 +115,7 @@ export interface IPostOrders {
   orderId: string;
   userName: string;
   place: string;
-  tables: IPostTables[] | null;
+  tables: string[] | null;
   productsSet: IPostOrder[] | null;
   paymentMethod: string;
 }
@@ -149,6 +124,54 @@ export interface IPostOrder {
   receiptNo: string | null | undefined; 
 }
 
-export interface IPostTables {
-  number: string | null | undefined; 
+// export interface IPostTables {
+//   number: string | null | undefined; 
+// }
+
+
+
+
+
+
+export interface IGetOrdersResponse {
+  orders: IGetOrder[];
+  countOrders: number;
 }
+export interface IGetOrder {
+  orderId: number;
+  receiptNumber: string[] | null;
+  cashier: string | null;
+  menu: string[] | null;
+  price: number;
+  place: string | null;
+  table: string[] | null;
+  orderDate: string;
+  paymentMethod: string;
+}
+
+
+
+
+
+
+// export interface IGetOrdersResponse {
+//   orders: IGetOrders[];
+//   countOrders: number;
+// }
+// export interface IGetOrders {
+//   orderId: string;
+//   productsSet: IGetOrderProduct[];
+//   paymentMethod: string;
+// }
+
+// export interface IGetOrderProduct {
+//   name: string;
+//   receiptNo: string;
+//   orderofDay: number;
+//   category: string;
+//   imageUrl: string;
+//   price: number;
+//   stock: number | null;
+//   tax: number;
+//   discount: number;
+// }
