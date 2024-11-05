@@ -1,5 +1,5 @@
 import { getToken } from '../reUse/getToken';
-import { IcreatePostAuthenticate, IVerifyEmail, IChangePassword, ISaveUserData, ISavePreferences, ISavePlans, IPostOrders } from './types';
+import { IcreatePostAuthenticate, IVerifyEmail, IChangePassword, ISaveUserData, ISavePreferences, ISavePlans, IPostOrders, IPostCardData, IVerifyCardData } from './types';
 
 // test
 export const API = import.meta.env.VITE_API_URL
@@ -258,6 +258,72 @@ export const createPostOrders = async (data: IPostOrders) => {
                 'Authorization': `Bearer ${accessToken}`
             },
             body: JSON.stringify(data)
+        });
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Post CardData
+export const createPostCardData = async (data: IPostCardData) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/payment/find`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            body: JSON.stringify(data)
+        });
+        if (res) {
+            console.log(res);
+            return res.status;
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Verify CardData
+export const createVerifyCardData = async ({ confirmPassword }: IVerifyCardData) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/mail/verifyPasswordPayment?confirmPassword=${confirmPassword}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+        });
+        if (res) {
+            return res.status;
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+// Get tables
+export const createGetTables = async () => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/tables/get`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
         });
         if (res.ok) {
             return res.json();

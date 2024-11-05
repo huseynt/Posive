@@ -21,7 +21,35 @@ import { IgetUser } from "../../utils/API/types";
 import { saveUser } from "../../utils/reUse/user";
 // import { createRefreshToken } from "../../utils/API/refreshToken";
 
+// {
+//   "orderId": 915696049,
+//   "receiptNumber": [
+//       "125",
+//       "134"
+//   ],
+//   "cashier": "Huseyn",
+//   "menu": [
+//       "Health Salad",
+//       "Tsunami Beef Egg"
+//   ],
+//   "price": 25.1,
+//   "place": "Take Away",
+//   "orderDate": "2024-11-05",
+//   "paymentMethod": "Master Card",
+//   "tables": []
+// }
 
+interface ISuccessOrder {
+  orderId: number;
+  receiptNumber: string[];
+  cashier: string;
+  menu: string[];
+  price: number;
+  place: string;
+  orderDate: string;
+  paymentMethod: string;  
+  tables: string[];
+}
 
 const Home = () => {
 
@@ -29,7 +57,17 @@ const Home = () => {
   const [qrOpen, setQrOpen] = useState<boolean>(false);
   const [table, setTable] = useState<boolean>(false);
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
-  const [successOrder, setSuccessOrder] = useState<boolean>(false);
+  const [successOrder, setSuccessOrder] = useState<ISuccessOrder>({
+    orderId: 0,
+    receiptNumber: [],
+    cashier: "",
+    menu: [],
+    price: 0,
+    place: "",
+    orderDate: "",
+    paymentMethod: "",
+    tables: []
+  });
   const [notification, setNotification] = useState<boolean>(false);
   const [navigation, setNavigation] = useState<string>("");
   const navigate = useNavigate()
@@ -98,7 +136,17 @@ useEffect(() => {
     setBag(false);
     setQrOpen(false);
     setTable(false);
-    setSuccessOrder(false);
+    setSuccessOrder({
+      orderId: 0,
+      receiptNumber: [],
+      cashier: "",
+      menu: [],
+      price: 0,
+      place: "",
+      orderDate: "",
+      paymentMethod: "",
+      tables: []
+    });
     setNotification(false);
     setNavigation((window.location.pathname).split("/home/")[1]);
   }, [navigation]);
@@ -160,7 +208,7 @@ useEffect(() => {
       />
       {qrOpen && <QRCode setQrOpen={setQrOpen} requestNotify={requestNotify} />}
       {table && <Table setTable={setTable} />}
-      {successOrder && <SuccessOrder setSuccessOrder={setSuccessOrder} />}
+      {successOrder.cashier && <SuccessOrder setSuccessOrder={setSuccessOrder} successOrder={successOrder}/>}
       <Notification setNotification={setNotification} notification={notification} bag={bag} />
       {/* {aboutmeal && <AboutMeal setAboutMeal={setAboutMeal} />} */}
       <Notify notify={notify} purpose={notifyPurpose} describtion={description}/>

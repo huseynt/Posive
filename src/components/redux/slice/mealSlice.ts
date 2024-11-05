@@ -13,6 +13,7 @@ const orderSlice = createSlice({
         place: "Dine In",
         tables: [],
         name: "",
+        paymentMethod: "",
     },
     reducers: {
         addMeal: (state, action) => {
@@ -73,6 +74,9 @@ const orderSlice = createSlice({
         changename: (state, action) => {
             state.name = action.payload
         },
+        changePaymentMethod: (state, action) => {
+            state.paymentMethod = action.payload
+        },
         resetDefaultState: (state) => {
             state.orders = state.orders.map((order) => {
                 return { ...order, order: 0 };
@@ -80,6 +84,7 @@ const orderSlice = createSlice({
             state.place = "Dine In";
             state.tables = [];
             state.name = "";
+            state.paymentMethod = "";
         }
     }
 });
@@ -95,5 +100,6 @@ export const {
     changeTable,
     changename,
     resetTable,
-    resetDefaultState
+    resetDefaultState,
+    changePaymentMethod
  } = orderSlice.actions;

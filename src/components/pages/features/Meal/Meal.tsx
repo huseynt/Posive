@@ -2,13 +2,27 @@ import style from './meal.module.scss'
 import { useState } from 'react'
 
 import AboutMeal from "../AboutMeal/AboutMeal";
-import { IMeal } from '../../../utils/interface/Meal';
+// import { IMeal } from '../../../utils/interface/Meal';
 import { useDispatch, useSelector } from 'react-redux';
 import { ascendingOrder, desascendingOrder } from '../../../redux/slice/mealSlice';
 import { IGetMeals } from '../../../redux/type';
 
+export interface IMeal { 
+  key?: string | undefined;
+  id?: string | number | null | undefined;
+  name: string | null | undefined;
+  category: string | null | undefined;
+  imageUrl: string | null | undefined;
+  price: number;
+  description: string,
+  stock: number | null | undefined;
+}
+
+
+
+
 const Meal = (props: IMeal) => {
-  const { id, name, price, description, imageUrl } = props;
+  const { id, name, price, description, imageUrl, stock } = props;
   const [aboutmeal, setAboutMeal] = useState<boolean>(false);
   const dispatch = useDispatch();
   const thisMeal = useSelector((state: { orders: IGetMeals[] }) => state.orders.find((meal) => meal.id === id));
@@ -35,7 +49,8 @@ const Meal = (props: IMeal) => {
           <p
           style={thisMeal?.order !== 0 ? {color: "#EA7E41"} : {color: ''}}
           >{thisMeal?.order}</p>
-          <button onClick={() => dispatch(ascendingOrder(id))}>+</button>
+          <button onClick={() => 
+            stock && thisMeal?.order !== stock ? dispatch(ascendingOrder(id)) : null}>+</button>
         </div>
 
         {aboutmeal && <AboutMeal 

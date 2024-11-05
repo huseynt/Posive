@@ -560,6 +560,7 @@ const Main= () => {
                     description={meal.description}
                     imageUrl={meal.imageUrl}
                     category={meal.category}
+                    stock={meal.stock}
                   />
               );
             }
@@ -573,6 +574,7 @@ const Main= () => {
                     description={meal.description}
                     imageUrl={meal.imageUrl}
                     category={meal.category}
+                    stock={meal.stock}
                   />
               );
             }

@@ -1,55 +1,105 @@
 import { useEffect, useState } from 'react';
 import style from './masterCard.module.scss';
+// import { useDispatch } from 'react-redux';
+// import { resetDefaultState } from '../../../redux/slice/mealSlice';
+import { useMutation } from '@tanstack/react-query';
+import { createPostCardData, createVerifyCardData } from '../../../utils/API/API';
+import Loader from '../../../common/Loader/Loader';
+
 
 interface MasterCardProps {
     setMastercard: React.Dispatch<React.SetStateAction<boolean>>;
-    setPaymentMethod: React.Dispatch<React.SetStateAction<string>>;
+    requestNotify: (type: string, message: string) => void;
+    handlePostOrder: () => void;
 }
 
-
 const MasterCard: React.FC<MasterCardProps> = (props) => {
-    const { setMastercard, setPaymentMethod } = props;
+    const { setMastercard, requestNotify, handlePostOrder } = props;
+    // const dispatch = useDispatch();
     const [section, setSection] = useState("card");
     const [flipped, setFlipped] = useState(false);
     const [verifyCode, setVerifyCode] = useState("");
     const [data, setData] = useState({
-        cardNumber: "",
-        cardHolder: "",
-        cardDate: "",
-        cardCvv: ""
+        number: "",
+        name: "",
+        date: "",
+        cvv: ""
     });
 
-    useEffect(() => {
-        if (section === "verify") {
-            setFlipped(false);
+    // ------------------- post card data ----------------
+    const {
+        mutate: PostCardData,
+        isPending: isPostCardDataPending,
+      } = useMutation({
+    mutationFn: createPostCardData,
+    onSuccess: (data) => {        
+        if (data === 200) {
+            console.log('Success');
+            setSection("verify");
+            requestNotify("done", "Code sent to your email address");
+        } else {
+            requestNotify("undone", "Card data is incorrect");
         }
-    }, [section]);
+
+        },
+    });
+    const handlePostCardData = () => {
+        PostCardData(data);
+    }
+    // ------------------- post card data -------------------
+
+
+    // ------------------- verify card data (& post order) ----------------
+    const {
+        mutate: VerifyCardData,
+        isPending: isVerifyCardDataPending,
+      } = useMutation({
+    mutationFn: createVerifyCardData,
+    onSuccess: (data) => {        
+        if (data === 200) {
+            console.log(data);
+            handlePostOrder();
+            setVerifyCode("");
+        } else {
+            requestNotify("undone", "Code is incorrect");
+            setVerifyCode("");
+            setSection("card");
+        }
+
+        },  
+    });
+    // ------------------- verify card data (& post order) -------------------    
+
+
 
     const handleVerify = () => {
         if (verifyCode !== "") {
-            setMastercard(false);
-            setPaymentMethod("mastercard");
+            VerifyCardData({confirmPassword: verifyCode});
+            // setMastercard(false);
+            // requestNotify("done", "");
+            // setSuccessOrder(true);
+            // handlePostOrder();
+            // dispatch(resetDefaultState());
         }
     }
 
-
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if(event.target.name === "cardNumber") {
+        if(event.target.name === "number") {
             let value = event.target.value.replace(/\D/g, '');
             if (value.length > 16) value = value.slice(0, 16);
             const formattedValue = value.replace(/(.{4})/g, '$1 ').trim();
             setData(
                 {
                     ...data,
-                    cardNumber: formattedValue
+                    number: formattedValue
                 }
             );
-        } else if(event.target.name === "cardHolder") {
+        } else if(event.target.name === "name") {
             let value = event.target.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase();
             if (value.length > 20) value = value.slice(0, 20);
             setData({
                 ...data,
-                cardHolder: value
+                name: value
             });
         } else if(event.target.name === "date") {
             let value = event.target.value.replace(/\D/g, '');
@@ -57,14 +107,14 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
             const formattedValue = value.replace(/(\d{2})(\d{1,2})/, '$1/$2');
             setData({
                 ...data,
-                cardDate: formattedValue
+                date: formattedValue
             });
         } else if(event.target.name === "cvv") {
             let value = event.target.value.replace(/\D/g, '');
             if (value.length > 3) value = value.slice(0, 3);
             setData({
                 ...data,
-                cardCvv: value
+                cvv: value
             });
         }
       };
@@ -73,6 +123,12 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
             setVerifyCode(event.target.value);
         }
 
+
+    useEffect(() => {
+        if (section === "verify") {
+            setFlipped(false);
+        }
+    }, [section]);
 
   return (
     <div className={style.masterCard}>
@@ -94,28 +150,28 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
                             onFocus={() => setFlipped(false)}
                             >
                                 <label className={style.masterCard_main_form_item_label} 
-                                htmlFor="cardNumber">CARD NUMBER</label>
+                                htmlFor="number">CARD NUMBER</label>
 
                                 <input  className={`${style.masterCard_main_form_item_input} ${style.cardNumber}`} 
                                 type="text" 
-                                name="cardNumber" 
-                                id="cardNumber" 
+                                name="number" 
+                                id="number" 
                                 onChange={handleChange}
-                                value={data.cardNumber}
+                                value={data.number}
                                 placeholder="0000 0000 0000 0000" />
                             </div>
                             <div className={style.masterCard_main_form_item}
                             onFocus={() => setFlipped(false)}
                             >
                                 <label className={style.masterCard_main_form_item_label} 
-                                htmlFor="cardHolder">CARD HOLDER</label>
+                                htmlFor="name">CARD HOLDER</label>
 
                                 <input className={`${style.masterCard_main_form_item_input} ${style.cvv}`} 
                                 type="text" 
-                                name="cardHolder" 
-                                id="cardHolder" 
+                                name="name" 
+                                id="name" 
                                 onChange={handleChange}
-                                value={data.cardHolder}
+                                value={data.name}
                                 placeholder="name surname" />
                             </div>
                             
@@ -131,7 +187,7 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
                                         name="date" 
                                         id="date" 
                                         onChange={handleChange}
-                                        value={data.cardDate}
+                                        value={data.date}
                                         placeholder="date" />
                                     </div>
                                     <div className={style.masterCard_main_form_item}
@@ -145,7 +201,7 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
                                         name="cvv" 
                                         id="cvv" 
                                         onChange={handleChange}
-                                        value={data.cardCvv}
+                                        value={data.cvv}
                                         placeholder="cvv" />
                                 </div>
                             </div>
@@ -153,9 +209,9 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
                             <p className={style.masterCard_main_form_info}>verify your card with the code sent to your email address.</p>
 
                             <div className={style.masterCard_main_form_btn}
-                            onClick={() => setSection("verify")}
+                            onClick={handlePostCardData}
                             >
-                                Verify
+                                {isPostCardDataPending ? <Loader/> : "Verify" }
                             </div>
                         </>
                     ) : (
@@ -189,7 +245,7 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
                             <div className={style.masterCard_main_form_btn}
                             onClick={handleVerify}
                             >
-                                Select This Method
+                                {isVerifyCardDataPending ? <Loader/> : "Pay" }
                             </div>
                         </>
                     )
@@ -222,10 +278,10 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
                             </svg>
                         </div>
                         
-                        <div className={style.masterCard_main_container_card_front_number}>{data.cardNumber || "0000 0000 0000 0000"}</div>
+                        <div className={style.masterCard_main_container_card_front_number}>{data.number || "0000 0000 0000 0000"}</div>
                         <div className={style.masterCard_main_container_card_front_info}>
-                            <div className={style.masterCard_main_container_card_front_info_holder}>{data.cardHolder || "NAME SURNAME"}</div>
-                            <div className={style.masterCard_main_container_card_front_info_date}>{data.cardDate || "MM/YY"}</div>
+                            <div className={style.masterCard_main_container_card_front_info_holder}>{data.name || "NAME SURNAME"}</div>
+                            <div className={style.masterCard_main_container_card_front_info_date}>{data.date || "MM/YY"}</div>
                         </div>
                     </div>
 
@@ -234,7 +290,7 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
                         <div className={style.masterCard_main_container_card_back_strip}></div>
                         <div className={style.masterCard_main_container_card_back_cvv}>
                             <div className={style.masterCard_main_container_card_back_cvv_head}>CVV</div>
-                            <div className={style.masterCard_main_container_card_back_cvv_code}>{data.cardCvv || "***"}</div>
+                            <div className={style.masterCard_main_container_card_back_cvv_code}>{data.cvv || "***"}</div>
                         </div>
                     </div>
 

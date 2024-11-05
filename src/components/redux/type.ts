@@ -2,7 +2,8 @@ export interface IOrderState {
   orders: IGetMeals[],
   place: string,
   tables: string[],
-  name: string
+  name: string,
+  paymentMethod: string,
 }
 
 export interface IGetMeals {

@@ -88,7 +88,7 @@ export interface IChangePassword {
     category: string | null | undefined;
     imageUrl: string | null;
     price: number ;
-    stock: number | null;
+    stock: number | null | undefined;
     tax: number | null;
     discount: number | null;
     description: string;
@@ -151,8 +151,17 @@ export interface IGetOrder {
 
 
 
+export interface IPostCardData {
+  number: string;
+  name: string;
+  date: string;
+  cvv: string;
+}
 
 
+export interface IVerifyCardData {
+  confirmPassword: string;
+}
 
 // export interface IGetOrdersResponse {
 //   orders: IGetOrders[];

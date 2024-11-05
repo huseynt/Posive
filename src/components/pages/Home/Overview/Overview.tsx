@@ -538,11 +538,7 @@ const Overview = () => {
             <div className={style.main_total_option_text}>
               <p className={style.main_total_option_text_up}>Total Tip</p>
               <h3 className={style.main_total_option_text_head}>
-                ${ordersFiltered ? 
-                 Number(ordersFiltered.reduce((acc, order) => acc + order.price, 0).toFixed(3)) > 10000 ?
-                  Math.floor(Number(ordersFiltered.reduce((acc, order) => acc + order.price, 0).toFixed(3))/1000) + "K": 
-                  ordersFiltered.reduce((acc, order) => acc + order.price, 0).toFixed(3)
-                : "0"}
+                ${m ? m?.countOrders * 0.1 > 1000 ? Math.floor(m?.countOrders/1000).toFixed(2) + "K": (m?.countOrders * 0.1).toFixed(2) : "0"}
               </h3>
             </div>
 

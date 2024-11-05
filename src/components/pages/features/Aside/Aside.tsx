@@ -1,48 +1,91 @@
 import { useDispatch, useSelector } from "react-redux";
 import style from "./aside.module.scss";
-import { changename, changePlace, deleteOrderById, resetDefaultState, resetTable } from "../../../redux/slice/mealSlice";
+import { changename, changePaymentMethod, changePlace, deleteOrderById, resetDefaultState, resetTable } from "../../../redux/slice/mealSlice";
 import { useEffect, useState } from "react";
 import { IOrderState } from "../../../redux/type";
 import { useMutation } from "@tanstack/react-query";
 import { createPostOrders } from "../../../utils/API/API";
 import MasterCard from "../MasterCard/MasterCard";
 
+interface ISuccessOrder {
+  orderId: number;
+  receiptNumber: string[];
+  cashier: string;
+  menu: string[];
+  price: number;
+  place: string;
+  orderDate: string;
+  paymentMethod: string;  
+  tables: string[];
+}
+
 interface AsideProps {
   bag: boolean;
   setQrOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setTable: React.Dispatch<React.SetStateAction<boolean>>;
   setBag: React.Dispatch<React.SetStateAction<boolean>>;
-  setSuccessOrder: React.Dispatch<React.SetStateAction<boolean>>;
+  setSuccessOrder: React.Dispatch<React.SetStateAction<ISuccessOrder>>;
   requestNotify: (purpose: string, description: string | undefined) => void;
 }
+
+
 
 const Aside: React.FC<AsideProps> = (props) => {
   const { bag, setQrOpen, setTable, setBag, setSuccessOrder, requestNotify } = props;
   const dispatch = useDispatch();
-  const [orderId] = useState<string>(
+  const [orderId, setOrderId] = useState<string>(
     Math.floor(Math.random() * 1000000000).toString()
   );
-  const { name, place, tables, orders } = useSelector((state: IOrderState) => state);
+  const { name, place, tables, orders, paymentMethod } = useSelector((state: IOrderState) => state);
   const [mastercard, setMastercard] = useState<boolean>(false);
-  const [paymentMethod, setPaymentMethod] = useState<string>("");
   // ------------ post data --------------
   const {
     mutate: PostOrders,
     // isPending: isLoginPending,
   } = useMutation({
     mutationFn: createPostOrders,
-    onSuccess: () => {
+    onSuccess: (data) => {
       console.log('Success');
+      setSuccessOrder({
+        orderId: data.orderId,
+        receiptNumber: data.receiptNumber,
+        cashier: data.cashier,
+        menu: data.menu,
+        price: data.price,
+        place: data.place,
+        orderDate: data.orderDate,
+        paymentMethod: data.paymentMethod,
+        tables: data.tables
+      });
+      setMastercard(false);
+      requestNotify("done", "Success");
+      dispatch(resetDefaultState());
+      setOrderId(Math.floor(Math.random() * 1000000000).toString());
     },
     onError: (error) => {
       console.log('Login error:', error);
     },
   });
+  const handlePostOrder = () => {
+    PostOrders(
+      {
+        orderId,
+        userName: name,
+        place,
+        tables: tables ? tables: [],
+        productsSet: orders ? orders.filter((m) => m.order > 0).map((m) => 
+        ({
+          receiptNo: m.receiptNo,
+        })) : [],
+        paymentMethod: "Master Card",
+      }
+    )
+  }
   // ------------ post data --------------
 
 // ------------ aside --------------
-  // const orderId = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
-  
+
+
   const handleOrder = () => {
     if (name === "" || 
       place === "" ||
@@ -50,35 +93,33 @@ const Aside: React.FC<AsideProps> = (props) => {
       orders.reduce((acc, m) => acc + m.order, 0) === 0) { 
       requestNotify("important", "Please fill in the required fields");
     }  else {
-      requestNotify("done", "");
-      setSuccessOrder(true);
-      console.log({
-        orderId,
-        name,
-        place,
-        tables,
-        productsSet: orders.filter((m) => m.order > 0).map((m) => 
-        ({
-          receiptNo: m.receiptNo,
-        })),
-        paymentMethod: "Master Card",
-      });
+      // requestNotify("done", "");
+      // setSuccessOrder(true);
 
-      // ------------ post data --------------
-      PostOrders(
-        {
-          orderId,
-          userName: name,
-          place,
-          tables: tables ? tables: [],
-          productsSet: orders ? orders.filter((m) => m.order > 0).map((m) => 
-          ({
-            receiptNo: m.receiptNo,
-          })) : [],
-          paymentMethod: "Master Card",
-        }
-      )
-      dispatch(resetDefaultState())
+
+      if (paymentMethod === "mastercard") {
+        setMastercard(true);
+      } else if (paymentMethod === "paypal") {
+        console.log("paypal");
+      } else if (paymentMethod === "qrcode") {
+        setQrOpen(true);
+      }
+
+
+
+      // console.log({
+      //   orderId,
+      //   name,
+      //   place,
+      //   tables,
+      //   productsSet: orders.filter((m) => m.order > 0).map((m) => 
+      //   ({
+      //     receiptNo: m.receiptNo,
+      //   })),
+      //   paymentMethod: "Master Card",
+      // });
+
+      
     }
   }
   useEffect(() => {
@@ -116,7 +157,8 @@ const Aside: React.FC<AsideProps> = (props) => {
         mastercard &&
         <MasterCard 
           setMastercard={setMastercard}
-          setPaymentMethod={setPaymentMethod}
+          requestNotify={requestNotify}
+          handlePostOrder={handlePostOrder}
         />
       }
 
@@ -428,7 +470,7 @@ const Aside: React.FC<AsideProps> = (props) => {
         <div className={style.aside_detail_total}>
           <p className={style.aside_detail_total_name}>Total Payment</p>
           <p className={style.aside_detail_total_price}>$
-            {orders.reduce((acc, m) => acc + ((m.price - (m.price * ((m.discount ?? 0) * 0.01))) + (m.price + (m.price * ((m.tax ?? 0) * 0.01)))) * m.order, 0).toFixed(2)}
+            {orders.reduce((acc, m) => acc + ((m.price - (m.price * ((m.discount ?? 0) * 0.01))) + (m.price * ((m.tax ?? 0) * 0.01))) * m.order, 0).toFixed(2)}
           </p>
         </div>
       </div>
@@ -446,7 +488,7 @@ const Aside: React.FC<AsideProps> = (props) => {
         <div className={style.aside_payment_select}>
 
           <div className={style.aside_payment_select_option}
-          onClick={() => setMastercard(true)}
+          onClick={() => dispatch(changePaymentMethod("mastercard"))}
           >
             <div className={style.aside_payment_select_option_icon}
             style={{
@@ -478,8 +520,18 @@ const Aside: React.FC<AsideProps> = (props) => {
               Master Card
             </p>
           </div>
-          <div className={style.aside_payment_select_option}>
-            <div className={style.aside_payment_select_option_icon}>
+
+          <div className={style.aside_payment_select_option}
+          // onClick={() => dispatch(changePaymentMethod("paypal"))}
+          style={{
+            opacity: "0.5",
+          }}
+          >
+            <div className={style.aside_payment_select_option_icon}
+            style={{
+              border: paymentMethod === "paypal" ? "1px solid #F79E1B" : "",
+            }}
+            >
               <svg
                 width="25"
                 height="25"
@@ -512,9 +564,13 @@ const Aside: React.FC<AsideProps> = (props) => {
 
           <div
             className={style.aside_payment_select_option}
-            onClick={() => setQrOpen(true)}
+            onClick={() => dispatch(changePaymentMethod("qrcode"))}
           >
-            <div className={style.aside_payment_select_option_icon}>
+            <div className={style.aside_payment_select_option_icon}
+            style={{
+              border: paymentMethod === "qrcode" ? "1px solid #F79E1B" : "",
+            }}
+            >
               <svg
                 width="21"
                 height="21"

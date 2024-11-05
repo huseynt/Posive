@@ -2,12 +2,24 @@ import style from "./successorder.module.scss";
 // import jsPDF from 'jspdf';
 // import html2canvas from 'html2canvas';
 
+interface ISuccessOrder {
+  orderId: number;
+  receiptNumber: string[];
+  cashier: string;
+  menu: string[];
+  price: number;
+  place: string;
+  orderDate: string;
+  paymentMethod: string;  
+  tables: string[];
+}
 interface IQRCodeComponentProps {
-  setSuccessOrder: React.Dispatch<React.SetStateAction<boolean>>;
+  setSuccessOrder: React.Dispatch<React.SetStateAction<ISuccessOrder>>;
+  successOrder: ISuccessOrder;
 }
 
 const SuccessOrder: React.FC<IQRCodeComponentProps> = (props) => {
-  const { setSuccessOrder } = props;
+  const { setSuccessOrder, successOrder } = props;
 
   const handlePrint = () => {
     window.print();
@@ -33,7 +45,17 @@ const SuccessOrder: React.FC<IQRCodeComponentProps> = (props) => {
     <div className={style.success}>
       <div
         className={style.success_bg}
-        onClick={() => setSuccessOrder(false)}
+        onClick={() => setSuccessOrder({
+          orderId: 0,
+          receiptNumber: [],
+          cashier: "",
+          menu: [],
+          price: 0,
+          place: "",
+          orderDate: "",
+          paymentMethod: "",
+          tables: []
+        })}
       ></div>
       <div className={style.success_block} id="content">
         <div className={style.success_block_head}>
@@ -63,26 +85,26 @@ const SuccessOrder: React.FC<IQRCodeComponentProps> = (props) => {
           <p className={style.success_block_head_text}>
             Successfully placed an order
           </p>
-          <p className={style.success_block_head_price}>$34.99</p>
+          <p className={style.success_block_head_price}>${successOrder.price.toFixed(2)}</p>
         </div>
 
         <div className={style.success_block_detail}>
           <div className={style.success_block_detail_item}>
             <p className={style.success_block_detail_item_name}>Order ID</p>
-            <p className={style.success_block_detail_item_value}>ORD212232</p>
+            <p className={style.success_block_detail_item_value}>{successOrder.orderId}</p>
           </div>
 
           <div className={style.success_block_detail_item}>
             <p className={style.success_block_detail_item_name}>
               Receipt Number
             </p>
-            <p className={style.success_block_detail_item_value}>MW12131</p>
+            <p className={style.success_block_detail_item_value}>{successOrder.receiptNumber.join("")}</p>
           </div>
 
           <div className={style.success_block_detail_item}>
             <p className={style.success_block_detail_item_name}>Date & Time</p>
             <p className={style.success_block_detail_item_value}>
-              Augustus 23, 2023 12.12am
+              {successOrder.orderDate}
             </p>
           </div>
 
@@ -91,21 +113,33 @@ const SuccessOrder: React.FC<IQRCodeComponentProps> = (props) => {
               Payment method
             </p>
             <p className={style.success_block_detail_item_value}>
-              Scan QR Code
+              {successOrder.paymentMethod}
             </p>
           </div>
 
           <div className={style.success_block_detail_item}>
             <p className={style.success_block_detail_item_name}>Collected by</p>
             <p className={style.success_block_detail_item_value}>
-              Cashier Sirojudi
+              {successOrder.cashier}
             </p>
           </div>
         </div>
 
         <div className={style.success_block_actions}>
           <button className={style.success_block_actions_new}
-          onClick={() => setSuccessOrder(false)}
+          onClick={() => setSuccessOrder(
+            {
+              orderId: 0,
+              receiptNumber: [],
+              cashier: "",
+              menu: [],
+              price: 0,
+              place: "",
+              orderDate: "",
+              paymentMethod: "",
+              tables: []
+            }
+          )}
           >New Order</button>
 
           <div className={style.success_block_actions_print}
