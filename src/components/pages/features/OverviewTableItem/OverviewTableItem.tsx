@@ -1,3 +1,4 @@
+import { IGetMeals } from "../../../utils/API/types";
 import OverviewItemView from "../OverviewItemView/OverviewItemView";
 import style from "./overviewTableItem.module.scss";
 import { useEffect, useState } from "react";
@@ -12,6 +13,8 @@ interface Order {
   table: string[] | null;
   orderDate: string;
   paymentMethod: string;
+  menus: IGetMeals[];
+  size: string[];
 
   checked: boolean;
   setMultiCheck: React.Dispatch<React.SetStateAction<number>>;

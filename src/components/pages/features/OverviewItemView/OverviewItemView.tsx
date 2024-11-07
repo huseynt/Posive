@@ -13,6 +13,7 @@ interface IQRCodeComponentProps {
   table: string[] | null;
   orderDate: string;
   paymentMethod: string;
+  
   menus: IGetMeals[];
   size: string[];
 }
