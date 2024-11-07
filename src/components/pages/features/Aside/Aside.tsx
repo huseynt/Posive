@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import style from "./aside.module.scss";
-import { changename, changePaymentMethod, changePlace, deleteOrderById, resetDefaultState, resetTable } from "../../../redux/slice/mealSlice";
+import { changename, changePaymentMethod, changePlace, deleteOrderById, resetTable } from "../../../redux/slice/mealSlice";
 import { useEffect, useState } from "react";
 import { IOrderState } from "../../../redux/type";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createPostOrders } from "../../../utils/API/API";
 import MasterCard from "../MasterCard/MasterCard";
 
@@ -39,6 +39,7 @@ const Aside: React.FC<AsideProps> = (props) => {
   const { name, place, tables, orders, paymentMethod } = useSelector((state: IOrderState) => state);
   const [mastercard, setMastercard] = useState<boolean>(false);
   // ------------ post data --------------
+  const queryClient = useQueryClient()
   const {
     mutate: PostOrders,
     // isPending: isLoginPending,
@@ -59,24 +60,25 @@ const Aside: React.FC<AsideProps> = (props) => {
       });
       setMastercard(false);
       requestNotify("done", "Success");
-      dispatch(resetDefaultState());
+      dispatch(resetTable());
       setOrderId(Math.floor(Math.random() * 1000000000).toString());
+      queryClient.invalidateQueries({queryKey: ["getMeals"]})
     },
     onError: (error) => {
       console.log('Login error:', error);
     },
   });
   const handlePostOrder = () => {
+    const products = orders ? orders.filter((m) => m.order > 0).map((m) =>
+      Array(m.order).fill({ receiptNo: m.receiptNo })
+    ) : []
     PostOrders(
       {
         orderId,
         userName: name,
         place,
         tables: tables ? tables: [],
-        productsSet: orders ? orders.filter((m) => m.order > 0).map((m) => 
-        ({
-          receiptNo: m.receiptNo,
-        })) : [],
+        productsSet: products.flat(),
         paymentMethod: "Master Card",
       }
     )
@@ -93,9 +95,6 @@ const Aside: React.FC<AsideProps> = (props) => {
       orders.reduce((acc, m) => acc + m.order, 0) === 0) { 
       requestNotify("important", "Please fill in the required fields");
     }  else {
-      // requestNotify("done", "");
-      // setSuccessOrder(true);
-
 
       if (paymentMethod === "mastercard") {
         setMastercard(true);
@@ -104,22 +103,6 @@ const Aside: React.FC<AsideProps> = (props) => {
       } else if (paymentMethod === "qrcode") {
         setQrOpen(true);
       }
-
-
-
-      // console.log({
-      //   orderId,
-      //   name,
-      //   place,
-      //   tables,
-      //   productsSet: orders.filter((m) => m.order > 0).map((m) => 
-      //   ({
-      //     receiptNo: m.receiptNo,
-      //   })),
-      //   paymentMethod: "Master Card",
-      // });
-
-      
     }
   }
   useEffect(() => {

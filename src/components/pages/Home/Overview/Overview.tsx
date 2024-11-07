@@ -50,6 +50,7 @@ const Overview = () => {
   const [page, setPage] = useState<number>(1);
   const [itemperpage, setItemPerPage] = useState<number>(10);
   const [countOrders, setCountOrders] = useState<number>(1);
+  const [allDataCount, setAllDataCount] = useState<number>(0);
 
   useEffect(() => {
     console.log(pagination, page);
@@ -74,6 +75,7 @@ const Overview = () => {
           : Math.floor(m.countOrders / itemperpage) + 1
         
       );
+      setAllDataCount(m.countOrders);
     }
   }, [m, isPending, itemperpage]);
   //  ----------------- get meals ---------------------------
@@ -424,11 +426,13 @@ const Overview = () => {
             <div className={style.main_total_option_text}>
               <p className={style.main_total_option_text_up}>Total Sales</p>
               <h3 className={style.main_total_option_text_head}>
-                ${ordersFiltered ? 
+                {/* ${ordersFiltered ? 
                  Number(ordersFiltered.reduce((acc, order) => acc + order.price, 0).toFixed(3)) > 10000 ?
                   Math.floor(Number(ordersFiltered.reduce((acc, order) => acc + order.price, 0).toFixed(3))/1000) + "K": 
                   ordersFiltered.reduce((acc, order) => acc + order.price, 0).toFixed(3)
-                : "0"}
+                : "0"} */}
+
+                ${m?.sales ? m.sales.toFixed(2): "0"}
               </h3>
             </div>
 
@@ -890,7 +894,7 @@ const Overview = () => {
             <div className={style.main_down_pagination_itemperpage}>
                 
                 <div className={style.main_down_pagination_itemperpage_info}>
-                  Showing {page === 1 ? 1 : page * itemperpage - itemperpage + 1} to {page * itemperpage > countOrders ? countOrders : page * itemperpage} of {countOrders} entries
+                  Showing {page === 1 ? 1 : page * itemperpage - itemperpage + 1} to {page * itemperpage > allDataCount ? allDataCount : page * itemperpage} of {allDataCount} entries
                 </div>
                 
                 <div className={style.main_down_pagination_itemperpage_action}>

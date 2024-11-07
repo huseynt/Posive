@@ -16,7 +16,7 @@ import { IGetMeals } from "../../../utils/API/types";
 
 
 import { useDispatch, useSelector } from "react-redux";
-import { addMeal } from "../../../redux/slice/mealSlice";
+import { addMeal, resetState } from "../../../redux/slice/mealSlice";
 
 
 
@@ -60,6 +60,7 @@ const Main= () => {
   
   useEffect(() => {
     if (!isMealsLoading && getMealsData) {
+      dispatch(resetState());
       getMealsData.forEach((meal) => dispatch(addMeal(meal)));
     }
   }, [getMealsData, isMealsLoading, dispatch]);

@@ -89,8 +89,14 @@ const HomePage = () => {
 
           <div className={style.home_main_container_describtion}>
 
-            <img className={style.home_main_container_describtion_iphone} src={iphone} alt="iphone13pro" />
-            <img className={style.home_main_container_describtion_mac} src={mac} alt="macbook" />
+            <img className={style.home_main_container_describtion_iphone} 
+            src={iphone} 
+            loading="lazy"
+            alt="iphone13pro" />
+            <img className={style.home_main_container_describtion_mac} 
+            src={mac} 
+            loading="lazy"
+            alt="macbook" />
           </div>
           
         </div>

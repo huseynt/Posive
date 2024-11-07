@@ -158,7 +158,7 @@ const RegisterForm: React.FC<RegistrFormProps>  = (props) => {
   return (
     <div className={style.login}>
       <div className={style.login_logo}>
-        <img src={logo} alt="Posive" />
+        <img src={logo} onClick={() => navigate("/")} style={{cursor: "pointer"}} alt="Posive" />
       </div>
       <div className={style.login_previous}>
         <div onClick={handleLogin}><img src={previous} alt="previous" /></div>

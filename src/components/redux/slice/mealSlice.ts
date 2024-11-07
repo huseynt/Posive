@@ -32,9 +32,6 @@ const orderSlice = createSlice({
                 return order;
             });
         },
-        resetState: (state) => {
-            state.orders = [];
-        },
         ascendingOrder: (state, action) => {
             state.orders = state.orders.map((meal) => {
                 if (meal.id === action.payload) {
@@ -69,8 +66,6 @@ const orderSlice = createSlice({
         resetTable: (state) => {
             state.tables = [];
         },
-
-
         changename: (state, action) => {
             state.name = action.payload
         },
@@ -81,6 +76,13 @@ const orderSlice = createSlice({
             state.orders = state.orders.map((order) => {
                 return { ...order, order: 0 };
             });
+            state.place = "Dine In";
+            state.tables = [];
+            state.name = "";
+            state.paymentMethod = "";
+        },
+        resetState: (state) => {
+            state.orders = [];
             state.place = "Dine In";
             state.tables = [];
             state.name = "";
@@ -101,5 +103,5 @@ export const {
     changename,
     resetTable,
     resetDefaultState,
-    changePaymentMethod
+    changePaymentMethod,
  } = orderSlice.actions;

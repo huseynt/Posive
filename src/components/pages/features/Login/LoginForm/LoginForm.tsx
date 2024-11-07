@@ -33,6 +33,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
     email: '',
     password: ''
   });
+  
 
 
 
@@ -182,7 +183,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
   return (
     <div className={style.login}>
       <div className={style.login_logo}>
-        <img src={logo} alt="Posive" />
+        <img onClick={() => navigate("/")} style={{cursor: "pointer"}} src={logo} alt="Posive" />
       </div>
       <h2 className={style.login_name}>Login</h2>
 

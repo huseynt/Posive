@@ -223,12 +223,12 @@
     
             &_option {
                 width: 100%;
-                min-width: 136px;
+                // min-width: 136px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 column-gap: 7px;
-                padding: 5px 20px 5px 20px;
+                padding: 5px 0 5px 0;
                 border-radius: 10px;
                 border: 1px solid $gray;
                 cursor: pointer;

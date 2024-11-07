@@ -108,7 +108,18 @@ function App() {
   //   createRefreshToken();
   // }, []);
 
-
+// Lazy-load components
+// const Login = React.lazy(() => import('@/components/pages/features/Login/Login'));
+// const Registr = React.lazy(() => import('@/components/pages/features/Register/Registr'));
+// const Forgot = React.lazy(() => import('@/components/pages/features/Forgot/Forgot'));
+// const Home = React.lazy(() => import('@/components/pages/Home/Home'));
+// const NotFound = React.lazy(() => import('@/components/pages/features/NotFound/NotFound'));
+// const HelpCenter = React.lazy(() => import('@/components/pages/Home/HelpCenter/HelpCenter'));
+// const Product = React.lazy(() => import('@/components/pages/Home/Product/Product'));
+// const Settings = React.lazy(() => import('@/components/pages/Home/Settings/Settings'));
+// const Overview = React.lazy(() => import('@/components/pages/Home/Overview/Overview'));
+// const Pos = React.lazy(() => import('@/components/pages/Home/Pos/Pos'));
+// const HomePage = React.lazy(() => import('@/components/pages/HomePage/HomePage'));
 
 
   return (

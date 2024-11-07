@@ -4,7 +4,6 @@ import { IOrderState } from "../../../redux/type";
 import { changeTable, resetTable } from "../../../redux/slice/mealSlice";
 import { createGetTables } from "../../../utils/API/API";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
 
 
 interface IgetTables {
@@ -33,11 +32,6 @@ const Table: React.FC<ITable> = (props) => {
     queryKey: ["getTables"],
     queryFn: createGetTables,
   });
-  useEffect(() => {
-    if (getTables) {
-      console.log(getTables);
-    }
-  }, [getTables]);
   // --------------------- get tables ----------------------------
 
 
@@ -82,12 +76,12 @@ const Table: React.FC<ITable> = (props) => {
               <p className={style.table_block_head_list_item_title}>Filled</p>
             </div>
 
-            <div className={style.table_block_head_list_item}>
+            {/* <div className={style.table_block_head_list_item}>
               <div className={style.table_block_head_list_item_circle}
               style={{backgroundColor: "#C65468"}}
               ></div>
               <p className={style.table_block_head_list_item_title}>Reserved</p>
-            </div>
+            </div> */}
           </div>
 
           {/* <div className={style.table_block_head_search}>

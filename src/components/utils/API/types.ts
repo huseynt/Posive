@@ -116,7 +116,7 @@ export interface IPostOrders {
   userName: string;
   place: string;
   tables: string[] | null;
-  productsSet: IPostOrder[] | null;
+  productsSet: IPostOrder[] | object[] | null;
   paymentMethod: string;
 }
 
@@ -136,6 +136,7 @@ export interface IPostOrder {
 export interface IGetOrdersResponse {
   orders: IGetOrder[];
   countOrders: number;
+  sales: number;
 }
 export interface IGetOrder {
   orderId: number;
