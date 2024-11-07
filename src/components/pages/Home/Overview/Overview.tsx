@@ -10,7 +10,7 @@ import OverviewTableItem from "../../features/OverviewTableItem/OverviewTableIte
 import { Helmet } from "react-helmet";
 import { useQuery } from "@tanstack/react-query";
 import { createGetOrders } from "../../../utils/API/API";
-import { IGetOrdersResponse } from "../../../utils/API/types";
+import { IGetMeals, IGetOrdersResponse } from "../../../utils/API/types";
 
 interface IOverview {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -28,6 +28,8 @@ interface IOrder {
   table: string[] | null;
   orderDate: string;
   paymentMethod: string;
+  menus: IGetMeals[];
+  size: string[];
 }
 
 const Overview = () => {
