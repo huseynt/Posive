@@ -179,12 +179,13 @@ interface GetOrdersParams {
     page?: number;
     size?: number;
     date?: string;
+    filter?: string;
 }
-export const createGetOrders = async ({ page, size, date }: GetOrdersParams) => {
+export const createGetOrders = async ({ page, size, date, filter }: GetOrdersParams) => {
     try {
         const token = await getToken();
         const accessToken = token?.accessToken;
-        const res = await fetch(`${base}/order/get?page=${page}&size=${size}&date=${date}`, {
+        const res = await fetch(`${base}/order/get?page=${page}&size=${size}&date=${date}&filter=${filter}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

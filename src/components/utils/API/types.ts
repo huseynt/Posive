@@ -148,6 +148,8 @@ export interface IGetOrder {
   table: string[] | null;
   orderDate: string;
   paymentMethod: string;
+  menus: IGetMeals[];
+  size: string[];
 }
 
 

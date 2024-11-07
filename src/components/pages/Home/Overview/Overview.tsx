@@ -64,8 +64,8 @@ const Overview = () => {
     data: m,
     isPending
   } = useQuery<IGetOrdersResponse | undefined>({
-    queryKey: ["getOrders", { page: page-1, size: itemperpage, date: period }],
-    queryFn: () => createGetOrders({ page: page-1, size: itemperpage, date: period }),
+    queryKey: ["getOrders", { page: page-1, size: itemperpage, date: period, filter: "DESC"}],
+    queryFn: () => createGetOrders({ page: page-1, size: itemperpage, date: period, filter: "DESC" }),
   });
   useEffect(() => {
     if (m && !isPending) {
@@ -94,7 +94,7 @@ const Overview = () => {
         ordersFiltered.length-1
       );
     }
-  }, [checked, m]);
+  }, [checked, m, ordersFiltered]);
 
   useEffect(() => { 
     setChecked(false);
@@ -178,6 +178,7 @@ const Overview = () => {
 
   return (
     <div className={style.overflow}>
+
       <Helmet>
         <title>Posive Overview</title>
         <meta name="description" content="Overview" />
