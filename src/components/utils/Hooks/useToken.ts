@@ -30,6 +30,7 @@ export const resetToken = () => {
     deleteCookie("refresh_token");
     sessionStorage.removeItem("access_token");
     sessionStorage.removeItem("refresh_token");
+    localStorage.removeItem("theme");
     deleteUser();
 };
 

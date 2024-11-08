@@ -19,6 +19,7 @@ npm install @tanstack/react-query @tanstack/react-query-devtools react-hook-form
 npm install @tanstack/eslint-plugin-query -D
 npm install firebase
 npm install i18next react-i18next
+npm install xlsx
 ```
 
 # React + TypeScript + Vite

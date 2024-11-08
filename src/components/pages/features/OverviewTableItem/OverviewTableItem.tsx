@@ -1,4 +1,7 @@
 import { IGetMeals } from "../../../utils/API/types";
+import Notify from "../Notify/Notify";
+import OverviewItemChange from "../OverviewItemChange/OverviewItemChange";
+import OverviewItemDelete from "../OverviewItemDelete/OverviewItemDelete";
 import OverviewItemView from "../OverviewItemView/OverviewItemView";
 import style from "./overviewTableItem.module.scss";
 import { useEffect, useState } from "react";
@@ -10,17 +13,19 @@ interface Order {
   menu: string[] | null;
   price: number;
   place: string | null;
-  table: string[] | null;
+  tables: string[] | null;
   orderDate: string;
   paymentMethod: string;
   menus: IGetMeals[];
   size: string[];
 
+  cashiers: string[] | undefined;
+
   checked: boolean;
   setMultiCheck: React.Dispatch<React.SetStateAction<number>>;
   multiCheck: number;
   period: string;
-  ascend: boolean;
+  ascend: string;
 }
 
 const OverviewTableItem:React.FC<Order> = (props) => {
@@ -29,6 +34,22 @@ const OverviewTableItem:React.FC<Order> = (props) => {
   const [viewOpen, setViewOpen] = useState<string>("");
   const date = new Date(orderDate);
 
+  //  ----------------------------- for notify ----------------------------
+  const [notify, setNotify] = useState<boolean>(false);
+  const [notifyPurpose, setNotifyPurpose] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const requestNotify = (purpose: string, description: string | undefined) => {
+    setNotifyPurpose(purpose);
+    setDescription(description ? description : "");
+    setNotify(true);
+    const timeout = setTimeout(() => {
+      setNotify(false);
+    }, 1800);
+    return () => {
+      clearTimeout(timeout);
+    };
+  };
+  //  ----------------------------- for notify ----------------------------
 
   useEffect(() => {
     setIsChecked(checked);
@@ -47,8 +68,8 @@ const OverviewTableItem:React.FC<Order> = (props) => {
 
   const handleView = (e:  React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement;
-    if (target.id === "view") {
-      setViewOpen("view");
+    if (target.id) {
+      setViewOpen(target.id);
     }
   }
 
@@ -63,6 +84,27 @@ const OverviewTableItem:React.FC<Order> = (props) => {
         viewOpen={viewOpen} 
         {...props}
         />}
+
+        {viewOpen==="change" && 
+        <OverviewItemChange
+        setViewOpen={setViewOpen} 
+        viewOpen={viewOpen} 
+        requestNotify={requestNotify}
+        {...props}
+        />}
+
+        { viewOpen==="delete" &&
+          <OverviewItemDelete
+          setViewOpen={setViewOpen} 
+          viewOpen={viewOpen} 
+          orderId={orderId}
+          requestNotify={requestNotify}
+          />
+        }
+
+        <Notify notify={notify} purpose={notifyPurpose} describtion={description}/>
+
+
 
 
 
@@ -125,7 +167,7 @@ const OverviewTableItem:React.FC<Order> = (props) => {
               backgroundColor: "#4D81E7",
               display: isChecked ? "none" : "block",
             }}
-            id="view"
+            id="change"
             onClick={handleView}
           >
             <svg width="12" pointerEvents={"none"} height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -161,7 +203,7 @@ const OverviewTableItem:React.FC<Order> = (props) => {
               backgroundColor: "#C65468",
               display: isChecked ? "none" : "block",
             }}
-            id="view"
+            id="delete"
             onClick={handleView}
           >
             <svg width="12" pointerEvents={"none"} height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">

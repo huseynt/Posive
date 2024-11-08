@@ -12,6 +12,9 @@ import { useQuery } from "@tanstack/react-query";
 import { createGetOrders } from "../../../utils/API/API";
 import { IGetMeals, IGetOrdersResponse } from "../../../utils/API/types";
 
+import * as XLSX from "xlsx";
+
+
 interface IOverview {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
   setNotification: React.Dispatch<React.SetStateAction<boolean>>;
@@ -25,7 +28,7 @@ interface IOrder {
   menu: string[] | null;
   price: number;
   place: string | null;
-  table: string[] | null;
+  tables: string[] | null;
   orderDate: string;
   paymentMethod: string;
   menus: IGetMeals[];
@@ -45,7 +48,7 @@ const Overview = () => {
   const [multiCheck, setMultiCheck] = useState<number>(1);
   const [ordersFiltered, setOrdersFiltered] = useState<IOrder[]>([]);
   const [ordersSetting, setOrdersSetting] = useState<boolean>(false);
-  const [ascend, setAscend] = useState<boolean>(false);
+  const [ascend, setAscend] = useState<string>("DESC");
 
 
   const [pagination, setPagination] = useState<number>(1);
@@ -61,13 +64,13 @@ const Overview = () => {
   useEffect(() => {
     setPage(1)
   }, [itemperpage]);
-  // ------------------- get meals ------------------------
+  // ------------------- get orders ------------------------
   const {
     data: m,
     isPending
   } = useQuery<IGetOrdersResponse | undefined>({
-    queryKey: ["getOrders", { page: page-1, size: itemperpage, date: period, filter: "DESC"}],
-    queryFn: () => createGetOrders({ page: page-1, size: itemperpage, date: period, filter: "DESC" }),
+    queryKey: ["getOrders", { page: page-1, size: itemperpage, date: period, filter: ascend}],
+    queryFn: () => createGetOrders({ page: page-1, size: itemperpage, date: period, filter: ascend }),
   });
   useEffect(() => {
     if (m && !isPending) {
@@ -80,9 +83,34 @@ const Overview = () => {
       setAllDataCount(m.countOrders);
     }
   }, [m, isPending, itemperpage]);
-  //  ----------------- get meals ---------------------------
+  //  ----------------- get orders ---------------------------
 
 
+  // ------------------- export orders as xlsx ------------------------
+  const exportToExcel = () => {
+    // 1. WorkBook və WorkSheet yaradın
+    const worksheet = XLSX.utils.json_to_sheet(
+    m?.orders?.map((order) => {
+      return {
+        "Order ID": order.orderId,
+        "Receipt Number": order.receiptNumber?.join(""),
+        Cashier: order.cashier,
+        Menu: order.receiptNumber?.join(","),
+        Price: order.price,
+        Place: order.place,
+        Table: order.tables?.join(","),
+        "Order Date": order.orderDate,
+        "Payment Method": order.paymentMethod,
+      };
+    }) || []);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+    // 2. Excel faylını yazın
+    XLSX.writeFile(workbook, "data.xlsx");
+  };
+
+  // ------------------- export orders as xlsx ------------------------
 
 
 
@@ -103,25 +131,25 @@ const Overview = () => {
     setMultiCheck(0);
   }, [ordersFiltered, period]);
 
-  const ascendingOrderDate = () => {
-    const sortedOrders = ordersFiltered.sort((a, b) => {
-      const dateA = new Date(a.orderDate);
-      const dateB = new Date(b.orderDate);
-      return dateA.getTime() - dateB.getTime();
-    });
-    setOrdersFiltered([...sortedOrders]);
-    setAscend(false);
-  };
+  // const ascendingOrderDate = () => {
+  //   const sortedOrders = ordersFiltered.sort((a, b) => {
+  //     const dateA = new Date(a.orderDate);
+  //     const dateB = new Date(b.orderDate);
+  //     return dateA.getTime() - dateB.getTime();
+  //   });
+  //   setOrdersFiltered([...sortedOrders]);
+  //   setAscend(false);
+  // };
 
-  const descendingOrderDate = () => {
-    const sortedOrders = ordersFiltered.sort((a, b) => {
-      const dateA = new Date(a.orderDate);
-      const dateB = new Date(b.orderDate);
-      return dateB.getTime() - dateA.getTime();
-    });
-    setOrdersFiltered([...sortedOrders]);
-    setAscend(true);
-  };
+  // const descendingOrderDate = () => {
+  //   const sortedOrders = ordersFiltered.sort((a, b) => {
+  //     const dateA = new Date(a.orderDate);
+  //     const dateB = new Date(b.orderDate);
+  //     return dateB.getTime() - dateA.getTime();
+  //   });
+  //   setOrdersFiltered([...sortedOrders]);
+  //   setAscend(true);
+  // };
 
   useEffect(() => {
     const today = new Date();
@@ -172,7 +200,7 @@ const Overview = () => {
         return dateB.getTime() - dateA.getTime();
       });
       setOrdersFiltered([...sortedOrders? sortedOrders: []]);
-      setAscend(true)
+      // setAscend(true)
     }
   }, [period, m]);
 
@@ -305,7 +333,9 @@ const Overview = () => {
           </div>
 
           <div className={style.main_up_actions}>
-            <div className={style.main_up_actions_export}>
+            <div className={style.main_up_actions_export}
+            onClick={exportToExcel}
+            >
               <p>Export</p>
               <svg
                 width="17"
@@ -715,8 +745,8 @@ const Overview = () => {
                 // style={{display: ordersSetting ? "flex" : "none"}}
                 >
                   <button className={style.main_down_up_actions_setting_down_btn}
-                  onClick={() => ascendingOrderDate()}
-                  style={{backgroundColor: !ascend ? "#fdefd9" : ""}}
+                  onClick={() => setAscend("ASC")}
+                  style={{backgroundColor: ascend==="ASC" ? "#fdefd9" : ""}}
                   title="Ascending Date"
                   >
                     <svg
@@ -731,8 +761,8 @@ const Overview = () => {
                   </button>
 
                   <button className={style.main_down_up_actions_setting_down_btn}
-                  onClick={() => descendingOrderDate()} 
-                  style={{backgroundColor: ascend ? "#fdefd9" : ""}}
+                  onClick={() => setAscend("DESC")} 
+                  style={{backgroundColor: ascend==="DESC" ? "#fdefd9" : ""}}
                   title="Descending Date"
                   >
                     <svg
@@ -809,6 +839,7 @@ const Overview = () => {
                     multiCheck={multiCheck}
                     period={period}
                     ascend={ascend}
+                    cashiers={m?.cashiers}
                   />
                 ))}
               </tbody>

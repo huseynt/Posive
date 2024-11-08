@@ -9,6 +9,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-content: center;
+    overflow-x: hidden;
 
     @include mobile {
         grid-template-columns: 1fr;

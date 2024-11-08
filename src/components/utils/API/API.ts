@@ -1,5 +1,6 @@
+import { resetToken } from '../Hooks/useToken';
 import { getToken } from '../reUse/getToken';
-import { IcreatePostAuthenticate, IVerifyEmail, IChangePassword, ISaveUserData, ISavePreferences, ISavePlans, IPostOrders, IPostCardData, IVerifyCardData } from './types';
+import { IcreatePostAuthenticate, IVerifyEmail, IChangePassword, ISaveUserData, ISavePreferences, ISavePlans, IPostOrders, IPostCardData, IVerifyCardData, ISaveOrder } from './types';
 
 // test
 export const API = import.meta.env.VITE_API_URL
@@ -102,6 +103,7 @@ export const createGetUser = async () => {
             return "Error";
         }
     } catch (error) {
+        resetToken();
         console.log(error);
     }
 }
@@ -133,7 +135,7 @@ export const createDeleteUser = async () => {
     try {
         const token = await getToken();
         const accessToken = token?.accessToken;
-        const res = await fetch(`${base}/account/deleteByEmail`, {
+        const res = await fetch(`${base}/account/deleting`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -328,6 +330,49 @@ export const createGetTables = async () => {
         });
         if (res.ok) {
             return res.json();
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Save orders
+export const createSaveOrders = async (data: ISaveOrder) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/order/update`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            body: JSON.stringify(data)
+        });
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Delete orders
+export const createDeleteOrders = async (id: string) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/order/delete?id=${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+        if (res.ok) {
+            return "Success";
         }
         return Promise.reject(res);
     } catch (error) {

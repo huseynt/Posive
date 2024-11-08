@@ -10,7 +10,7 @@ interface IQRCodeComponentProps {
   menu: string[] | null;
   price: number;
   place: string | null;
-  table: string[] | null;
+  tables: string[] | null;
   orderDate: string;
   paymentMethod: string;
   
@@ -21,10 +21,13 @@ interface IQRCodeComponentProps {
 const OverviewItemView: React.FC<IQRCodeComponentProps> = (props) => {
   const { setViewOpen, menus, size, paymentMethod, orderDate, cashier, orderId } = props;
 
+  const handlePrint = () => {
+    window.print();
+  }
 
 
   return (
-    <div className={style.view}>
+    <div className={`${style.view} ${style.printable_modal}`}>
       <div className={style.view_bg} onClick={() => setViewOpen("")}></div>
 
       <div className={style.view_block}>
@@ -136,7 +139,9 @@ const OverviewItemView: React.FC<IQRCodeComponentProps> = (props) => {
         </div>
 
         <div className={style.view_block_actions}>
-          <div className={`${style.view_block_actions_option} ${style.view_block_actions_print}`}>
+          <div className={`${style.view_block_actions_option} ${style.view_block_actions_print}`}
+          onClick={handlePrint}
+          >
             <span>Print</span>
             <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4.8335 5.16634H11.1668V3.83301C11.1668 2.49967 10.6668 1.83301 9.16683 1.83301H6.8335C5.3335 1.83301 4.8335 2.49967 4.8335 3.83301V5.16634Z" stroke="white" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
@@ -148,7 +153,9 @@ const OverviewItemView: React.FC<IQRCodeComponentProps> = (props) => {
           </div>
 
           <div className={style.view_block_actions_option}
-          style={{width: "100px"}}>
+          style={{width: "100px"}}
+          onClick={() => setViewOpen("change")}
+          >
             <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M9.34006 2.89982L3.86673 8.69315C3.66006 8.91315 3.46006 9.34649 3.42006 9.64649L3.1734 11.8065C3.08673 12.5865 3.64673 13.1198 4.42006 12.9865L6.56673 12.6198C6.86673 12.5665 7.28673 12.3465 7.4934 12.1198L12.9667 6.32649C13.9134 5.32649 14.3401 4.18649 12.8667 2.79315C11.4001 1.41315 10.2867 1.89982 9.34006 2.89982Z" stroke="#1A1C1E" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M8.42676 3.86621C8.71342 5.70621 10.2068 7.11288 12.0601 7.29954" stroke="#1A1C1E" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
@@ -157,6 +164,7 @@ const OverviewItemView: React.FC<IQRCodeComponentProps> = (props) => {
             <span>Edit</span>
             </div>
           <div className={style.view_block_actions_option}
+          onClick={() => setViewOpen("delete")}
           style={{width: "100px"}}>
             <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M14.5 4.48665C12.28 4.26665 10.0467 4.15332 7.82 4.15332C6.5 4.15332 5.18 4.21999 3.86 4.35332L2.5 4.48665" stroke="#AA3D5A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>

@@ -9,7 +9,9 @@ export const saveUser = ( userData : IgetUser | undefined ) => {
     // localStorage.setItem("userImage", userData?.imageUrl || "");
     // localStorage.setItem("userRole", userData?.role || "");
     // localStorage.setItem("userTheme", !userData?.setting?.theme ? "light" : userData?.setting?.theme  || "");
-
+    
+    
+    localStorage.setItem("theme", userData?.setting?.theme || "light");
 
     setCookie("userFirstname", userData?.firstname || "", 7);
     setCookie("userLastname", userData?.lastname || "", 7);
@@ -21,15 +23,9 @@ export const saveUser = ( userData : IgetUser | undefined ) => {
 }
 
 export const deleteUser = () => {
-    // localStorage.removeItem("userData");
-    // localStorage.removeItem("userEmail");
-    // localStorage.removeItem("userPhone");
-    // localStorage.removeItem("userImage");
-    // localStorage.removeItem("userRole");
-    // localStorage.removeItem("userTheme");
-
-    deleteCookie("userData");
     deleteCookie("userEmail");
+    deleteCookie("userFirstname");
+    deleteCookie("userLastname");
     deleteCookie("userPhone");
     deleteCookie("userImage");
     deleteCookie("userRole");

@@ -51,8 +51,13 @@ interface ISuccessOrder {
   tables: string[];
 }
 
-const Home = () => {
+interface IHome {
+  setTheme: (theme: string) => void;
+}
 
+const Home: React.FC<IHome> = (props) => {
+
+  const { setTheme } = props;
   const [bag, setBag] = useState<boolean>(false);
   const [qrOpen, setQrOpen] = useState<boolean>(false);
   const [table, setTable] = useState<boolean>(false);
@@ -116,6 +121,7 @@ useEffect(() => {
     if (userData) {
       console.log(userData);
       saveUser(userData);
+      setTheme(userData.setting?.theme || "light");
     } 
     // else if (!userData) {
     //   const refreshToken = await createRefreshToken();
@@ -125,7 +131,7 @@ useEffect(() => {
     // }
   };
   handleUserData();
-}, [userData]);
+}, [userData, setTheme]);
 // ----------------------------- get user ----------------------------
 
 

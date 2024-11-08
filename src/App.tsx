@@ -35,8 +35,8 @@ import { changeLanguage } from 'i18next'
 function App() {
   // ---------- theme ------------------------------
   const [theme, setTheme] = useState<string>("");
+  const currentTheme = localStorage.getItem('theme');
   useEffect(() => {
-    const currentTheme = localStorage.getItem('theme');
     if (currentTheme) {
       document.body.setAttribute('data-theme', currentTheme);
       setTheme(currentTheme);
@@ -46,7 +46,17 @@ function App() {
       localStorage.setItem('theme', 'light');
       setTheme('light');
     }
-  }, [theme, setTheme]);
+  }, [theme, setTheme, currentTheme]);
+
+  useEffect(() => {
+    if(theme === 'system') {
+      const matchMediaDark = window.matchMedia('(prefers-color-scheme: dark)');
+      const updateTheme = () => document.body.setAttribute('data-theme', matchMediaDark.matches ? 'dark' : 'light');
+      updateTheme();
+      matchMediaDark.addEventListener('change', updateTheme);
+      return () => matchMediaDark.removeEventListener('change', updateTheme);
+    }
+  }, [theme, currentTheme]);
   // ---------- theme ------------------------------
 
   
@@ -80,7 +90,7 @@ function App() {
     }
     else {
       changeLanguage('en');
-    }})
+    }}, [])
   // ---------- language -------------------
 
   // ----------- body title ----------------
@@ -91,17 +101,6 @@ function App() {
   // ----------- body title ----------------
 
 
-  // ----------- system mode ----------------    
-  useEffect(() => {
-    if(theme === 'system') {
-      const matchMediaDark = window.matchMedia('(prefers-color-scheme: dark)');
-      const updateTheme = () => document.body.setAttribute('data-theme', matchMediaDark.matches ? 'dark' : 'light');
-      updateTheme();
-      matchMediaDark.addEventListener('change', updateTheme);
-      return () => matchMediaDark.removeEventListener('change', updateTheme);
-    }
-  }, [theme]);
-  // ----------- system mode ----------------
 
 
   // useEffect(() => {
@@ -128,13 +127,13 @@ function App() {
         {!loaded && <TriangleLoader /> }
         <div style={{opacity: loaded ? '1' : '0'}}>
           <Routes>
-            <Route index element={<HomePage />} />
+            <Route index element={<HomePage/>} />
             <Route path='/registr' element={<Registr />} />
             <Route path='/login' element={<Login />} />
             <Route path='/forgot' element={<Forgot />} />
             <Route path='/homepage' element={<HomePage />} />
             
-            <Route path='/home' element={<Home />}>
+            <Route path='/home' element={<Home setTheme={setTheme}/>}>
               <Route index element={<Pos/>} />
               <Route path='' element={<Pos/>} />
               <Route path='overview' element={<Overview/>} />

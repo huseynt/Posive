@@ -137,6 +137,7 @@ export interface IGetOrdersResponse {
   orders: IGetOrder[];
   countOrders: number;
   sales: number;
+  cashiers: string[];
 }
 export interface IGetOrder {
   orderId: number;
@@ -145,7 +146,7 @@ export interface IGetOrder {
   menu: string[] | null;
   price: number;
   place: string | null;
-  table: string[] | null;
+  tables: string[] | null;
   orderDate: string;
   paymentMethod: string;
   menus: IGetMeals[];
@@ -165,6 +166,37 @@ export interface IPostCardData {
 export interface IVerifyCardData {
   confirmPassword: string;
 }
+
+
+
+// orderId: orderId,
+// userName: cashier,
+// productsSet: products,
+// price: price,
+// orderDate: orderDate,
+// paymentMethod: paymentMethod,
+
+export interface ISaveOrder {
+  orderId: number;
+  userName: string;
+  productsSet: { receiptNo: string }[] | [];
+  price: number;
+  orderDate: string;
+  paymentMethod: string;
+}
+
+// interface IReceipts {
+//   receiptNo: string;
+// }
+
+
+
+
+
+
+
+
+
 
 // export interface IGetOrdersResponse {
 //   orders: IGetOrders[];
