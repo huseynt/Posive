@@ -22,15 +22,17 @@ interface Order {
   cashiers: string[] | undefined;
 
   checked: boolean;
-  setMultiCheck: React.Dispatch<React.SetStateAction<number>>;
-  multiCheck: number;
+  setMultiCheck: React.Dispatch<React.SetStateAction<number[]>>;
+  multiCheck: number[];
   period: string;
   ascend: string;
 }
 
 const OverviewTableItem:React.FC<Order> = (props) => {
-  const { orderId, receiptNumber, menu, cashier, orderDate, paymentMethod, checked, setMultiCheck, multiCheck, period, ascend } = props;
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const { orderId, receiptNumber, menus, cashier, orderDate, paymentMethod, checked, setMultiCheck, multiCheck, period, ascend } = props;
+  const [isChecked, setIsChecked] = useState<boolean>(
+    multiCheck.includes(orderId) ? true : false
+  );
   const [viewOpen, setViewOpen] = useState<string>("");
   const date = new Date(orderDate);
 
@@ -57,10 +59,14 @@ const OverviewTableItem:React.FC<Order> = (props) => {
 
   useEffect(() => {
     if (isChecked) {
-      setMultiCheck(multiCheck+1);
-    } else if (multiCheck > 0) {
-      setMultiCheck(multiCheck-1);
-    }}, [isChecked]);
+      setMultiCheck((prev) => [...prev, orderId]);
+    } 
+    else if (multiCheck.includes(orderId)) {
+      setMultiCheck(
+        multiCheck.filter((check) => check !== orderId)
+      );
+    }
+  }, [isChecked]);
 
     useEffect(() => {
       setIsChecked(false);
@@ -116,11 +122,36 @@ const OverviewTableItem:React.FC<Order> = (props) => {
           className={style.tr_checkbox}
           onChange={()=> setIsChecked(!isChecked)} checked={isChecked} />
         </td>
-        <td>{orderId}</td>
+
+        <td
+        title={orderId.toString()}
+        >{orderId}</td>
+
         <td className={style.tr_desktop}
         style={{maxWidth: "80px"}}
+        title={receiptNumber?.join('')}
         >{receiptNumber?.join('')}</td>
-        <td className={style.tr_desktop} style={{maxWidth: "100px"}}>{menu}</td>
+        <td className={style.tr_desktop} style={{maxWidth: "100px"}}
+        title={
+          menus &&
+          menus.filter((menu, index, self) =>
+            index === self.findIndex((t) => (
+              t.name === menu.name
+            ))
+          ).map((menu) => {
+            return menu.name ? menu.name.replace(/_/g, " ") : "";
+          }).join(", ")
+        }
+        >
+          {menus.filter((menu, index, self) =>
+            index === self.findIndex((t) => (
+              t.name === menu.name
+            ))
+          ).map((menu) => {
+            return menu.name ? menu.name.replace(/_/g, " ") : "";
+          }).join(", ")
+          }
+          </td>
         <td className={style.tr_desktop} style={{maxWidth: "80px"}}>{cashier}</td>
         <td className={style.tr_mobileDate}>{
           date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()

@@ -379,3 +379,25 @@ export const createDeleteOrders = async (id: string) => {
         console.log(error);
     }
 }
+
+// Delete orders all
+export const createDeleteOrdersAll = async (data: number[]) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/order/deleteALL`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            body: JSON.stringify(data)
+        });
+        if (res.ok) {
+            return "Success";
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
