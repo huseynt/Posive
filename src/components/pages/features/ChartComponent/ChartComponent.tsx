@@ -1,7 +1,13 @@
 import style from './chartComponent.module.scss';
 import React, { useEffect, useState } from 'react';
 import HomeLineChart from './Chart/Chart';
+import { useQuery } from '@tanstack/react-query';
+import { createGetStatistics } from '../../../utils/API/API';
 
+interface IGetStatistics {
+    incomes: number[],
+    years: string[]
+}
 
 
 const ChartComponent: React.FC = () => {
@@ -9,23 +15,58 @@ const ChartComponent: React.FC = () => {
     const [selectedYear, setSelectedYear] = useState<string>(`${today.getFullYear()}`);
     const [selectedPeriod, setSelectedPeriod] = useState<string>('1Y');
     // const [firstItem, setFirstItem] = useState<string>('');
-    const [selectedMonth, setSelectedMonth] = useState<string>('');
+    const [selectedMonth, setSelectedMonth] = useState<string>('jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec');
+
+
+    // ------------------- get orders ------------------------
+    const {
+        data: StatisticsData,
+        isPending
+    } = useQuery<IGetStatistics | undefined>({
+        queryKey: ["getStatistics", { months: selectedMonth, year: selectedYear}],
+        queryFn: () => createGetStatistics(selectedMonth, Number(selectedYear)),
+    });
+    
+    useEffect(() => {
+        if (StatisticsData && !isPending) {
+        console.log("StatisticsData", StatisticsData.incomes, StatisticsData.years);
+        }
+    }, [StatisticsData, isPending]);
+    // const dataset = StatisticsData.incomes.map((income: any) => income.totalPrice);
+    //  ----------------- get orders ---------------------------
 
 
     // const report = generateCardReport(orders, selectedYear, selectedPeriod);
     // const filteredYears = [...orders.map((order) => order.dateTime.split(' ')[0]).map((date) => date.split('/')[2]).filter((year, index, self) => self.indexOf(year) === index)]
 
     
-    const order = [ 1000, 200, 300, 400, 500, 600, 700, 200, 900, 1000, 1100, 110 ]
-    const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    const year = ["2023", "2024"]
+    // const order = [ 1000, 200, 300, 400, 500, 600, 700, 200, 900, 1000, 1100, 110 ]
+    // const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    // const year = ["2023", "2024"]
 
-        useEffect(() => {
-            console.log({
-                selectedYear,
-                selectedMonth
-            });
-        }, [selectedMonth, selectedYear])
+
+    const days = (month: string) => {
+        switch (month) {
+            case 'Jan':
+            case 'Mar':
+            case 'May':
+            case 'Jul':
+            case 'Aug':
+            case 'Oct':
+            case 'Dec':
+                return 31;
+            case 'Apr':
+            case 'Jun':
+            case 'Sep':
+            case 'Nov':
+                return 30;
+            case 'Feb':
+                return 28;
+            default:
+                return 31;
+        }
+    }
+
 
 
 
@@ -40,13 +81,19 @@ const ChartComponent: React.FC = () => {
                         <div className={style.chartComp_up_actions_year_selected}>{selectedYear}</div>
                         
                         <div className={style.chartComp_up_actions_year_down}>
-                            {year.map((year) => (
+                            {StatisticsData?.years ? StatisticsData.years.map((year) => (
                                 <div className={style.chartComp_up_actions_year_down_option} 
                                 onClick={() => setSelectedYear(`${year}`)} 
                                 key={year}
                                 style={{backgroundColor: selectedYear===year ? "#fff" : ""}}
                                 >{year}</div>
-                            ))}
+                                )) 
+                                : 
+                                (
+                                    <div className={style.chartComp_up_actions_year_down_option} 
+                                    style={{backgroundColor: "#fff"}}>2024</div>
+                                )
+                            }   
                         </div>
                     </div>
 
@@ -119,13 +166,13 @@ const ChartComponent: React.FC = () => {
 
                         <div className={style.chartComp_up_actions_period_threeDown}>
                             <div className={style.chartComp_up_actions_period_threeDown_option}
-                            onClick={() => setSelectedMonth("Jan, Feb, Mar")}
+                            onClick={() => setSelectedMonth("Jan, Feb, Mar, Apr")}
                             >I quarter</div>
                             <div className={style.chartComp_up_actions_period_threeDown_option}
-                            onClick={() => setSelectedMonth("Apr, May, Jun")}
+                            onClick={() => setSelectedMonth("May, Jun, Jul, Aug")}
                             >II quarter</div>
                             <div className={style.chartComp_up_actions_period_threeDown_option}
-                            onClick={() => setSelectedMonth("Jul, Aug, Sep")}
+                            onClick={() => setSelectedMonth("Sep, Oct, Nov, Dec")}
                             >III quarter</div>
                         </div>
 
@@ -146,10 +193,10 @@ const ChartComponent: React.FC = () => {
 
             <div className={style.chartComp_chart}>
                 <HomeLineChart data={{
-                    labels: month,
+                    labels: selectedMonth.split(', ').length == 1 ? Array.from({ length: days(selectedMonth) }, (_, i) => String(i + 1)): selectedMonth.split(', '),
                     datasets: [{
                         label: 'Total Price',
-                        data: order,
+                        data:  StatisticsData?.incomes || [],
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         borderColor: 'rgba(75, 192, 192, 1)',
                     }]

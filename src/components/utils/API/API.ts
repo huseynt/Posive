@@ -410,3 +410,24 @@ export const createDeleteOrdersAll = async (data: number[]) => {
         console.log(error);
     }
 }
+
+// Get statistics with params (months, years)
+export const createGetStatistics = async (months: string, year: number) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/order/incomeByMonth?months=${months}&year=${year}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
