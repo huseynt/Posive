@@ -304,4 +304,382 @@
     }
 
 
+    &_down {
+        width: 100%;
+        padding: 18px 24px 24px 24px;
+        border-radius: 7px;
+        animation: fadeIn .8s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        align-items: center;
+
+        @include mobile {
+            padding-inline: 15px;
+        }
+
+        @include themed() {
+            border: 1px solid t(gray);
+            background-color: t(white);
+          }
+
+
+        &_up {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &_head {
+                @extend %ml_b;
+                @include themed() {
+                    color: t(black);
+                  } 
+            }
+
+            &_actions {
+                display: flex;
+                align-content: center;
+                column-gap: 12px;
+
+                &_search {
+                    position: relative;
+                    border-radius: 10px;
+
+                    @include mobile {
+                        display: none;
+                    }
+
+                    @include themed() {
+                        border: 1px solid t(gray);
+                      }
+                }
+
+                &_delete {
+                    padding: 8px 10px;
+                    border-radius: 8px;
+                    transition: background-color 0.1s ease-in-out;
+                    position: relative;
+                    cursor: pointer;
+        
+                    &:hover {
+                        background-color: darken(#868686a9, 30%) !important; 
+                    }
+
+                    svg {
+                        width: 20px;
+                        height: 20px;
+                    }
+
+                    &_count {
+                        position: absolute;
+                        width: 16px;
+                        height: 15px;
+                        color: $black;
+                        @extend %ex_s_b;
+                        top: 3px;
+                        right: 2px;
+                        padding: 1px 2px;
+                        border-radius: 50%;
+                        background-color: $white;
+                        text-align: center;
+                    }
+                }
+
+                &_setting {
+                    padding: 8px 10px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    border: 1px solid $gray;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    user-select: none;
+                    position: relative;
+
+                    @include themed() {
+                        border: 1px solid t(gray);
+                        background-color: t(white);
+                      }
+
+                    &:hover {
+                        div {
+                            display: flex;
+                        }
+
+                        svg {
+                            path {
+                                @include themed() {
+                                    stroke: t(main_color);
+                                }
+                            }
+                        }
+                    }
+
+                    &_icon {
+                            path {
+                                @include themed() {
+                                    stroke: t(black);
+                                }
+                            }
+                    }
+
+                    &_down {
+                        width: calc(100% + 2px);
+                        padding-top: 10px;
+                        position: absolute;         
+                        top: 27px;
+                        left: -1px;
+                        display: none;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 0 0 10px 10px;
+
+                        @include themed() {
+                            background-color: t(white);
+                            border: 1px solid t(gray);
+                            border-top: none;
+                        }
+
+                        &_btn {
+                            width: 100%;
+                            background-color: transparent;
+                            border-radius: 10px;
+                            
+
+                            &:hover {
+                                @include themed() {
+                                    background-color: t(main_light_two);
+                                }   
+                            }
+                            svg {
+                                width: 18px;
+                                margin: 0 auto;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
+        &_transactions {
+            width: 100%;
+            background-color: transparent;
+            animation: fadeIn 0.5s;
+
+            &_table {
+                width: 100%;
+                @extend %text_overflow;
+                border-radius: 10px;
+
+                tr {
+
+                    th {
+                        max-width: 300px;
+                        text-align: left;
+                        padding: 10px 12px;
+                        @extend %sm, %text_overflow;
+
+                        @include themed() {
+                            color: t(light_m_gray);
+                            background-color: t(table_header);
+                        }
+
+
+                        input[type="checkbox"] {
+                            accent-color: $main_color;
+                            width: 15px;
+                            height: 15px;
+                        }
+
+                        @include mobile {
+                            padding: 7px 5px;
+                        }
+                    }
+
+                    td {
+                        // max-width: 300px;
+                        text-align: left;
+                        padding: 7px 12px;
+                        @extend %sm, %text_overflow;
+
+                        @include mobile {
+                            padding: 7px 5px;
+                        }
+                    }
+                }
+
+                &_head_th_mobileDate {
+                    @extend %text_overflow;
+
+                    @include mobile {
+                        max-width: 100px !important;
+                    }
+                }
+
+                &_head_th_desktop {
+
+                    @include mobile {
+                        display: none;
+                    }
+                }
+                &_tbody {
+                    width: 100%;
+                    animation: fadeTbody 0.4s;
+                }
+            }
+        }
+
+        &_pagination {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            column-gap: 10px;
+            padding: 10px 0;
+            animation: fadeIn 0.5s;
+            @extend %sm;
+
+            @include mobile {
+                flex-direction: column;
+                row-gap: 10px;
+            }
+
+            &_pages {
+                height: 28px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                column-gap: 5px;
+
+                @include mobile {
+                    width: 100%;
+                    column-gap: 3px;
+                }
+
+                &_page {
+                    min-width: 32px;
+                    padding: 2px 5px;
+                    display: grid;
+                    place-items: center;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    user-select: none;
+                    @extend %sm;
+
+                    &:hover {
+                        border: 1px solid $gray;
+                        background-color: $main_light_two;
+                    }
+                }
+
+                &_dots {
+                    min-width: 32px;
+                    height: 100%;
+                    padding: 2px 5px;
+                    display: grid;
+                    place-items: center;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    user-select: none;
+                    @extend %sm;
+
+                    &_hover:hover {
+                        border: 1px solid $gray;
+                        background-color: $main_light_two;
+                    }
+                }
+
+                &_left {
+                    min-width: 32px;
+                    height: 100%;
+                    padding: 2px 5px 2px 4px;
+                    margin: 0 5px;
+                    display: grid;
+                    place-items: center;
+                    border-radius: 5px;
+                    border: 1px solid $gray;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    user-select: none;
+
+                    &:hover {
+                        background-color: $main_light_color;
+                    }
+
+                    @include mobile {
+                        margin-right: auto;
+                    }
+                }
+
+                &_right {
+                    min-width: 32px;
+                    height: 100%;
+                    padding: 2px 4px 2px 5px;
+                    margin: 0 5px;
+                    display: grid;
+                    place-items: center;
+                    border-radius: 5px;
+                    border: 1px solid $gray;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    user-select: none;
+
+                    &:hover {
+                        background-color: $main_light_color;
+                    }
+
+                    @include mobile {
+                        margin-left: auto;
+                    }
+                }
+                
+            }
+
+            &_itemperpage {
+                display: flex;
+                align-items: center;
+                column-gap: 10px;
+
+                @include mobile {
+                    width: 100%;
+                    column-gap: 3px;
+                    justify-content: space-between;
+                }
+
+                &_info {
+                    @extend %s;
+                    @include themed() {
+                        color: t(light_m_gray);
+                    }
+                }
+
+                &_action {
+                    padding: 2px 7px;
+                    border: 1px solid $gray;
+                    border-radius: 5px;
+
+
+                    &_select {
+                        outline: none;
+                        border: none;
+
+                        option {
+                            @extend %sm;
+                        }
+                    }
+                }
+            }
+           
+
+        }
+    }
+
+
 }

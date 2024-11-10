@@ -66,6 +66,8 @@ const Overview = () => {
   useEffect(() => {
     setPage(1)
   }, [itemperpage]);
+
+  
   // ------------------- get orders ------------------------
   const {
     data: m,
@@ -86,6 +88,7 @@ const Overview = () => {
     }
   }, [m, isPending, itemperpage]);
   //  ----------------- get orders ---------------------------
+
 
 
   // ------------------- export orders as xlsx ------------------------
@@ -115,31 +118,6 @@ const Overview = () => {
   // ------------------- export orders as xlsx ------------------------
 
 
-
-
-  // ------------------- delete orders all ------------------------
-  // const queryClient = useQueryClient();
-  // const {
-  //   mutate: DeleteOrdersAll,
-  //   // isPending: isDeletingAll,
-  // } = useMutation({
-  //   mutationFn: createDeleteOrdersAll,
-  //   onSuccess: () => {
-  //     console.log('Delete success:');
-  //       console.log('Deleted');
-  //       queryClient.invalidateQueries({queryKey: ["getOrders"]})
-  //       setMultiCheck([]);
-  //       // requestNotify("done", "Order deleted successfully");
-  //   },
-  //   onError: (error) => {
-  //     console.log('Delete error:', error);  
-  //     // requestNotify("undone", "Error deleting order");
-  //   },
-  // });
-  // const handleDeleteAll = () => {
-  //   DeleteOrdersAll(multiCheck);
-  // }
-  // ------------------- delete orders all ------------------------
   
   useEffect(() => {
     if (checked == false) {
@@ -185,49 +163,78 @@ const Overview = () => {
     // console.log(mealsFiltered);
   }, []);
 ``
+// useEffect(() => {
+//   if (period !== "All time") {
+//     const filteredOrders = m?.orders.filter((order) => {
+//       const date = new Date(order.orderDate); // ISO formatında tarix, birbaşa `Date` obyektinə çevrilir
+//       const today = new Date();
+
+//       if (period === "This week") {
+//         const startOfWeek = new Date(today);
+//         startOfWeek.setDate(today.getDate() - today.getDay());
+
+//         const endOfWeek = new Date(today);
+//         endOfWeek.setDate(today.getDate() - today.getDay() + 6);
+
+//         return date >= startOfWeek && date <= endOfWeek;
+//       } 
+//       else if (period === "This month") {
+//         return (
+//           date.getMonth() === today.getMonth() &&
+//           date.getFullYear() === today.getFullYear()
+//         );
+//       } else if (period === "This year") {
+//         return date.getFullYear() === today.getFullYear();
+//       } else {
+//         return order;
+//       }
+//     });
+
+//     setOrdersFiltered(filteredOrders ? filteredOrders : []);
+//     setOrdersSetting(false);
+//     console.log(period);
+//   } else {
+//     const sortedOrders = m?.orders.sort((a, b) => {
+//       const dateA = new Date(a.orderDate);
+//       const dateB = new Date(b.orderDate);
+//       return dateB.getTime() - dateA.getTime();
+//     });
+//     setOrdersFiltered([...sortedOrders ? sortedOrders : []]);
+//   }
+// }, [period, m]);
+
+
+
   useEffect(() => {
-    if (period!=="All time") {
-    const filteredOrders = m?.orders.filter((order) => {
-      if (period === "This week") {
-        const today = new Date();
-        const date = new Date(order.orderDate);
-        const startOfWeek = new Date(
-          today.setDate(today.getDate() - today.getDay())
-        );
-        const endOfWeek = new Date(
-          today.setDate(today.getDate() - today.getDay() + 6)
-        );
-        return date >= startOfWeek && date <= endOfWeek;
-      } else if (period === "This month") {
-        const today = new Date();
-        const date = new Date(order.orderDate);
-        return (
-          date.getMonth() === today.getMonth() &&
-          date.getFullYear() === today.getFullYear()
-        );
-      } else if (period === "This year") {
-        const today = new Date();
-        const date = new Date(order.orderDate);
-        return date.getFullYear() === today.getFullYear();
-      } else {
-        return order;
-      }
-    });
-    setOrdersFiltered(filteredOrders ? filteredOrders : []);
-    setOrdersSetting(false)
-    console.log(period);
-    } else {
-      const sortedOrders = m?.orders.sort((a, b) => {
+    let sortedOrders: IOrder[] = [];
+    if (m && ascend === "DESC") {
+      sortedOrders = m.orders.sort((a, b) => {
         const dateA = new Date(a.orderDate);
         const dateB = new Date(b.orderDate);
         return dateB.getTime() - dateA.getTime();
       });
-      setOrdersFiltered([...sortedOrders? sortedOrders: []]);
-      // setAscend(true)
+    } else if (m && ascend === "ASC") {
+      sortedOrders = m.orders.sort((a, b) => {
+        const dateA = new Date(a.orderDate);
+        const dateB = new Date(b.orderDate);
+        return dateA.getTime() - dateB.getTime();
+      });
     }
-  }, [period, m]);
+    setOrdersFiltered([...sortedOrders]);
+  }, [m, ascend]);
+
+          // .map(order => ({
+      //   ...order,
+      //   orderDate: new Date(order.orderDate).toLocaleDateString("en-GB")
+      // }));
 
 
+  useEffect(() => {
+    console.log(ordersFiltered);
+  }, [ordersFiltered]);
+
+
+ 
 
   return (
     <>

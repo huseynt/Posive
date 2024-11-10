@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet'
 import { useOutletContext } from "react-router-dom";
 
 import ChartComponent from '../../features/ChartComponent/ChartComponent';
+import { useState } from 'react';
 
 interface IProduct {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,10 +11,76 @@ interface IProduct {
   notification: boolean;
 }
 
+const ProductData = [
+  {
+    id: 1,
+    name: "Healthy Salad",
+    receipt: "MW12131",
+    order: 110,
+    category: "Salad",
+    price: "$12.00",
+    stock: 150,
+    tax: "2%",
+    discount: "15%",
+  },
+  {
+    id: 2,
+    name: "Healthy Salad",
+    receipt: "MW12131",
+    order: 110,
+    category: "Salad",
+    price: "$12.00",
+    stock: 150,
+    tax: "2%",
+    discount: "15%",
+  },
+  {
+    id: 3,
+    name: "Healthy Salad",
+    receipt: "MW12131",
+    order: 110,
+    category: "Salad",
+    price: "$12.00",
+    stock: 150,
+    tax: "2%",
+    discount: "15%",
+  },
+  {
+    id: 4,
+    name: "Healthy Salad",
+    receipt: "MW12131",
+    order: 110,
+    category: "Salad",
+    price: "$12.00",
+    stock: 150,
+    tax: "2%",
+    discount: "15%",
+  },
+  {
+    id: 5,
+    name: "Healthy Salad",
+    receipt: "MW12131",
+    order: 110,
+    category: "Salad",
+    price: "$12.00",
+    stock: 150,
+    tax: "2%",
+    discount: "15%",
+  }
+]
+
 
 
 const Product = () => {
   const { setToggleMenu, setNotification, notification } = useOutletContext<IProduct>();
+
+  const [pagination, setPagination] = useState<number>(1);
+  const [page, setPage] = useState<number>(1);
+  const [itemperpage, setItemPerPage] = useState<number>(10);
+  const [countOrders] = useState<number>(1);
+  const [allDataCount] = useState<number>(0);
+  // const [deleteAllOpen, setDeleteAllOpen] = useState<boolean>(false);
+
 
 
 
@@ -229,6 +296,380 @@ const Product = () => {
         <div className={style.main_chart}>
           <ChartComponent/>
         </div>
+
+
+
+
+          {/* -------------------------- Transactions -------------------------------- */}
+          <div className={style.main_down}
+          // onClick={() => setPeriodDown(false)}
+          >
+            {/* -------------------------- Transactions up -------------------------------- */}
+            <div className={style.main_down_up}>
+              <p className={style.main_down_up_head}>Recent Transaction</p>
+              <div className={style.main_down_up_actions}>
+                <div className={style.main_down_up_actions_search}>
+                  {/* <SearchInput
+                    meals={meals}
+                    setMealsFiltered={setMealsFiltered}
+                  /> */}
+                </div>
+
+                {/* --------------------- delete multiselect ----------------------------------- */}
+                <div
+                  className={style.main_down_up_actions_delete}
+                  style={{
+                    backgroundColor: "#C65468",
+                    // display: multiCheck.length !== 0 ? "block" : "none",
+                  }}
+                  // onClick={() => setDeleteAllOpen(true)}
+                >
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M10.5 2.99023C8.835 2.82523 7.16 2.74023 5.49 2.74023C4.5 2.74023 3.51 2.79023 2.52 2.89023L1.5 2.99023"
+                      fill="white"
+                    />
+                    <path
+                      d="M10.5 2.99023C8.835 2.82523 7.16 2.74023 5.49 2.74023C4.5 2.74023 3.51 2.79023 2.52 2.89023L1.5 2.99023"
+                      stroke="white"
+                      strokeWidth="1.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M4.25 2.485L4.36 1.83C4.44 1.355 4.5 1 5.345 1H6.655C7.5 1 7.565 1.375 7.64 1.835L7.75 2.485"
+                      stroke="white"
+                      strokeWidth="1.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M9.42495 4.57031L9.09995 9.60531C9.04495 10.3903 8.99995 11.0003 7.60495 11.0003H4.39495C2.99995 11.0003 2.95495 10.3903 2.89995 9.60531L2.57495 4.57031"
+                      stroke="white"
+                      strokeWidth="1.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M5.16504 8.25H6.83004"
+                      stroke="white"
+                      strokeWidth="1.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M4.75 6.25H7.25"
+                      stroke="white"
+                      strokeWidth="1.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  <div className={style.main_down_up_actions_delete_count}>
+                    {/* {multiCheck.length} */}
+                    5
+                  </div>
+                </div>
+
+                {/* --------------------- setting ----------------------------------- */}
+                <div className={style.main_down_up_actions_setting}
+                title="Sorting Date"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 18 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    // onClick={() => setOrdersSetting(!ordersSetting)}
+                    className={style.main_down_up_actions_setting_icon}
+                  >
+                    <path
+                      d="M16.5 4.875H12"
+                      stroke="#1A1C1E"
+                      strokeWidth="1.5"
+                      strokeMiterlimit="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M4.5 4.875H1.5"
+                      stroke="#1A1C1E"
+                      strokeWidth="1.5"
+                      strokeMiterlimit="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M7.5 7.5C8.94975 7.5 10.125 6.32475 10.125 4.875C10.125 3.42525 8.94975 2.25 7.5 2.25C6.05025 2.25 4.875 3.42525 4.875 4.875C4.875 6.32475 6.05025 7.5 7.5 7.5Z"
+                      stroke="#1A1C1E"
+                      strokeWidth="1.5"
+                      strokeMiterlimit="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M16.5 13.125H13.5"
+                      stroke="#1A1C1E"
+                      strokeWidth="1.5"
+                      strokeMiterlimit="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M6 13.125H1.5"
+                      stroke="#1A1C1E"
+                      strokeWidth="1.5"
+                      strokeMiterlimit="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M10.5 15.75C11.9497 15.75 13.125 14.5747 13.125 13.125C13.125 11.6753 11.9497 10.5 10.5 10.5C9.05025 10.5 7.875 11.6753 7.875 13.125C7.875 14.5747 9.05025 15.75 10.5 15.75Z"
+                      stroke="#1A1C1E"
+                      strokeWidth="1.5"
+                      strokeMiterlimit="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+
+                  <div className={style.main_down_up_actions_setting_down}
+                  // style={{display: ordersSetting ? "flex" : "none"}}
+                  >
+                    <button className={style.main_down_up_actions_setting_down_btn}
+                    // onClick={() => setAscend("ASC")}
+                    // style={{backgroundColor: ascend==="ASC" ? "#fdefd9" : ""}}
+                    title="Ascending Date"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="24px"
+                        viewBox="0 -960 960 960"
+                        width="24px"
+                        fill="#6c7278"
+                      >
+                        <path d="M400-240v-80h160v80H400ZM240-440v-80h480v80H240ZM120-640v-80h720v80H120Z" />
+                      </svg>
+                    </button>
+
+                    <button className={style.main_down_up_actions_setting_down_btn}
+                    // onClick={() => setAscend("DESC")} 
+                    // style={{backgroundColor: ascend==="DESC" ? "#fdefd9" : ""}}
+                    title="Descending Date"
+                    >
+                      <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          height="24px"
+                          viewBox="0 -960 960 960"
+                          width="24px"
+                          fill="#6c7278"
+                          style={{rotate: "180deg"}}
+                        >
+                          <path d="M400-240v-80h160v80H400ZM240-440v-80h480v80H240ZM120-640v-80h720v80H120Z" />
+                        </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* -------------------------- Transactions main -------------------------------- */}
+            <div className={style.main_down_transactions}
+            // onClick={() => setOrdersSetting(false)}
+            >
+              <table className={style.main_down_transactions_table}>
+                <thead className={style.main_down_transactions_table_head}>
+                  <tr className={style.main_down_transactions_table_head_th}>
+                  <th className={style.main_down_transactions_table_head_th_desktop}>Product Name</th>
+                    <th className={style.main_down_transactions_table_head_th_desktop}>Receipt No</th>
+                    <th className={style.main_down_transactions_table_head_th_desktop}>Order/day</th>
+                    <th className={style.main_down_transactions_table_head_th_desktop}>Category</th>
+                    <th className={style.main_down_transactions_table_head_th_mobileDate}>Price/unit</th>
+                    <th className={style.main_down_transactions_table_head_th_desktop}>Stock</th>
+                    <th className={style.main_down_transactions_table_head_th_desktop}>Tax</th>
+                    <th className={style.main_down_transactions_table_head_th_desktop}>Discount</th>
+                    <th className={style.main_down_transactions_table_head_th_desktop}>Action</th>
+                  </tr>
+                </thead>
+
+                <tbody className={style.main_down_transactions_table_tbody}>
+                  {/* {ordersFiltered.map((order, index) => (
+                    <OverviewTableItem
+                      key={index}
+                      checked={checked}
+                      {...order}
+                      setMultiCheck={setMultiCheck}
+                      multiCheck={multiCheck}
+                      period={period}
+                      ascend={ascend}
+                      cashiers={m?.cashiers}
+                    />
+                  ))} */}
+
+                  {/* <tr className={style.main_down_transactions_table_tbody_tr}>
+                    <td>Healthy Salad</td>
+                    <td className={style.main_down_transactions_table_tbody_tr_desktop}>MW12131</td>
+                    <td className={style.main_down_transactions_table_tbody_tr_desktop}>110</td>
+                    <td className={style.main_down_transactions_table_tbody_tr_desktop}>Salad</td>
+                    <td className={style.main_down_transactions_table_tbody_tr_mobileDate}>$12.00</td>
+                    <td className={style.main_down_transactions_table_tbody_tr_desktop}>150</td>
+                    <td className={style.main_down_transactions_table_tbody_tr_desktop}>2%</td>
+                    <td className={style.main_down_transactions_table_tbody_tr_desktop}>15%</td>
+                    <td>
+                      <div className={style.main_down_transactions_table_tbody_tr_action}>
+                        <button className={style.main_down_transactions_table_tbody_tr_action_view}>
+                          View
+                        </button> 
+                        <button className={style.main_down_transactions_table_tbody_tr_action_delete}>
+                          Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr> */}
+
+
+                  {ProductData.map((item, index) => (
+                    <tr className={style.main_down_transactions_table_tbody_tr} key={index}>
+                      <td style={{display: "flex"}}>
+                        {/* <img src="https://firebasestorage.googleapis.com/v0/b/posive-229b1.appspot.com/o/meals%2Fsmooky_beef.png?alt=media&token=af9922f1-d476-45ee-8506-316ec043194b" alt="meal" /> */}
+                        <span>{item.name}</span>
+                      </td>
+                      <td className={style.main_down_transactions_table_tbody_tr_desktop}>{item.receipt}</td>
+                      <td className={style.main_down_transactions_table_tbody_tr_desktop}>{item.order}</td>
+                      <td className={style.main_down_transactions_table_tbody_tr_desktop}>{item.category}</td>
+                      <td className={style.main_down_transactions_table_tbody_tr_mobileDate}>{item.price}</td>
+                      <td className={style.main_down_transactions_table_tbody_tr_desktop}>{item.stock}</td>
+                      <td className={style.main_down_transactions_table_tbody_tr_desktop}>{item.tax}</td>
+                      <td className={style.main_down_transactions_table_tbody_tr_desktop}>{item.discount}</td>
+                      <td>
+                        <div className={style.main_down_transactions_table_tbody_tr_action}>
+                          <button className={style.main_down_transactions_table_tbody_tr_action_view}>
+                            View
+                          </button> 
+                          <button className={style.main_down_transactions_table_tbody_tr_action_delete}>
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+
+
+
+                  
+                </tbody>
+              </table>
+            </div>
+
+
+            <div className={style.main_down_pagination}>
+              
+              <div className={style.main_down_pagination_pages}>
+
+                {/* left button */}
+                <div className={style.main_down_pagination_pages_left}
+                onClick={() => {
+                  setPage(page> 1 ? page - 1 : page)
+                  page === pagination && setPagination(pagination > 1 ? pagination - 1 : pagination)
+                }}
+                >
+                  <svg width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 12.2797L1.65333 7.93306C1.14 7.41973 1.14 6.57973 1.65333 6.06639L6 1.71973" stroke="#292D32" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+
+                {/* pages */}
+                <div className={style.main_down_pagination_pages_page}
+                style={{border: page === pagination ? "1px solid #6c7278" : ""}}
+                onClick={() => setPage(pagination)}
+                >
+                  {pagination}
+                </div>
+                
+                {countOrders >1 && <div className={style.main_down_pagination_pages_page}
+                style={{border: page === pagination + 1 ? "1px solid #6c7278" : ""}}
+                onClick={() => setPage(pagination + 1)}
+                >
+                  {pagination + 1}
+                </div>}
+                
+                {countOrders >2 && <div className={style.main_down_pagination_pages_page}
+                style={{border: page === pagination + 2 ? "1px solid #6c7278" : ""}}
+                onClick={() => setPage(pagination + 2)}
+                >
+                  {pagination + 2}
+                </div>}
+
+                {countOrders >3 && <div className={`${style.main_down_pagination_pages_dots} 
+                ${pagination + 4 === countOrders ? style.main_down_pagination_pages_dots_hover : ""}`}
+                style={{
+                  border: page === pagination + 3 ? "1px solid #6c7278" : "",
+                }}
+                onClick={() => setPage(pagination + 4 === countOrders ? countOrders -1 : page)}
+                >
+                  {pagination + 4 === countOrders ? countOrders -1 : "..." }
+                </div>}
+
+                {countOrders >4 && <div className={style.main_down_pagination_pages_page}
+                style={{
+                  border: page === countOrders || pagination + 9 === page  ? "1px solid #6c7278" : "",
+                }}
+                onClick={() => {
+                  setPage(
+                  pagination + 9 <= countOrders ? pagination + 9 : countOrders
+                )
+                  setPagination(countOrders - 4 > pagination + 9 ? pagination + 9 : countOrders - 4)
+                }}
+                >
+                  {
+                    pagination + 9 <= countOrders ? pagination + 9 : countOrders
+                  }
+                </div>}
+
+                {/* right button */}
+                <div className={style.main_down_pagination_pages_right}
+                onClick={() => {
+                  setPage(countOrders > page ? page + 1 : page)
+                  page - 2 === pagination && setPagination(pagination + 4 < countOrders ? pagination + 1 : pagination)
+                }}
+                >
+                  <svg width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.940002 12.2797L5.28667 7.93306C5.8 7.41973 5.8 6.57973 5.28667 6.06639L0.940002 1.71973" stroke="#292D32" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+
+              </div>
+
+              <div className={style.main_down_pagination_itemperpage}>
+                  
+                  <div className={style.main_down_pagination_itemperpage_info}>
+                    Showing {page === 1 ? 1 : page * itemperpage - itemperpage + 1} to {page * itemperpage > allDataCount ? allDataCount : page * itemperpage} of {allDataCount} entries
+                  </div>
+                  
+                  <div className={style.main_down_pagination_itemperpage_action}>
+                    <select
+                      className={style.main_down_pagination_itemperpage_action_select}
+                      onChange={(e) =>
+                        setItemPerPage(Number(e.target.value))
+                      }
+                      value={itemperpage}
+                    >
+                      <option value="8">Show 8</option>
+                      <option value="10">Show 10</option>
+                      <option value="20">Show 20</option>
+                    </select>
+                  </div>
+
+              </div>
+            </div>
+          </div>
 
 
 

@@ -3,6 +3,18 @@
 @import '../../../common/reUseable/mixin';
 @import '../../../common/reUseable/theme';
 
+.chartComp_up_actions_period_option_m:hover ~ .chartComp_up_actions_period_mDown {
+    display: grid;
+}
+
+.chartComp_up_actions_period_option_three:hover ~ .chartComp_up_actions_period_threeDown {
+    display: grid;
+}
+
+.chartComp_up_actions_period_option_six:hover ~ .chartComp_up_actions_period_sixDown {
+    display: grid;
+}
+
 
 .chartComp {
     width: 100%;
@@ -110,16 +122,22 @@
 
             &_period {
                 display: flex;
+                // grid-template-columns: repeat(4, 30px);
                 align-items: center;
                 justify-content: space-around;
                 padding: 4px 6px;
                 border-radius: 6px;
                 column-gap: 10px;
+                position: relative;
 
                 @include themed {
                     background-color: t(light_bg_gray);
                     border: 1px solid t(gray);
                 }
+
+                // &:hover .chartComp_up_actions_period_down {
+                //     display: grid;
+                // }
 
                 &_option {
                     padding: 5px 12px;
@@ -139,6 +157,140 @@
                         }
                     }
                 }
+
+                &_mDown {
+                    width: calc(100% + 2px);
+                    position: absolute;
+                    padding: 6px 3px;
+                    top: 32px;
+                    left: -1px;
+                    display: none;
+                    text-align: center;
+                    border-radius: 0 0 6px 6px;
+                    color: $light_m_gray;
+                    grid-template-columns: repeat(4, auto);
+
+                    &:hover {
+                        display: grid;
+                    }
+                    
+
+                    @include themed {
+                        background-color: t(light_bg_gray);
+                        border: 1px solid t(gray);
+                        border-top: none;
+                    }
+                
+                    &_option {
+                        padding: 5px 12px;
+                        border-radius: 5px;
+                        background-color: transparent;
+                        user-select: none;
+                        cursor: pointer;
+                        @extend %s_b;
+                        @include themed {
+                            color: t(light_m_gray);
+                        }
+    
+                        &:hover {
+                            @include themed {
+                                background-color: t(white);
+                                color: t(main_color);
+                            }
+                        }
+                    }
+                }
+
+                &_threeDown {
+                    width: calc(100% + 2px);
+                    position: absolute;
+                    padding: 6px 3px;
+                    top: 32px;
+                    left: -1px;
+                    display: none;
+                    text-align: center;
+                    border-radius: 0 0 6px 6px;
+                    color: $light_m_gray;
+                    grid-template-columns: repeat(3, auto);
+
+                    &:hover {
+                        display: grid;
+                    }
+                    
+
+                    @include themed {
+                        background-color: t(light_bg_gray);
+                        border: 1px solid t(gray);
+                        border-top: none;
+                    }
+                
+                    &_option {
+                        padding: 5px 8px;
+                        border-radius: 5px;
+                        background-color: transparent;
+                        user-select: none;
+                        cursor: pointer;
+                        @extend %s_b;
+                        @include themed {
+                            color: t(light_m_gray);
+                        }
+    
+                        &:hover {
+                            @include themed {
+                                background-color: t(white);
+                                color: t(main_color);
+                            }
+                        }
+                    }
+                }
+
+                &_sixDown {
+                    width: calc(100% + 2px);
+                    position: absolute;
+                    padding: 6px 3px;
+                    top: 32px;
+                    left: -1px;
+                    display: none;
+                    text-align: center;
+                    border-radius: 0 0 6px 6px;
+                    color: $light_m_gray;
+                    grid-template-columns: repeat(2, auto);
+
+                    &:hover {
+                        display: grid;
+                    }
+                    
+
+                    @include themed {
+                        background-color: t(light_bg_gray);
+                        border: 1px solid t(gray);
+                        border-top: none;
+                    }
+                
+                    &_option {
+                        padding: 5px 12px;
+                        border-radius: 5px;
+                        background-color: transparent;
+                        user-select: none;
+                        cursor: pointer;
+                        @extend %s_b;
+                        @include themed {
+                            color: t(light_m_gray);
+                        }
+    
+                        &:hover {
+                            @include themed {
+                                background-color: t(white);
+                                color: t(main_color);
+                            }
+                        }
+                    }
+                }
+
+
+
+
+                
             }
         }
     }
