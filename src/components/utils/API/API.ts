@@ -112,7 +112,7 @@ export const createGetUser = async () => {
             return "Error";
         }
     } catch (error) {
-        resetToken();
+        // resetToken();
         console.log(error);
     }
 }
@@ -417,6 +417,33 @@ export const createGetStatistics = async (months: string, year: number) => {
         const token = await getToken();
         const accessToken = token?.accessToken;
         const res = await fetch(`${base}/order/incomeByMonth?months=${months}&year=${year}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+// Get Products
+interface GetProductsParams {
+    page?: number;
+    size?: number;
+    filter?: string;
+}
+export const createGetProducts = async ({ page, size, filter }: GetProductsParams) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/product/getALL?page=${page}&size=${size}&filter=${filter}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

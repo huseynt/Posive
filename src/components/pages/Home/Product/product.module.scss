@@ -471,6 +471,7 @@
             background-color: transparent;
             animation: fadeIn 0.5s;
 
+            
             &_table {
                 width: 100%;
                 @extend %text_overflow;
@@ -481,7 +482,7 @@
                     th {
                         max-width: 300px;
                         text-align: left;
-                        padding: 10px 12px;
+                        padding: 10px 12px 10px 0;
                         @extend %sm, %text_overflow;
 
                         @include themed() {
@@ -504,7 +505,7 @@
                     td {
                         // max-width: 300px;
                         text-align: left;
-                        padding: 7px 12px;
+                        padding: 7px 8px 7px 0;
                         @extend %sm, %text_overflow;
 
                         @include mobile {

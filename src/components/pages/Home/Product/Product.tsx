@@ -3,7 +3,11 @@ import { Helmet } from 'react-helmet'
 import { useOutletContext } from "react-router-dom";
 
 import ChartComponent from '../../features/ChartComponent/ChartComponent';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { createGetProducts } from '../../../utils/API/API';
+import { IGetProducts } from '../../../utils/API/types';
+import ProductsTableItem from '../../features/ProductsTableItem/ProductsTableItem';
 
 interface IProduct {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,63 +15,63 @@ interface IProduct {
   notification: boolean;
 }
 
-const ProductData = [
-  {
-    id: 1,
-    name: "Healthy Salad",
-    receipt: "MW12131",
-    order: 110,
-    category: "Salad",
-    price: "$12.00",
-    stock: 150,
-    tax: "2%",
-    discount: "15%",
-  },
-  {
-    id: 2,
-    name: "Healthy Salad",
-    receipt: "MW12131",
-    order: 110,
-    category: "Salad",
-    price: "$12.00",
-    stock: 150,
-    tax: "2%",
-    discount: "15%",
-  },
-  {
-    id: 3,
-    name: "Healthy Salad",
-    receipt: "MW12131",
-    order: 110,
-    category: "Salad",
-    price: "$12.00",
-    stock: 150,
-    tax: "2%",
-    discount: "15%",
-  },
-  {
-    id: 4,
-    name: "Healthy Salad",
-    receipt: "MW12131",
-    order: 110,
-    category: "Salad",
-    price: "$12.00",
-    stock: 150,
-    tax: "2%",
-    discount: "15%",
-  },
-  {
-    id: 5,
-    name: "Healthy Salad",
-    receipt: "MW12131",
-    order: 110,
-    category: "Salad",
-    price: "$12.00",
-    stock: 150,
-    tax: "2%",
-    discount: "15%",
-  }
-]
+// const ProductData = [
+//   {
+//     id: 1,
+//     name: "Healthy Salad",
+//     receipt: "MW12131",
+//     order: 110,
+//     category: "Salad",
+//     price: "$12.00",
+//     stock: 150,
+//     tax: "2%",
+//     discount: "15%",
+//   },
+//   {
+//     id: 2,
+//     name: "Healthy Salad",
+//     receipt: "MW12131",
+//     order: 110,
+//     category: "Salad",
+//     price: "$12.00",
+//     stock: 150,
+//     tax: "2%",
+//     discount: "15%",
+//   },
+//   {
+//     id: 3,
+//     name: "Healthy Salad",
+//     receipt: "MW12131",
+//     order: 110,
+//     category: "Salad",
+//     price: "$12.00",
+//     stock: 150,
+//     tax: "2%",
+//     discount: "15%",
+//   },
+//   {
+//     id: 4,
+//     name: "Healthy Salad",
+//     receipt: "MW12131",
+//     order: 110,
+//     category: "Salad",
+//     price: "$12.00",
+//     stock: 150,
+//     tax: "2%",
+//     discount: "15%",
+//   },
+//   {
+//     id: 5,
+//     name: "Healthy Salad",
+//     receipt: "MW12131",
+//     order: 110,
+//     category: "Salad",
+//     price: "$12.00",
+//     stock: 150,
+//     tax: "2%",
+//     discount: "15%",
+//   }
+// ]
 
 
 
@@ -78,10 +82,26 @@ const Product = () => {
   const [page, setPage] = useState<number>(1);
   const [itemperpage, setItemPerPage] = useState<number>(10);
   const [countOrders] = useState<number>(1);
-  const [allDataCount] = useState<number>(0);
+  const [allDataCount, setAllDataCount] = useState<number>(0);
+  const [ascend, setAscend] = useState<string>("DESC");
+
   // const [deleteAllOpen, setDeleteAllOpen] = useState<boolean>(false);
 
-
+  
+  // ------------------- get products ------------------------
+  const {
+    data: getProducts,
+    isPending,
+  } = useQuery<IGetProducts | undefined>({
+    queryKey: ["getOrders", { page: page-1, size: itemperpage, filter: ascend }],
+    queryFn: () => createGetProducts({ page: page-1, size: itemperpage, filter: ascend}),
+  });
+  useEffect(() => {
+    if (getProducts && !isPending) {
+      setAllDataCount(getProducts.countProducts);
+    }
+  }, [getProducts, isPending, itemperpage]);
+  //  ----------------- get products ---------------------------
 
 
 
@@ -300,13 +320,13 @@ const Product = () => {
 
 
 
-          {/* -------------------------- Transactions -------------------------------- */}
+          {/* -------------------------- Products -------------------------------- */}
           <div className={style.main_down}
           // onClick={() => setPeriodDown(false)}
           >
-            {/* -------------------------- Transactions up -------------------------------- */}
+            {/* -------------------------- Products up -------------------------------- */}
             <div className={style.main_down_up}>
-              <p className={style.main_down_up_head}>Recent Transaction</p>
+              <p className={style.main_down_up_head}>Product List</p>
               <div className={style.main_down_up_actions}>
                 <div className={style.main_down_up_actions_search}>
                   {/* <SearchInput
@@ -316,7 +336,7 @@ const Product = () => {
                 </div>
 
                 {/* --------------------- delete multiselect ----------------------------------- */}
-                <div
+                {/* <div
                   className={style.main_down_up_actions_delete}
                   style={{
                     backgroundColor: "#C65468",
@@ -372,10 +392,10 @@ const Product = () => {
                     />
                   </svg>
                   <div className={style.main_down_up_actions_delete_count}>
-                    {/* {multiCheck.length} */}
+                    {multiCheck.length}
                     5
                   </div>
-                </div>
+                </div> */}
 
                 {/* --------------------- setting ----------------------------------- */}
                 <div className={style.main_down_up_actions_setting}
@@ -444,8 +464,8 @@ const Product = () => {
                   // style={{display: ordersSetting ? "flex" : "none"}}
                   >
                     <button className={style.main_down_up_actions_setting_down_btn}
-                    // onClick={() => setAscend("ASC")}
-                    // style={{backgroundColor: ascend==="ASC" ? "#fdefd9" : ""}}
+                    onClick={() => setAscend("ASC")}
+                    style={{backgroundColor: ascend==="ASC" ? "#fdefd9" : ""}}
                     title="Ascending Date"
                     >
                       <svg
@@ -460,8 +480,8 @@ const Product = () => {
                     </button>
 
                     <button className={style.main_down_up_actions_setting_down_btn}
-                    // onClick={() => setAscend("DESC")} 
-                    // style={{backgroundColor: ascend==="DESC" ? "#fdefd9" : ""}}
+                    onClick={() => setAscend("DESC")} 
+                    style={{backgroundColor: ascend==="DESC" ? "#fdefd9" : ""}}
                     title="Descending Date"
                     >
                       <svg
@@ -480,26 +500,38 @@ const Product = () => {
               </div>
             </div>
 
-            {/* -------------------------- Transactions main -------------------------------- */}
+            {/* -------------------------- Products main -------------------------------- */}
             <div className={style.main_down_transactions}
             // onClick={() => setOrdersSetting(false)}
             >
               <table className={style.main_down_transactions_table}>
                 <thead className={style.main_down_transactions_table_head}>
                   <tr className={style.main_down_transactions_table_head_th}>
-                  <th className={style.main_down_transactions_table_head_th_desktop}>Product Name</th>
-                    <th className={style.main_down_transactions_table_head_th_desktop}>Receipt No</th>
+
+                    <th className={style.main_down_transactions_table_head_th_mobileDate}
+                    style={{paddingLeft: "12px"}}>Product Name</th>
+                    <th className={style.main_down_transactions_table_head_th_mobileDate}>Receipt No</th>
                     <th className={style.main_down_transactions_table_head_th_desktop}>Order/day</th>
                     <th className={style.main_down_transactions_table_head_th_desktop}>Category</th>
-                    <th className={style.main_down_transactions_table_head_th_mobileDate}>Price/unit</th>
+                    <th className={style.main_down_transactions_table_head_th_desktop}>Price/unit</th>
                     <th className={style.main_down_transactions_table_head_th_desktop}>Stock</th>
                     <th className={style.main_down_transactions_table_head_th_desktop}>Tax</th>
                     <th className={style.main_down_transactions_table_head_th_desktop}>Discount</th>
-                    <th className={style.main_down_transactions_table_head_th_desktop}>Action</th>
+                    <th className={style.main_down_transactions_table_head_th_mobileDate}>Action</th>
                   </tr>
                 </thead>
 
                 <tbody className={style.main_down_transactions_table_tbody}>
+
+
+                  { getProducts?.products.map((order, index) => (
+                    <ProductsTableItem
+                      key={index}
+                      {...order}
+                    />
+                  ))}
+
+
                   {/* {ordersFiltered.map((order, index) => (
                     <OverviewTableItem
                       key={index}
@@ -535,33 +567,33 @@ const Product = () => {
                   </tr> */}
 
 
-                  {ProductData.map((item, index) => (
-                    <tr className={style.main_down_transactions_table_tbody_tr} key={index}>
-                      <td style={{display: "flex"}}>
-                        {/* <img src="https://firebasestorage.googleapis.com/v0/b/posive-229b1.appspot.com/o/meals%2Fsmooky_beef.png?alt=media&token=af9922f1-d476-45ee-8506-316ec043194b" alt="meal" /> */}
-                        <span>{item.name}</span>
-                      </td>
-                      <td className={style.main_down_transactions_table_tbody_tr_desktop}>{item.receipt}</td>
-                      <td className={style.main_down_transactions_table_tbody_tr_desktop}>{item.order}</td>
-                      <td className={style.main_down_transactions_table_tbody_tr_desktop}>{item.category}</td>
-                      <td className={style.main_down_transactions_table_tbody_tr_mobileDate}>{item.price}</td>
-                      <td className={style.main_down_transactions_table_tbody_tr_desktop}>{item.stock}</td>
-                      <td className={style.main_down_transactions_table_tbody_tr_desktop}>{item.tax}</td>
-                      <td className={style.main_down_transactions_table_tbody_tr_desktop}>{item.discount}</td>
-                      <td>
-                        <div className={style.main_down_transactions_table_tbody_tr_action}>
-                          <button className={style.main_down_transactions_table_tbody_tr_action_view}>
-                            View
-                          </button> 
-                          <button className={style.main_down_transactions_table_tbody_tr_action_delete}>
-                            Delete
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-
-
+                  {
+                  // ProductData.map((item, index) => (
+                  //   <tr className={style.main_down_transactions_table_tbody_tr} key={index}>
+                  //     <td style={{display: "flex"}}>
+                  //       {/* <img src="https://firebasestorage.googleapis.com/v0/b/posive-229b1.appspot.com/o/meals%2Fsmooky_beef.png?alt=media&token=af9922f1-d476-45ee-8506-316ec043194b" alt="meal" /> */}
+                  //       <span>{item.name}</span>
+                  //     </td>
+                  //     <td className={style.main_down_transactions_table_tbody_tr_desktop}>{item.receipt}</td>
+                  //     <td className={style.main_down_transactions_table_tbody_tr_desktop}>{item.order}</td>
+                  //     <td className={style.main_down_transactions_table_tbody_tr_desktop}>{item.category}</td>
+                  //     <td className={style.main_down_transactions_table_tbody_tr_mobileDate}>{item.price}</td>
+                  //     <td className={style.main_down_transactions_table_tbody_tr_desktop}>{item.stock}</td>
+                  //     <td className={style.main_down_transactions_table_tbody_tr_desktop}>{item.tax}</td>
+                  //     <td className={style.main_down_transactions_table_tbody_tr_desktop}>{item.discount}</td>
+                  //     <td>
+                  //       <div className={style.main_down_transactions_table_tbody_tr_action}>
+                  //         <button className={style.main_down_transactions_table_tbody_tr_action_view}>
+                  //           View
+                  //         </button> 
+                  //         <button className={style.main_down_transactions_table_tbody_tr_action_delete}>
+                  //           Delete
+                  //         </button>
+                  //       </div>
+                  //     </td>
+                  //   </tr>
+                  // ))
+                  }
 
                   
                 </tbody>

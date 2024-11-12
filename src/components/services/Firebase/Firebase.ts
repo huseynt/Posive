@@ -50,4 +50,36 @@ export default function uploadImage(file: File, onProgress: (progress: number) =
   });
 }
 
+
+export function uploadMealImage(file: File, onProgress: (progress: number) => void): Promise<UploadProgressResult> {
+  return new Promise((resolve, reject) => {
+    if (!file) {
+      reject("No file provided");
+      return;
+    }
+
+    const storageRef = ref(storage, `meals/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        onProgress(progress);  
+      },
+      (error) => {
+        reject(error);
+      },
+      async () => {
+        try {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          resolve({ progress: 100, downloadURL });
+        } catch (error) {
+          reject(error);
+        }
+      }
+    );
+  });
+}
+
   

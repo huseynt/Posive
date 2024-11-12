@@ -228,6 +228,7 @@ const OverviewTableItem:React.FC<Order> = (props) => {
               />
             </svg>
           </div>
+          
           <div
             className={style.tr_actions_option}
             style={{

@@ -125,7 +125,8 @@ const ChartComponent: React.FC = () => {
                         }}>1Y</div>
 
 
-                        <div className={style.chartComp_up_actions_period_mDown}>
+                        <div className={style.chartComp_up_actions_period_mDown} 
+                        onClick={() => setSelectedPeriod("1M")}>
                             <div className={style.chartComp_up_actions_period_mDown_option}
                             onClick={() => setSelectedMonth("Jan")}
                             >Jun</div>
@@ -164,7 +165,9 @@ const ChartComponent: React.FC = () => {
                             >Dec</div>
                         </div>
 
-                        <div className={style.chartComp_up_actions_period_threeDown}>
+                        <div className={style.chartComp_up_actions_period_threeDown}
+                        onClick={() => setSelectedPeriod("3M")}
+                        >
                             <div className={style.chartComp_up_actions_period_threeDown_option}
                             onClick={() => setSelectedMonth("Jan, Feb, Mar, Apr")}
                             >I quarter</div>
@@ -176,7 +179,8 @@ const ChartComponent: React.FC = () => {
                             >III quarter</div>
                         </div>
 
-                        <div className={style.chartComp_up_actions_period_sixDown}>
+                        <div className={style.chartComp_up_actions_period_sixDown}
+                        onClick={() => setSelectedPeriod("6M")}>
                             <div className={style.chartComp_up_actions_period_sixDown_option}
                             onClick={() => setSelectedMonth("Jan, Feb, Mar, Apr, May, Jun")}
                             >I half-year</div>

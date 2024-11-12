@@ -185,11 +185,70 @@ export interface ISaveOrder {
   paymentMethod: string;
 }
 
-// interface IReceipts {
-//   receiptNo: string;
+
+// {
+//   "products": [
+//       {
+//           "id": 1,
+//           "name": "Tsunami Beef Egg",
+//           "receiptNo": "134",
+//           "orderofDay": 0,
+//           "category": "Main Course",
+//           "imageUrl": "https://firebasestorage.googleapis.com/v0/b/posive-229b1.appspot.com/o/meals%2Ftsunami_beef_egg.png?alt=media&token=c79e552a-344e-4567-9416-43bf1e670f06",
+//           "price": 16,
+//           "stock": 6,
+//           "tax": 1,
+//           "discount": 1,
+//           "description": "A healthy salad made with fresh vegetables and fruits"
+//       },
+//       {
+//           "id": 5,
+//           "name": "Indomie with Cheese",
+//           "receiptNo": "126",
+//           "orderofDay": 0,
+//           "category": "Fast Food",
+//           "imageUrl": "https://firebasestorage.googleapis.com/v0/b/posive-229b1.appspot.com/o/meals%2Findomie.png?alt=media&token=1e7c816f-2ed3-4cd4-985c-e9fe13fea288",
+//           "price": 15,
+//           "stock": 0,
+//           "tax": 1,
+//           "discount": 9,
+//           "description": "A delicious plate of indomie with cheese and vegetables"
+//       },
+//       {
+//           "id": 4,
+//           "name": "Health Salad",
+//           "receiptNo": "125",
+//           "orderofDay": 0,
+//           "category": "Healthy Food",
+//           "imageUrl": "https://firebasestorage.googleapis.com/v0/b/posive-229b1.appspot.com/o/meals%2Fhealth_salad.png?alt=media&token=fa0d246d-743f-4795-81a4-b5942b2f38c4",
+//           "price": 10,
+//           "stock": 0,
+//           "tax": 1,
+//           "discount": 10,
+//           "description": "A healthy salad made with fresh vegetables and fruits"
+//       }
+//   ],
+//   "countProducts": 3
 // }
 
 
+export interface IGetProducts {
+  products: IProducts[];
+  countProducts: number;
+}
+export interface IProducts {
+  id: number;
+  name: string;
+  receiptNo: string;
+  orderofDay: number;
+  category: string;
+  imageUrl: string;
+  price: number;
+  stock: number;
+  tax: number;
+  discount: number;
+  description: string;
+}
 
 
 
