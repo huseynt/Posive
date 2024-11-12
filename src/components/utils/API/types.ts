@@ -251,8 +251,29 @@ export interface IProducts {
 }
 
 
+export interface IUpdateProduct {
+  name: string;
+  category: string;
+  receiptNo: string;
+  tax: number;
+  discount: number;
+  price: number;
+  stock: number;
+  imageUrl: string;
+  description: string;
+}
 
-
+export interface IAddProduct {
+  name: string;
+  category: string;
+  // receiptNo: string;
+  tax: number;
+  discount: number;
+  price: number;
+  stock: number;
+  imageUrl: string;
+  description: string;
+}
 
 
 

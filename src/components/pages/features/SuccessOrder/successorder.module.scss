@@ -104,6 +104,8 @@
                     @extend %sm;
                 }
                 &_value {
+                    max-width: 198px;
+                    @extend %text_overflow;
                     @extend %sm;
                 }
             }

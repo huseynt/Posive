@@ -30,6 +30,7 @@
     }
 
   &_mobile {
+    max-width: 90px;
     @extend %text_overflow;
 
     &_action {

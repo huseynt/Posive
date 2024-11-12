@@ -10,7 +10,7 @@ import Notify from '../Notify/Notify';
 
 
 const ProductsTableItem: React.FC<IProducts> = (props) => {
-    const { id, name,receiptNo,orderofDay,category,imageUrl,price,stock,tax,discount } = props;
+    const { name,receiptNo,orderofDay,category,imageUrl,price,stock,tax,discount } = props;
     const [viewOpen, setViewOpen] = useState<string>("");
 
 
@@ -60,7 +60,7 @@ const ProductsTableItem: React.FC<IProducts> = (props) => {
           <ProductItemDelete
           setViewOpen={setViewOpen} 
           viewOpen={viewOpen} 
-          orderId={id}
+          receiptNo={receiptNo}
           requestNotify={requestNotify}
           />
         }

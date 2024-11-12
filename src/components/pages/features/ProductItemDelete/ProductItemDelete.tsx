@@ -1,30 +1,30 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createDeleteOrders } from "../../../utils/API/API";
+import { createDeleteProduct } from "../../../utils/API/API";
 import style from "./productitemdelete.module.scss";
 import Loader from "../../../common/Loader/Loader";
 
 interface IQRCodeComponentProps {
   setViewOpen: React.Dispatch<React.SetStateAction<string>>;
   viewOpen: string;
-  orderId: number;
+  receiptNo: string;
   requestNotify: (purpose: string, description: string | undefined) => void;
 }
 
 const ProductItemDelete: React.FC<IQRCodeComponentProps> = (props) => {
-  const { setViewOpen, orderId, requestNotify } = props;
+  const { setViewOpen, receiptNo , requestNotify } = props;
 
   // ------------------- delete user ------------------------
   const queryClient = useQueryClient();
   const {
-    mutate: DeleteOrder,
+    mutate: DeleteProduct,
     isPending: isDeleting,
   } = useMutation({
-    mutationFn: () => createDeleteOrders(orderId?.toString()),
+    mutationFn: () => createDeleteProduct(receiptNo?.toString()),
     onSuccess: (response) => {
       console.log('Delete success:', response);
         console.log('Deleted');
         setViewOpen("");
-        queryClient.invalidateQueries({queryKey: ["getOrders"]})
+        queryClient.invalidateQueries({queryKey: ["getProducts"]});
         requestNotify("done", "Order deleted successfully");
     },
     onError: (error) => {
@@ -34,7 +34,7 @@ const ProductItemDelete: React.FC<IQRCodeComponentProps> = (props) => {
     },
   });
   const handleDeleteOrder = () => {
-    DeleteOrder();
+    DeleteProduct();
   }
   // ------------------- delete user ------------------------
 

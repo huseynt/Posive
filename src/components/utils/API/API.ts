@@ -9,7 +9,9 @@ import { IcreatePostAuthenticate,
     IPostOrders, 
     IPostCardData, 
     IVerifyCardData, 
-    ISaveOrder 
+    ISaveOrder, 
+    IUpdateProduct,
+    IAddProduct
 } from './types';
 
 // Base
@@ -452,6 +454,74 @@ export const createGetProducts = async ({ page, size, filter }: GetProductsParam
         });
         if (res.ok) {
             return res.json();
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+
+// Delete product
+export const createDeleteProduct = async (receiptNo: string) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/product/deleteBy?product=${receiptNo}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+        if (res.ok) {
+            return "Success";
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Change product
+export const createChangeProduct = async (data: IUpdateProduct) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/product/update`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            body: JSON.stringify(data)
+        });
+        if (res.ok) {
+            return "Success";
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+// Add product
+export const createAddProduct = async (data: IAddProduct) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/product/add`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            body: JSON.stringify(data)
+        });
+        if (res.ok) {
+            return "Success";
         }
         return Promise.reject(res);
     } catch (error) {
