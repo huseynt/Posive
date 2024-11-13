@@ -27,7 +27,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
   const [hide, setHide] = useState(false);
   const [data, setData] = useState({
     email: "1234.1999.s1@gmail.com",
-    password: "11111111",
+    password: "11111",
   });
   const [validate, setValidate] = useState({
     email: '',

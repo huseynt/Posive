@@ -11,7 +11,8 @@ import { IcreatePostAuthenticate,
     IVerifyCardData, 
     ISaveOrder, 
     IUpdateProduct,
-    IAddProduct
+    IAddProduct,
+    IGetGeneral
 } from './types';
 
 // Base
@@ -229,6 +230,27 @@ export const createSavePreferences = async (data: ISavePreferences) => {
             body: JSON.stringify(data)
         });
         if (res.ok) {
+            return res.status;
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// get Subscriptions
+export const createGetPlans = async () => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/subscriptions/getByEmail`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+        if (res.ok) {
             return res.json();
         }
         return Promise.reject(res);
@@ -237,7 +259,7 @@ export const createSavePreferences = async (data: ISavePreferences) => {
     }
 }
 
-// Save Plans 
+// Save Subscriptions 
 export const createPostPlans = async (data: ISavePlans) => {
     try {
         const token = await getToken();
@@ -251,7 +273,7 @@ export const createPostPlans = async (data: ISavePlans) => {
             body: JSON.stringify(data)
         });
         if (res.ok) {
-            return res.json();
+            return res.status;
         }
         return Promise.reject(res);
     } catch (error) {
@@ -522,6 +544,74 @@ export const createAddProduct = async (data: IAddProduct) => {
         });
         if (res.ok) {
             return "Success";
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Get Setting General 
+export const createGetSettingGeneral = async () => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/general/get`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Save Setting General
+export const createSaveSettingGeneral = async (data: IGetGeneral) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/general/save`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            body: JSON.stringify(data)
+        });
+        if (res.ok) {
+            return "Success";
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Get User Permissions
+interface GetUsersParams {
+    page?: number;
+    size?: number;
+}
+export const createGetUsers = async ({ page, size }: GetUsersParams) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/user_permission/getAll?page=${page}&size=${size}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+        if (res.ok) {
+            return res.json();
         }
         return Promise.reject(res);
     } catch (error) {

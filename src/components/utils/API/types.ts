@@ -105,7 +105,6 @@ export interface ISavePreferences {
 }
 
 export interface ISavePlans {
-  subscriptionId: string | null, 
   plan: {
     name: string | null,
   }
@@ -275,7 +274,32 @@ export interface IAddProduct {
   description: string;
 }
 
+export interface IGetGeneral {
+  businessDetails: {
+    storeName: string | null;
+    number: string | null;
+    businessEmail: string | null;
+    fax: string | null;
+    imageUrl: string | null;
+  };
+  address: {
+    country: string | null;
+    city: string | null;
+    street: string | null;
+    flat: string | null;
+    streetNumber: string | null;
+    postalCode: string | null;
+  }
+}
 
+
+export interface IGetPlan {
+  subscriptionId: string;
+  planName: string;
+  status: string;
+  startDate: string;
+  amount: number;
+}
 
 
 // export interface IGetOrdersResponse {

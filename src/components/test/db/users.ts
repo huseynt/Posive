@@ -50,67 +50,67 @@ export const users: IUsers[] = [
         created: '06 Jun 2021',
         role: 'Member'
     },
-    {
-        id: 7,
-        fullName: 'Shasa Brown',
-        email: 'Shasbrown@gmail.com',
-        created: '23 Jun 2021',
-        role: 'Member'
-    },
-    {
-        id: 8,
-        fullName: 'Ork Plon',
-        email: 'Orpin@mail.com',
-        created: '25 Dec 2023',
-        role: 'Member'
-    },
-    {
-        id: 9,
-        fullName: 'Kaiser Brown',
-        email: 'Kaiserbrown@gmail.com',
-        created: '08 May 2021',
-        role: 'Member'
-    },
-    {
-        id: 10,
-        fullName: 'Jane Doe',
-        email: 'jane56@mail.com',
-        created: '02 Feb 2019',
-        role: 'Super Admin'
-    },
-    {
-        id: 11,
-        fullName: 'New User 1',
-        email: 'newuser1@mail.com',
-        created: '01 Sep 2024',
-        role: 'Member'
-    },
-    {
-        id: 12,
-        fullName: 'New User 2',
-        email: 'newuser2@mail.com',
-        created: '01 Sep 2024',
-        role: 'Member'
-    },
-    {
-        id: 13,
-        fullName: 'New User 3',
-        email: 'newuser3@mail.com',
-        created: '01 Sep 2024',
-        role: 'Member'
-    },
-    {
-        id: 14,
-        fullName: 'New User 4',
-        email: 'newuser4@mail.com',
-        created: '01 Sep 2024',
-        role: 'Member'
-    },
-    {
-        id: 15,
-        fullName: 'New User 5',
-        email: 'newuser5@mail.com',
-        created: '02 Sep 2024',
-        role: 'Member'
-    }
+    // {
+    //     id: 7,
+    //     fullName: 'Shasa Brown',
+    //     email: 'Shasbrown@gmail.com',
+    //     created: '23 Jun 2021',
+    //     role: 'Member'
+    // },
+    // {
+    //     id: 8,
+    //     fullName: 'Ork Plon',
+    //     email: 'Orpin@mail.com',
+    //     created: '25 Dec 2023',
+    //     role: 'Member'
+    // },
+    // {
+    //     id: 9,
+    //     fullName: 'Kaiser Brown',
+    //     email: 'Kaiserbrown@gmail.com',
+    //     created: '08 May 2021',
+    //     role: 'Member'
+    // },
+    // {
+    //     id: 10,
+    //     fullName: 'Jane Doe',
+    //     email: 'jane56@mail.com',
+    //     created: '02 Feb 2019',
+    //     role: 'Super Admin'
+    // },
+    // {
+    //     id: 11,
+    //     fullName: 'New User 1',
+    //     email: 'newuser1@mail.com',
+    //     created: '01 Sep 2024',
+    //     role: 'Member'
+    // },
+    // {
+    //     id: 12,
+    //     fullName: 'New User 2',
+    //     email: 'newuser2@mail.com',
+    //     created: '01 Sep 2024',
+    //     role: 'Member'
+    // },
+    // {
+    //     id: 13,
+    //     fullName: 'New User 3',
+    //     email: 'newuser3@mail.com',
+    //     created: '01 Sep 2024',
+    //     role: 'Member'
+    // },
+    // {
+    //     id: 14,
+    //     fullName: 'New User 4',
+    //     email: 'newuser4@mail.com',
+    //     created: '01 Sep 2024',
+    //     role: 'Member'
+    // },
+    // {
+    //     id: 15,
+    //     fullName: 'New User 5',
+    //     email: 'newuser5@mail.com',
+    //     created: '02 Sep 2024',
+    //     role: 'Member'
+    // }
 ];

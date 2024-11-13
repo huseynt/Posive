@@ -48,10 +48,10 @@
   display: flex;
   flex-direction: column;
   row-gap: 24px;
-  transition: all 0.3s linear;
+  transition: all 0.5s linear;
 
   @include desktop {
-    margin-bottom: 70px;
+    margin-bottom: 0px;
   }
 
   @include themed() {
@@ -162,7 +162,7 @@
     align-items: start;
     justify-content: center;
     row-gap: 2px;
-    animation: fadeIn 0.3s;
+    animation: fadeIn 0.5s;
 
     @include mobile {
       margin-bottom: 20px;
@@ -185,6 +185,7 @@
 
   &_container {
     width: 100%;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -198,6 +199,12 @@
       padding-top: 80px;
     }
 
+    @include desktop {
+      height: 100%;
+      min-height: 755px;
+      padding-bottom: 10px;
+    }
+
     &_navigation {
       width: 100%;
       min-height: 100%;
@@ -208,7 +215,7 @@
       display: flex;
       flex-direction: column;
       row-gap: 12px;
-      animation: fadeIn 0.3s;
+      animation: fadeIn 0.7s;
 
       @include mobile {
         padding: 16px;

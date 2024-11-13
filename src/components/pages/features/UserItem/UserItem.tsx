@@ -26,9 +26,12 @@ const UserItem: React.FC<IUsers> = (props) => {
         <td className={style.row_item}>{id}</td>
         <td className={style.row_item}>{fullName}</td>
         <td className={`${style.row_item} ${style.hide}`}>{email}</td>
-        <td className={`${style.row_item} ${style.hide}`}>{created}</td>
-        <td className={style.row_item}>{role}</td>
-        <td className={`${style.row_item} ${style.actions}`}>
+        <td className={`${style.row_item} ${style.hide}`}>{isNaN(new Date(created).getTime()) ? 'Invalid Date' : new Date(created).toLocaleDateString()}</td>
+        <td className={`${style.row_item} ${style.hide}`}>{role}</td>
+
+        <td className={`${style.row_item} ${style.actions}`}
+        style={{width: '80px'}}
+        >
             <div className={style.row_item_edit}>
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M6.63005 1.79962L2.52505 6.14462C2.37005 6.30962 2.22005 6.63462 2.19005 6.85962L2.00505 8.47962C1.94005 9.06462 2.36005 9.46462 2.94005 9.36462L4.55005 9.08962C4.77505 9.04962 5.09005 8.88462 5.24505 8.71462L9.35005 4.36962C10.06 3.61962 10.38 2.76462 9.27505 1.71962C8.17505 0.68462 7.34005 1.04962 6.63005 1.79962Z" stroke="white" strokeWidth="1.2" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>

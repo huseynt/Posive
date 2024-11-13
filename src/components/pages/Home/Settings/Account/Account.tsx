@@ -7,6 +7,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { createDeleteUser, createGetUser, createSaveUser } from '../../../../utils/API/API';
 import { useNavigate } from 'react-router-dom';
 import { resetToken } from '../../../../utils/Hooks/useToken';
+import PageLoader from '../../../../common/PageLoader/PageLoader';
 
 interface IGeneral {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
@@ -50,6 +51,7 @@ const General: React.FC<IGeneral> = (props) => {
   // ------------------- get user ------------------------
   const {
     data: userData,
+    isPending: isUserPending,
   } = useQuery<IGetUser | undefined>({
     queryKey: ["getUser"],
     queryFn: createGetUser,
@@ -206,8 +208,13 @@ const General: React.FC<IGeneral> = (props) => {
   }
 
   return (
+    <>
+    {isUserPending && <PageLoader /> }
+
     <div className={style.parent}
     onClick={() => setMobileSelect(false)}>
+
+    
 
     {/* ----------------- save buttons ------------------------------ */}
     <div className={style.parent_buttons}>
@@ -394,6 +401,7 @@ const General: React.FC<IGeneral> = (props) => {
 
     </div>
   </div>
+  </>
   )
 }
 

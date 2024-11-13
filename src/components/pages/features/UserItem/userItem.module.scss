@@ -7,12 +7,14 @@
     width: 100%;
     padding: 8px 15px;
     display: grid;
-    grid-template-columns: 24px 35px 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 24px 35px 1fr 1fr 1fr 1fr 90px;
+    column-gap: 4px;
     cursor: pointer;
-    column-gap: 5px;
+    // column-gap: 5px;
 
     @include mobile() {
-        grid-template-columns: 24px 35px 1fr 1fr 1fr;
+        grid-template-columns: 20px 23px 1fr 70px;
+        column-gap: 4px;
     }
 
     // &:hover {
@@ -22,7 +24,7 @@
     // }
 
     &_item {
-        padding-right: 3px;
+        // padding-right: 3px;  
         text-align: start;
         @extend %sm_b;
         @extend %text_overflow;

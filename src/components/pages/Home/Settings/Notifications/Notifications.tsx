@@ -62,6 +62,10 @@ const Notifications: React.FC<IGeneral> = (props) => {
 
 
   return (
+    <>
+
+    {/* {isGeneralLoading && <PageLoader /> } */}
+  
     <div className={style.parent}
     onClick={() => setMobileSelect(false)}>
 
@@ -260,6 +264,7 @@ const Notifications: React.FC<IGeneral> = (props) => {
 
 
   </div>
+  </>
   )
 }
 

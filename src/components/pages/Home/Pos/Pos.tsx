@@ -17,6 +17,7 @@ import { IGetMeals } from "../../../utils/API/types";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addMeal, resetState } from "../../../redux/slice/mealSlice";
+import PageLoader from "../../../common/PageLoader/PageLoader";
 
 
 
@@ -96,6 +97,8 @@ const Main= () => {
         <meta name="description" content="POS Dashboard" />
         <meta name="keywords" content="Posive" />
       </Helmet>
+
+      {isMealsLoading && <PageLoader /> }
 
 
       <div className={style.main}>
@@ -550,6 +553,7 @@ const Main= () => {
 
         {/* -------------------------- cards ---------------------------------- */}
         <div className={style.main_meals}>
+
           {reduxMeals && reduxMeals.map((meal) => {
             if (category === meal.category) {
               return (
@@ -581,6 +585,8 @@ const Main= () => {
             }
             return null;
           })}
+
+          
         </div>
 
         {/* ------------------------ for mobile continue ------------------ */}

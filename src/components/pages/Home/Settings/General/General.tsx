@@ -1,6 +1,10 @@
 import style from './general.module.scss'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import uploadImage from '../../../../services/Firebase/Firebase'
+import { createGetSettingGeneral, createSaveSettingGeneral } from '../../../../utils/API/API';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { IGetGeneral } from '../../../../utils/API/types';
+import PageLoader from '../../../../common/PageLoader/PageLoader';
 
 interface IGeneral {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
@@ -9,29 +13,62 @@ interface IGeneral {
 
 const General: React.FC<IGeneral> = (props) => {
   const { setMobileSelect, requestNotify } = props
-  const [data, setData] = useState({
-    imgFile: "",
-    storeName: "",
-    businessMail: "",
-    businessNumber: "",
-    fax: "",
-    country: "",
-    city: "",
-    flatUnit: "",
-    street: "",
-    streetNo: "",
-    postcode: "",
+
+
+  // ----------------- get data --------------------------
+  const {
+    data: getGeneralData,
+    isLoading: isGeneralLoading,
+  } = useQuery<IGetGeneral | undefined>({
+    queryKey: ["getSettingGeneral"],
+    queryFn: createGetSettingGeneral,
   });
 
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [uploadProgress, setUploadProgress] = useState<number>(0);
-  // const changeData = (e: React.ChangeEvent<HTMLInputElement>) => { 
-  //   setData({
-  //     ...data,
-  //     [e.target.id]: e.target.value,
-  //   });
-  // }
+  useEffect(() => {
+    console.log(getGeneralData);
+  }, [getGeneralData]);
 
+  //------------------ get data ---------------------------
+
+
+  // ----------------- save data --------------------------
+  const queryClient = useQueryClient();
+  const {
+    mutate: SaveGeneral,
+  } = useMutation({
+    mutationFn: createSaveSettingGeneral,
+    onSuccess: (response) => {
+      console.log('Delete success:', response);
+      requestNotify("done");
+      queryClient.invalidateQueries({queryKey: ["getSettingGeneral"]})
+    },
+    onError: (error) => {
+      console.log('Delete error:', error);  
+      requestNotify("undone");
+    },
+  });
+  // ---------------- save data ----------------------------
+
+
+
+
+
+  const [data, setData] = useState({
+    imgFile: getGeneralData?.businessDetails.imageUrl || "",
+    storeName: getGeneralData?.businessDetails.storeName || "",
+    businessMail: getGeneralData?.businessDetails.businessEmail || "",
+    businessNumber: getGeneralData?.businessDetails.number || "",
+    fax: getGeneralData?.businessDetails.fax || "",
+    country: getGeneralData?.address.country || "",
+    city: getGeneralData?.address.city || "",
+    flatUnit: getGeneralData?.address.flat || "",
+    street: getGeneralData?.address.street || "",
+    streetNo: getGeneralData?.address.streetNumber || "",
+    postcode: getGeneralData?.address.postalCode || "",
+  });
+
+  const [imagePreview, setImagePreview] = useState<string | null>(getGeneralData?.businessDetails.imageUrl || null);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
 
 
 
@@ -96,7 +133,26 @@ const General: React.FC<IGeneral> = (props) => {
 
   const sendData = () => {
     console.log(data)
-    requestNotify("done")
+    SaveGeneral(
+      {
+        businessDetails: {
+          storeName: data.storeName,
+          number: data.businessNumber,
+          businessEmail: data.businessMail,
+          fax: data.fax,
+          imageUrl: data.imgFile,
+        },
+        address: {
+          country: data.country,
+          city: data.city,
+          street: data.street,
+          flat: data.flatUnit,
+          streetNumber: data.streetNo,
+          postalCode: data.postcode,
+        }
+      }
+    )
+
   }
 
 
@@ -106,6 +162,11 @@ const General: React.FC<IGeneral> = (props) => {
 
 
   return (
+    <>
+    
+    {isGeneralLoading && <PageLoader /> }
+
+    
     <div className={style.parent}
     onClick={() => setMobileSelect(false)}>
 
@@ -223,74 +284,75 @@ const General: React.FC<IGeneral> = (props) => {
       <div className={style.parent_main_adress}>
         <h3 className={style.parent_main_adress_head}>Adress</h3>
 
-        <div className={style.parent_main_adress_container}>
+        <div className={style.parent_main_adress_container}
+        // style={{height: window.innerHeight > 798  ? "700px" : ""}}
+        >
           
-        <div className={style.parent_main_adress_container_block}>
-          <input 
-          type="text" 
-          id="country" 
-          onChange={changeData} 
-          value={data.country}
-          className={style.parent_main_adress_container_block_input}
-          />
-          <p className={data.country ? style.label_focus: style.label}>Country</p>
-        </div>
+          <div className={style.parent_main_adress_container_block}>
+            <input 
+            type="text" 
+            id="country" 
+            onChange={changeData} 
+            value={data.country}
+            className={style.parent_main_adress_container_block_input}
+            />
+            <p className={data.country ? style.label_focus: style.label}>Country</p>
+          </div>
 
-        <div className={style.parent_main_adress_container_block}>
-          <input 
-          type="text" 
-          id="city" 
-          onChange={changeData} 
-          value={data.city}
-          className={style.parent_main_adress_container_block_input}
-          />
-          <p className={data.city ? style.label_focus: style.label}>City</p>
-        </div>
+          <div className={style.parent_main_adress_container_block}>
+            <input 
+            type="text" 
+            id="city" 
+            onChange={changeData} 
+            value={data.city}
+            className={style.parent_main_adress_container_block_input}
+            />
+            <p className={data.city ? style.label_focus: style.label}>City</p>
+          </div>
 
-        <div className={style.parent_main_adress_container_block}>
-          <input 
-          type="text" 
-          id="flatUnit" 
-          onChange={changeData} 
-          value={data.flatUnit}
-          className={style.parent_main_adress_container_block_input}
-          />
-          <p className={data.flatUnit ? style.label_focus: style.label}>Flat/Unit</p>
-        </div>
+          <div className={style.parent_main_adress_container_block}>
+            <input 
+            type="text" 
+            id="flatUnit" 
+            onChange={changeData} 
+            value={data.flatUnit}
+            className={style.parent_main_adress_container_block_input}
+            />
+            <p className={data.flatUnit ? style.label_focus: style.label}>Flat/Unit</p>
+          </div>
 
-        <div className={style.parent_main_adress_container_block}>
-          <input 
-          type="text" 
-          id="street" 
-          onChange={changeData} 
-          value={data.street}
-          className={style.parent_main_adress_container_block_input}
-          />
-          <p className={data.street ? style.label_focus: style.label}>Street</p>
-        </div>
+          <div className={style.parent_main_adress_container_block}>
+            <input 
+            type="text" 
+            id="street" 
+            onChange={changeData} 
+            value={data.street}
+            className={style.parent_main_adress_container_block_input}
+            />
+            <p className={data.street ? style.label_focus: style.label}>Street</p>
+          </div>
 
-        <div className={style.parent_main_adress_container_block}>
-          <input 
-          type="text" 
-          id="streetNo" 
-          onChange={changeData} 
-          value={data.streetNo}
-          className={style.parent_main_adress_container_block_input}
-          />
-          <p className={data.streetNo ? style.label_focus: style.label}>Street No</p>
-        </div>
+          <div className={style.parent_main_adress_container_block}>
+            <input 
+            type="text" 
+            id="streetNo" 
+            onChange={changeData} 
+            value={data.streetNo}
+            className={style.parent_main_adress_container_block_input}
+            />
+            <p className={data.streetNo ? style.label_focus: style.label}>Street No</p>
+          </div>
 
-        <div className={style.parent_main_adress_container_block}>
-          <input 
-          type="text" 
-          id="postcode" 
-          onChange={changeData} 
-          value={data.postcode}
-          className={style.parent_main_adress_container_block_input}
-          />
-          <p className={data.postcode ? style.label_focus: style.label}>Post Code</p>
-        </div>
-
+          <div className={style.parent_main_adress_container_block}>
+            <input 
+            type="text" 
+            id="postcode" 
+            onChange={changeData} 
+            value={data.postcode}
+            className={style.parent_main_adress_container_block_input}
+            />
+            <p className={data.postcode ? style.label_focus: style.label}>Post Code</p>
+          </div>
             
         </div>
       </div>
@@ -302,6 +364,7 @@ const General: React.FC<IGeneral> = (props) => {
 
     </div>
   </div>
+  </>
   )
 }
 

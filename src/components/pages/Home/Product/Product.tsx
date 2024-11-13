@@ -9,6 +9,7 @@ import { createGetProducts } from '../../../utils/API/API';
 import { IGetProducts } from '../../../utils/API/types';
 import ProductsTableItem from '../../features/ProductsTableItem/ProductsTableItem';
 import ProductItemAdd from '../../features/ProductItemAdd/ProductItemAdd';
+import PageLoader from '../../../common/PageLoader/PageLoader';
 
 interface IProduct {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -92,16 +93,16 @@ const Product = () => {
   // ------------------- get products ------------------------
   const {
     data: getProducts,
-    isPending,
+    isPending: isProductsPending,
   } = useQuery<IGetProducts | undefined>({
     queryKey: ["getProducts", { page: page-1, size: itemperpage, filter: ascend }],
     queryFn: () => createGetProducts({ page: page-1, size: itemperpage, filter: ascend}),
   });
   useEffect(() => {
-    if (getProducts && !isPending) {
+    if (getProducts && !isProductsPending) {
       setAllDataCount(getProducts.countProducts);
     }
-  }, [getProducts, isPending, itemperpage]);
+  }, [getProducts, isProductsPending, itemperpage]);
   //  ----------------- get products ---------------------------
 
 
@@ -116,6 +117,8 @@ const Product = () => {
   return (
     <>
       { viewAdd && <ProductItemAdd setViewAdd={setViewAdd}/>}
+
+      {isProductsPending && <PageLoader /> }
 
       <div className={style.overflow}>
         <Helmet>
@@ -707,6 +710,9 @@ const Product = () => {
 
                 </div>
               </div>
+
+
+              
             </div>
 
 

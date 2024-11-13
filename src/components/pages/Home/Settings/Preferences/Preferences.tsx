@@ -11,6 +11,7 @@ import { getCookie, setCookie } from '../../../../utils/reUse/cookie'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { createGetUser, createSavePreferences } from '../../../../utils/API/API'
 import { IgetUser } from '../../../../utils/API/types'
+import PageLoader from '../../../../common/PageLoader/PageLoader'
 
 interface IPreferences {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
@@ -37,6 +38,7 @@ const Preferences: React.FC<IPreferences> = (props) => {
   // ------------------- get user ------------------------
   const {
     data: userData,
+    isPending: userIsPending,
   } = useQuery<IgetUser | undefined>({
     queryKey: ["getUser"],
     queryFn: createGetUser,
@@ -86,10 +88,11 @@ const Preferences: React.FC<IPreferences> = (props) => {
     mutate: SavePreferences,
   } = useMutation({
     mutationFn: createSavePreferences,
-    onSuccess: () => {
-      console.log('Success');
-      requestNotify("done")
-      queryClient.invalidateQueries({queryKey: ["getUser"]})
+    onSuccess: (data) => {
+      if (data === 200) {
+        requestNotify("done")
+        queryClient.invalidateQueries({queryKey: ["getUser"]})
+      }
     },
     onError: (error) => {
       console.log('Login error:', error);
@@ -137,6 +140,9 @@ const Preferences: React.FC<IPreferences> = (props) => {
 
 
   return (
+    <>
+    {userIsPending && <PageLoader /> }
+
     <div className={style.parent}
     onClick={() => setMobileSelect(false)}>
 
@@ -349,7 +355,7 @@ const Preferences: React.FC<IPreferences> = (props) => {
           </div>
         </div>
 
-        <div className={style.parent_main_form_parametr}>
+        {/* <div className={style.parent_main_form_parametr}>
           <h3 className={style.parent_main_form_parametr_head}>{t("Icons Size")}</h3>
 
           <div className={style.parent_main_form_parametr_select}>
@@ -372,7 +378,7 @@ const Preferences: React.FC<IPreferences> = (props) => {
               >{"Medium (27px)"}</p>
             </div>
           </div>
-        </div>
+        </div> */}
 
 
       </div>
@@ -383,6 +389,7 @@ const Preferences: React.FC<IPreferences> = (props) => {
     {/* <Theme setTheme={setTheme} theme={theme}/> */}
 
   </div>
+  </>
   )
 }
 

@@ -1,7 +1,8 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import style from './billings.module.scss'
 import { useEffect, useState } from 'react'
-import { createPostPlans } from '../../../../utils/API/API';
+import { createGetPlans, createPostPlans } from '../../../../utils/API/API';
+import { IGetPlan } from '../../../../utils/API/types';
 
 interface IGeneral {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,32 +11,47 @@ interface IGeneral {
 
 const Billings: React.FC<IGeneral> = (props) => {
   const { setMobileSelect, requestNotify } = props
-  const [plan, setPlan] = useState('Professional Plan')
+  const [plan, setPlan] = useState(
+    "Basic"
+  )
+  // ----------------- get data --------------------------
+  const {
+    data: getSubscriptionData,
+  } = useQuery<IGetPlan[] | undefined>({
+    queryKey: ["getSubscriptions"],
+    queryFn: createGetPlans,
+  });
+  useEffect(() => {
+    if (getSubscriptionData && Array.isArray(getSubscriptionData)) {
+      // setPlan(getSubscriptionData[0].planName);
+    const lastSubscription = getSubscriptionData.filter((item) => item.status === "SUCCESS").pop();
+    if (lastSubscription) {
+      setPlan(lastSubscription.planName);
+      }
+    }
+  }, [getSubscriptionData]);
+  //------------------ get data ---------------------------
+
+
 
   // ------------------- save user ------------------------
-  // const queryClient = useQueryClient()
+  const queryClient = useQueryClient()
   const {
     mutate: SavePlans,
   } = useMutation({
     mutationFn: createPostPlans,
-    onSuccess: () => {
-      console.log('Success');
-      requestNotify("done")
-      // queryClient.invalidateQueries({queryKey: ["getUser"]})
+    onSuccess: (data) => {
+      console.log('Success', data);
+      if (data === 201) {
+        requestNotify('success')
+        queryClient.invalidateQueries({queryKey: ["getSubscriptions"]})
+      }
     },
     onError: (error) => {
       console.log('Login error:', error);
     },
   });
   // ------------------- save user ------------------------
-  
-  useEffect(() => {
-    // test notification
-    return () => {
-      SavePlans({subscriptionId: "1", plan: {name: plan}})
-    }
-  }, [plan])
-
 
 
   return (
@@ -97,7 +113,7 @@ const Billings: React.FC<IGeneral> = (props) => {
           </div>
 
           <button className={style.parent_main_plans_option_btn}
-          onClick={() => setPlan('Basic Plan')}>
+          onClick={() => SavePlans({plan: {name: "Basic Plan"}})}>
             {plan==='Basic Plan' ? "Active Plan" : "Choose Plan"}
           </button>
         </div>
@@ -145,7 +161,7 @@ const Billings: React.FC<IGeneral> = (props) => {
           </div>
 
           <button className={style.parent_main_plans_option_btn}
-          onClick={() => setPlan('Enterprise Plan')}>
+          onClick={() => SavePlans({plan: {name: "Enterprise Plan"}})}>
             {plan==='Enterprise Plan' ? "Active Plan" : "Choose Plan"}
           </button>
         </div>
@@ -193,13 +209,50 @@ const Billings: React.FC<IGeneral> = (props) => {
           </div>
 
           <button className={style.parent_main_plans_option_btn}
-          onClick={() => setPlan('Professional Plan')}>
+          onClick={() => SavePlans({plan: {name: "Professional Plan"}})}>
             {plan==='Professional Plan' ? "Active Plan" : "Choose Plan"}
           </button>
         </div>
 
       </div>
 
+
+      {/* -------------------------- transactions ------------------------------ */}
+      <div className={style.parent_main_transactions}>
+
+        <h5 className={style.parent_main_transactions_head}>Billing History</h5>
+
+        <div className={style.parent_main_transactions_main}>
+          <table className={style.parent_main_transactions_main_table}>
+            <thead className={style.parent_main_transactions_main_table_head}>
+              <tr>
+                <th className={style.parent_main_transactions_main_table_head_date}>Invoices</th>
+                <th className={style.parent_main_transactions_main_table_head_desc}>Created Date</th>
+                <th className={style.parent_main_transactions_main_table_head_price}>Amount</th>
+                <th className={style.parent_main_transactions_main_table_head_plan}>Selected Plan</th>
+              </tr>
+            </thead> 
+            <tbody className={style.parent_main_transactions_main_table_body}>
+              {
+                getSubscriptionData && 
+                getSubscriptionData
+                  .sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime())
+                  .slice(0, 5)
+                  .map((item, index) => (
+                    <tr key={index} className={style.parent_main_transactions_main_table_body_item}>
+                      <td className={style.parent_main_transactions_main_table_body_item_date}>{item.subscriptionId}</td>
+                      <td className={style.parent_main_transactions_main_table_body_item_desc}>{item.startDate}</td>
+                      <td className={style.parent_main_transactions_main_table_body_item_price}>${item.amount}</td>
+                      <td className={style.parent_main_transactions_main_table_body_item_plan}>{item.planName}</td>
+                    </tr>
+                  ))
+              }
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      
 
     </div>
 

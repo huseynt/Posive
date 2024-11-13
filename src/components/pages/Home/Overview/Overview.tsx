@@ -14,6 +14,7 @@ import { IGetMeals, IGetOrdersResponse } from "../../../utils/API/types";
 
 import * as XLSX from "xlsx";
 import OverviewItemDeleteAll from "../../features/OverItemDeleteAll/OverviewItemDeleteAll";
+import PageLoader from "../../../common/PageLoader/PageLoader";
 
 
 interface IOverview {
@@ -71,13 +72,13 @@ const Overview = () => {
   // ------------------- get orders ------------------------
   const {
     data: m,
-    isPending
+    isPending: isMPending,
   } = useQuery<IGetOrdersResponse | undefined>({
     queryKey: ["getOrders", { page: page-1, size: itemperpage, date: period, filter: ascend}],
     queryFn: () => createGetOrders({ page: page-1, size: itemperpage, date: period, filter: ascend }),
   });
   useEffect(() => {
-    if (m && !isPending) {
+    if (m && !isMPending) {
       setCountOrders(
         m.countOrders % itemperpage === 0
           ? m.countOrders / itemperpage
@@ -86,7 +87,7 @@ const Overview = () => {
       );
       setAllDataCount(m.countOrders);
     }
-  }, [m, isPending, itemperpage]);
+  }, [m, isMPending, itemperpage]);
   //  ----------------- get orders ---------------------------
 
 
@@ -245,6 +246,11 @@ const Overview = () => {
           multiCheck={multiCheck}
         />
       }
+
+      {isMPending && <PageLoader /> }
+
+
+
       <div className={style.overflow}>
 
         <Helmet>
