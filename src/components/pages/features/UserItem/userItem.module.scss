@@ -17,15 +17,11 @@
         column-gap: 4px;
     }
 
-    // &:hover {
-    //     @include themed() {
-    //         background-color: t(main_light_two);
-    //     }
-    // }
-
     &_item {
-        // padding-right: 3px;  
+        min-height: 32px;
         text-align: start;
+        display: flex;
+        align-items: center;
         @extend %sm_b;
         @extend %text_overflow;
         @include themed() {

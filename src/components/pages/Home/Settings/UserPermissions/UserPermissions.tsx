@@ -1,10 +1,12 @@
 import UserItem from '../../../features/UserItem/UserItem'
 import style from './userpermissions.module.scss'
 // import { users } from '../../../../test/db/users'
-import { createGetUsers } from '../../../../utils/API/API'
-import { useQuery } from '@tanstack/react-query'
+import { createDeletePermissionUserAll, createGetUsers } from '../../../../utils/API/API'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import PageLoader from '../../../../common/PageLoader/PageLoader'
+import Notify from '../../../features/Notify/Notify'
+import Loader from '../../../../common/Loader/Loader'
 interface IGeneral {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>
 }
@@ -39,12 +41,32 @@ interface IGetPermission {
 }
 
 const UserPermissions: React.FC<IGeneral> = (props) => {
-  const { setMobileSelect } = props
+  const { setMobileSelect,  } = props
   const [pagination, setPagination] = useState<number>(1);
   const [page, setPage] = useState<number>(1);
   const [itemperpage, setItemPerPage] = useState<number>(10);
-  const [countOrders, ] = useState<number>(1);
+  const [countOrders, setCountOrders] = useState<number>(1);
   const [allDataCount, setAllDataCount] = useState<number>(0);
+  const [checked, setChecked] = useState<boolean>(false);
+  const [multiCheck, setMultiCheck] = useState<string[]>([]);
+
+  //  ----------------------------- for notify ----------------------------
+  const [notify, setNotify] = useState<boolean>(false);
+  const [notifyPurpose, setNotifyPurpose] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const requestNotify = (purpose: string, description: string | undefined) => {
+      setNotifyPurpose(purpose);
+      setDescription(description ? description : "");
+      setNotify(true);
+      const timeout = setTimeout(() => {
+      setNotify(false);
+      }, 1800);
+      return () => {
+      clearTimeout(timeout);
+      };
+  };
+  //  ----------------------------- for notify ----------------------------
+
 
   // ----------------- get data --------------------------
   const {
@@ -55,11 +77,57 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
     queryFn: () => createGetUsers({ page: page-1, size: itemperpage}),
   });
   useEffect(() => {
-    if (getPermissionData) {
-      setAllDataCount(getPermissionData.countUserPermissions.totalElements);
+    if (getPermissionData && !isPermissionLoading) {
+      setCountOrders(
+        Number(getPermissionData.countUserPermissions) % itemperpage === 0
+          ? Number(getPermissionData.countUserPermissions) / itemperpage
+          : Math.floor(Number(getPermissionData.countUserPermissions) / itemperpage) + 1
+        
+      );
+      setAllDataCount(Number(getPermissionData.countUserPermissions));
     }
-  }, [getPermissionData]);
+  }, [getPermissionData, isPermissionLoading, itemperpage]);
   //------------------ get data ---------------------------
+
+
+
+
+  // ----------------- handle multicheck --------------------------
+  useEffect(() => {
+    if (checked == false) {
+      setMultiCheck([]);
+    }
+  }, [checked, getPermissionData]);
+  useEffect(() => { 
+    setChecked(false);
+    setMultiCheck([]);
+  }, [getPermissionData]);
+  // ----------------- handle multicheck --------------------------
+
+
+
+  // ----------------- delete all --------------------------
+  const queryClient = useQueryClient();
+  const {
+    mutate: DeletePermissionUserAll,
+    isPending: isDeletePermissionLoading,
+  } = useMutation({
+    mutationFn: createDeletePermissionUserAll,
+    onSuccess: () => {
+      requestNotify("done", "Deleted successfully");
+      setMultiCheck([]);
+      setChecked(false);
+      queryClient.invalidateQueries({queryKey: ["getPermission"]})
+    },
+    onError: (error) => {
+      console.log('Delete error:', error);  
+      requestNotify("undone", "Delete failed");
+    },
+  });
+  const handleDeleteAll = () => {
+    DeletePermissionUserAll(multiCheck);
+  }
+  // ----------------- delete all --------------------------
 
 
   return (
@@ -67,8 +135,35 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
 
     {isPermissionLoading && <PageLoader /> }
 
+    <Notify notify={notify} purpose={notifyPurpose} describtion={description}/>
+
+
     <div className={style.parent}
     onClick={() => setMobileSelect(false)}>
+
+
+    {/* ----------------- save buttons ------------------------------ */}
+    { multiCheck.length > 0 &&
+      <div className={style.parent_buttons}>
+        <button className={style.parent_buttons_cancel}
+        onClick={() => {
+          setChecked(false);
+          setMultiCheck([]);
+        }}
+        >Cancel</button>
+
+        <button className={style.parent_buttons_save}
+          onClick={handleDeleteAll}
+          >
+          { isDeletePermissionLoading ?
+          <Loader/>
+          :
+          "Delete All"
+          }
+          </button>
+      </div>
+    }
+    {/* ----------------- save buttons ------------------------------ */}
       
     <div className={style.parent_up}>
       <h2 className={style.parent_up_head}>User Permissions</h2>
@@ -84,7 +179,10 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
         <thead className={style.parent_main_table_thead}>
           <tr className={style.parent_main_table_thead_row}>
             <th className={style.parent_main_table_thead_row_item}>
-              <input type="checkbox"/>
+              <input type="checkbox"
+              checked={checked}
+              onChange={(e) => {setChecked(e.target.checked)}}
+              />
             </th>
             <th className={style.parent_main_table_thead_row_item}>No</th>
             <th className={style.parent_main_table_thead_row_item}>Name</th>
@@ -106,6 +204,11 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
               email={item.email}
               created={item.created}
               role={item.role}
+              multiCheck={multiCheck}
+              setMultiCheck={setMultiCheck}
+              checked={checked}
+              requestNotify={requestNotify}
+              isDeletePermissionLoading={isDeletePermissionLoading}
               />
             ))
           }
@@ -205,9 +308,9 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
                 }
                 value={itemperpage}
               >
+                <option value="5">Show 5</option>
                 <option value="8">Show 8</option>
                 <option value="10">Show 10</option>
-                <option value="20">Show 20</option>
               </select>
             </div>
 

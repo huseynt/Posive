@@ -119,7 +119,6 @@ const {
 useEffect(() => {
   const handleUserData = async () => {
     if (userData) {
-      console.log(userData);
       saveUser(userData);
       setTheme(userData.setting?.theme || "light");
     } 

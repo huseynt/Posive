@@ -301,6 +301,30 @@ export interface IGetPlan {
   amount: number;
 }
 
+export interface IUpdateUserPermissions {
+  username: string;
+  email: string;
+  created: string;
+  role: string;
+}
+
+export interface IGetNotifications {
+  emailNotDTO: {
+    email: string;
+    nots: string[];
+  };
+  moreActivityDTO: {
+    email: string;
+    activity: string[];
+  };
+}
+
+export interface SaveNotificationsParams {
+  nlist: string;
+  mlist: string;
+}
+
+
 
 // export interface IGetOrdersResponse {
 //   orders: IGetOrders[];

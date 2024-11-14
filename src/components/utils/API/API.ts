@@ -12,7 +12,9 @@ import { IcreatePostAuthenticate,
     ISaveOrder, 
     IUpdateProduct,
     IAddProduct,
-    IGetGeneral
+    IGetGeneral,
+    IUpdateUserPermissions,
+    SaveNotificationsParams
 } from './types';
 
 // Base
@@ -612,6 +614,115 @@ export const createGetUsers = async ({ page, size }: GetUsersParams) => {
         });
         if (res.ok) {
             return res.json();
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+// Edit User Permissions
+export const createEditUserPermissions = async (data: IUpdateUserPermissions) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/user_permission/update`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            body: JSON.stringify(data)
+        });
+        if (res.ok) {
+            return "Success";
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Delete User
+export const createDeleteUserPermission = async (email: string) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/user_permission/delete?email=${email}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+        if (res.ok) {
+            return "Success";
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Delete User by email
+export const createDeletePermissionUserAll = async (data: string[]) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/user_permission/deleteAll`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            body: JSON.stringify(data)
+        });
+        if (res.ok) {
+            return "Success";
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Get Notifications
+export const createGetNotifications = async () => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/notifications/get`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+// Save Notifications
+export const createSaveNotifications = async (params: SaveNotificationsParams) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/notifications/save?nList=${params.nlist}&mList=${params.mlist}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+        });
+        if (res.ok) {
+            return res.status;
         }
         return Promise.reject(res);
     } catch (error) {

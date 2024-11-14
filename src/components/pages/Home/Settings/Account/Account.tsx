@@ -8,10 +8,11 @@ import { createDeleteUser, createGetUser, createSaveUser } from '../../../../uti
 import { useNavigate } from 'react-router-dom';
 import { resetToken } from '../../../../utils/Hooks/useToken';
 import PageLoader from '../../../../common/PageLoader/PageLoader';
+import Loader from '../../../../common/Loader/Loader';
 
 interface IGeneral {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
-  requestNotify: (message: string) => void;
+  requestNotify: (message: string, purpose: string) => void;
 }
 
 interface IData {
@@ -77,12 +78,11 @@ const General: React.FC<IGeneral> = (props) => {
   const {
     mutate: SaveUser,
     // isSuccess: isCreatePostSuccess,
-    // isPending: isPostsPending
+    isPending: isSaveUserPending
   } = useMutation({
     mutationFn: createSaveUser,
     onSuccess: () => {
-      console.log('Success');
-      requestNotify("done")
+      requestNotify("done", "Account saved successfully")
       queryClient.invalidateQueries({queryKey: ["getUser"]})
     },
     onError: (error) => {
@@ -98,11 +98,9 @@ const General: React.FC<IGeneral> = (props) => {
     mutate: DeleteUser,
   } = useMutation({
     mutationFn: createDeleteUser,
-    onSuccess: (response) => {
-      console.log('Delete success:', response);
-        console.log('Deleted');
-        navigate('/login')
-        resetToken()  
+    onSuccess: () => {
+      navigate('/login')
+      resetToken()  
     },
     onError: (error) => {
       console.log('Delete error:', error);  
@@ -198,12 +196,13 @@ const General: React.FC<IGeneral> = (props) => {
     if (data.name && 
       data.email && 
       data.phoneNumber) {
-      console.log(data)
-      // resetData()
-      SaveUser(data)
+      SaveUser({
+        ...data,
+        phoneNumber: data.phoneNumber[0] !== '+' ? `+${data.phoneNumber}` : data.phoneNumber
+      });
     }
     else {
-      requestNotify("important")
+      requestNotify("important", "Please fill in the required fields")
     }
   }
 
@@ -223,7 +222,13 @@ const General: React.FC<IGeneral> = (props) => {
       >Cancel</button>
       <button className={style.parent_buttons_save}
       onClick={sendData}
-      >Save</button>
+      >
+        { isSaveUserPending ?
+          <Loader/>
+          :
+          "Save"
+        }
+      </button>
     </div>
     
     <div className={style.parent_up}>

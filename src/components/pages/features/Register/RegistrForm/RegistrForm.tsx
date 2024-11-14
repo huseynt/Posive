@@ -130,11 +130,11 @@ const RegisterForm: React.FC<RegistrFormProps>  = (props) => {
       data.password &&
       repeatPassword) {
       console.log("Form submitted successfully", data);
-      // Registr({
-      //   ...data,
-      //   phoneNumber: data.phoneNumber[0] !== '+' ? `+${data.phoneNumber}` : data.phoneNumber
-      // });
-      Registr(data);
+      Registr({
+        ...data,
+        phoneNumber: data.phoneNumber[0] !== '+' ? `+${data.phoneNumber}` : data.phoneNumber
+      });
+      // Registr(data);
     } 
     else {
       setValidate((prevData) => {

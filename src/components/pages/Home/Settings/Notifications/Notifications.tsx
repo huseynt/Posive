@@ -1,5 +1,8 @@
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { createGetNotifications, createSaveNotifications } from '../../../../utils/API/API';
 import style from './notifications.module.scss'
 import { useEffect, useState } from 'react'
+import { IGetNotifications } from '../../../../utils/API/types';
 
 interface IGeneral {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
@@ -8,8 +11,69 @@ interface IGeneral {
 
 const Notifications: React.FC<IGeneral> = (props) => {
   const { setMobileSelect, requestNotify } = props
-  const [ emailNotifications, setEmailNotifications ] = useState(false)
-  const [ moreActivity, setMoreActivity ] = useState(false)
+
+  // ----------------- get data --------------------------
+  const {
+    data: getNotifications,
+    isPending: isNotificationsLoading,
+  } = useQuery<IGetNotifications | undefined>({
+    queryKey: ["getNotifications"],
+    queryFn: createGetNotifications,
+  });
+  useEffect(() => {
+    if (!isNotificationsLoading && getNotifications) {
+      setData({
+        news: getNotifications?.emailNotDTO.nots.includes("NEWS") ? true : false,
+        tips: getNotifications?.emailNotDTO.nots.includes("TIPS") ? true : false,
+        offer: getNotifications?.emailNotDTO.nots.includes("OFFER") ? true : false,
+        allReminder: getNotifications?.moreActivityDTO.activity.includes("ALLREMINDERS") ? true : false,
+        activity: getNotifications?.moreActivityDTO.activity.includes("ACTIVITY") ? true : false,
+        important: getNotifications?.moreActivityDTO.activity.includes("IMPORTANT") ? true : false,
+      });
+      setEmailNotifications(
+        getNotifications?.emailNotDTO.nots ? getNotifications?.emailNotDTO.nots.length > 0 ? true : false : false
+      )
+      setMoreActivity(
+        getNotifications?.moreActivityDTO.activity ? getNotifications?.moreActivityDTO.activity.length > 0 ? true : false : false
+      )
+    }
+  }, [isNotificationsLoading, getNotifications]);
+  //------------------ get data ---------------------------
+
+  const [data, setData] = useState({
+    news: getNotifications?.emailNotDTO.nots.includes("NEWS") ? true : false,
+    tips: getNotifications?.emailNotDTO.nots.includes("TIPS") ? true : false,
+    offer: getNotifications?.emailNotDTO.nots.includes("OFFER") ? true : false,
+    allReminder: getNotifications?.moreActivityDTO.activity.includes("ALLREMINDERS") ? true : false,
+    activity: getNotifications?.moreActivityDTO.activity.includes("ACTIVITY") ? true : false,
+    important: getNotifications?.moreActivityDTO.activity.includes("IMPORTANT") ? true : false,
+  });
+  const [ emailNotifications, setEmailNotifications ] = useState(
+    getNotifications?.emailNotDTO.nots ? getNotifications?.emailNotDTO.nots.length > 0 ? true : false : false)
+  const [ moreActivity, setMoreActivity ] = useState(
+    getNotifications?.moreActivityDTO.activity ? getNotifications?.moreActivityDTO.activity.length > 0 ? true : false : false)
+
+
+  // ------------------- save user ------------------------
+  const queryClient = useQueryClient()
+  const {
+    mutate: SaveNotifications,
+    // isPending: isSavePending,
+  } = useMutation({
+    mutationFn: createSaveNotifications,
+    onSuccess: (data) => {
+      if (data == 200) {
+        queryClient.invalidateQueries({queryKey: ["getNotifications"]})
+      }
+    },
+    onError: (error) => {
+      console.log('Login error:', error);
+    },
+  });
+  // ------------------- save user ------------------------
+
+
+
 
   useEffect(() => {
     if(!emailNotifications) {
@@ -33,15 +97,6 @@ const Notifications: React.FC<IGeneral> = (props) => {
     }
   }, [moreActivity])
 
-  const [data, setData] = useState({
-    news: false,
-    tips: false,
-    offer: false,
-    allReminder: false,
-    activity: false,
-    important: false,
-  });
-
   const resetData = () => {
     setData({
       news: false,
@@ -56,10 +111,22 @@ const Notifications: React.FC<IGeneral> = (props) => {
   }
 
   const sendData = () => {
-    console.log(data)
     requestNotify("done")
+    const params = {
+      nlist: `${data.news ? "NEWS" : ""}${data.tips ? ",TIPS" : ""}${data.offer ? ",OFFER" : ""}`.replace(/^,|,$/g, ""),
+      mlist: `${data.allReminder ? "ALLREMINDERS" : ""}${data.activity ? ",ACTIVITY" : ""}${data.important ? ",IMPORTANT" : ""}`.replace(/^,|,$/g, ""),
+    }
+    SaveNotifications(params)
   }
 
+  useEffect(() => {
+    if(!data.news && !data.tips && !data.offer) {
+      setEmailNotifications(false)
+    }
+    if(!data.allReminder && !data.activity && !data.important) {
+      setMoreActivity(false)
+    }
+  }, [data])
 
   return (
     <>
@@ -76,7 +143,13 @@ const Notifications: React.FC<IGeneral> = (props) => {
       >Cancel</button>
       <button className={style.parent_buttons_save}
       onClick={sendData}
-      >Save</button>
+      >Save
+      {/* { isSaveGeneralPending ?
+          <Loader/>
+          :
+          "Save"
+      } */}
+      </button>
     </div>
     {/* ----------------- save buttons ------------------------------ */}
 

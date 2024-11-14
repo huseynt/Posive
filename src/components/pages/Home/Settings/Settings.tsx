@@ -46,7 +46,6 @@ const Settings: React.FC<ThemeProps> = (props) => {
       const path = window.location.pathname.split("/")[3];
       setSub(path);
     });
-    console.log(sub);
   }, [sub]);
 
   useEffect(() => {

@@ -83,7 +83,7 @@ const Product = () => {
   const [pagination, setPagination] = useState<number>(1);
   const [page, setPage] = useState<number>(1);
   const [itemperpage, setItemPerPage] = useState<number>(10);
-  const [countOrders] = useState<number>(1);
+  const [countOrders, setCountOrders] = useState<number>(1);
   const [allDataCount, setAllDataCount] = useState<number>(0);
   const [ascend, setAscend] = useState<string>("DESC");
   const [viewAdd, setViewAdd] = useState<boolean>(false);
@@ -100,6 +100,12 @@ const Product = () => {
   });
   useEffect(() => {
     if (getProducts && !isProductsPending) {
+      setCountOrders(
+        getProducts.countProducts % itemperpage === 0
+          ? getProducts.countProducts / itemperpage
+          : Math.floor(getProducts.countProducts / itemperpage) + 1
+        
+      );
       setAllDataCount(getProducts.countProducts);
     }
   }, [getProducts, isProductsPending, itemperpage]);

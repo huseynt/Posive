@@ -27,10 +27,54 @@
     display: flex;
     flex-direction: column;
     row-gap: 20px;
+    position: relative;
 
     @include themed() {
         background-color: t(white);
         border: 1px solid t(gray);
+    }
+
+    &_buttons {
+        position: absolute;
+        top: -73px;
+        right: 0;
+        display: flex;
+        align-items: center;
+        column-gap: 12px;
+        animation: fadeIn .3s;
+
+        @include mobile {
+            width: 100%;
+            position: fixed;
+            justify-content: center;
+            bottom: 0;
+            top: auto;
+            right: auto;
+            left: 0;
+            z-index: 999;
+            padding: 2%;
+            @include themed() {
+                background-color: t(white);
+                border-top: 1px solid t(gray);
+            }
+        }
+
+        &_save {
+            @extend %btn_main;
+            background-color: $reserved !important;
+            min-width: 140px;
+            border-radius: 10px;
+
+            &:hover {
+                background-color: $warning !important;
+            }
+        }
+
+        &_cancel {
+            @extend %btn_main_w;
+            min-width: 140px;
+            border-radius: 10px;
+        }
     }
 
     &_up {

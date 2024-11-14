@@ -12,6 +12,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { createGetUser, createSavePreferences } from '../../../../utils/API/API'
 import { IgetUser } from '../../../../utils/API/types'
 import PageLoader from '../../../../common/PageLoader/PageLoader'
+import Loader from '../../../../common/Loader/Loader'
 
 interface IPreferences {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
@@ -45,7 +46,6 @@ const Preferences: React.FC<IPreferences> = (props) => {
   });
   useEffect(() => {
     if (userData) {
-      console.log(userData);
       setPereferencesData({
         theme: userData?.setting?.theme ? userData?.setting?.theme : "light",
         language: userData?.setting?.language ? userData?.setting?.language : language==="az" ? "Azərbaycan" : "English (US)",
@@ -86,6 +86,7 @@ const Preferences: React.FC<IPreferences> = (props) => {
   const queryClient = useQueryClient()
   const {
     mutate: SavePreferences,
+    isPending: isSavePending,
   } = useMutation({
     mutationFn: createSavePreferences,
     onSuccess: (data) => {
@@ -114,7 +115,6 @@ const Preferences: React.FC<IPreferences> = (props) => {
   }
 
   const sendData = () => {
-    console.log(pereferencesData)
     toggleTheme(pereferencesData.theme??'light')
     requestNotify("done")
     changeLanguage(
@@ -134,7 +134,6 @@ const Preferences: React.FC<IPreferences> = (props) => {
     document.body.setAttribute('data-theme', mode);
     localStorage.setItem('theme', mode);
     setTheme(mode);
-    console.log('Theme:', mode);
   };
 
 
@@ -153,7 +152,13 @@ const Preferences: React.FC<IPreferences> = (props) => {
       >{t("cancel")}</button>
       <button className={style.parent_buttons_save}
       onClick={sendData}
-      >{t("save")}</button>
+      >
+      { isSavePending ?
+          <Loader/>
+          :
+          t("save")
+      }
+      </button>
     </div>
       
     <div className={style.parent_up}>

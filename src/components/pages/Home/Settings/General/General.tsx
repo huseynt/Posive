@@ -5,6 +5,7 @@ import { createGetSettingGeneral, createSaveSettingGeneral } from '../../../../u
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { IGetGeneral } from '../../../../utils/API/types';
 import PageLoader from '../../../../common/PageLoader/PageLoader';
+import Loader from '../../../../common/Loader/Loader';
 
 interface IGeneral {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,6 +14,21 @@ interface IGeneral {
 
 const General: React.FC<IGeneral> = (props) => {
   const { setMobileSelect, requestNotify } = props
+  const [data, setData] = useState({
+    imgFile: "",
+    storeName: "",
+    businessMail: "",
+    businessNumber: "",
+    fax: "",
+    country: "",
+    city: "",
+    flatUnit: "",
+    street: "",
+    streetNo: "",
+    postcode: "",
+  });
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
+
 
 
   // ----------------- get data --------------------------
@@ -23,11 +39,24 @@ const General: React.FC<IGeneral> = (props) => {
     queryKey: ["getSettingGeneral"],
     queryFn: createGetSettingGeneral,
   });
-
   useEffect(() => {
-    console.log(getGeneralData);
-  }, [getGeneralData]);
-
+    if (!isGeneralLoading && getGeneralData) {
+      setData({
+        imgFile: getGeneralData?.businessDetails.imageUrl || "",
+        storeName: getGeneralData?.businessDetails.storeName || "",
+        businessMail: getGeneralData?.businessDetails.businessEmail || "",
+        businessNumber: getGeneralData?.businessDetails.number || "",
+        fax: getGeneralData?.businessDetails.fax || "",
+        country: getGeneralData?.address.country || "",
+        city: getGeneralData?.address.city || "",
+        flatUnit: getGeneralData?.address.flat || "",
+        street: getGeneralData?.address.street || "",
+        streetNo: getGeneralData?.address.streetNumber || "",
+        postcode: getGeneralData?.address.postalCode || "",
+      });
+    }
+    setImagePreview(getGeneralData?.businessDetails.imageUrl || null);
+  }, [isGeneralLoading, getGeneralData]);
   //------------------ get data ---------------------------
 
 
@@ -35,10 +64,10 @@ const General: React.FC<IGeneral> = (props) => {
   const queryClient = useQueryClient();
   const {
     mutate: SaveGeneral,
+    isPending: isSaveGeneralPending,
   } = useMutation({
     mutationFn: createSaveSettingGeneral,
-    onSuccess: (response) => {
-      console.log('Delete success:', response);
+    onSuccess: () => {
       requestNotify("done");
       queryClient.invalidateQueries({queryKey: ["getSettingGeneral"]})
     },
@@ -48,29 +77,7 @@ const General: React.FC<IGeneral> = (props) => {
     },
   });
   // ---------------- save data ----------------------------
-
-
-
-
-
-  const [data, setData] = useState({
-    imgFile: getGeneralData?.businessDetails.imageUrl || "",
-    storeName: getGeneralData?.businessDetails.storeName || "",
-    businessMail: getGeneralData?.businessDetails.businessEmail || "",
-    businessNumber: getGeneralData?.businessDetails.number || "",
-    fax: getGeneralData?.businessDetails.fax || "",
-    country: getGeneralData?.address.country || "",
-    city: getGeneralData?.address.city || "",
-    flatUnit: getGeneralData?.address.flat || "",
-    street: getGeneralData?.address.street || "",
-    streetNo: getGeneralData?.address.streetNumber || "",
-    postcode: getGeneralData?.address.postalCode || "",
-  });
-
   const [imagePreview, setImagePreview] = useState<string | null>(getGeneralData?.businessDetails.imageUrl || null);
-  const [uploadProgress, setUploadProgress] = useState<number>(0);
-
-
 
 
 
@@ -132,7 +139,6 @@ const General: React.FC<IGeneral> = (props) => {
   }
 
   const sendData = () => {
-    console.log(data)
     SaveGeneral(
       {
         businessDetails: {
@@ -177,7 +183,13 @@ const General: React.FC<IGeneral> = (props) => {
       >Cancel</button>
       <button className={style.parent_buttons_save}
       onClick={sendData}
-      >Save</button>
+      >
+      { isSaveGeneralPending ?
+          <Loader/>
+          :
+          "Save"
+      }
+      </button>
     </div>
     
     <div className={style.parent_up}>
