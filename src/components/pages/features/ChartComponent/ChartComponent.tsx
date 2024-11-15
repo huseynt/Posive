@@ -6,11 +6,21 @@ import { createGetStatistics } from '../../../utils/API/API';
 
 interface IGetStatistics {
     incomes: number[],
-    years: string[]
+    years: string[],
+    monthlyIncome: number,
+    products: number,
+    purchase: number,
+}
+
+interface IChartComponenrtProps {
+    setMonthlyIncome: React.Dispatch<React.SetStateAction<number>>;
+    setProductsNumber: React.Dispatch<React.SetStateAction<number>>;
+    setPurchanes: React.Dispatch<React.SetStateAction<number>>;
 }
 
 
-const ChartComponent: React.FC = () => {
+const ChartComponent: React.FC<IChartComponenrtProps> = (props) => {
+    const {setMonthlyIncome, setProductsNumber, setPurchanes} = props;
     const today = new Date()
     const [selectedYear, setSelectedYear] = useState<string>(`${today.getFullYear()}`);
     const [selectedPeriod, setSelectedPeriod] = useState<string>('1Y');
@@ -30,8 +40,11 @@ const ChartComponent: React.FC = () => {
     useEffect(() => {
         if (StatisticsData && !isPending) {
         console.log("StatisticsData", StatisticsData.incomes, StatisticsData.years);
+        setProductsNumber(StatisticsData.products);
+        setMonthlyIncome(StatisticsData.monthlyIncome);
+        setPurchanes(StatisticsData.purchase);
         }
-    }, [StatisticsData, isPending]);
+        }, [StatisticsData, isPending]);
     // const dataset = StatisticsData.incomes.map((income: any) => income.totalPrice);
     //  ----------------- get orders ---------------------------
 

@@ -19,6 +19,8 @@ import { createGetUser } from "../../utils/API/API";
 import { useQuery } from "@tanstack/react-query";
 import { IgetUser } from "../../utils/API/types";
 import { saveUser } from "../../utils/reUse/user";
+import { setCookie } from "../../utils/reUse/cookie";
+import { useTranslation } from "react-i18next";
 // import { createRefreshToken } from "../../utils/API/refreshToken";
 
 // {
@@ -88,6 +90,13 @@ const Home: React.FC<IHome> = (props) => {
   }, [token, navigate]);
   // ----------------------------- for token ----------------------------
 
+  // ----------------- languages ---------------------
+  const { i18n } = useTranslation();
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+    setCookie("i18next", lng, 7);
+  };
+  // ----------------- languages ---------------------
 
   //  ----------------------------- for notify ----------------------------
   const [notify, setNotify] = useState<boolean>(false);
@@ -121,6 +130,9 @@ useEffect(() => {
     if (userData) {
       saveUser(userData);
       setTheme(userData.setting?.theme || "light");
+      changeLanguage(
+        userData.setting?.language === "Azərbaycan" ? "az" : "en"
+      )
     } 
     // else if (!userData) {
     //   const refreshToken = await createRefreshToken();

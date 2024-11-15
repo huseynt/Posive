@@ -50,6 +50,11 @@
     justify-content: center;
     gap: 16px;
     grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    justify-items: center;
+
+    @include mobile {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
 
     &_element {
       width: 100%;
@@ -61,6 +66,14 @@
       align-items: center;
       justify-content: start;
       animation: fadeIn 0.4s;
+
+      
+      @include mobile {
+        width: 100%;
+        min-width: unset;
+        align-items: center;
+        justify-content: center;
+      }
 
       &:hover {
         cursor: pointer;
@@ -102,6 +115,7 @@
 
       &_text {
         @extend %m_b;
+        text-wrap: wrap;
       }
     }
   }

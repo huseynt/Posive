@@ -66,7 +66,7 @@ const OverviewItemView: React.FC<IQRCodeComponentProps> = (props) => {
               <div className={style.view_block_main_information_item_value}>{
                 new Date(orderDate).toLocaleDateString("en-US", {
                   year: "numeric",
-                  month: "long",
+                  month: "short",
                   day: "numeric",
                   hour: "numeric",
                   minute: "numeric",

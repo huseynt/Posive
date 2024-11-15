@@ -12,11 +12,17 @@
         align-items: center;
         column-gap: 7px;
 
+        // @include mobile {
+        //     max-width: 100px;
+        // }
+
         &_name {
             max-width: 150px;
             @extend %text_overflow;
+            
             @include mobile {
-                width: 90px;
+                width: 100%;
+                max-width: 50px;
             }
         }
 
@@ -26,6 +32,14 @@
             height: 40px;
             object-fit: fill;
             border-radius: 50%;
+
+            @include mobile {
+                width: 30px;
+                min-width: 30px;
+                height: 30px;
+                object-fit: fill;
+                border-radius: 50%;
+            }
         }
     }
 
@@ -38,6 +52,11 @@
         display: flex;
         align-items: center;
         column-gap: 5px;
+
+        @include mobile {
+            column-gap: 2px;
+            flex-wrap: wrap;
+        }
 
         &_option {
             padding: 7px;

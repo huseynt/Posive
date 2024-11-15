@@ -1,9 +1,23 @@
 //--------------------- print ---------------------
 @media print {
+
     @page {
         size: A5;
     }
     #notify {
         z-index: -1;
     }
-}
+
+
+    #content * {
+      visibility: visible;
+    }
+    #content {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      background: white;
+      z-index: 99999;
+    }
+  }

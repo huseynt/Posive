@@ -1,6 +1,27 @@
 
 {
     "welcome": "Welcome",
+    "Fill in all fields!" : "Fill in all fields!",
+    "An error occurred while saving!" : "An error occurred while saving!",
+    "Saved successfully!": "Saved successfully!",
+    "en": "en",
+    "$": "$",
+    "AZN": "",
+
+
+    "Overview": "Overview",
+    "Product": "Product",
+    "Settings": "Settings",
+    "Help Center": "Help Center",
+    "Logout": "Logout",
+
+
+
+
+
+
+
+
     "settings": "Settings",
     "cancel": "Cancel",
     "save": "Save",
@@ -15,6 +36,136 @@
     "Currency": "Currency",
     "Time Zone": "Time Zone",
     "Sidebar Size": "Sidebar Size",
-    "Icons Size": "Icons Size"
+    "Icons Size": "Icons Size",
+    "(UTC - 04:00) Baku Times": "(UTC - 04:00) Baku Times",
+    "(UTC - 08:00) Pacific Times ( Los Angles )": "(UTC - 08:00) Pacific Times ( Los Angles )",
+    "Azerbaijan Manat (AZN)": "Azerbaijan Manat (AZN)",
+    "United States dollar (USD)": "United States dollar (USD)",
+    "Azerbaijani": "Azerbaijani",
+    "English (US)": "English (US)",
+    "Medium (220px)": "Medium (220px)",
+    "Big (240px)": "Big (240px)",
+    
+
+    "General": "General",
+    "Update your business persona": "Update your business persona",
+    "Business Details": "Business Details",
+    "Selected": "Selected",
+    "Upload Photo": "Upload Photo",
+    "For better preview recommended size is 450px x 450px. Max size 5MB.": "For better preview recommended size is 450px x 450px. Max size 5MB.",
+    "Store Name": "Store Name",
+    "Business Email": "Business Email",
+    "Business Number": "Business Number",
+    "Adress": "Adress",
+    "Country": "Country",
+    "City": "City",
+    "Flat/Unit": "Flat/Unit",
+    "Street": "Street",
+    "Street No": "Street No",
+    "Post Code": "Post Code",
+
+
+
+    "Delete All": "Delete All",
+    "User Permissions": "User Permissions",
+    "Manage who has access in your system": "Manage who has access in your system",
+    "Name": "Name",
+    "Email": "Email",
+    "Created": "Created",
+    "Role": "Role",
+    "Actions": "Actions",
+    "Showing": "Showing",
+    "to": "to",
+    "of": "of",
+    "entries": "entries",
+    "Show": "Show",
+    "Edit User Permission": "Edit User Permission",
+    "Full Name": "Full Name",
+    "SUPER ADMIN": "SUPER ADMIN",
+    "ADMIN": "ADMIN",
+    "MEMBER": "MEMBER",
+    "Update": "Update",
+    "Delete User ?": "Delete User ?",
+    "Are you sure you want to delete": "Are you sure you want to delete",
+    "Delete": "Delete",
+
+
+
+    "Your Account": "Your Account",
+    "Manage your account settings": "Manage your account settings",
+    "Profile": "Profile",
+    "Upload New": "Upload New",
+    "Email Address": "Email Address",
+    "Phone Number": "Phone Number",
+    "Male": "Male",
+    "Female": "Female",
+    "Password": "Password",
+    "Birth of Date": "Birth of Date",
+    "Delete account": "Delete account",
+    "When you delete your account, you lose access to Front account services, and we permanently delete your personal data. You can cancel the deletion for 14 days.": "When you delete your account, you lose access to Front account services, and we permanently delete your personal data. You can cancel the deletion for 14 days.",
+    "Learn more": "Learn more",
+    "Notifications": "Notifications",
+    "Email Notifications": "Email Notifications",
+    "Substance can send you email notifications for any new direct messages": "Substance can send you email notifications for any new direct messages",
+    "On": "On",
+    "Off": "Off",
+    "News and Update Settings": "News and Update Settings",
+    "The latest news about the latest features and software update settings": "The latest news about the latest features and software update settings",
+    "Tips and Tutorials": "Tips and Tutorials",
+    "Tips and tricks in order to increase your performance efficiency": "Tips and tricks in order to increase your performance efficiency",
+    "Offer and Promotions": "Offer and Promotions",
+    "Promotions about software package prices and about the latest discounts": "Promotions about software package prices and about the latest discounts",
+    "More Activity": "More Activity",
+    "More option about email notifcations for any new direct messages": "More option about email notifcations for any new direct messages",
+    "All Reminders & Activity": "All Reminders & Activity",
+    "Notify me all system activities and reminders that have been created": "Notify me all system activities and reminders that have been created",
+    "Activity only": "Activity only",
+    "Only notify me we have the latest activity updates about increasing or decreasing data": "Only notify me we have the latest activity updates about increasing or decreasing data",
+    "Important Reminder only": "Important Reminder only",
+    "Only notify me all the reminders that have been made": "Only notify me all the reminders that have been made",
+
+
+
+
+    "Billings": "Billings",
+    "Pick a billing plan that suits you": "Pick a billing plan that suits you",
+    "Basic Plan": "Basic Plan", 
+    "year": "year",
+    "Suitable plan for starter business": "Suitable plan for starter business",
+    "Customers Segmentations": "Customers Segmentations",
+    "Google Integrations": "Google Integrations",
+    "Activity Reminde": "Activity Reminde",
+    "Enterprise Plan": "Enterprise Plan",
+    "Best plan for mid-sized businesses": "Best plan for mid-sized businesses",
+    "Get a Basic Plans": "Get a Basic Plans",
+    "Access All Feature": "Access All Feature",
+    "Get 1 TB Cloud Storage": "Get 1 TB Cloud Storage",
+    "Professional Plan": "Professional Plan",
+    "Suitable for big company": "Suitable for big company",
+    "Get a Enterprise Plans": "Get a Enterprise Plans",
+    "Get 2 TB Cloud Storage": "Get 2 TB Cloud Storage",
+    "Billing History": "Billing History",
+    "Invoices": "Invoices",
+    "Created Date": "Created Date",
+    "Amount": "Amount",
+    "Selected Plan": "Selected Plan",
+    "Active Plan": "Active Plan",
+    "Choose Plan": "Choose Plan",
+
+
+
+    "Posive Settings": "Posive Settings",
+    "Let’s Manage your settings": "Let’s Manage your settings",
+    "Sub settings": "Sub settings",
+    "Privacy Policy": "Privacy Policy",
+    "Preferences": "Preferences",
+    "Account": "Account",
+
+
+
+    "Welcome to our POS (Point of Sale) Dashboard, a powerful tool designed to revolutionize the way you manage your business transactions. Our intuitive interface provides real-time insights, customizable reports, and seamless integration with your existing POS system, empowering you to make informed decisions and drive business growth. Whether you're a small business owner or a large enterprise, our POS Dashboard is tailored to meet your unique needs.": "Welcome to our POS (Point of Sale) Dashboard, a powerful tool designed to revolutionize the way you manage your business transactions. Our intuitive interface provides real-time insights, customizable reports, and seamless integration with your existing POS system, empowering you to make informed decisions and drive business growth. Whether you're a small business owner or a large enterprise, our POS Dashboard is tailored to meet your unique needs."
+
+
+
 }
   

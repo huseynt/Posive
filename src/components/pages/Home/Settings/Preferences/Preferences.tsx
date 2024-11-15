@@ -18,7 +18,7 @@ interface IPreferences {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
   theme: string;
   setTheme: (theme: string) => void;
-  requestNotify: (purpose: string) => void;
+  requestNotify: (purpose: string, description: string) => void;
 }
 
 interface IPereferencesData{
@@ -45,7 +45,7 @@ const Preferences: React.FC<IPreferences> = (props) => {
     queryFn: createGetUser,
   });
   useEffect(() => {
-    if (userData) {
+    if (!userIsPending && userData) {
       setPereferencesData({
         theme: userData?.setting?.theme ? userData?.setting?.theme : "light",
         language: userData?.setting?.language ? userData?.setting?.language : language==="az" ? "Azərbaycan" : "English (US)",
@@ -56,10 +56,8 @@ const Preferences: React.FC<IPreferences> = (props) => {
       })
       localStorage.setItem('theme', userData?.setting?.theme ? userData?.setting?.theme : "light");
       setTheme(userData?.setting?.theme ? userData?.setting?.theme : "light");
-      changeLanguage(userData?.setting?.language ? userData?.setting?.language==="Azərbaycan" ? "az" : "en" : "en")
-      setCookie("i18next", userData?.setting?.language ? userData?.setting?.language==="Azərbaycan" ? "az" : "en" : "en", 7);
     }
-  }, [userData, language, setTheme ]);
+  }, [userData, language, setTheme, userIsPending ]);
     //  ----------------- get user ---------------------------
 
   const [pereferencesData, setPereferencesData] = useState<IPereferencesData>({
@@ -91,12 +89,17 @@ const Preferences: React.FC<IPreferences> = (props) => {
     mutationFn: createSavePreferences,
     onSuccess: (data) => {
       if (data === 200) {
-        requestNotify("done")
+        requestNotify("done", t("Saved successfully!"))
         queryClient.invalidateQueries({queryKey: ["getUser"]})
+        toggleTheme(pereferencesData.theme??'light')
+        changeLanguage(
+          pereferencesData.language === "Azərbaycan" ? "az" : "en"
+        )
       }
     },
     onError: (error) => {
       console.log('Login error:', error);
+      requestNotify("error", t("An error occurred while saving!"))
     },
   });
   // ------------------- save user ------------------------
@@ -115,11 +118,6 @@ const Preferences: React.FC<IPreferences> = (props) => {
   }
 
   const sendData = () => {
-    toggleTheme(pereferencesData.theme??'light')
-    requestNotify("done")
-    changeLanguage(
-      pereferencesData.language === "Azərbaycan" ? "az" : "en"
-    )
     SavePreferences({
       theme: pereferencesData.theme,
       language: pereferencesData.language,
@@ -265,7 +263,9 @@ const Preferences: React.FC<IPreferences> = (props) => {
 
           <div className={style.parent_main_form_parametr_select}>
             <div className={style.parent_main_form_parametr_select_head}>
-              <p className={style.parent_main_form_parametr_select_head_p}>{pereferencesData.language}</p>
+              <p className={style.parent_main_form_parametr_select_head_p}>{
+              pereferencesData.language === "Azərbaycan" ? t("Azerbaijani") : t("English (US)")
+                }</p>
               <img className={style.parent_main_form_parametr_select_head_img} src={arrowdown} alt="arrowdown" />
             </div>
             <div className={style.parent_main_form_parametr_select_down}>
@@ -274,13 +274,13 @@ const Preferences: React.FC<IPreferences> = (props) => {
                 ...pereferencesData,
                 language: "Azərbaycan"
               })}
-              >{"Azərbaycan"}</p>
+              >{t("Azerbaijani")}</p>
               <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.language==="English (US)" && style.down_selectOption}`}
               onClick={() => setPereferencesData({
                 ...pereferencesData,
                 language: "English (US)"
               })}
-              >{"English (US)"}</p>
+              >{t("English (US)")}</p>
             </div>
           </div>
         </div>
@@ -290,7 +290,9 @@ const Preferences: React.FC<IPreferences> = (props) => {
 
           <div className={style.parent_main_form_parametr_select}>
             <div className={style.parent_main_form_parametr_select_head}>
-              <p className={style.parent_main_form_parametr_select_head_p}>{pereferencesData.currency}</p>
+              <p className={style.parent_main_form_parametr_select_head_p}>{
+              pereferencesData.currency === "United States dollar (USD)" ? t("United States dollar (USD)") : t("Azerbaijan Manat (AZN)")
+              }</p>
               <img className={style.parent_main_form_parametr_select_head_img} src={arrowdown} alt="arrowdown" />
             </div>
             <div className={style.parent_main_form_parametr_select_down}>
@@ -299,13 +301,13 @@ const Preferences: React.FC<IPreferences> = (props) => {
                 ...pereferencesData,
                 currency: "United States dollar (USD)"
               })}
-              >{"United States dollar (USD)"}</p>
+              >{t("United States dollar (USD)")}</p>
               <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.currency==="Azerbaijan Manat (AZN)" && style.down_selectOption}`}
               onClick={() => setPereferencesData({
                 ...pereferencesData,
                 currency: "Azerbaijan Manat (AZN)"
               })}
-              >{"Azerbaijan Manat (AZN)"}</p>
+              >{t("Azerbaijan Manat (AZN)")}</p>
             </div>
           </div>
         </div>
@@ -315,7 +317,9 @@ const Preferences: React.FC<IPreferences> = (props) => {
 
           <div className={style.parent_main_form_parametr_select}>
             <div className={style.parent_main_form_parametr_select_head}>
-              <p className={style.parent_main_form_parametr_select_head_p}>{pereferencesData.timeZone}</p>
+              <p className={style.parent_main_form_parametr_select_head_p}>{
+              pereferencesData.timeZone === "(UTC - 08:00) Pacific Times ( Los Angles )" ? t("(UTC - 08:00) Pacific Times ( Los Angles )") : t("(UTC - 04:00) Baku Times")
+              }</p>
               <img className={style.parent_main_form_parametr_select_head_img} src={arrowdown} alt="arrowdown" />
             </div>
             <div className={style.parent_main_form_parametr_select_down}>
@@ -324,13 +328,13 @@ const Preferences: React.FC<IPreferences> = (props) => {
                 ...pereferencesData,
                 timeZone: "(UTC - 08:00) Pacific Times ( Los Angles )"
               })}
-              >{"(UTC - 08:00) Pacific Times ( Los Angles )"}</p>
+              >{t("(UTC - 08:00) Pacific Times ( Los Angles )")}</p>
               <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.timeZone==="(UTC - 04:00) Baku Times" && style.down_selectOption}`}
               onClick={() => setPereferencesData({
                 ...pereferencesData,
                 timeZone: "(UTC - 04:00) Baku Times"
               })}
-              >{"(UTC - 04:00) Baku Times"}</p>
+              >{t("(UTC - 04:00) Baku Times")}</p>
             </div>
           </div>
         </div>
@@ -340,7 +344,9 @@ const Preferences: React.FC<IPreferences> = (props) => {
 
           <div className={style.parent_main_form_parametr_select}>
             <div className={style.parent_main_form_parametr_select_head}>
-              <p className={style.parent_main_form_parametr_select_head_p}>{pereferencesData.size}</p>
+              <p className={style.parent_main_form_parametr_select_head_p}>{
+              pereferencesData.size === "Medium (220px)" ? t("Medium (220px)") : t("Big (240px)")
+              }</p>
               <img className={style.parent_main_form_parametr_select_head_img} src={arrowdown} alt="arrowdown" />
             </div>
             <div className={style.parent_main_form_parametr_select_down}>
@@ -349,13 +355,13 @@ const Preferences: React.FC<IPreferences> = (props) => {
                 ...pereferencesData,
                 size: "Medium (220px)"
               })}
-              >{"Medium (220px)"}</p>
+              >{t("Medium (220px)")}</p>
               <p className={`${style.parent_main_form_parametr_select_down_option} ${pereferencesData.size==="Big (240px)" && style.down_selectOption}`}
               onClick={() => setPereferencesData({
                 ...pereferencesData,
                 size: "Big (240px)"
               })}
-              >{"Big (240px)"}</p>
+              >{t("Big (240px)")}</p>
             </div>
           </div>
         </div>

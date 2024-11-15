@@ -17,66 +17,6 @@ interface IProduct {
   notification: boolean;
 }
 
-// const ProductData = [
-//   {
-//     id: 1,
-//     name: "Healthy Salad",
-//     receipt: "MW12131",
-//     order: 110,
-//     category: "Salad",
-//     price: "$12.00",
-//     stock: 150,
-//     tax: "2%",
-//     discount: "15%",
-//   },
-//   {
-//     id: 2,
-//     name: "Healthy Salad",
-//     receipt: "MW12131",
-//     order: 110,
-//     category: "Salad",
-//     price: "$12.00",
-//     stock: 150,
-//     tax: "2%",
-//     discount: "15%",
-//   },
-//   {
-//     id: 3,
-//     name: "Healthy Salad",
-//     receipt: "MW12131",
-//     order: 110,
-//     category: "Salad",
-//     price: "$12.00",
-//     stock: 150,
-//     tax: "2%",
-//     discount: "15%",
-//   },
-//   {
-//     id: 4,
-//     name: "Healthy Salad",
-//     receipt: "MW12131",
-//     order: 110,
-//     category: "Salad",
-//     price: "$12.00",
-//     stock: 150,
-//     tax: "2%",
-//     discount: "15%",
-//   },
-//   {
-//     id: 5,
-//     name: "Healthy Salad",
-//     receipt: "MW12131",
-//     order: 110,
-//     category: "Salad",
-//     price: "$12.00",
-//     stock: 150,
-//     tax: "2%",
-//     discount: "15%",
-//   }
-// ]
-
-
-
 const Product = () => {
   const { setToggleMenu, setNotification, notification } = useOutletContext<IProduct>();
 
@@ -87,6 +27,9 @@ const Product = () => {
   const [allDataCount, setAllDataCount] = useState<number>(0);
   const [ascend, setAscend] = useState<string>("DESC");
   const [viewAdd, setViewAdd] = useState<boolean>(false);
+  const [monthlyIncome, setMonthlyIncome] = useState<number>(0);
+  const [productsNumber, setProductsNumber] = useState<number>(0);
+  const [purchanes, setPurchanes] = useState<number>(0);
   // const [deleteAllOpen, setDeleteAllOpen] = useState<boolean>(false);
 
   
@@ -269,7 +212,9 @@ const Product = () => {
             >
               <div className={style.main_total_option_text}>
                 <p className={style.main_total_option_text_up}>Total Products Menu</p>
-                <h3 className={style.main_total_option_text_head}>250</h3>
+                <h3 className={style.main_total_option_text_head}>
+                  {productsNumber ? productsNumber : 0}
+                </h3>
               </div>
 
               <div
@@ -290,7 +235,9 @@ const Product = () => {
             >
               <div className={style.main_total_option_text}>
                 <p className={style.main_total_option_text_up}>Purchase Invoice </p>
-                <h3 className={style.main_total_option_text_head}>50244</h3>
+                <h3 className={style.main_total_option_text_head}>
+                  {purchanes ? purchanes : 0}
+                </h3>
               </div>
 
               <div
@@ -309,7 +256,9 @@ const Product = () => {
             >
               <div className={style.main_total_option_text}>
                 <p className={style.main_total_option_text_up}>Montly Income</p>
-                <h3 className={style.main_total_option_text_head}>$45461</h3>
+                <h3 className={style.main_total_option_text_head}>
+                  ${monthlyIncome ? monthlyIncome.toFixed(2) : 0}
+                </h3>
               </div>
 
               <div
@@ -329,7 +278,11 @@ const Product = () => {
 
 
           <div className={style.main_chart}>
-            <ChartComponent/>
+            <ChartComponent
+            setMonthlyIncome={setMonthlyIncome}
+            setProductsNumber={setProductsNumber}
+            setPurchanes={setPurchanes}
+            />
           </div>
 
 

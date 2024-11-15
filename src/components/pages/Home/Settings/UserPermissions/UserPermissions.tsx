@@ -7,26 +7,10 @@ import { useEffect, useState } from 'react'
 import PageLoader from '../../../../common/PageLoader/PageLoader'
 import Notify from '../../../features/Notify/Notify'
 import Loader from '../../../../common/Loader/Loader'
+import { useTranslation } from 'react-i18next'
 interface IGeneral {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>
 }
-
-// {
-//   "userPermissions": [
-//       {
-//           "username": "EsmaNebiyeva",
-//           "email": "enebiyeva@std.beu.edu.az",
-//           "created": "2024-11-09T02:54:18.703473",
-//           "role": "ADMIN"
-//       },
-//       {
-//           "username": "qwsaedfd",
-//           "email": "esma.@gmail.com",
-//           "role": "MEMBER"
-//       }
-//   ],
-//   "countUserPermissions": 2
-// }
 
 interface IGetPermission {
   userPermissions: {
@@ -49,6 +33,7 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
   const [allDataCount, setAllDataCount] = useState<number>(0);
   const [checked, setChecked] = useState<boolean>(false);
   const [multiCheck, setMultiCheck] = useState<string[]>([]);
+  const { t } = useTranslation();
 
   //  ----------------------------- for notify ----------------------------
   const [notify, setNotify] = useState<boolean>(false);
@@ -129,7 +114,6 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
   }
   // ----------------- delete all --------------------------
 
-
   return (
     <>
 
@@ -148,9 +132,8 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
         <button className={style.parent_buttons_cancel}
         onClick={() => {
           setChecked(false);
-          setMultiCheck([]);
         }}
-        >Cancel</button>
+        >{t("cancel")}</button>
 
         <button className={style.parent_buttons_save}
           onClick={handleDeleteAll}
@@ -158,7 +141,7 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
           { isDeletePermissionLoading ?
           <Loader/>
           :
-          "Delete All"
+          t("Delete All")
           }
           </button>
       </div>
@@ -166,8 +149,8 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
     {/* ----------------- save buttons ------------------------------ */}
       
     <div className={style.parent_up}>
-      <h2 className={style.parent_up_head}>User Permissions</h2>
-      <h5 className={style.parent_up_info}>Manage who has access in your system</h5>
+      <h2 className={style.parent_up_head}>{t("User Permissions")}</h2>
+      <h5 className={style.parent_up_info}>{t("Manage who has access in your system")}</h5>
     </div>
 
     <div className={style.parent_line}></div>
@@ -184,12 +167,12 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
               onChange={(e) => {setChecked(e.target.checked)}}
               />
             </th>
-            <th className={style.parent_main_table_thead_row_item}>No</th>
-            <th className={style.parent_main_table_thead_row_item}>Name</th>
-            <th className={`${style.parent_main_table_thead_row_item} ${style.hide}`}>Email</th>
-            <th className={`${style.parent_main_table_thead_row_item} ${style.hide}`}>Created</th>
-            <th className={`${style.parent_main_table_thead_row_item} ${style.hide}`}>Role</th>
-            <th className={style.parent_main_table_thead_row_item} style={{width: '80px !important'}}>Action</th>
+            <th className={style.parent_main_table_thead_row_item}>№</th>
+            <th className={style.parent_main_table_thead_row_item}>{t("Name")}</th>
+            <th className={`${style.parent_main_table_thead_row_item} ${style.hide}`}>{t("Email")}</th>
+            <th className={`${style.parent_main_table_thead_row_item} ${style.hide}`}>{t("Created")}</th>
+            <th className={`${style.parent_main_table_thead_row_item} ${style.hide}`}>{t("Role")}</th>
+            <th className={style.parent_main_table_thead_row_item} style={{width: '80px !important'}}>{t("Actions")}</th>
           </tr>
         </thead>
 
@@ -297,7 +280,7 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
         <div className={style.main_down_pagination_itemperpage}>
             
             <div className={style.main_down_pagination_itemperpage_info}>
-              Showing {page === 1 ? 1 : page * itemperpage - itemperpage + 1} to {page * itemperpage > allDataCount ? allDataCount : page * itemperpage} of {allDataCount} entries
+              {t("Showing")} {page === 1 ? 1 : page * itemperpage - itemperpage + 1} {t("to")} {page * itemperpage > allDataCount ? allDataCount : page * itemperpage} {t("of")} {allDataCount} {t("entries")}
             </div>
             
             <div className={style.main_down_pagination_itemperpage_action}>
@@ -308,9 +291,9 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
                 }
                 value={itemperpage}
               >
-                <option value="5">Show 5</option>
-                <option value="8">Show 8</option>
-                <option value="10">Show 10</option>
+                <option value="5">{t("Show")} 5</option>
+                <option value="8">{t("Show")} 8</option>
+                <option value="10">{t("Show")} 10</option>
               </select>
             </div>
 

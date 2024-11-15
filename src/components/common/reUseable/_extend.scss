@@ -196,6 +196,7 @@
 
 // ----------------- button -----------------
 %btn_main {
+  height: 38px;
   padding: 7px 30px;
   border-radius: 10px;
   @extend %m_b;
@@ -217,6 +218,7 @@
 }
 
 %btn_main_w {
+  height: 38px;
   padding: 7px 30px;
   border-radius: 10px;
   @extend %m_b;

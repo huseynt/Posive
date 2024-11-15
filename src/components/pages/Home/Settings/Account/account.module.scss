@@ -251,7 +251,7 @@
                                 border-radius: 10px;
                                 outline: none;
                                 background-color: transparent;
-                                border: 1px solid $light_gray;
+                                border: 1px solid $light_bg_gray;
                                 @extend %m;
                                 z-index: 9;
 
@@ -511,10 +511,14 @@
 
 
 .dateOnMobile {
-    border: 1px solid $light_gray;
+    border: 1px solid $light_bg_gray;
     border-radius: 10px;
     @include mobile {
         padding: 0 10px 0 0 !important;
+    }
+
+    @include themed {
+        border: 1px solid t(gray);
     }
 
     input {

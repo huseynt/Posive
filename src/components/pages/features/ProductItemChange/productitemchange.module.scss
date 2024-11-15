@@ -70,6 +70,11 @@
         z-index: 30;
         animation: fadeBg 0.3s ease;
 
+        @include mobile {
+            padding: 17px;
+            row-gap: 5px;
+        }
+
         &_head {
             width: 100%;
             @extend %ml_b;
@@ -112,12 +117,11 @@
                 border-right: 1px solid $gray;
 
                 @include mobile {
-                    height: 340px;
+                    height: 305px;
                     padding-right: 0;
                     padding-bottom: 0px;
                     border-right: none;
-                    row-gap: 5px;
-                    // border-bottom: 1px solid $gray;
+                    row-gap: 2px;
                 }
 
                 &_item {
@@ -128,7 +132,7 @@
 
                     @include mobile {
                         flex-direction: column;
-                        row-gap: 5px;
+                        row-gap: 1px;
                     }
 
                     &_head {
@@ -213,8 +217,10 @@
                 row-gap: 10px;
 
                 @include mobile {
-                    height: 300px;
+                    height: 267px;
                     padding-left: 0;
+                    row-gap: 5px;
+                    // background-color: $available;
                     // padding-top: 20px;
                 }
 
@@ -233,6 +239,7 @@
                     border: 1px solid $gray;
                     border-radius: 10px;
 
+
                     &_img {
                         width: 60px;
                         
@@ -250,6 +257,11 @@
                         @extend %sm_b;
                         color: $light_m_gray;
                     }
+
+                    &_size {
+                        @extend %sm;
+                        color: $light_m_gray;
+                    }
                 }
 
                 &_drag {
@@ -265,6 +277,12 @@
                     cursor: pointer;
                     user-select: none;
                     position: relative;
+
+                    @include mobile {
+                        flex-direction: row;
+                        justify-content: space-between;
+                        padding: 5px 10px;
+                    }
 
                     &:hover {
                         border: 1px solid $main_light_color;
@@ -297,6 +315,10 @@
             column-gap: 10px;
             border-top: 1px solid $gray;
             padding-top: 20px;
+
+            @include mobile {
+                padding-top: 10px;
+            }
 
             &_print {
                 width: 140px;

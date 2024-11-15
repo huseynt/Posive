@@ -3,6 +3,9 @@ import { createGetNotifications, createSaveNotifications } from '../../../../uti
 import style from './notifications.module.scss'
 import { useEffect, useState } from 'react'
 import { IGetNotifications } from '../../../../utils/API/types';
+import { useTranslation } from 'react-i18next';
+import PageLoader from '../../../../common/PageLoader/PageLoader';
+import Loader from '../../../../common/Loader/Loader';
 
 interface IGeneral {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,7 +14,8 @@ interface IGeneral {
 
 const Notifications: React.FC<IGeneral> = (props) => {
   const { setMobileSelect, requestNotify } = props
-
+  const { t } = useTranslation();
+  
   // ----------------- get data --------------------------
   const {
     data: getNotifications,
@@ -58,7 +62,7 @@ const Notifications: React.FC<IGeneral> = (props) => {
   const queryClient = useQueryClient()
   const {
     mutate: SaveNotifications,
-    // isPending: isSavePending,
+    isPending: isSavePending,
   } = useMutation({
     mutationFn: createSaveNotifications,
     onSuccess: (data) => {
@@ -99,15 +103,13 @@ const Notifications: React.FC<IGeneral> = (props) => {
 
   const resetData = () => {
     setData({
-      news: false,
-      tips: false,
-      offer: false,
-      allReminder: false,
-      activity: false,
-      important: false,
+      news: getNotifications?.emailNotDTO.nots.includes("NEWS") ? true : false,
+      tips: getNotifications?.emailNotDTO.nots.includes("TIPS") ? true : false,
+      offer: getNotifications?.emailNotDTO.nots.includes("OFFER") ? true : false,
+      allReminder: getNotifications?.moreActivityDTO.activity.includes("ALLREMINDERS") ? true : false,
+      activity: getNotifications?.moreActivityDTO.activity.includes("ACTIVITY") ? true : false,
+      important: getNotifications?.moreActivityDTO.activity.includes("IMPORTANT") ? true : false,
     });
-    setEmailNotifications(false)
-    setMoreActivity(false)
   }
 
   const sendData = () => {
@@ -131,7 +133,7 @@ const Notifications: React.FC<IGeneral> = (props) => {
   return (
     <>
 
-    {/* {isGeneralLoading && <PageLoader /> } */}
+    {isNotificationsLoading && <PageLoader /> }
   
     <div className={style.parent}
     onClick={() => setMobileSelect(false)}>
@@ -140,24 +142,22 @@ const Notifications: React.FC<IGeneral> = (props) => {
     <div className={style.parent_buttons}>
       <button className={style.parent_buttons_cancel}
       onClick={resetData}
-      >Cancel</button>
+      >{t("cancel")}</button>
       <button className={style.parent_buttons_save}
       onClick={sendData}
-      >Save
-      {/* { isSaveGeneralPending ?
+      >{ isSavePending ?
           <Loader/>
           :
-          "Save"
-      } */}
-      </button>
+          t("save")
+      }</button>
     </div>
     {/* ----------------- save buttons ------------------------------ */}
 
 
       
     <div className={style.parent_up}>
-      <h2 className={style.parent_up_head}>Notifications</h2>
-      <h5 className={style.parent_up_info}>Update your business persona</h5>
+      <h2 className={style.parent_up_head}>{t("Notifications")}</h2>
+      <h5 className={style.parent_up_info}>{t("Update your business persona")}</h5>
     </div>
 
     <div className={style.parent_line}></div>
@@ -168,8 +168,8 @@ const Notifications: React.FC<IGeneral> = (props) => {
       <div className={style.parent_main_block}>
 
         <div className={style.parent_main_block_header}>
-          <h3 className={style.parent_main_block_header_head}>Email Notifications</h3>
-          <p className={style.parent_main_block_header_desc}>Substance can send you email notifications for any new direct messages</p>
+          <h3 className={style.parent_main_block_header_head}>{t("Email Notifications")}</h3>
+          <p className={style.parent_main_block_header_desc}>{t("Substance can send you email notifications for any new direct messages")}</p>
         </div>
 
         <div className={style.parent_main_block_actions}>
@@ -182,7 +182,7 @@ const Notifications: React.FC<IGeneral> = (props) => {
               ></div>
             </div>
             <span className={style.parent_main_block_actions_turn_span}>
-              {emailNotifications ? "On" : "Off"}
+              {emailNotifications ? t("On") : t("Off")}
             </span>
           </div>
 
@@ -199,8 +199,8 @@ const Notifications: React.FC<IGeneral> = (props) => {
             </div>
 
             <div className={style.parent_main_block_actions_option_info}>
-              <h3 className={style.parent_main_block_actions_option_info_head}>News and Update Settings</h3>
-              <p className={style.parent_main_block_actions_option_info_desc}>The latest news about the latest features and software update settings</p>
+              <h3 className={style.parent_main_block_actions_option_info_head}>{t("News and Update Settings")}</h3>
+              <p className={style.parent_main_block_actions_option_info_desc}>{t("The latest news about the latest features and software update settings")}</p>
             </div>
           </div>
 
@@ -217,8 +217,8 @@ const Notifications: React.FC<IGeneral> = (props) => {
             </div>
 
             <div className={style.parent_main_block_actions_option_info}>
-              <h3 className={style.parent_main_block_actions_option_info_head}>Tips and Tutorials</h3>
-              <p className={style.parent_main_block_actions_option_info_desc}>Tips and tricks in order to increase your performance efficiency</p>
+              <h3 className={style.parent_main_block_actions_option_info_head}>{t("Tips and Tutorials")}</h3>
+              <p className={style.parent_main_block_actions_option_info_desc}>{t("Tips and tricks in order to increase your performance efficiency")}</p>
             </div>
           </div>
 
@@ -235,8 +235,8 @@ const Notifications: React.FC<IGeneral> = (props) => {
             </div>
 
             <div className={style.parent_main_block_actions_option_info}>
-              <h3 className={style.parent_main_block_actions_option_info_head}>Offer and Promotions</h3>
-              <p className={style.parent_main_block_actions_option_info_desc}>Promotions about software package prices and about the latest discounts</p>
+              <h3 className={style.parent_main_block_actions_option_info_head}>{t("Offer and Promotions")}</h3>
+              <p className={style.parent_main_block_actions_option_info_desc}>{t("Promotions about software package prices and about the latest discounts")}</p>
             </div>
           </div>
 
@@ -251,8 +251,8 @@ const Notifications: React.FC<IGeneral> = (props) => {
       <div className={style.parent_main_block}>
 
         <div className={style.parent_main_block_header}>
-          <h3 className={style.parent_main_block_header_head}>More Activity</h3>
-          <p className={style.parent_main_block_header_desc}>More option about email notifcations for any new direct messages</p>
+          <h3 className={style.parent_main_block_header_head}>{t("More Activity")}</h3>
+          <p className={style.parent_main_block_header_desc}>{t("More option about email notifcations for any new direct messages")}</p>
         </div>
 
         <div className={style.parent_main_block_actions}>
@@ -265,7 +265,7 @@ const Notifications: React.FC<IGeneral> = (props) => {
               ></div>
             </div>
             <span className={style.parent_main_block_actions_turn_span}>
-              {moreActivity ? "On" : "Off"}
+              {moreActivity ? t("On") : t("Off")}
             </span>
           </div>
 
@@ -282,8 +282,8 @@ const Notifications: React.FC<IGeneral> = (props) => {
             </div>
 
             <div className={style.parent_main_block_actions_option_info}>
-              <h3 className={style.parent_main_block_actions_option_info_head}>All Reminders & Activity</h3>
-              <p className={style.parent_main_block_actions_option_info_desc}>Notify me all system activities and reminders that have been created</p>
+              <h3 className={style.parent_main_block_actions_option_info_head}>{t("All Reminders & Activity")}</h3>
+              <p className={style.parent_main_block_actions_option_info_desc}>{t("Notify me all system activities and reminders that have been created")}</p>
             </div>
           </div>
 
@@ -300,8 +300,8 @@ const Notifications: React.FC<IGeneral> = (props) => {
             </div>
 
             <div className={style.parent_main_block_actions_option_info}>
-              <h3 className={style.parent_main_block_actions_option_info_head}>Activity only</h3>
-              <p className={style.parent_main_block_actions_option_info_desc}>Only notify me we have the latest activity updates about increasing or decreasing data</p>
+              <h3 className={style.parent_main_block_actions_option_info_head}>{t("Activity only")}</h3>
+              <p className={style.parent_main_block_actions_option_info_desc}>{t("Only notify me we have the latest activity updates about increasing or decreasing data")}</p>
             </div>
           </div>
 
@@ -318,8 +318,8 @@ const Notifications: React.FC<IGeneral> = (props) => {
             </div>
 
             <div className={style.parent_main_block_actions_option_info}>
-              <h3 className={style.parent_main_block_actions_option_info_head}>Important Reminder only</h3>
-              <p className={style.parent_main_block_actions_option_info_desc}>Only notify me all the reminders that have been made</p>
+              <h3 className={style.parent_main_block_actions_option_info_head}>{t("Important Reminder only")}</h3>
+              <p className={style.parent_main_block_actions_option_info_desc}>{t("Only notify me all the reminders that have been made")}</p>
             </div>
           </div>
 

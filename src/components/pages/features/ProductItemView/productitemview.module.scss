@@ -24,9 +24,9 @@
 }
 
 @media print {
-    body * {
-      visibility: hidden;
-    }
+    // body * {
+    //   visibility: hidden;
+    // }
     .view_block_main {
         flex-direction: column;
         row-gap: 5px;
@@ -104,6 +104,11 @@
         z-index: 30;
         animation: fadeBg 0.3s ease;
 
+        @include mobile {
+            padding: 17px;
+            row-gap: 5px;
+        }
+
         &_head {
             width: 100%;
             @extend %ml_b;
@@ -133,6 +138,7 @@
 
             @include mobile {
                 flex-direction: column;
+                row-gap: 5px;
             }
 
             &_information {
@@ -146,12 +152,19 @@
                 border-right: 1px solid $gray;
 
                 @include mobile {
-                    height: 390px;
+                    // height: 390px;
                     padding-left: 0;
                     padding-right: 0;
                     padding-bottom: 20px;
+                    // border-right: none;
+                    // row-gap: 10px;
+
+
+                    height: 305px;
+                    padding-right: 0;
+                    padding-bottom: 0px;
                     border-right: none;
-                    row-gap: 10px;
+                    row-gap: 2px;
                     // border-bottom: 1px solid $gray;
                 }
 
@@ -164,7 +177,7 @@
 
                     @include mobile {
                         flex-direction: column;
-                        row-gap: 5px;
+                        row-gap: 1px;
                     }
 
                     &_head {
@@ -204,9 +217,9 @@
                 row-gap: 10px;
 
                 @include mobile {
-                    height: 240px;
+                    height: 227px;
                     padding-left: 0;
-                    // padding-top: 20px;
+                    row-gap: 5px;
                 }
 
                 &_head {
@@ -254,10 +267,20 @@
             border-top: 1px solid $gray;
             padding-top: 20px;
 
+            @include mobile {
+                justify-content: space-between;
+                padding-top: 10px;
+                column-gap: 5px;
+            }
+
             &_print {
                 width: 140px;
                 background-color: $main_light_color;
                 color: $white;
+
+                @include mobile {
+                    width: 100%;
+                }   
 
                 &:hover {
                     background-color: $main_color_dark !important;
@@ -278,8 +301,13 @@
                 align-items: center;
                 column-gap: 5px;
 
+                @include mobile {
+                    width: 100px;
+                }   
+
                 svg {
                     max-width: 15px;
+                    width: 15px;
                 }
 
                 &:hover {

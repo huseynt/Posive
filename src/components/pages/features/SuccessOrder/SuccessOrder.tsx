@@ -98,13 +98,19 @@ const SuccessOrder: React.FC<IQRCodeComponentProps> = (props) => {
             <p className={style.success_block_detail_item_name}>
               Receipt Number
             </p>
-            <p className={style.success_block_detail_item_value}>{successOrder.receiptNumber.join("")}</p>
+            <p className={style.success_block_detail_item_value}>{successOrder.receiptNumber.join("").slice(1,8)}</p>
           </div>
 
           <div className={style.success_block_detail_item}>
             <p className={style.success_block_detail_item_name}>Date & Time</p>
             <p className={style.success_block_detail_item_value}>
-              {successOrder.orderDate}
+              {new Date(successOrder.orderDate).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "numeric",
+                })}
             </p>
           </div>
 

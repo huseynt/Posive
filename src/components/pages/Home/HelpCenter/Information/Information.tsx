@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import style from './information.module.scss'
 
 interface IInformation {
@@ -7,7 +8,7 @@ interface IInformation {
 
 const Information: React.FC<IInformation> = (props) => {
   const { setMobileSelect } = props
-
+  const { t } = useTranslation();
 
 
 
@@ -24,7 +25,9 @@ const Information: React.FC<IInformation> = (props) => {
 
     <div className={style.parent_main}>
       <div className={style.parent_main_block}>
-        <p className={style.parent_main_block_text}>Welcome to our POS (Point of Sale) Dashboard, a powerful tool designed to revolutionize the way you manage your business transactions. Our intuitive interface provides real-time insights, customizable reports, and seamless integration with your existing POS system, empowering you to make informed decisions and drive business growth. Whether you're a small business owner or a large enterprise, our POS Dashboard is tailored to meet your unique needs.</p>
+        <p className={style.parent_main_block_text}>
+          {t("Welcome to our POS (Point of Sale) Dashboard, a powerful tool designed to revolutionize the way you manage your business transactions. Our intuitive interface provides real-time insights, customizable reports, and seamless integration with your existing POS system, empowering you to make informed decisions and drive business growth. Whether you're a small business owner or a large enterprise, our POS Dashboard is tailored to meet your unique needs.")}
+        </p>
       </div>
 
       <div className={style.parent_main_block}>

@@ -12,6 +12,7 @@ import { Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -31,7 +32,7 @@ interface IProduct {
 const Settings: React.FC<ThemeProps> = (props) => {
   const { setTheme, theme} = props;
   const { setToggleMenu, setNotification, notification, requestNotify } = useOutletContext<IProduct>();
-
+  const { t } = useTranslation();
 
   const [mobileSelect, setMobileSelect] = useState<boolean>(false);
   const [sub, setSub] = useState<string>("");
@@ -70,7 +71,7 @@ const Settings: React.FC<ThemeProps> = (props) => {
   return (
     <div className={style.overflow}>
       <Helmet>
-        <title>Posive Settings</title>
+        <title>{t("Posive Settings")}</title>
         <meta name="description" content="Settings" />
         <meta name="keywords" content="Posive" />
       </Helmet>
@@ -188,8 +189,8 @@ const Settings: React.FC<ThemeProps> = (props) => {
 
         {/* --------------------------- up ------------------------------- */}
         <div className={style.main_up}>
-          <h2 className={style.main_up_head}>Settings</h2>
-          <p className={style.main_up_desc}>Let’s Manage your settings</p>
+          <h2 className={style.main_up_head}>{t("Settings")}</h2>
+          <p className={style.main_up_desc}>{t("Let’s Manage your settings")}</p>
         </div>
 
         <div className={style.main_container}>
@@ -199,7 +200,7 @@ const Settings: React.FC<ThemeProps> = (props) => {
           >
             
             <h3 className={style.main_container_navigation_head}>
-              Sub settings
+              {t("Sub settings")}
             </h3>
 
             {/* ---------------------- mobile sub select ----------------------------- */}
@@ -297,12 +298,12 @@ const Settings: React.FC<ThemeProps> = (props) => {
               </svg>
 
               {
-                sub === "privacy" ? "Privacy Policy" : 
-                sub === "preferences" ? "Preferences" : 
-                sub === "userpermissions" ? "User Permissions" : 
-                sub === "account" ? "Account" : 
-                sub === "notifications" ? "Notifications" :  
-                sub === "billings" ? "Billings" : "General"
+                sub === "privacy" ? t("Privacy Policy") : 
+                sub === "preferences" ? t("Preferences") : 
+                sub === "userpermissions" ? t("User Permissions") : 
+                sub === "account" ? t("Account") : 
+                sub === "notifications" ? t("Notifications") :  
+                sub === "billings" ? t("Billings") : t("General")
               }
               <p style={{marginLeft: "auto"}}>
                 <svg width="14" 
@@ -345,7 +346,7 @@ const Settings: React.FC<ThemeProps> = (props) => {
                 style={{
                   color: sub === "general" || sub === undefined ? "#EA7E41" : "",
                 }}
-              >General</p>
+              >{t("General")}</p>
             </div>
 
             {/* ----------------------  preferences  ------------------------------ */}
@@ -375,7 +376,7 @@ const Settings: React.FC<ThemeProps> = (props) => {
               style={{
                 color: sub === "preferences" ? "#EA7E41" : "",
               }}
-              >Preferences</p>
+              >{t("Preferences")}</p>
             </div>
 
             {/* ----------------------  userpermissions  ------------------------------ */}
@@ -409,7 +410,7 @@ const Settings: React.FC<ThemeProps> = (props) => {
               style={{
                 color: sub === "userpermissions" ? "#EA7E41" : "",
               }}
-              >User Permissions</p>
+              >{t("User Permissions")}</p>
             </div>
 
             {/* ----------------------  account  ------------------------------ */}
@@ -437,7 +438,7 @@ const Settings: React.FC<ThemeProps> = (props) => {
               style={{
                 color: sub === "account" ? "#EA7E41" : "",
               }}
-              >Account</p>
+              >{t("Account")}</p>
             </div>
 
             {/* ----------------------  notifications  ------------------------------ */}
@@ -465,7 +466,7 @@ const Settings: React.FC<ThemeProps> = (props) => {
               style={{
                 color: sub === "notifications" ? "#EA7E41" : "",
               }}
-              >Notifications</p>
+              >{t("Notifications")}</p>
             </div>
 
             {/* ----------------------  billings  ------------------------------ */}
@@ -493,7 +494,7 @@ const Settings: React.FC<ThemeProps> = (props) => {
               style={{
                 color: sub === "billings" ? "#EA7E41" : "",
               }}
-              >Billings</p>
+              >{t("Billings")}</p>
             </div>
 
           </div>

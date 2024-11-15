@@ -70,6 +70,11 @@
         z-index: 30;
         animation: fadeBg 0.3s ease;
 
+        @include mobile {
+            padding: 17px;
+            row-gap: 5px;
+        }
+
         &_head {
             width: 100%;
             @extend %ml_b;
@@ -112,11 +117,12 @@
                 border-right: 1px solid $gray;
 
                 @include mobile {
-                    height: 400px;
+                    height: 345px;
                     padding-right: 0;
                     padding-bottom: 30px;
                     border-right: none;
                     border-bottom: 1px solid $gray;
+                    row-gap: 4px;
                 }
 
                 &_item {
@@ -127,7 +133,7 @@
 
                     @include mobile {
                         flex-direction: column;
-                        row-gap: 5px;
+                        row-gap: 2px;
                     }
 
                     &_head {
@@ -203,9 +209,10 @@
                 row-gap: 17px;
 
                 @include mobile {
-                    height: 180px;
+                    height: 175px;
                     padding-left: 0;
-                    padding-top: 20px;
+                    padding: 10px 0 10px 0px;
+                    row-gap: 10px;
                 }
 
                 &_head {
@@ -323,6 +330,10 @@
             column-gap: 10px;
             border-top: 1px solid $gray;
             padding-top: 20px;
+
+            @include mobile {
+                padding-top: 10px;
+            }
 
             &_print {
                 width: 140px;

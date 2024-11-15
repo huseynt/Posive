@@ -1,5 +1,24 @@
 {
     "welcome": "Xoş gəldiniz",
+    "Fill in all fields!" : "Bütün sahələri doldurun!",
+    "An error occurred while saving!" : "Yadda saxlama zamanı səhv baş verdi!",
+    "Saved successfully!": "Uğurla yadda saxlanıldı!",
+    "en": "az",
+    "$": "",
+    "AZN": "Azn",
+
+
+    "Overview": "Ümumi baxış",
+    "Product": "Məhsul",
+    "Settings": "Ayarlar",
+    "Help Center": "Kömək",
+    "Logout": "Çıxış",
+
+
+
+
+
+
     "settings": "Ayarlar",
     "cancel": "İmtina",
     "save": "Yadda saxla",
@@ -14,5 +33,134 @@
     "Currency": "Valyuta",
     "Time Zone": "Zaman qurşağı",
     "Sidebar Size": "Yan panelin ölçüsü",
-    "Icons Size": "Nişanların ölçüsü"
+    "Icons Size": "Nişanların ölçüsü",
+    "(UTC - 04:00) Baku Times": "(UTC - 04:00) Bakı vaxtı",
+    "(UTC - 08:00) Pacific Times ( Los Angles )": "(UTC - 08:00) Pasifik vaxtı (Los Anceles)",
+    "Azerbaijan Manat (AZN)": "Azərbaycan manatı (AZN)",
+    "United States dollar (USD)": "ABŞ dolları (USD)",
+    "Azerbaijani": "Azərbaycanca",
+    "English (US)": "İngiliscə (ABŞ)",
+    "Medium (220px)": "Orta (220px)",
+    "Big (240px)": "Böyük (240px)",
+
+
+    
+    "General": "Ümumi",
+    "Update your business persona": "Biznes personanızı yeniləyin",
+    "Business Details": "Biznes məlumatları",
+    "Selected": "Seçilib",
+    "Upload Photo": "Şəkil yüklə",
+    "For better preview recommended size is 450px x 450px. Max size 5MB.": "Daha yaxşı önizləmə üçün tövsiyyə olunan ölçü 450px x 450px-dir. Maksimum ölçü 5MB-dır.",
+    "Store Name": "Mağaza adı",
+    "Business Email": "Biznes e-poçtu",
+    "Business Number": "Biznes nömrəsi",
+    "Adress": "Ünvan",
+    "Country": "Ölkə",
+    "City": "Şəhər",
+    "Flat/Unit": "Mənzil/Birlik",
+    "Street": "Küçə",
+    "Street No": "Küçə No",
+    "Post Code": "Poçt indeksi",
+
+
+    "Delete All": "Hamısını sil",
+    "User Permissions": "İcazələr",
+    "Manage who has access in your system": "Kimin sistemə girişi olacağını idarə edin",
+    "Name": "Ad",
+    "Email": "E-poçt",
+    "Created": "Yaradıldı",
+    "Role": "Rol",
+    "Actions": "Əməllər",
+    "Showing": "Göstərilir",
+    "to": "dən",
+    "of": "qədər",
+    "entries": "qeydlərdən",
+    "Show": "Göstər",
+    "Edit User Permission": "İstifadəçi icazəsini düzəldin",
+    "Full Name": "Tam ad",
+    "SUPER ADMIN": "SUPER ADMİN",
+    "ADMIN": "ADMİN",
+    "MEMBER": "ÜZV",
+    "Update": "Yenilə",
+    "Delete User ?": "İstifadəçini sil?",
+    "Are you sure you want to delete User?": "İstifadəçini silmək istədiyinizə əminsiniz?",
+    "Delete": "Sil",
+
+
+
+    "Your Account": "Sizin hesabınız",
+    "Manage your account settings": "Hesabınızın ayarlarını idarə edin",
+    "Profile": "Profil",
+    "Upload New": "Yeni yüklə",
+    "Email Address": "E-poçt ünvanı",
+    "Phone Number": "Telefon nömrəsi",
+    "Male": "Kişi",
+    "Female": "Qadın",
+    "Password": "Şifrə",
+    "Birth of Date": "Doğum tarixi",
+    "Delete account": "Hesabı sil",
+    "When you delete your account, you lose access to Front account services, and we permanently delete your personal data. You can cancel the deletion for 14 days.": "Hesabınızı siləndə, front hesabı xidmətlərinə girişi itirirsiniz və şəxsi məlumatlarınızı daimi olaraq silirik. Silməni 14 gün ərzində ləğv edə bilərsiniz.",
+    "Learn more": "Daha ətraflı",
+    "Notifications": "Bildirişlər",
+    "Email Notifications": "E-poçt bildirişləri",
+    "Substance can send you email notifications for any new direct messages": "Substance sizə yeni doğrudan mesajlar üçün e-poçt bildirişləri göndərə bilər",
+    "On": "Açıq",
+    "Off": "Bağlı",
+    "News and Update Settings": "Xəbər və yeniləmə ayarları",
+    "The latest news about the latest features and software update settings": "Ən son xüsusiyyətlər və proqram yeniləmə ayarları haqqında ən son xəbərlər",
+    "Tips and Tutorials": "Məsləhətlər və Təlimatlar",
+    "Tips and tricks in order to increase your performance efficiency": "Performans effektivliyinizi artırmaq üçün məsləhətlər və təlimatlar",
+    "Offer and Promotions": "Təklif və Promosyonlar",
+    "Promotions about software package prices and about the latest discounts": "Proqram paket qiymətləri və ən son endirimlər haqqında promosyonlar",
+    "More Activity": "Daha çox fəaliyyət",
+    "More option about email notifcations for any new direct messages": "Hər hansı yeni doğrudan mesajlar üçün e-poçt bildirişləri haqqında daha çox seçim",
+    "All Reminders & Activity": "Bütün xatırlatmalar və fəaliyyətlər",
+    "Notify me all system activities and reminders that have been created": "Yaradılmış bütün sistem fəaliyyətləri və xatırlatmalar məni xəbərdar etsin",
+    "Activity only": "Yalnız fəaliyyət",
+    "Only notify me we have the latest activity updates about increasing or decreasing data": "Yalnız məni məlumatların artması və azalması haqqında ən son fəaliyyət yeniləmələri barədə xəbərdar edin",
+    "Important Reminder only": "Yalnız əhəmiyyətli xatırlatma",
+    "Only notify me all the reminders that have been made": "Yalnız məni yaradılmış bütün xatırlatmalar barədə xəbərdar edin",
+
+
+
+
+    "Billings": "Hesablaşmalar",
+    "Pick a billing plan that suits you": "Sizinə uyğun bir ödəmə planı seçin",
+    "Basic Plan": "Əsas plan",
+    "year": "il",
+    "Suitable plan for starter business": "Başlanğıc biznesi üçün uyğun plan",
+    "Customers Segmentations": "Müştərilər segmentləri",
+    "Google Integrations": "Google inteqrasiyaları",
+    "Activity Reminde": "Fəaliyyət xatırlatması",
+    "Enterprise Plan": "İş planı",
+    "Best plan for mid-sized businesses": "Orta ölçülü bizneslər üçün ən yaxşı plan",
+    "Get a Basic Plans": "Əsas planları əldə et",
+    "Access All Feature": "Bütün xüsusiyyətlərə giriş",
+    "Get 1 TB Cloud Storage": "1 TB Bulud saxlama alanı əldə et",
+    "Professional Plan": "Profesional plan",
+    "Suitable for big company": "Böyük şirkətlər üçün uyğun",
+    "Get a Enterprise Plans": "İş planlarını əldə et",
+    "Get 2 TB Cloud Storage": "2 TB Bulud saxlama alanı əldə et",
+    "Billing History": "Hesablaşma tarixçəsi",
+    "Invoices": "Fakturalar",
+    "Created Date": "Yaradılma tarixi",
+    "Amount": "Məbləğ",
+    "Selected Plan": "Seçilmiş plan",
+    "Active Plan": "Aktiv plan",
+    "Choose Plan": "Planı seçin",
+
+
+
+    "Posive Settings": "Posive Ayarları",
+    "Let’s Manage your settings": "Ayarlarınızı idarə edək",
+    "Sub settings": "Alt ayarlar",
+    "Privacy Policy": "Gizlilik Siyasəti",
+    "Preferences": "Seçimlər",
+    "Account": "Hesab",
+
+
+
+    "Welcome to our POS (Point of Sale) Dashboard, a powerful tool designed to revolutionize the way you manage your business transactions. Our intuitive interface provides real-time insights, customizable reports, and seamless integration with your existing POS system, empowering you to make informed decisions and drive business growth. Whether you're a small business owner or a large enterprise, our POS Dashboard is tailored to meet your unique needs.": "POS (Satış Nöqtəsi) İdarə Panelinə xoş gəlmisiniz, biznes əməliyyatlarınızı idarə etmək üçün yaradılmış güclü bir alətdir. Bizim intuativ interfeysimiz sizə anında görüşlər, tənzimlənə bilən hesabatlar və mövcud POS sisteminizlə səmərəli inteqrasiya təmin edir, sizə məlumatlı qərarlar vermək və biznesinizi inkişaf etdirmək imkanı verir. Kiçik biznes sahibi və ya böyük bir şirkət olun, bizim POS İdarə Panelimiz sizin unikal ehtiyaclarınıza cavab verəcək şəkildə hazırlanmışdır."
+
+
 }

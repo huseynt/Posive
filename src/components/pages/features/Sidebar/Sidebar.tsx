@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { resetToken } from "../../../utils/Hooks/useToken";
 import { IgetUser } from "../../../utils/API/types";
 import { deleteUser } from "../../../utils/reUse/user";
+import { useTranslation } from 'react-i18next';
 interface ISidebarProps {
   toggleMenu: boolean;
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,6 +19,7 @@ interface ISidebarProps {
 const Sidebar: React.FC<ISidebarProps> = (props) => {
   const { toggleMenu, setToggleMenu, setNavigation, navigation, userData } = props;
   const [toggleUser, setToggleUser] = useState(true);
+  const { t } = useTranslation();
 
   const handleToggleMenu = () => {
     setToggleMenu(!toggleMenu);
@@ -51,12 +53,17 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
     screen.width<=991 && setToggleMenu(false);
   }, [navigation]);
 
+  useEffect(() => {
+    console.log(userData?.setting?.size);
+  }, [userData]);
+
 
   return (
     <div
       className={style.sidebar}
       style={{
-        width: screen.width>=991 && !toggleMenu ? "80px" : "220px",
+        width: screen.width>=991 && !toggleMenu ? "80px" : 
+        userData?.setting?.size ? userData?.setting?.size === "Medium (220px)" ? "220px" : "240px" : "220px",
         transition: "0.2s",
         transform: toggleMenu ? "translateX(0)" : ""
       }}
@@ -227,7 +234,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
               color: navigation === "overview" ? "#EA7E41" : "",
             }}
           >
-            Overview
+            {t('Overview')}
           </span>
         </div>
 
@@ -283,7 +290,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
               color: navigation === "product" ? "#EA7E41" : "",
             }}
           >
-            Product
+            {t('Product')}
           </span>
         </div>
 
@@ -325,7 +332,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
               color: (/^settings.*/).test(navigation) ? "#EA7E41" : "",
             }}
           >
-            Settings
+            {t('Settings')}
           </span>
         </div>
 
@@ -374,7 +381,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
               color: (/^help.*/).test(navigation) ? "#EA7E41" : "",
             }}
           >
-            Help Center
+            {t('Help Center')}
           </span>
         </div>
       </div>
@@ -438,7 +445,7 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           }
           style={{ display: !toggleMenu ? "none" : "block" }}
         >
-          <div onClick={handleLogout}>Logout</div>
+          <div onClick={handleLogout}>{t("Logout")}</div>
         </div>
       </div>
     </div>

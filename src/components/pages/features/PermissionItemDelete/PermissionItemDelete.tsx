@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createDeleteUserPermission } from "../../../utils/API/API";
 import style from "./permissionitemdelete.module.scss";
 import Loader from "../../../common/Loader/Loader";
+import { useTranslation } from "react-i18next";
 
 interface IQRCodeComponentProps {
   setViewOpen: React.Dispatch<React.SetStateAction<string>>;
@@ -11,7 +12,8 @@ interface IQRCodeComponentProps {
 
 const PermissionItemDelete: React.FC<IQRCodeComponentProps> = (props) => {
   const { setViewOpen, email , requestNotify } = props;
-
+  const { t } = useTranslation();
+  
   // ------------------- delete user ------------------------
   const queryClient = useQueryClient();
   const {
@@ -43,11 +45,11 @@ const PermissionItemDelete: React.FC<IQRCodeComponentProps> = (props) => {
 
       <div className={style.view_block}>
         <div className={style.view_block_head}>
-          <h3>Delete User ?</h3>
+          <h3>{t("Delete User ?")}</h3>
         </div>
         
         <div className={style.view_block_main}>
-          <p>Are you sure you want to delete User?</p>
+          <p>{t("Are you sure you want to delete User?")}</p>
         </div>
 
         <div className={style.view_block_actions}>
@@ -57,12 +59,12 @@ const PermissionItemDelete: React.FC<IQRCodeComponentProps> = (props) => {
             { isDeleting ? 
             <Loader/>
             :
-            <span>Delete</span>}
+            <span>{t("Delete")}</span>}
           </div>
 
           <div className={style.view_block_actions_option}
           onClick={() => setViewOpen("")}>
-            <span>Cancel</span>
+            <span>{t("cancel")}</span>
             </div>
         </div>
 
