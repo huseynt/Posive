@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createDeleteOrdersAll } from "../../../utils/API/API";
 import style from "./overviewitemdeleteall.module.scss";
 import Loader from "../../../common/Loader/Loader";
+import { useTranslation } from "react-i18next";
 
 interface IQRCodeComponentProps {
   setDeleteAllOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -12,7 +13,8 @@ interface IQRCodeComponentProps {
 
 const OverviewItemDeleteAll: React.FC<IQRCodeComponentProps> = (props) => {
   const { setDeleteAllOpen, multiCheck, setMultiCheck } = props;
-
+  const {t} = useTranslation();
+  
   // ------------------- delete orders all ------------------------
   const queryClient = useQueryClient();
   const {
@@ -51,11 +53,11 @@ const OverviewItemDeleteAll: React.FC<IQRCodeComponentProps> = (props) => {
 
       <div className={style.view_block}>
         <div className={style.view_block_head}>
-          <h3>Delete Transactions ?</h3>
+          <h3>{t("Delete Transactions ?")}</h3>
         </div>
         
         <div className={style.view_block_main}>
-          <p>Are you sure you want to delete Transactions ?</p>
+          <p>{t("Are you sure you want to delete Transactions ?")}</p>
         </div>
 
         <div className={style.view_block_actions}>
@@ -65,14 +67,14 @@ const OverviewItemDeleteAll: React.FC<IQRCodeComponentProps> = (props) => {
             { isDeletingAll ? 
             <Loader/>
             :
-            <span>Delete</span>}
+            <span>{t("Delete")}</span>}
           </div>
 
           <div className={style.view_block_actions_option}
           onClick={() => {
             setDeleteAllOpen(false);
           }}>
-            <span>Cancel</span>
+            <span>{t("Cancel")}</span>
             </div>
         </div>
 

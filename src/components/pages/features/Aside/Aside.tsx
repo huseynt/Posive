@@ -6,6 +6,7 @@ import { IOrderState } from "../../../redux/type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createPostOrders } from "../../../utils/API/API";
 import MasterCard from "../MasterCard/MasterCard";
+import { useTranslation } from "react-i18next";
 
 interface ISuccessOrder {
   orderId: number;
@@ -38,6 +39,8 @@ const Aside: React.FC<AsideProps> = (props) => {
   );
   const { name, place, tables, orders, paymentMethod } = useSelector((state: IOrderState) => state);
   const [mastercard, setMastercard] = useState<boolean>(false);
+  const {t} = useTranslation();
+  
   // ------------ post data --------------
   const queryClient = useQueryClient()
   const {
@@ -99,9 +102,8 @@ const Aside: React.FC<AsideProps> = (props) => {
       if (paymentMethod === "mastercard") {
 
         // for testing
-        setMastercard(false);
-        handlePostOrder();
-
+        setMastercard(true);
+        // handlePostOrder();
 
       } else if (paymentMethod === "paypal") {
         console.log("paypal");
@@ -161,10 +163,10 @@ const Aside: React.FC<AsideProps> = (props) => {
         }}
       >
         <div className={style.aside_up_order}>
-          <h4>Current Order</h4>
+          <h4>{t("Current Order")}</h4>
           <p
             onClick={() => navigator.clipboard.writeText(orderId)}
-            title="Copy Current Order ID"
+            title={t("Copy Current Order ID")}
           >
             {orderId}
             <svg
@@ -220,7 +222,12 @@ const Aside: React.FC<AsideProps> = (props) => {
           </svg>
         </div>
 
-        <button className={style.aside_up_settings}>
+        {/* <button className={style.aside_up_settings}
+        onClick={() => {
+          navigate("/home/settings")
+          setBag(false)
+        }}
+        >
           <svg
             width="18"
             height="18"
@@ -243,7 +250,7 @@ const Aside: React.FC<AsideProps> = (props) => {
               strokeLinejoin="round"
             />
           </svg>
-        </button>
+        </button> */}
       </div>
 
       {/* ------------ customer -------------- */}
@@ -262,7 +269,9 @@ const Aside: React.FC<AsideProps> = (props) => {
           value={name}
           className={style.aside_customer_name}
         />
-        <p className={name ? style.label_focus : style.label}>Customer Name</p>
+        <p className={name ? style.label_focus : style.label}>
+          {t("Customer Name")}  
+        </p>
         <svg
           className={style.aside_customer_icon}
           width="16"
@@ -297,7 +306,7 @@ const Aside: React.FC<AsideProps> = (props) => {
           transition: "all 0.1s ease-in-out",
         }}
       >
-        <h3 className={style.aside_place_head}>Where will you eat :</h3>
+        <h3 className={style.aside_place_head}>{t("Where will you eat :")}</h3>
         <div className={style.aside_place_selection}>
 
           <div className={`${style.aside_place_selection_option} ${place === "Dine In" && style.selectedPlace}`}
@@ -319,7 +328,7 @@ const Aside: React.FC<AsideProps> = (props) => {
                 fill="#292D32"
               />
             </svg>
-            <p className={style.aside_place_selection_option_name}>Dine in</p>
+            <p className={style.aside_place_selection_option_name}>{t("Dine in")}</p>
           </div>
 
           <div className={`${style.aside_place_selection_option} ${place === "Take Away" && style.selectedPlace}`}
@@ -342,7 +351,7 @@ const Aside: React.FC<AsideProps> = (props) => {
                 fill="#292D32"
               />
             </svg>
-            <p className={style.aside_place_selection_option_name}>Take away</p>
+            <p className={style.aside_place_selection_option_name}>{t("Take away")}</p>
           </div>
         </div>
       </div>
@@ -356,12 +365,12 @@ const Aside: React.FC<AsideProps> = (props) => {
           opacity: place === "Take Away" ? "0.5" : "",
         }}
       >
-        <h3 className={style.aside_table_head}>Table :</h3>
+        <h3 className={style.aside_table_head}>{t("Table :")}</h3>
         <div
           className={`${style.aside_table_select} ${place !== "Take Away"? style.dinein: ""} ${tables.length>0 && style.selectedPlace}`}
           onClick={() => place !== "Take Away" && setTable(true)}
         >
-          <p className={style.aside_table_select_name}>Select Table</p>
+          <p className={style.aside_table_select_name}>{t("Select Table")}</p>
           <svg
             className={style.aside_table_select_icon}
             width="20"
@@ -391,11 +400,11 @@ const Aside: React.FC<AsideProps> = (props) => {
           transition: "all 0.1s ease-in-out",
         }}
       >
-        <h3 className={style.aside_order_head}>Your Order :</h3>
+        <h3 className={style.aside_order_head}>{t("Your Order :")}</h3>
 
         <div className={style.aside_order_list}>
           { orders.reduce((acc, m) => acc + m.order, 0) === 0 ? (
-              <p className={style.aside_order_list_empty}>Your order is empty</p>
+              <p className={style.aside_order_list_empty}>{t("Your order is empty")}</p>
             )
             :
             (
@@ -442,21 +451,25 @@ const Aside: React.FC<AsideProps> = (props) => {
         <div className={style.aside_detail_orders}>
           <div className={style.aside_detail_orders_subtotal}>
             <p className={style.aside_detail_orders_subtotal_name}>
-              Subtotal
+              {t("Subtotal")}
             </p>
             <p className={style.aside_detail_orders_subtotal_price}>$
               {orders.reduce((acc, m) => acc + (m.price - (m.price * ((m.discount ?? 0) * 0.01))) * m.order, 0).toFixed(2)}
             </p>
           </div>
           <div className={style.aside_detail_orders_tax}>
-            <p className={style.aside_detail_orders_tax_name}>Service Tax</p>
+            <p className={style.aside_detail_orders_tax_name}>
+              {t("Service Tax")}
+            </p>
             <p className={style.aside_detail_orders_tax_price}>$
               {orders.reduce((acc, m) => acc + (m.price * ((m.tax ?? 0) * 0.01)) * m.order, 0).toFixed(2)}
             </p>
           </div>
         </div>
         <div className={style.aside_detail_total}>
-          <p className={style.aside_detail_total_name}>Total Payment</p>
+          <p className={style.aside_detail_total_name}>
+            {t("Total Payment")}  
+          </p>
           <p className={style.aside_detail_total_price}>$
             {orders.reduce((acc, m) => acc + ((m.price - (m.price * ((m.discount ?? 0) * 0.01))) + (m.price * ((m.tax ?? 0) * 0.01))) * m.order, 0).toFixed(2)}
           </p>
@@ -472,7 +485,7 @@ const Aside: React.FC<AsideProps> = (props) => {
           transition: "all 0.1s ease-in-out",
         }}
       >
-        <h3 className={style.aside_payment_head}>Payment Method :</h3>
+        <h3 className={style.aside_payment_head}>{t("Payment Method :")}</h3>
         <div className={style.aside_payment_select}>
 
           <div className={style.aside_payment_select_option}
@@ -505,7 +518,7 @@ const Aside: React.FC<AsideProps> = (props) => {
               </svg>
             </div>
             <p className={style.aside_payment_select_option_name}>
-              Master Card
+              {t("Master Card")}
             </p>
           </div>
 
@@ -600,7 +613,7 @@ const Aside: React.FC<AsideProps> = (props) => {
                 />
               </svg>
             </div>
-            <p className={style.aside_payment_select_option_name}>Scan Code</p>
+            <p className={style.aside_payment_select_option_name}>{t("Scan Code")}</p>
           </div>
         </div>
       </div>
@@ -614,7 +627,7 @@ const Aside: React.FC<AsideProps> = (props) => {
         }}
         onClick={handleOrder}
       >
-        Make Order
+        {t("Make Order")}
       </button>
     </div>
   );

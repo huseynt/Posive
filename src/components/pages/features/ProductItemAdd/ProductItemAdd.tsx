@@ -3,6 +3,7 @@ import style from "./productitemadd.module.scss";
 import { uploadMealImage } from '../../../services/Firebase/Firebase'
 import { createAddProduct } from "../../../utils/API/API";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 
 interface IProductItemAddComponentProps {
@@ -26,6 +27,7 @@ interface IUpdateProduct {
 
 const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
   const { setViewAdd } = props;
+  const {t} = useTranslation();
 
   const [data, setData] = useState<IUpdateProduct>({
     // id: "*****",
@@ -129,7 +131,7 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
 
       <div className={style.view_block}>
         <div className={style.view_block_head}>
-          <h3>Edit Product Details</h3>
+          <h3>{t("Edit Product Details")}</h3>
           <div className={style.view_block_head_exit}
           onClick={() => setViewAdd(false)}
           >
@@ -145,11 +147,11 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
           <div className={style.view_block_main_information}>
 
             <div className={style.view_block_main_information_item}>
-              <div className={style.view_block_main_information_item_head}>Product Name</div>
+              <div className={style.view_block_main_information_item_head}>{t("Product Name")}</div>
               <div className={style.view_block_main_information_item_value}>
                 <input type="text" 
                 name="name" 
-                placeholder="Enter product name"
+                placeholder={t("Enter product name")}
                 value={data.name} 
                 style={{outline:"none", border: "none"}}
                 onChange={handleChange} />
@@ -157,27 +159,32 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
             </div>
 
             <div className={style.view_block_main_information_item}>
-              <div className={style.view_block_main_information_item_head}>Category</div>
+              <div className={style.view_block_main_information_item_head}>{t("Category")}</div>
               <div className={`${style.view_block_main_information_item_value} ${style.view_block_main_information_item_value_payment}`}>
                 <div className={style.view_block_main_information_item_value_payment_head}>
                     {/* <span>{data.category}</span> */}
-                    {data.category}
+                    {
+                      data.category === "Main Course" ? t("Main Course") :
+                      data.category === "Rice Bowl" ? t("Rice Bowl") :
+                      data.category === "Fast food" ? t("Fast Food") :
+                      data.category === "Healthy food" ? t("Healthy Food") : ""
+                    }
                     <svg width="14" height="7" viewBox="0 0 14 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12.28 0.966797L7.9333 5.31346C7.41997 5.8268 6.57997 5.8268 6.06664 5.31346L1.71997 0.966797" stroke="#1A1C1E" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                 </div>
                 
                 <div className={`${style.view_block_main_information_item_value_payment_down}`}>
-                  <div style={{backgroundColor: data.category==="Main Course" ? "#edf1d3" : ""}} onClick={() => setData({ ...data, category: "Main Course" })}>Main Course</div>
-                  <div style={{backgroundColor: data.category==="Rice Bowl" ? "#edf1d3" : ""}} onClick={() => setData({ ...data, category: "Rice Bowl" })}>Rice Bowl</div>
-                  <div style={{backgroundColor: data.category==="Fast food" ? "#edf1d3" : ""}} onClick={() => setData({ ...data, category: "Fast food" })}>Fast food</div>
-                  <div style={{backgroundColor: data.category==="Healthy food" ? "#edf1d3" : ""}} onClick={() => setData({ ...data, category: "Healthy food" })}>Healthy food</div>
+                  <div style={{backgroundColor: data.category==="Main Course" ? "#edf1d3" : ""}} onClick={() => setData({ ...data, category: "Main Course" })}>{t("Main Course")}</div>
+                  <div style={{backgroundColor: data.category==="Rice Bowl" ? "#edf1d3" : ""}} onClick={() => setData({ ...data, category: "Rice Bowl" })}>{t("Rice Bowl")}</div>
+                  <div style={{backgroundColor: data.category==="Fast food" ? "#edf1d3" : ""}} onClick={() => setData({ ...data, category: "Fast food" })}>{t("Fast Food")}</div>
+                  <div style={{backgroundColor: data.category==="Healthy food" ? "#edf1d3" : ""}} onClick={() => setData({ ...data, category: "Healthy food" })}>{t("Healthy Food")}</div>
                 </div>
               </div>
             </div>
 
             <div className={style.view_block_main_information_item}>
-              <div className={style.view_block_main_information_item_head}>Receipt Number</div>
+              <div className={style.view_block_main_information_item_head}>{t("Receipt Number")}</div>
               <div className={style.view_block_main_information_item_value}
               style={{backgroundColor: "#edf1f3"}}
               >
@@ -187,7 +194,7 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
             </div>
 
             <div className={style.view_block_main_information_item}>
-              <div className={style.view_block_main_information_item_head}>Input Tax</div>
+              <div className={style.view_block_main_information_item_head}>{t("Input Tax")}</div>
               <div className={style.view_block_main_information_item_value}>
                 <input type="text" 
                 name="tax" 
@@ -198,7 +205,7 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
             </div>
 
             <div className={style.view_block_main_information_item}>
-              <div className={style.view_block_main_information_item_head}>Discount</div>
+              <div className={style.view_block_main_information_item_head}>{t("Discount")}</div>
               <div className={style.view_block_main_information_item_value}>
                 <input type="text" 
                 name="discount" 
@@ -214,7 +221,7 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
           <div className={style.view_block_main_menu}>
             
             <div className={style.view_block_main_information_item}>
-              <div className={style.view_block_main_information_item_head}>Price</div>
+              <div className={style.view_block_main_information_item_head}>{t("Price")}</div>
               <div className={style.view_block_main_information_item_value}>
                 $<input type="text" 
                 name="price" 
@@ -225,7 +232,7 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
             </div>
 
             <div className={style.view_block_main_information_item}>
-              <div className={style.view_block_main_information_item_head}>Stock</div>
+              <div className={style.view_block_main_information_item_head}>{t("Stock")}</div>
               <div className={style.view_block_main_information_item_value}>
                 <input type="text" 
                 name="stock" 
@@ -235,7 +242,7 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
               </div>
             </div>
             
-            <div className={style.view_block_main_menu_head}>Product Image</div>
+            <div className={style.view_block_main_menu_head}>{t("Product Image")}</div>
             <div className={style.view_block_main_menu_drag}>
               <div className={style.view_block_main_menu_drag_img}>
                 <label htmlFor="imageUrl"></label>
@@ -244,6 +251,7 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
                 multiple = {false}
                 name="imageUrl" 
                 id="imageUrl"
+                draggable="true"
                 style={{display: "none"}}
                 className={style.parent_main_business_block_photo_upload_input} 
                 onChange={handleChange}/>
@@ -259,7 +267,7 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
                 </svg>
                 }
               </div>
-              <div className={style.view_block_main_menu_drag_name}>Drag and drop a file to upload</div>
+              <div className={style.view_block_main_menu_drag_name}>{t("Drag and drop a file to upload")}</div>
             </div>
 
             { data.imageUrl &&
@@ -285,7 +293,7 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
             {/* {false ? 
             // <Loader/>
             :  */}
-            <span>Add product</span>
+            <span>{t("Add product")}</span>
             {/* } */}
           </div>
 
@@ -293,7 +301,7 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
           style={{width: "100px"}}
           onClick={()=> setViewAdd(false)}
           >
-            <span>Cancel</span>
+            <span>{t("Cancel")}</span>
           </div>
         </div>
 

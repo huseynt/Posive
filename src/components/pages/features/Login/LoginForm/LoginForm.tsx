@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import Loader from "../../../../common/Loader/Loader";
+// import { useMutation } from "@tanstack/react-query";
+// import { createGoogleAuth } from "../../../../utils/API/API";
 // ---------- google auth ------------------------------
 
 
@@ -94,6 +96,22 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
   //   navigate('/home')
   // }
 
+  // ----------- check api ------------------------------
+  // // const queryClient = useQueryClient()
+  // const {
+  //   mutate: googleLogin,
+  //   // isPending: isLoginPending,
+  // } = useMutation({
+  //   mutationFn: createGoogleAuth,
+  //   onSuccess: () => {
+  //     console.log('Success');
+  //     // queryClient.invalidateQueries({queryKey: ["getMeals"]})
+  //   },
+  //   onError: (error) => {
+  //     console.log('Login error:', error);
+  //   },
+  // });
+
 
   // ---------- google auth ------------------------------
   interface GoogleLoginResponse {
@@ -102,7 +120,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
   const handleSuccess = (response: GoogleLoginResponse) => {
     if (response.credential) {
       const userObject = jwtDecode(response.credential);
-      console.log("User Info:", userObject);
+      console.log("User Info:", userObject, response);
     } else {
       console.log('No credential received');
     }

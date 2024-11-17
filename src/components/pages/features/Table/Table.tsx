@@ -4,6 +4,7 @@ import { IOrderState } from "../../../redux/type";
 import { changeTable, resetTable } from "../../../redux/slice/mealSlice";
 import { createGetTables } from "../../../utils/API/API";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 
 interface IgetTables {
@@ -17,6 +18,7 @@ interface ITable {
 
 const Table: React.FC<ITable> = (props) => {
   const { setTable } = props;
+  const { t } = useTranslation();
   // -------------------- redux --------------------------
   const dispatch = useDispatch();
   const { tables } = useSelector((state: IOrderState) => state);
@@ -52,28 +54,28 @@ const Table: React.FC<ITable> = (props) => {
 
         {/* --------------- head ------------------- */}
         <div className={style.table_block_head}>
-          <h3 className={style.table_block_head_title}>Choose Table</h3>
+          <h3 className={style.table_block_head_title}>{t("Choose Table")}</h3>
 
           <div className={style.table_block_head_list}>
             <div className={style.table_block_head_list_item}>
               <div className={style.table_block_head_list_item_circle}
               style={{backgroundColor: "#12B3A8"}}
               ></div>
-              <p className={style.table_block_head_list_item_title}>Available</p>
+              <p className={style.table_block_head_list_item_title}>{t("Available")}</p>
             </div>
 
             <div className={style.table_block_head_list_item}>
               <div className={style.table_block_head_list_item_circle}
               style={{backgroundColor: "#EA7E41"}}
               ></div>
-              <p className={style.table_block_head_list_item_title}>Available Soon</p>
+              <p className={style.table_block_head_list_item_title}>{t("Available Soon")}</p>
             </div>
 
             <div className={style.table_block_head_list_item}>
               <div className={style.table_block_head_list_item_circle} 
               style={{backgroundColor: "#4D81E7"}}
               ></div>
-              <p className={style.table_block_head_list_item_title}>Filled</p>
+              <p className={style.table_block_head_list_item_title}>{t("Filled")}</p>
             </div>
 
             {/* <div className={style.table_block_head_list_item}>
@@ -465,7 +467,7 @@ const Table: React.FC<ITable> = (props) => {
 
           <div className={style.table_block_actions_left}>
 
-            <p className={style.table_block_actions_left_title}>Selected Table</p>
+            <p className={style.table_block_actions_left_title}>{t("Selected Table")}</p>
 
             <div className={style.table_block_actions_left_list}>
               {
@@ -484,10 +486,10 @@ const Table: React.FC<ITable> = (props) => {
               setTable(false)
               dispatch(resetTable())
             }}
-            >Cancel</button>
+            >{t("Cancel")}</button>
             <button className={style.table_block_actions_right_continue}
             onClick={() => setTable(false)}
-            >Continue</button>
+            >{t("Continue")}</button>
           </div>
 
         </div>

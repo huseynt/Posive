@@ -96,6 +96,14 @@
         font-size: 1rem;
         font-weight: 600;
         z-index: 1;
+
+        @include mobile {
+          font-size: 0.6rem;
+        }
+        @include themed() {
+          border-bottom: 1px solid t(gray);
+          border-right: 1px solid t(gray);
+        }
       }
 
       &_discount {
@@ -109,6 +117,14 @@
         font-size: 1.3rem;
         font-weight: 600;
         z-index: 1;
+
+        @include mobile {
+          font-size: 0.8rem;
+        }
+        @include themed() {
+          border-bottom: 1px solid t(gray);
+          border-left: 1px solid t(gray);
+        }
       }
 
       &_stock {
@@ -122,6 +138,14 @@
         font-size: 1rem;
         font-weight: 600;
         z-index: 1;
+
+        @include mobile {
+          font-size: 0.6rem;
+        }
+        @include themed() {
+          border-top: 1px solid t(gray);
+          border-right: 1px solid t(gray);
+        }
       }
     }
 

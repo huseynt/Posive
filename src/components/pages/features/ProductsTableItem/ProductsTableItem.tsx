@@ -82,10 +82,10 @@ const ProductsTableItem: React.FC<IProducts> = (props) => {
             <td className={style.productsItem_mobile}>{receiptNo}</td>
             <td className={style.productsItem_desktop}>{orderofDay}</td>
             <td className={style.productsItem_desktop}>{category}</td>
-            <td className={style.productsItem_desktop}>{price}</td>
+            <td className={style.productsItem_desktop}>${price}</td>
             <td className={style.productsItem_desktop}>{stock}</td>
-            <td className={style.productsItem_desktop}>{tax}</td>
-            <td className={style.productsItem_desktop}>{discount}</td>
+            <td className={style.productsItem_desktop}>{tax}%</td>
+            <td className={style.productsItem_desktop}>{discount}%</td>
             
             <td className={style.productsItem_mobile}>
                 <div className={style.productsItem_mobile_action}>

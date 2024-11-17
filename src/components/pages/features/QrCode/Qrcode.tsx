@@ -1,6 +1,7 @@
 import QRCode from "qrcode.react";
 import style from "./qrcode.module.scss";
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 interface IQRCodeComponentProps {
   setQrOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,6 +11,7 @@ interface IQRCodeComponentProps {
 const QRCodeComponent: React.FC<IQRCodeComponentProps> = (props) => {
   const { setQrOpen, requestNotify } = props;
   const [code, setCode] = React.useState<string>("");
+  const {t} = useTranslation();
   // const id: string = "LK21-121KL-12UI-78HY-FGA8";
 
 // --------------------for test--------------------------
@@ -46,26 +48,26 @@ const QRCodeComponent: React.FC<IQRCodeComponentProps> = (props) => {
       <div className={style.qrcode_bg} onClick={() => setQrOpen(false)}></div>
 
       <div className={style.qrcode_block}>
-        <h3 className={style.qrcode_block_head}>Scan QR Code</h3>
+        <h3 className={style.qrcode_block_head}>{t("Scan QR Code")}</h3>
         <p className={style.qrcode_block_information}>
-          Waiting for payment from customers
+          {t("Waiting for payment from customers")}
         </p>
         <div className={style.qrcode_block_qr}>
           <QRCode value={code} size={224} fgColor={"#d4733b"} />
         </div>
 
         <div className={style.qrcode_block_or}>
-          <p className={style.qrcode_block_or_p}>or</p>
+          <p className={style.qrcode_block_or_p}>{t("or")}</p>
         </div>
 
-        <p className={style.qrcode_block_label}>Manualy enter the code below</p>
+        <p className={style.qrcode_block_label}>{t("Manualy enter the code below")}</p>
 
         <div className={style.qrcode_block_manual}>
           <p className={style.qrcode_block_manual_id}>{code}</p>
           <div className={style.qrcode_block_manual_copy}
           onClick={() => {
             navigator.clipboard.writeText(code)
-            requestNotify("done", "");
+            requestNotify("done", t("Copied to clipboard"));
           }
           }
           >
@@ -97,10 +99,10 @@ const QRCodeComponent: React.FC<IQRCodeComponentProps> = (props) => {
         <div className={style.qrcode_block_actions}>
           <div className={style.qrcode_block_actions_option}
           onClick={() => setQrOpen(false)}
-          >Change Method</div>
+          >{t("Change Method")}</div>
           <div className={style.qrcode_block_actions_option}
           onClick={generateRandomCode}
-          >Send QR</div>
+          >{t("Send QR")}</div>
         </div>
       </div>
     </div>

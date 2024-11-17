@@ -15,6 +15,7 @@ import { IGetMeals, IGetOrdersResponse } from "../../../utils/API/types";
 import * as XLSX from "xlsx";
 import OverviewItemDeleteAll from "../../features/OverItemDeleteAll/OverviewItemDeleteAll";
 import PageLoader from "../../../common/PageLoader/PageLoader";
+import { useTranslation } from "react-i18next";
 
 
 interface IOverview {
@@ -41,7 +42,6 @@ const Overview = () => {
 
   const { setToggleMenu, setNotification, notification } =
     useOutletContext<IOverview>();
-  const [date, setDate] = useState("");
   const [mobileSearch, setMobileSearch] = useState<boolean>(false);
   // const [mealsFiltered, setMealsFiltered] = useState<IMeal[]>([]);
   const [periodDown, setPeriodDown] = useState<boolean>(false);
@@ -59,10 +59,8 @@ const Overview = () => {
   const [countOrders, setCountOrders] = useState<number>(1);
   const [allDataCount, setAllDataCount] = useState<number>(0);
   const [deleteAllOpen, setDeleteAllOpen] = useState<boolean>(false);
+  const {t} = useTranslation();
 
-  useEffect(() => {
-    console.log(pagination, page);
-  }, [pagination, page]);
 
   useEffect(() => {
     setPage(1)
@@ -153,16 +151,7 @@ const Overview = () => {
   //   setAscend(true);
   // };
 
-  useEffect(() => {
-    const today = new Date();
-    const formattedDate = today.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-    setDate(formattedDate);
-    // console.log(mealsFiltered);
-  }, []);
+
 ``
 // useEffect(() => {
 //   if (period !== "All time") {
@@ -230,11 +219,6 @@ const Overview = () => {
       // }));
 
 
-  useEffect(() => {
-    console.log(ordersFiltered);
-  }, [ordersFiltered]);
-
-
  
 
   return (
@@ -254,7 +238,7 @@ const Overview = () => {
       <div className={style.overflow}>
 
         <Helmet>
-          <title>Posive Overview</title>
+          <title>{t("Posive Overview")}</title>
           <meta name="description" content="Overview" />
           <meta name="keywords" content="Posive" />
         </Helmet>
@@ -372,15 +356,22 @@ const Overview = () => {
           {/* ------------------------------ up ----------------------------------------- */}
           <div className={style.main_up}>
             <div className={style.main_up_overview}>
-              <h3 className={style.main_up_overview_head}>Overview</h3>
-              <p className={style.main_up_overview_date}>{date ? date : "Jan 01,2024" }</p>
+              <h3 className={style.main_up_overview_head}>{t("Overview")}</h3>
+              <p className={style.main_up_overview_date}>
+                { 
+                new Date().toLocaleDateString(t("en-US"), {
+                  year: "numeric",
+                  month: "numeric",
+                  day: "numeric",
+                })
+              }</p>
             </div>
 
             <div className={style.main_up_actions}>
               <div className={style.main_up_actions_export}
               onClick={exportToExcel}
               >
-                <p>Export</p>
+                <p>{t("Export")}</p>
                 <svg
                   width="17"
                   height="17"
@@ -420,7 +411,12 @@ const Overview = () => {
                   className={style.main_up_actions_period_text}
                   onClick={() => setPeriodDown(!periodDown)}
                 >
-                  {period}
+                  {
+                    period === "This week" ? t("This week") :
+                    period === "This month" ? t("This month") :
+                    period === "This year" ? t("This year") :
+                    period === "All time" ? t("All time") : t("All time")
+                  }
                 </p>
                 <svg
                   width="16"
@@ -458,7 +454,7 @@ const Overview = () => {
                       setPeriodDown(false);
                     }}
                   >
-                    This week
+                    {t("This week")}
                   </div>
                   <div
                     className={style.main_up_actions_period_down_option}
@@ -467,7 +463,7 @@ const Overview = () => {
                       setPeriodDown(false);
                     }}
                   >
-                    This month
+                    {t("This month")}
                   </div>
                   <div
                     className={style.main_up_actions_period_down_option}
@@ -476,7 +472,7 @@ const Overview = () => {
                       setPeriodDown(false);
                     }}
                   >
-                    This year
+                    {t("This year")}
                   </div>
                   <div
                     className={style.main_up_actions_period_down_option}
@@ -485,7 +481,7 @@ const Overview = () => {
                       setPeriodDown(false);
                     }}
                   >
-                    All time
+                    {t("All time")}
                   </div>
                 </div>
               </div>
@@ -501,7 +497,7 @@ const Overview = () => {
               style={{ animationDuration: "0.5s" }}
             >
               <div className={style.main_total_option_text}>
-                <p className={style.main_total_option_text_up}>Total Sales</p>
+                <p className={style.main_total_option_text_up}>{t("Total Sales")}</p>
                 <h3 className={style.main_total_option_text_head}>
                   {/* ${ordersFiltered ? 
                   Number(ordersFiltered.reduce((acc, order) => acc + order.price, 0).toFixed(3)) > 10000 ?
@@ -541,7 +537,7 @@ const Overview = () => {
               style={{ animationDuration: "0.55s" }}
             >
               <div className={style.main_total_option_text}>
-                <p className={style.main_total_option_text_up}>Total Customers</p>
+                <p className={style.main_total_option_text_up}>{t("Total Customers")}</p>
                 <h3 className={style.main_total_option_text_head}>{m?.countOrders ? m.countOrders: "0"}</h3>
               </div>
 
@@ -589,7 +585,7 @@ const Overview = () => {
               style={{ animationDuration: "0.6s" }}
             >
               <div className={style.main_total_option_text}>
-                <p className={style.main_total_option_text_up}>Total Order</p>
+                <p className={style.main_total_option_text_up}>{t("Total Orders")}</p>
                 <h3 className={style.main_total_option_text_head}>{m?.countOrders ? m.countOrders: "0"}</h3>
               </div>
 
@@ -617,7 +613,7 @@ const Overview = () => {
               style={{ animationDuration: "0.65s" }}
             >
               <div className={style.main_total_option_text}>
-                <p className={style.main_total_option_text_up}>Total Tip</p>
+                <p className={style.main_total_option_text_up}>{t("Total Tips")}</p>
                 <h3 className={style.main_total_option_text_head}>
                   ${m ? m?.countOrders * 0.1 > 1000 ? Math.floor(m?.countOrders/1000).toFixed(2) + "K": (m?.countOrders * 0.1).toFixed(2) : "0"}
                 </h3>
@@ -653,7 +649,7 @@ const Overview = () => {
           >
             {/* -------------------------- Transactions up -------------------------------- */}
             <div className={style.main_down_up}>
-              <p className={style.main_down_up_head}>Recent Transaction</p>
+              <p className={style.main_down_up_head}>{t("Recent Transactions")}</p>
               <div className={style.main_down_up_actions}>
                 <div className={style.main_down_up_actions_search}>
                   {/* <SearchInput
@@ -670,6 +666,7 @@ const Overview = () => {
                     display: multiCheck.length !== 0 ? "block" : "none",
                   }}
                   onClick={() => setDeleteAllOpen(true)}
+                  title={t("Delete")}
                 >
                   <svg
                     width="12"
@@ -725,7 +722,7 @@ const Overview = () => {
 
                 {/* --------------------- setting ----------------------------------- */}
                 <div className={style.main_down_up_actions_setting}
-                title="Sorting Date"
+                title={t("Sorting Date")}
                 >
                   <svg
                     width="18"
@@ -792,7 +789,7 @@ const Overview = () => {
                     <button className={style.main_down_up_actions_setting_down_btn}
                     onClick={() => setAscend("ASC")}
                     style={{backgroundColor: ascend==="ASC" ? "#fdefd9" : ""}}
-                    title="Ascending Date"
+                    title={t("Ascending Date")}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -808,7 +805,7 @@ const Overview = () => {
                     <button className={style.main_down_up_actions_setting_down_btn}
                     onClick={() => setAscend("DESC")} 
                     style={{backgroundColor: ascend==="DESC" ? "#fdefd9" : ""}}
-                    title="Descending Date"
+                    title={t("Descending Date")}
                     >
                       <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -846,21 +843,21 @@ const Overview = () => {
                         style.main_down_transactions_table_head_th_desktop
                       }
                     >
-                      Receipt No
+                      {t("Receipt No")}
                     </th>
                     <th
                       className={
                         style.main_down_transactions_table_head_th_desktop
                       }
                     >
-                      Menu
+                      {t("Menu")}
                     </th>
                     <th
                       className={
                         style.main_down_transactions_table_head_th_desktop
                       }
                     >
-                      Collected/Cashier
+                      {t("Collected/Cashier")}
                     </th>
                     <th className={style.main_down_transactions_table_head_th_mobileDate}>Date & Time</th>
                     <th
@@ -868,9 +865,9 @@ const Overview = () => {
                         style.main_down_transactions_table_head_th_desktop
                       }
                     >
-                      Payment method
+                      {t("Payment method")}
                     </th>
-                    <th>Action</th>
+                    <th>{t("Action")}</th>
                   </tr>
                 </thead>
 
@@ -973,7 +970,7 @@ const Overview = () => {
               <div className={style.main_down_pagination_itemperpage}>
                   
                   <div className={style.main_down_pagination_itemperpage_info}>
-                    Showing {page === 1 ? 1 : page * itemperpage - itemperpage + 1} to {page * itemperpage > allDataCount ? allDataCount : page * itemperpage} of {allDataCount} entries
+                    {t("Showing")} {page === 1 ? 1 : page * itemperpage - itemperpage + 1} {t("to")} {page * itemperpage > allDataCount ? allDataCount : page * itemperpage} {t("of")} {allDataCount} {t("entries")}
                   </div>
                   
                   <div className={style.main_down_pagination_itemperpage_action}>
@@ -984,9 +981,9 @@ const Overview = () => {
                       }
                       value={itemperpage}
                     >
-                      <option value="8">Show 8</option>
-                      <option value="10">Show 10</option>
-                      <option value="20">Show 20</option>
+                      <option value="8">{t("Show")} 8</option>
+                      <option value="10">{t("Show")} 10</option>
+                      <option value="20">{t("Show")} 20</option>
                     </select>
                   </div>
 

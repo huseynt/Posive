@@ -1,5 +1,6 @@
 import { IGetMeals } from "../../../utils/API/types";
 import style from "./overviewitemview.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface IQRCodeComponentProps {
   setViewOpen: React.Dispatch<React.SetStateAction<string>>;
@@ -20,7 +21,8 @@ interface IQRCodeComponentProps {
 
 const OverviewItemView: React.FC<IQRCodeComponentProps> = (props) => {
   const { setViewOpen, menus, size, paymentMethod, orderDate, cashier, orderId } = props;
-
+  const {t} = useTranslation();
+  
   const handlePrint = () => {
     window.print();
   }
@@ -32,7 +34,7 @@ const OverviewItemView: React.FC<IQRCodeComponentProps> = (props) => {
 
       <div className={style.view_block}>
         <div className={style.view_block_head}>
-          <h3>Details Transactions</h3>
+          <h3>{t("Details Transactions")}</h3>
           <div className={style.view_block_head_exit}
           onClick={() => setViewOpen("")}
           >
@@ -47,26 +49,26 @@ const OverviewItemView: React.FC<IQRCodeComponentProps> = (props) => {
 
           <div className={style.view_block_main_information}>
             <div className={style.view_block_main_information_item}>
-              <div className={style.view_block_main_information_item_head}>Order ID</div>
+              <div className={style.view_block_main_information_item_head}>{t("Order ID")}</div>
               <div className={style.view_block_main_information_item_value}>{orderId}</div>
             </div>
 
             <div className={style.view_block_main_information_item}>
-              <div className={style.view_block_main_information_item_head}>Receipt Number</div>
+              <div className={style.view_block_main_information_item_head}>{t("Receipt Number")}</div>
               <div className={style.view_block_main_information_item_value}>{menus.map((m) => m.receiptNo).join('').slice(1,10)}</div>
             </div>
 
             <div className={style.view_block_main_information_item}>
-              <div className={style.view_block_main_information_item_head}>Collected By</div>
+              <div className={style.view_block_main_information_item_head}>{t("Collected By")}</div>
               <div className={style.view_block_main_information_item_value}>{cashier}</div>
             </div>
 
             <div className={style.view_block_main_information_item}>
-              <div className={style.view_block_main_information_item_head}>Date & Time</div>
+              <div className={style.view_block_main_information_item_head}>{t("Date & Time")}</div>
               <div className={style.view_block_main_information_item_value}>{
-                new Date(orderDate).toLocaleDateString("en-US", {
+                new Date(orderDate).toLocaleDateString(t("en-US"), {
                   year: "numeric",
-                  month: "short",
+                  month: "numeric",
                   day: "numeric",
                   hour: "numeric",
                   minute: "numeric",
@@ -75,7 +77,7 @@ const OverviewItemView: React.FC<IQRCodeComponentProps> = (props) => {
             </div>
 
             <div className={style.view_block_main_information_item}>
-              <div className={style.view_block_main_information_item_head}>Payment Method</div>
+              <div className={style.view_block_main_information_item_head}>{t("Payment Method")}</div>
               <div className={`${style.view_block_main_information_item_value} ${style.view_block_main_information_item_value_payment}`}>{paymentMethod}</div>
             </div>
           </div>
@@ -84,7 +86,7 @@ const OverviewItemView: React.FC<IQRCodeComponentProps> = (props) => {
           <div className={style.view_block_main_menu}>
             <div className={style.view_block_main_menu_head}>
               <div>Menu Orders</div>
-              <div className={style.view_block_main_menu_head_count}>{size.length} Menu</div>
+              <div className={style.view_block_main_menu_head_count}>{size.length} {t("Menu")}</div>
             </div>
 
             <div className={style.view_block_main_menu_container}>
@@ -142,7 +144,7 @@ const OverviewItemView: React.FC<IQRCodeComponentProps> = (props) => {
           <div className={`${style.view_block_actions_option} ${style.view_block_actions_print}`}
           onClick={handlePrint}
           >
-            <span>Print</span>
+            <span>{t("Print")}</span>
             <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4.8335 5.16634H11.1668V3.83301C11.1668 2.49967 10.6668 1.83301 9.16683 1.83301H6.8335C5.3335 1.83301 4.8335 2.49967 4.8335 3.83301V5.16634Z" stroke="white" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M10.6668 10.5V13.1667C10.6668 14.5 10.0002 15.1667 8.66683 15.1667H7.3335C6.00016 15.1667 5.3335 14.5 5.3335 13.1667V10.5H10.6668Z" stroke="white" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
@@ -161,7 +163,7 @@ const OverviewItemView: React.FC<IQRCodeComponentProps> = (props) => {
               <path d="M8.42676 3.86621C8.71342 5.70621 10.2068 7.11288 12.0601 7.29954" stroke="#1A1C1E" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M2.5 15.167H14.5" stroke="#1A1C1E" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-            <span>Edit</span>
+            <span>{t("Edit")}</span>
             </div>
           <div className={style.view_block_actions_option}
           onClick={() => setViewOpen("delete")}
@@ -173,7 +175,7 @@ const OverviewItemView: React.FC<IQRCodeComponentProps> = (props) => {
               <path d="M7.38672 11.5H9.60672" stroke="#AA3D5A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M6.8335 8.83301H10.1668" stroke="#AA3D5A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-            <span>Delete</span>
+            <span>{t("Delete")}</span>
           </div>
         </div>
 

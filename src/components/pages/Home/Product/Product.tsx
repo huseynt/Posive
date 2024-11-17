@@ -10,6 +10,7 @@ import { IGetProducts } from '../../../utils/API/types';
 import ProductsTableItem from '../../features/ProductsTableItem/ProductsTableItem';
 import ProductItemAdd from '../../features/ProductItemAdd/ProductItemAdd';
 import PageLoader from '../../../common/PageLoader/PageLoader';
+import { useTranslation } from 'react-i18next';
 
 interface IProduct {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -31,7 +32,7 @@ const Product = () => {
   const [productsNumber, setProductsNumber] = useState<number>(0);
   const [purchanes, setPurchanes] = useState<number>(0);
   // const [deleteAllOpen, setDeleteAllOpen] = useState<boolean>(false);
-
+  const {t} = useTranslation();
   
   // ------------------- get products ------------------------
   const {
@@ -71,7 +72,7 @@ const Product = () => {
 
       <div className={style.overflow}>
         <Helmet>
-          <title>Posive Product</title>
+          <title>{t("Posive Product")}</title>
           <meta name="description" content="Product" />
           <meta name="keywords" content="Posive" />
         </Helmet>
@@ -190,15 +191,15 @@ const Product = () => {
           {/* ------------------------------ up ----------------------------------------- */}
           <div className={style.main_up}>
             <div className={style.main_up_overview}>
-              <h3 className={style.main_up_overview_head}>Product</h3>
-              <p className={style.main_up_overview_date}>Let’s Manage your product</p>
+              <h3 className={style.main_up_overview_head}>{t("Product")}</h3>
+              <p className={style.main_up_overview_date}>{t("Let’s Manage your products")}</p>
             </div>
 
             <div className={style.main_up_actions}>
               <div className={style.main_up_actions_export}
               onClick={() => setViewAdd(true)}
               >
-                <p>Add new product +</p>
+                <p>{t("Add new product +")}</p>
               </div>
             </div>
           </div>
@@ -211,7 +212,7 @@ const Product = () => {
               style={{ animationDuration: "0.5s" }}
             >
               <div className={style.main_total_option_text}>
-                <p className={style.main_total_option_text_up}>Total Products Menu</p>
+                <p className={style.main_total_option_text_up}>{t("Total Products Menu")}</p>
                 <h3 className={style.main_total_option_text_head}>
                   {productsNumber ? productsNumber : 0}
                 </h3>
@@ -234,7 +235,7 @@ const Product = () => {
               style={{ animationDuration: "0.55s" }}
             >
               <div className={style.main_total_option_text}>
-                <p className={style.main_total_option_text_up}>Purchase Invoice </p>
+                <p className={style.main_total_option_text_up}>{t("Purchase Invoice")}</p>
                 <h3 className={style.main_total_option_text_head}>
                   {purchanes ? purchanes : 0}
                 </h3>
@@ -255,7 +256,7 @@ const Product = () => {
               style={{ animationDuration: "0.6s" }}
             >
               <div className={style.main_total_option_text}>
-                <p className={style.main_total_option_text_up}>Montly Income</p>
+                <p className={style.main_total_option_text_up}>{t("Montly Income")}</p>
                 <h3 className={style.main_total_option_text_head}>
                   ${monthlyIncome ? monthlyIncome.toFixed(2) : 0}
                 </h3>
@@ -294,7 +295,7 @@ const Product = () => {
             >
               {/* -------------------------- Products up -------------------------------- */}
               <div className={style.main_down_up}>
-                <p className={style.main_down_up_head}>Product List</p>
+                <p className={style.main_down_up_head}>{t("Product List")}</p>
                 <div className={style.main_down_up_actions}>
                   <div className={style.main_down_up_actions_search}>
                     {/* <SearchInput
@@ -367,7 +368,7 @@ const Product = () => {
 
                   {/* --------------------- setting ----------------------------------- */}
                   <div className={style.main_down_up_actions_setting}
-                  title="Sorting Date"
+                  title={t("Sorting Letters")}
                   >
                     <svg
                       width="18"
@@ -434,7 +435,7 @@ const Product = () => {
                       <button className={style.main_down_up_actions_setting_down_btn}
                       onClick={() => setAscend("ASC")}
                       style={{backgroundColor: ascend==="ASC" ? "#fdefd9" : ""}}
-                      title="Ascending Date"
+                      title={t("Ascending Letter")}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -450,7 +451,7 @@ const Product = () => {
                       <button className={style.main_down_up_actions_setting_down_btn}
                       onClick={() => setAscend("DESC")} 
                       style={{backgroundColor: ascend==="DESC" ? "#fdefd9" : ""}}
-                      title="Descending Date"
+                      title={t("Descending Letter")}
                       >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -477,15 +478,15 @@ const Product = () => {
                     <tr className={style.main_down_transactions_table_head_th}>
 
                       <th className={style.main_down_transactions_table_head_th_mobileDate}
-                      style={{paddingLeft: "12px"}}>Product Name</th>
-                      <th className={style.main_down_transactions_table_head_th_mobileDate}>Receipt No</th>
-                      <th className={style.main_down_transactions_table_head_th_desktop}>Order/day</th>
-                      <th className={style.main_down_transactions_table_head_th_desktop}>Category</th>
-                      <th className={style.main_down_transactions_table_head_th_desktop}>Price/unit</th>
-                      <th className={style.main_down_transactions_table_head_th_desktop}>Stock</th>
-                      <th className={style.main_down_transactions_table_head_th_desktop}>Tax</th>
-                      <th className={style.main_down_transactions_table_head_th_desktop}>Discount</th>
-                      <th className={style.main_down_transactions_table_head_th_mobileDate}>Action</th>
+                      style={{paddingLeft: "12px"}}>{t("Product Name")}</th>
+                      <th className={style.main_down_transactions_table_head_th_mobileDate}>{t("Receipt Number")}</th>
+                      <th className={style.main_down_transactions_table_head_th_desktop}>{t("Order/day")}</th>
+                      <th className={style.main_down_transactions_table_head_th_desktop}>{t("Category")}</th>
+                      <th className={style.main_down_transactions_table_head_th_desktop}>{t("Price/unit")}</th>
+                      <th className={style.main_down_transactions_table_head_th_desktop}>{t("Stock")}</th>
+                      <th className={style.main_down_transactions_table_head_th_desktop}>{t("Tax")}</th>
+                      <th className={style.main_down_transactions_table_head_th_desktop}>{t("Discount")}</th>
+                      <th className={style.main_down_transactions_table_head_th_mobileDate}>{t("Action")}</th>
                     </tr>
                   </thead>
 
@@ -650,7 +651,7 @@ const Product = () => {
                 <div className={style.main_down_pagination_itemperpage}>
                     
                     <div className={style.main_down_pagination_itemperpage_info}>
-                      Showing {page === 1 ? 1 : page * itemperpage - itemperpage + 1} to {page * itemperpage > allDataCount ? allDataCount : page * itemperpage} of {allDataCount} entries
+                      {t("Showing")} {page === 1 ? 1 : page * itemperpage - itemperpage + 1} {t("to")} {page * itemperpage > allDataCount ? allDataCount : page * itemperpage} {t("of")} {allDataCount} {t("entries")}
                     </div>
                     
                     <div className={style.main_down_pagination_itemperpage_action}>
@@ -661,9 +662,9 @@ const Product = () => {
                         }
                         value={itemperpage}
                       >
-                        <option value="8">Show 8</option>
-                        <option value="10">Show 10</option>
-                        <option value="20">Show 20</option>
+                        <option value="8">{t("Show")} 8</option>
+                        <option value="10">{t("Show")} 10</option>
+                        <option value="20">{t("Show")} 20</option>
                       </select>
                     </div>
 

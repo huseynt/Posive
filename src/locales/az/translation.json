@@ -160,7 +160,167 @@
 
 
 
-    "Welcome to our POS (Point of Sale) Dashboard, a powerful tool designed to revolutionize the way you manage your business transactions. Our intuitive interface provides real-time insights, customizable reports, and seamless integration with your existing POS system, empowering you to make informed decisions and drive business growth. Whether you're a small business owner or a large enterprise, our POS Dashboard is tailored to meet your unique needs.": "POS (Satış Nöqtəsi) İdarə Panelinə xoş gəlmisiniz, biznes əməliyyatlarınızı idarə etmək üçün yaradılmış güclü bir alətdir. Bizim intuativ interfeysimiz sizə anında görüşlər, tənzimlənə bilən hesabatlar və mövcud POS sisteminizlə səmərəli inteqrasiya təmin edir, sizə məlumatlı qərarlar vermək və biznesinizi inkişaf etdirmək imkanı verir. Kiçik biznes sahibi və ya böyük bir şirkət olun, bizim POS İdarə Panelimiz sizin unikal ehtiyaclarınıza cavab verəcək şəkildə hazırlanmışdır."
+    "Welcome to our POS (Point of Sale) Dashboard, a powerful tool designed to revolutionize the way you manage your business transactions. Our intuitive interface provides real-time insights, customizable reports, and seamless integration with your existing POS system, empowering you to make informed decisions and drive business growth. Whether you're a small business owner or a large enterprise, our POS Dashboard is tailored to meet your unique needs.": "POS (Satış Nöqtəsi) İdarə Panelinə xoş gəlmisiniz, biznes əməliyyatlarınızı idarə etmək üçün yaradılmış güclü bir alətdir. Bizim intuativ interfeysimiz sizə anında görüşlər, tənzimlənə bilən hesabatlar və mövcud POS sisteminizlə səmərəli inteqrasiya təmin edir, sizə məlumatlı qərarlar vermək və biznesinizi inkişaf etdirmək imkanı verir. Kiçik biznes sahibi və ya böyük bir şirkət olun, bizim POS İdarə Panelimiz sizin unikal ehtiyaclarınıza cavab verəcək şəkildə hazırlanmışdır.",
 
 
+
+
+    "POS Dashboard": "POS İdarə Paneli",
+    "Main Course": "Ana yemək",
+    "Rice Bowl": "Düyü mənşəli",
+    "Fast Food": "Hazır yemək",
+    "Healthy Food": "Sağlam qida",
+    "Continue": "Davam et",
+    "Current Order": "Cari sifariş",
+    "Copy Current Order ID": "Cari sifarişin ID-ni kopyalayın",
+    "Where will you eat :": "Harada yemək yeyəcəksiniz :",
+    "Dine in": "Yerində",
+    "Take away": "Götürmək",
+    "Table :": "Masa :",
+    "Select Table": "Masa seçin",
+    "Your Order :": "Sifarişiniz :",
+    "Your order is empty": "Sifarişiniz boşdur",
+    "Subtotal": "Toplam",
+    "Service Tax": "Xidmət Vergisi",
+    "Total Payment": "Ümumi ödəniş",
+    "Payment Method :": "Ödəniş üsulu :",
+    "Master Card": "Master Kart",
+    "Scan Code": "Kodu skan edin",
+    "Make Order": "Sifariş verin",
+    "Customer Name": "Müştəri adı",
+    "Receipt ID :": "Qəbzin ID-si :",
+    "Discount": "Endirim",
+    "Stock :": "Stok :",
+    "Price :": "Qiymət :",
+    "Back to Shopping": "Alış-verişə geri dön",
+    "Choose Table": "Masa seçin",
+    "Available": "Boş",
+    "Available Soon": "Tezliklə boş olacaq",
+    "Filled": "Doludur",
+    "Selected Table": "Seçilmiş masa",
+    "Cancel": "İmtina et",
+    "MasterCard Payment": "MasterCard Ödənişi",
+    "CARD NUMBER": "KART NÖMRƏSİ",
+    "CARD HOLDER": "KART SAHİBİ",
+    "CARD DATE": "BİTMƏ TARİXİ",
+    "CARD CVV": "KART CVV",
+    "Verify your card with the code sent to your email address.": "Kartınızı e-poçt ünvanınıza göndərilən kodla təsdiqləyin.",
+    "Verify": "Təsdiqlə",
+    "Verify Payment": "Ödənişi təsdiqlə",
+    "VERIFY CODE": "KODU TƏSDİQLƏ",
+    "Pay": "Ödə",
+    "name surname": "ad soyad",
+    "NAME SURNAME": "AD SOYAD",
+    "MM/YY": "AA/YY",
+    "Scan QR Code": "QR Kodunu skan edin",
+    "Waiting for payment from customers": "Müştərilərdən ödəniş gözlənilir",
+    "or": "və ya",
+    "Manualy enter the code below": "Aşağıdakı kodu əl ilə daxil edin",
+    "Change Method": "Metodu dəyişdirin",
+    "Send QR": "QR Göndər",
+    "Copied to clipboard": "Klipborda kopyalanmışdır",
+
+
+
+    "Posive Overview": "Posive Ümumi Baxış",
+    "Jan": "Yan",
+    "en-US": "en-US",
+    "Export": "İxrac et",
+    "This week": "Bu həftə",
+    "This month": "Bu ay",
+    "This year": "Bu il",
+    "All time": "Bütün",
+    "Total Sales": "Ümumi Satışlar",
+    "Total Customers": "Ümumi Müştərilər",
+    "Total Orders": "Ümumi Sifarişlər",
+    "Total Tips": "Ümumi Bəxşişlər",
+    "Recent Transactions": "Son əməliyyatlar",
+    "Sorting Date": "Sıralama tarixi",
+    "Ascending Date": "Artan tarix",
+    "Descending Date": "Azalan tarix",
+    "Receipt No": "Qəbz №",
+    "Menu": "Menyu",
+    "Collected/Cashier": "Toplanan/Kassir",
+    "Payment method": "Ödəniş üsulu",
+    "Action": "Əməliyyat",
+    "Delete Transactions ?": "Əməliyyatlar silinsin?",
+    "Are you sure you want to delete Transactions ?": "Əməliyyatları silmək istədiyinizə əminsiniz?",
+    "Edit Details": "Ətraflıları düzəldin",
+    "Order ID": "Sifariş ID",
+    "Receipt Number": "Qəbz №",
+    "Collected By": "Toplayan",
+    "Date & Time": "Tarix və Saat",
+    "Payment Method": "Ödəniş üsulu",
+    "Select Payment Method": "Ödəniş üsulunu seçin",
+    "Menu Orders": "Menyu Sifarişləri",
+    "Details Transactions": "Ətraflı əməliyyatlar",
+    "Print": "Çap et",
+    "Edit": "Düzəldin",
+    "Delete Transaction details ?": "Əməliyyat detalları silinsin?",
+    "Are you sure you want to delete Transaction details ?": "Əməliyyat detallarını silmək istədiyinizə əminsiniz?",
+
+
+
+    "Posive Product": "Posive Məhsul",
+    "Let’s Manage your products": "Məhsullarınızı idarə edin",
+    "Add new product +": "Yeni məhsul əlavə edin +",
+    "Total Products Menu": "Ümumi Məhsullar Menyusu",
+    "Purchase Invoice": "Alış fakturası",
+    "Montly Income": "Aylıq gəlir",
+    "Product List": "Məhsul siyahısı",
+    "Ascending Letter": "Artan hərf",
+    "Descending Letter": "Azalan hərf",
+    "Sorting Letters": "Hərfləri sıralama",
+    "Product Name": "Məhsul adı",
+    "Order/day": "Sifariş/gün",
+    "Category": "Kateqoriya",
+    "Price/unit": "Qiymət/miqdar",
+    "Stock": "Stok",
+    "Tax": "Vergi",
+    "Edit Product Details": "Məhsul detallarını düzəldin",
+    "Enter product name": "Məhsul adını daxil edin",
+    "Input Tax": "Giriş vergisi",
+    "Price": "Qiymət",
+    "Product Image": "Məhsul şəkli",
+    "Drag and drop a file to upload": "Yükləmək üçün bir faylı sürükləyin və buraxın",
+    "Add product": "Əlavə edin",
+    "Details Product": "Ətraflı məhsul",
+    "Delete Product ?": "Məhsulu silinsin?",
+    "Are you sure you want to delete Product ?": "Məhsulu silmək istədiyinizə əminsiniz?",
+    "Income Statistics": "Gəlir Statistikası",
+    "1M": "1A",
+    "3M": "3R",
+    "6M": "6A",
+    "1Y": "1İ",
+    "Feb": "Fev",
+    "Mar": "Mar",
+    "Apr": "Apr",
+    "May": "May",
+    "Jun": "İyn",
+    "Jul": "İyl",
+    "Aug": "Avq",
+    "Sep": "Sen",
+    "Oct": "Okt",
+    "Nov": "Noy",
+    "Dec": "Dek",
+    "quarter": "rüb",
+    "half-year": "yarım il",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    "1": "1"
 }

@@ -729,3 +729,22 @@ export const createSaveNotifications = async (params: SaveNotificationsParams) =
         console.log(error);
     }
 }
+
+
+// google auth 
+// export const createGoogleAuth = async (data: any) => {
+//     const token = await getToken();
+//     const accessToken = token?.accessToken;
+//     const res = await fetch(`${base}/login/outh/code/google`, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Authorization': `Bearer ${accessToken}`
+//         },
+//         body: JSON.stringify(data)
+//     });
+//     if (res.ok) {
+//         return res.json();
+//     }
+//     return Promise.reject(res);
+// }

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import HomeLineChart from './Chart/Chart';
 import { useQuery } from '@tanstack/react-query';
 import { createGetStatistics } from '../../../utils/API/API';
+import { useTranslation } from 'react-i18next';
 
 interface IGetStatistics {
     incomes: number[],
@@ -22,11 +23,13 @@ interface IChartComponenrtProps {
 const ChartComponent: React.FC<IChartComponenrtProps> = (props) => {
     const {setMonthlyIncome, setProductsNumber, setPurchanes} = props;
     const today = new Date()
+    const {t} = useTranslation();
     const [selectedYear, setSelectedYear] = useState<string>(`${today.getFullYear()}`);
     const [selectedPeriod, setSelectedPeriod] = useState<string>('1Y');
     // const [firstItem, setFirstItem] = useState<string>('');
-    const [selectedMonth, setSelectedMonth] = useState<string>('jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec');
-
+    const [selectedMonth, setSelectedMonth] = useState<string>(
+        `${t("Jan")}, ${t("Feb")}, ${t("Mar")}, ${t("Apr")}, ${t("May")}, ${t("Jun")}, ${t("Jul")}, ${t("Aug")}, ${t("Sep")}, ${t("Oct")}, ${t("Nov")}, ${t("Dec")}`
+    );
 
     // ------------------- get orders ------------------------
     const {
@@ -86,7 +89,7 @@ const ChartComponent: React.FC<IChartComponenrtProps> = (props) => {
     return (
         <div className={style.chartComp}>
             <div className={style.chartComp_up}>
-                <div className={style.chartComp_up_head}>Income Statistics</div>
+                <div className={style.chartComp_up_head}>{t("Income Statistics")}</div>
 
                 <div className={style.chartComp_up_actions}>
                     <div className={style.chartComp_up_actions_year}>
@@ -115,19 +118,19 @@ const ChartComponent: React.FC<IChartComponenrtProps> = (props) => {
                         style={{backgroundColor: selectedPeriod==="1M" ? "#fff" : "",
                             color: selectedPeriod==="1M" ? "#000" : ""}}
                         title="Select a month from the dropdown list"
-                        onClick={() => setSelectedPeriod("1M")}>1M</div>
+                        >{t("1M")}</div>
                         
                         <div className={`${style.chartComp_up_actions_period_option} ${style.chartComp_up_actions_period_option_three}`}
                         style={{backgroundColor: selectedPeriod==="3M" ? "#fff" : "",
                             color: selectedPeriod==="3M" ? "#000" : ""}}
                         title='Select a quarter from the dropdown list'
-                        onClick={() => setSelectedPeriod("3M")}>3M</div>
+                        >{t("3M")}</div>
 
                         <div className={`${style.chartComp_up_actions_period_option} ${style.chartComp_up_actions_period_option_six}`}
                         style={{backgroundColor: selectedPeriod==="6M" ? "#fff" : "",
                             color: selectedPeriod==="6M" ? "#000" : ""}}
                         title='Select a half-year from the dropdown list'
-                        onClick={() => setSelectedPeriod("6M")}>6M</div>
+                        >{t("6M")}</div>
 
                         <div className={style.chartComp_up_actions_period_option} 
                         style={{backgroundColor: selectedPeriod==="1Y" ? "#fff" : "",
@@ -135,47 +138,47 @@ const ChartComponent: React.FC<IChartComponenrtProps> = (props) => {
                         onClick={() => {
                             setSelectedPeriod("1Y") 
                             setSelectedMonth("Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec")
-                        }}>1Y</div>
+                        }}>{t("1Y")}</div>
 
 
                         <div className={style.chartComp_up_actions_period_mDown} 
                         onClick={() => setSelectedPeriod("1M")}>
                             <div className={style.chartComp_up_actions_period_mDown_option}
                             onClick={() => setSelectedMonth("Jan")}
-                            >Jun</div>
+                            >{t("Jan")}</div>
                             <div className={style.chartComp_up_actions_period_mDown_option}
                             onClick={() => setSelectedMonth("Feb")}
-                            >Feb</div>
+                            >{t("Feb")}</div>
                             <div className={style.chartComp_up_actions_period_mDown_option}
                             onClick={() => setSelectedMonth("Mar")}
-                            >Mar</div>
+                            >{t("Mar")}</div>
                             <div className={style.chartComp_up_actions_period_mDown_option}
                             onClick={() => setSelectedMonth("Apr")}
-                            >Apr</div>
+                            >{t("Apr")}</div>
                             <div className={style.chartComp_up_actions_period_mDown_option}
                             onClick={() => setSelectedMonth("May")}
-                            >May</div>
+                            >{t("May")}</div>
                             <div className={style.chartComp_up_actions_period_mDown_option}
                             onClick={() => setSelectedMonth("Jun")}
-                            >Jun</div>
+                            >{t("Jun")}</div>
                             <div className={style.chartComp_up_actions_period_mDown_option}
                             onClick={() => setSelectedMonth("Jul")}
-                            >Jul</div>
+                            >{t("Jul")}</div>
                             <div className={style.chartComp_up_actions_period_mDown_option}
                             onClick={() => setSelectedMonth("Aug")}
-                            >Aug</div>
+                            >{t("Aug")}</div>
                             <div className={style.chartComp_up_actions_period_mDown_option}
                             onClick={() => setSelectedMonth("Sep")}
-                            >Sep</div>
+                            >{t("Sep")}</div>
                             <div className={style.chartComp_up_actions_period_mDown_option}
                             onClick={() => setSelectedMonth("Oct")}
-                            >Oct</div>
+                            >{t("Oct")}</div>
                             <div className={style.chartComp_up_actions_period_mDown_option}
                             onClick={() => setSelectedMonth("Nov")}
-                            >Nov</div>
+                            >{t("Nov")}</div>
                             <div className={style.chartComp_up_actions_period_mDown_option}
                             onClick={() => setSelectedMonth("Dec")}
-                            >Dec</div>
+                            >{t("Dec")}</div>
                         </div>
 
                         <div className={style.chartComp_up_actions_period_threeDown}
@@ -183,23 +186,23 @@ const ChartComponent: React.FC<IChartComponenrtProps> = (props) => {
                         >
                             <div className={style.chartComp_up_actions_period_threeDown_option}
                             onClick={() => setSelectedMonth("Jan, Feb, Mar, Apr")}
-                            >I quarter</div>
+                            >I {t("quarter")}</div>
                             <div className={style.chartComp_up_actions_period_threeDown_option}
                             onClick={() => setSelectedMonth("May, Jun, Jul, Aug")}
-                            >II quarter</div>
+                            >II {t("quarter")}</div>
                             <div className={style.chartComp_up_actions_period_threeDown_option}
                             onClick={() => setSelectedMonth("Sep, Oct, Nov, Dec")}
-                            >III quarter</div>
+                            >III {t("quarter")}</div>
                         </div>
 
                         <div className={style.chartComp_up_actions_period_sixDown}
                         onClick={() => setSelectedPeriod("6M")}>
                             <div className={style.chartComp_up_actions_period_sixDown_option}
                             onClick={() => setSelectedMonth("Jan, Feb, Mar, Apr, May, Jun")}
-                            >I half-year</div>
+                            >I {t("half-year")}</div>
                             <div className={style.chartComp_up_actions_period_sixDown_option}
                             onClick={() => setSelectedMonth("Jul, Aug, Sep, Oct, Nov, Dec")}
-                            >II half-year</div>
+                            >II {t("half-year")}</div>
                         </div>
                         
 
@@ -210,7 +213,8 @@ const ChartComponent: React.FC<IChartComponenrtProps> = (props) => {
 
             <div className={style.chartComp_chart}>
                 <HomeLineChart data={{
-                    labels: selectedMonth.split(', ').length == 1 ? Array.from({ length: days(selectedMonth) }, (_, i) => String(i + 1)): selectedMonth.split(', '),
+                    labels: selectedMonth.split(', ').length == 1 ? Array.from({ length: days(selectedMonth) }, (_, i) => String(i + 1)): 
+                    selectedMonth.split(', ').map((month) => t(month)),
                     datasets: [{
                         label: 'Total Price',
                         data:  StatisticsData?.incomes || [],

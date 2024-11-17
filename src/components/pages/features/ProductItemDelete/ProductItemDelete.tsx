@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createDeleteProduct } from "../../../utils/API/API";
 import style from "./productitemdelete.module.scss";
 import Loader from "../../../common/Loader/Loader";
+import { useTranslation } from "react-i18next";
 
 interface IQRCodeComponentProps {
   setViewOpen: React.Dispatch<React.SetStateAction<string>>;
@@ -12,6 +13,7 @@ interface IQRCodeComponentProps {
 
 const ProductItemDelete: React.FC<IQRCodeComponentProps> = (props) => {
   const { setViewOpen, receiptNo , requestNotify } = props;
+  const {t} = useTranslation();
 
   // ------------------- delete user ------------------------
   const queryClient = useQueryClient();
@@ -49,11 +51,11 @@ const ProductItemDelete: React.FC<IQRCodeComponentProps> = (props) => {
 
       <div className={style.view_block}>
         <div className={style.view_block_head}>
-          <h3>Delete Product ?</h3>
+          <h3>{t("Delete Product ?")}</h3>
         </div>
         
         <div className={style.view_block_main}>
-          <p>Are you sure you want to delete Product?</p>
+          <p>{t("Are you sure you want to delete Product ?")}</p>
         </div>
 
         <div className={style.view_block_actions}>
@@ -63,12 +65,12 @@ const ProductItemDelete: React.FC<IQRCodeComponentProps> = (props) => {
             { isDeleting ? 
             <Loader/>
             :
-            <span>Delete</span>}
+            <span>{t("Delete")}</span>}
           </div>
 
           <div className={style.view_block_actions_option}
           onClick={() => setViewOpen("")}>
-            <span>Cancel</span>
+            <span>{t("Cancel")}</span>
             </div>
         </div>
 

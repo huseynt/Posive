@@ -5,6 +5,7 @@ import style from './masterCard.module.scss';
 import { useMutation } from '@tanstack/react-query';
 import { createPostCardData, createVerifyCardData } from '../../../utils/API/API';
 import Loader from '../../../common/Loader/Loader';
+import { useTranslation } from 'react-i18next';
 
 
 interface MasterCardProps {
@@ -16,6 +17,7 @@ interface MasterCardProps {
 const MasterCard: React.FC<MasterCardProps> = (props) => {
     const { setMastercard, requestNotify, handlePostOrder } = props;
     // const dispatch = useDispatch();
+    const {t} = useTranslation();
     const [section, setSection] = useState("card");
     const [flipped, setFlipped] = useState(false);
     const [verifyCode, setVerifyCode] = useState("");
@@ -144,13 +146,13 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
                 {
                     section === "card" ? (
                         <>
-                            <div className={style.masterCard_main_form_title}>MasterCard Payment</div>
+                            <div className={style.masterCard_main_form_title}>{t("MasterCard Payment")}</div>
                 
                             <div className={style.masterCard_main_form_item}
                             onFocus={() => setFlipped(false)}
                             >
                                 <label className={style.masterCard_main_form_item_label} 
-                                htmlFor="number">CARD NUMBER</label>
+                                htmlFor="number">{t("CARD NUMBER")}</label>
 
                                 <input  className={`${style.masterCard_main_form_item_input} ${style.cardNumber}`} 
                                 type="text" 
@@ -164,7 +166,7 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
                             onFocus={() => setFlipped(false)}
                             >
                                 <label className={style.masterCard_main_form_item_label} 
-                                htmlFor="name">CARD HOLDER</label>
+                                htmlFor="name">{t("CARD HOLDER")}</label>
 
                                 <input className={`${style.masterCard_main_form_item_input} ${style.cvv}`} 
                                 type="text" 
@@ -172,7 +174,7 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
                                 id="name" 
                                 onChange={handleChange}
                                 value={data.name}
-                                placeholder="name surname" />
+                                placeholder={t("name surname")} />
                             </div>
                             
                             <div className={style.masterCard_main_form_detail}>
@@ -180,7 +182,7 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
                                     onFocus={() => setFlipped(false)}
                                     >
                                         <label className={style.masterCard_main_form_item_label} 
-                                        htmlFor="date">CARD DATE</label>
+                                        htmlFor="date">{t("CARD DATE")}</label>
 
                                         <input className={`${style.masterCard_main_form_item_input} ${style.cvv}`} 
                                         type="text" 
@@ -188,13 +190,13 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
                                         id="date" 
                                         onChange={handleChange}
                                         value={data.date}
-                                        placeholder="date" />
+                                        placeholder={t("MM/YY")} />
                                     </div>
                                     <div className={style.masterCard_main_form_item}
                                     onFocus={() => setFlipped(true)}
                                     >
                                         <label className={style.masterCard_main_form_item_label} 
-                                        htmlFor="cvv">CARD CVV</label>
+                                        htmlFor="cvv">{t("CARD CVV")}</label>
 
                                         <input className={`${style.masterCard_main_form_item_input} ${style.cvv}`} 
                                         type="text" 
@@ -206,12 +208,12 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
                                 </div>
                             </div>
 
-                            <p className={style.masterCard_main_form_info}>verify your card with the code sent to your email address.</p>
+                            <p className={style.masterCard_main_form_info}>{t("Verify your card with the code sent to your email address.")}</p>
 
                             <div className={style.masterCard_main_form_btn}
                             onClick={handlePostCardData}
                             >
-                                {isPostCardDataPending ? <Loader/> : "Verify" }
+                                {isPostCardDataPending ? <Loader/> : t("Verify") }
                             </div>
                         </>
                     ) : (
@@ -225,11 +227,11 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
                                 </svg>
                             </div>
 
-                            <div className={style.masterCard_main_form_title}>Verify Payment</div>
+                            <div className={style.masterCard_main_form_title}>{t("Verify Payment")}</div>
                 
                             <div className={style.masterCard_main_form_item}>
                                 <label className={style.masterCard_main_form_item_label} 
-                                htmlFor="verifyCode">VERIFY CODE</label>
+                                htmlFor="verifyCode">{t("VERIFY CODE")}</label>
 
                                 <input  className={`${style.masterCard_main_form_item_input} ${style.cardNumber}`} 
                                 type="text" 
@@ -240,12 +242,12 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
                                 placeholder="*****" />
                             </div>
                             
-                            <p className={style.masterCard_main_form_info}>verify your card with the code sent to your email address.</p>
+                            <p className={style.masterCard_main_form_info}>{t("Verify your card with the code sent to your email address.")}</p>
 
                             <div className={style.masterCard_main_form_btn}
                             onClick={handleVerify}
                             >
-                                {isVerifyCardDataPending ? <Loader/> : "Pay" }
+                                {isVerifyCardDataPending ? <Loader/> : t("Pay") }
                             </div>
                         </>
                     )
@@ -280,7 +282,7 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
                         
                         <div className={style.masterCard_main_container_card_front_number}>{data.number || "0000 0000 0000 0000"}</div>
                         <div className={style.masterCard_main_container_card_front_info}>
-                            <div className={style.masterCard_main_container_card_front_info_holder}>{data.name || "NAME SURNAME"}</div>
+                            <div className={style.masterCard_main_container_card_front_info_holder}>{data.name || t("NAME SURNAME")}</div>
                             <div className={style.masterCard_main_container_card_front_info_date}>{data.date || "MM/YY"}</div>
                         </div>
                     </div>

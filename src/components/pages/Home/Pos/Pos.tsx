@@ -18,6 +18,7 @@ import { IGetMeals } from "../../../utils/API/types";
 import { useDispatch, useSelector } from "react-redux";
 import { addMeal, resetState } from "../../../redux/slice/mealSlice";
 import PageLoader from "../../../common/PageLoader/PageLoader";
+import { useTranslation } from "react-i18next";
 
 
 
@@ -35,7 +36,7 @@ const Main= () => {
   const [category, setCategory] = useState<string>("");
   // const [mealsFiltered, setMealsFiltered] = useState<IGetMeals[]>([]);
   const [mobileSearch, setMobileSearch] = useState<boolean>(false);
-
+  const { t } = useTranslation();
 
 
   // ------------------------- Redux -----------------------------
@@ -94,7 +95,7 @@ const Main= () => {
 
       <Helmet>
         <title>Posive POS</title>
-        <meta name="description" content="POS Dashboard" />
+        <meta name="description" content={t("POS Dashboard")} />
         <meta name="keywords" content="Posive" />
       </Helmet>
 
@@ -409,7 +410,7 @@ const Main= () => {
                   color: category === "Main Course" ? "white" : "",
                 }}
               >
-                Main Course
+                {t("Main Course")}
               </h4>
               <p
                 style={{
@@ -449,7 +450,7 @@ const Main= () => {
               <h4
                 style={{ color: category === "Rice Bowl" ? "white" : "" }}
               >
-                Rice Bowl
+                {t("Rice Bowl")}
               </h4>
               <p
                 style={{ color: category === "Rice Bowl" ? "white" : "" }}
@@ -493,7 +494,7 @@ const Main= () => {
               <h4
                 style={{ color: category === "Fast Food" ? "white" : "" }}
               >
-                Fast food
+                {t("Fast Food")}
               </h4>
               <p
                 style={{ color: category === "Fast Food" ? "white" : "" }}
@@ -535,7 +536,7 @@ const Main= () => {
                   color: category === "Healthy Food" ? "white" : "",
                 }}
               >
-                Healthy food
+                {t("Healthy Food")}
               </h4>
               <p
                 style={{
@@ -591,7 +592,9 @@ const Main= () => {
 
         {/* ------------------------ for mobile continue ------------------ */}
         <div className={style.main_continue} onClick={() => setBag(!bag)}>
-          <button className={style.main_continue_btn}>Continue</button>
+          <button className={style.main_continue_btn}>
+            {t("Continue")}
+          </button>
         </div>
       </div>
     </div>

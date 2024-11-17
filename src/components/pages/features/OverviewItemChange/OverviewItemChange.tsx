@@ -4,6 +4,7 @@ import style from "./overviewitemchange.module.scss";
 import { createSaveOrders } from "../../../utils/API/API";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Loader from "../../../common/Loader/Loader";
+import { useTranslation } from "react-i18next";
 
 interface IQRCodeComponentProps {
   setViewOpen: React.Dispatch<React.SetStateAction<string>>;
@@ -27,7 +28,7 @@ interface IQRCodeComponentProps {
 
 const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
   const { setViewOpen, menus, size, paymentMethod, orderDate, cashier, orderId, cashiers, price, requestNotify } = props;
-
+  const {t} = useTranslation();
 
   const ordersRecipeNumbers = menus?.map((m) => m.receiptNo).filter((receiptNo): receiptNo is string => receiptNo !== null && receiptNo !== undefined)
   const [productCounts, setProductCounts] = useState<{ [key: string]: number }>(
@@ -118,7 +119,7 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
 
       <div className={style.view_block}>
         <div className={style.view_block_head}>
-          <h3>Edit Details</h3>
+          <h3>{t("Edit Details")}</h3>
           <div className={style.view_block_head_exit}
           onClick={() => setViewOpen("")}
           >
@@ -133,21 +134,21 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
 
           <div className={style.view_block_main_information}>
             <div className={style.view_block_main_information_item}>
-              <div className={style.view_block_main_information_item_head}>Order ID</div>
+              <div className={style.view_block_main_information_item_head}>{t("Order ID")}</div>
               <div className={style.view_block_main_information_item_value}
               style={{backgroundColor: "#edf1f3"}}
               >{orderId}</div>
             </div>
 
             <div className={style.view_block_main_information_item}>
-              <div className={style.view_block_main_information_item_head}>Receipt Number</div>
+              <div className={style.view_block_main_information_item_head}>{t("Receipt Number")}</div>
               <div className={style.view_block_main_information_item_value}
               style={{backgroundColor: "#edf1f3"}}
               >{menus.map((m) => m.receiptNo).join('').slice(1,10)}</div>
             </div>
 
             <div className={style.view_block_main_information_item}>
-              <div className={style.view_block_main_information_item_head}>Collected By</div>
+              <div className={style.view_block_main_information_item_head}>{t("Collected By")}</div>
               <div className={`${style.view_block_main_information_item_value} ${style.view_block_main_information_item_value_payment}`}>
                 <div className={`${style.view_block_main_information_item_value_payment_head}`}>
                     {data.userName}
@@ -165,7 +166,7 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
             </div>
 
             <div className={style.view_block_main_information_item}>
-              <div className={style.view_block_main_information_item_head}>Date & Time</div>
+              <div className={style.view_block_main_information_item_head}>{t("Date & Time")}</div>
               <div className={style.view_block_main_information_item_value}>
                 <input style={{outline:"none", border: "none"}} type="date" value={formattedDate || ""} 
                 onChange={(e) => setData({ ...data, orderDate: 
@@ -176,10 +177,14 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
             </div>
 
             <div className={style.view_block_main_information_item}>
-              <div className={style.view_block_main_information_item_head}>Payment Method</div>
+              <div className={style.view_block_main_information_item_head}>{t("Payment Method")}</div>
               <div className={`${style.view_block_main_information_item_value} ${style.view_block_main_information_item_value_payment}`}>
                 <div className={`${style.view_block_main_information_item_value_payment_head}`}>
-                    {paymentMethod}
+                    {
+                      data.paymentMethod === "Master Card" ? t("Master Card") :
+                      data.paymentMethod === "Paypal" ? "Paypal" :
+                      data.paymentMethod === "QR-Code" ? "QR-Code" : t("Select Payment Method")
+                    }
                     <svg width="14" height="7" viewBox="0 0 14 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12.28 0.966797L7.9333 5.31346C7.41997 5.8268 6.57997 5.8268 6.06664 5.31346L1.71997 0.966797" stroke="#1A1C1E" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
@@ -188,7 +193,7 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
                 <div className={`${style.view_block_main_information_item_value_payment_down}`}>
                   <div onClick={() => setData({ ...data, paymentMethod: "Master Card" })}
                     style={{backgroundColor: data.paymentMethod == "Master Card" ? "#edf1d3": ""}}
-                    >Master Card</div>
+                    >{t("Master Card")}</div>
                   <div onClick={() => setData({ ...data, paymentMethod: "Paypal" })}
                   style={{backgroundColor: data.paymentMethod == "Paypal" ? "#edf1d3": ""}}
                     >Paypal</div>
@@ -204,8 +209,8 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
 
           <div className={style.view_block_main_menu}>
             <div className={style.view_block_main_menu_head}>
-              <div>Menu Orders</div>
-              <div className={style.view_block_main_menu_head_count}>{size.length} Menu</div>
+              <div>{t("Menu Orders")}</div>
+              <div className={style.view_block_main_menu_head_count}>{size.length} {t("Menu")}</div>
             </div>
 
             <div className={style.view_block_main_menu_container}>
@@ -275,7 +280,7 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
             {isSaveOrders ? 
             <Loader/>
             : 
-            <span>Save</span>
+            <span>{t("Save")}</span>
             }
           </div>
 
@@ -283,7 +288,7 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
           style={{width: "100px"}}
           onClick={()=> setViewOpen("")}
           >
-            <span>Cancel</span>
+            <span>{t("Cancel")}</span>
           </div>
         </div>
 
