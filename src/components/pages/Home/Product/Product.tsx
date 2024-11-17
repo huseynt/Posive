@@ -11,6 +11,7 @@ import ProductsTableItem from '../../features/ProductsTableItem/ProductsTableIte
 import ProductItemAdd from '../../features/ProductItemAdd/ProductItemAdd';
 import PageLoader from '../../../common/PageLoader/PageLoader';
 import { useTranslation } from 'react-i18next';
+import Notify from '../../features/Notify/Notify';
 
 interface IProduct {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -57,6 +58,23 @@ const Product = () => {
 
 
 
+    //  ----------------------------- for notify ----------------------------
+    const [notify, setNotify] = useState<boolean>(false);
+    const [notifyPurpose, setNotifyPurpose] = useState<string>("");
+    const [description, setDescription] = useState<string>("");
+    const requestNotify = (purpose: string, description: string | undefined) => {
+      setNotifyPurpose(purpose);
+      setDescription(description ? description : "");
+      setNotify(true);
+      const timeout = setTimeout(() => {
+        setNotify(false);
+      }, 1800);
+      return () => {
+        clearTimeout(timeout);
+      };
+    };
+    //  ----------------------------- for notify ----------------------------
+  
 
 
 
@@ -66,9 +84,13 @@ const Product = () => {
 
   return (
     <>
-      { viewAdd && <ProductItemAdd setViewAdd={setViewAdd}/>}
+      { viewAdd && <ProductItemAdd 
+      requestNotify={requestNotify}
+      setViewAdd={setViewAdd}/>}
 
       {isProductsPending && <PageLoader /> }
+
+      <Notify notify={notify} purpose={notifyPurpose} describtion={description}/>
 
       <div className={style.overflow}>
         <Helmet>

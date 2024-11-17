@@ -305,9 +305,10 @@
     "Dec": "Dek",
     "quarter": "rüb",
     "half-year": "yarım il",
-
-
-
+    "Product saved successfully": "Məhsul uğurla yadda saxlanıldı",
+    "Product save failed": "Məhsul yadda saxlanmadı",
+    "Order deleted successfully": "Sifariş uğurla silindi",
+    "Error deleting order": "Sifariş silinmədi",
 
 
 

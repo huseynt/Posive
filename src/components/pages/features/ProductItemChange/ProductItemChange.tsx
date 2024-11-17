@@ -4,6 +4,7 @@ import { uploadMealImage } from '../../../services/Firebase/Firebase'
 import { createChangeProduct } from "../../../utils/API/API";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import Loader from "../../../common/Loader/Loader";
 
 
 interface IQRCodeComponentProps {
@@ -38,7 +39,7 @@ interface IUpdateProduct {
 }
 
 const ProductItemChange: React.FC<IQRCodeComponentProps> = (props) => {
-  const { setViewOpen,  receiptNo, discount, tax, category, name, price, stock, imageUrl, description } = props;
+  const { requestNotify, setViewOpen,  receiptNo, discount, tax, category, name, price, stock, imageUrl, description } = props;
   const {t} = useTranslation();
 
   const [data, setData] = useState<IUpdateProduct>({
@@ -101,18 +102,18 @@ const ProductItemChange: React.FC<IQRCodeComponentProps> = (props) => {
   const queryClient = useQueryClient();
   const {
     mutate: ChangeProduct,
-    // isPending: isSaveOrders,
+    isPending: isSaveProductPending,
   } = useMutation({
     mutationFn: createChangeProduct,
     onSuccess: () => {
       console.log('Success');
       queryClient.invalidateQueries({queryKey: ["getProducts"]});
       setViewOpen("")
-      // requestNotify("done", "Order saved successfully");
+      requestNotify("done", t("Product saved successfully"));
     },
     onError: (error) => {
       console.log('Login error:', error);
-      // requestNotify("undone", "Order save failed");
+      requestNotify("undone", t("Product save failed"));
     },
   });
 
@@ -300,11 +301,11 @@ const ProductItemChange: React.FC<IQRCodeComponentProps> = (props) => {
           <div className={`${style.view_block_actions_option} ${style.view_block_actions_print}`}
           onClick={saveOrder}
           >
-            {/* {false ? 
-            // <Loader/>
-            :  */}
-            <span>{t("Update")}</span>
-            {/* } */}
+            {isSaveProductPending ? 
+              <Loader/>
+            : 
+              <span>{t("Update")}</span>
+            }
           </div>
 
           <div className={style.view_block_actions_option}

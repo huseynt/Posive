@@ -4,12 +4,13 @@ import { uploadMealImage } from '../../../services/Firebase/Firebase'
 import { createAddProduct } from "../../../utils/API/API";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import Loader from "../../../common/Loader/Loader";
 
 
 interface IProductItemAddComponentProps {
   setViewAdd: React.Dispatch<React.SetStateAction<boolean>>;
 
-  // requestNotify: (purpose: string, description: string | undefined) => void;
+  requestNotify: (purpose: string, description: string | undefined) => void;
 }
 
 interface IUpdateProduct {
@@ -26,7 +27,7 @@ interface IUpdateProduct {
 }
 
 const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
-  const { setViewAdd } = props;
+  const { setViewAdd, requestNotify } = props;
   const {t} = useTranslation();
 
   const [data, setData] = useState<IUpdateProduct>({
@@ -91,18 +92,18 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
   
   const {
     mutate: AddProduct,
-    // isPending: isSaveOrders,
+    isPending: isSaveProductPending,
   } = useMutation({
     mutationFn: createAddProduct,
     onSuccess: () => {
       console.log('Success');
       queryClient.invalidateQueries({queryKey: ["getProducts"]})
       setViewAdd(false);
-      // requestNotify("done", "Order saved successfully");
+      requestNotify("done", t("Product saved successfully"));
     },
     onError: (error) => {
       console.log('Login error:', error);
-      // requestNotify("undone", "Order save failed");
+      requestNotify("undone", t("Product save failed"));
     },
   });
 
@@ -290,11 +291,11 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
           <div className={`${style.view_block_actions_option} ${style.view_block_actions_print}`}
           onClick={saveOrder}
           >
-            {/* {false ? 
-            // <Loader/>
-            :  */}
+            {isSaveProductPending ? 
+            <Loader/>
+            : 
             <span>{t("Add product")}</span>
-            {/* } */}
+             }
           </div>
 
           <div className={style.view_block_actions_option}

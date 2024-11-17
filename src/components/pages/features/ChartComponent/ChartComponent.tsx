@@ -28,7 +28,7 @@ const ChartComponent: React.FC<IChartComponenrtProps> = (props) => {
     const [selectedPeriod, setSelectedPeriod] = useState<string>('1Y');
     // const [firstItem, setFirstItem] = useState<string>('');
     const [selectedMonth, setSelectedMonth] = useState<string>(
-        `${t("Jan")}, ${t("Feb")}, ${t("Mar")}, ${t("Apr")}, ${t("May")}, ${t("Jun")}, ${t("Jul")}, ${t("Aug")}, ${t("Sep")}, ${t("Oct")}, ${t("Nov")}, ${t("Dec")}`
+       "Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
     );
 
     // ------------------- get orders ------------------------
@@ -39,6 +39,10 @@ const ChartComponent: React.FC<IChartComponenrtProps> = (props) => {
         queryKey: ["getStatistics", { months: selectedMonth, year: selectedYear}],
         queryFn: () => createGetStatistics(selectedMonth, Number(selectedYear)),
     });
+
+    useEffect(() => {
+        console.log("StatisticsData", StatisticsData);
+    }, [StatisticsData]);
     
     useEffect(() => {
         if (StatisticsData && !isPending) {

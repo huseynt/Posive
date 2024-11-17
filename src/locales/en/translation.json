@@ -306,7 +306,10 @@
     "Dec": "Dec",
     "quarter": "quarter",
     "half-year": "half-year",
-
+    "Product saved successfully": "Product saved successfully",
+    "Product save failed": "Product save failed",
+    "Order deleted successfully": "Order deleted successfully",
+    "Error deleting order": "Error deleting order",
 
 
 
