@@ -4,7 +4,7 @@ import Meal from "../../features/Meal/Meal";
 import { useEffect } from "react";
 import { useState } from "react";
 // import { IMeal } from "../../../utils/interface/Meal";
-// import SearchInput from "../../features/SearchInput/SearchInput";
+import SearchInput from "../../features/SearchInput/SearchInput";
 
 import { Helmet } from "react-helmet";
 
@@ -34,8 +34,9 @@ interface MainProps {
 const Main= () => {
   const { bag, setBag, setToggleMenu, setNotification, notification } = useOutletContext<MainProps>();
   const [category, setCategory] = useState<string>("");
-  // const [mealsFiltered, setMealsFiltered] = useState<IGetMeals[]>([]);
+  const [mealsFiltered, setMealsFiltered] = useState<IGetMeals[]>([]);
   const [mobileSearch, setMobileSearch] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>("");
   const { t } = useTranslation();
 
 
@@ -64,8 +65,14 @@ const Main= () => {
     if (!isMealsLoading && getMealsData) {
       dispatch(resetState());
       getMealsData.forEach((meal) => dispatch(addMeal(meal)));
+      setMealsFiltered(getMealsData);
     }
   }, [getMealsData, isMealsLoading, dispatch]);
+  
+  useEffect(() => {
+    setCategory("");
+  }, [search]);
+
   
   // useEffect(() => {
   //   if (reduxMeals) {
@@ -109,9 +116,12 @@ const Main= () => {
 
           {/* ----------------------------------------- */}
           <div className={style.main_up_search}>
-            {/* <SearchInput meals={meals} 
+            <SearchInput meals={getMealsData? getMealsData : []} 
             setMealsFiltered={setMealsFiltered}
-            /> */}
+            category={category}
+            setSearch={setSearch}
+            search={search}
+            />
           </div>
 
 
@@ -371,9 +381,12 @@ const Main= () => {
             className={style.main_mobileUp_down}
             style={{ display: mobileSearch ? "flex" : "none" }}
           >
-            {/* <SearchInput meals={meals} 
+            <SearchInput meals={getMealsData? getMealsData : []} 
             setMealsFiltered={setMealsFiltered}
-            /> */}
+            category={category}
+            setSearch={setSearch}
+            search={search}
+            />
           </div>
         </div>
 
@@ -556,7 +569,7 @@ const Main= () => {
         <div className={style.main_meals}>
 
           {reduxMeals && reduxMeals.map((meal) => {
-            if (category === meal.category) {
+            if (category === meal.category && mealsFiltered.some(filteredMeal => filteredMeal.id === meal.id)) {
               return (
                 <Meal
                     key={`meal-${meal.id}`}
@@ -570,7 +583,7 @@ const Main= () => {
                   />
               );
             }
-            else if (category === "") {
+            else if (category === "" && mealsFiltered.some(filteredMeal => filteredMeal.id === meal.id)) {
               return (
                 <Meal
                     key={`meal-${meal.id}`}

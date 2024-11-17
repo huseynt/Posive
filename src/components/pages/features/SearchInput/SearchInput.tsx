@@ -2,27 +2,21 @@ import style from "./searchInput.module.scss";
 import { useEffect, useState } from "react";
 // import { IMeal } from "../../../utils/interface/Meal";
 import SearchItem from "../SearchItem/SearchItem";
+import { IGetMeals } from "../../../utils/API/types";
 
 interface ISearchInput {
-  meals: IMeal[];
-  setMealsFiltered: (meals: IMeal[]) => void;
-}
-
-interface IMeal { 
-  key?: string;
-  id?: string;
-  name: string;
+  meals: IGetMeals[];
+  setMealsFiltered: (meals: IGetMeals[]) => void;
   category: string;
-  imageUrl: string;
-  price: number;
-  description: string,
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
+  search: string;
 }
 
-const Searchİnput: React.FC<ISearchInput> = (props) => {
-  const { meals, setMealsFiltered } = props;
+const SearchInput: React.FC<ISearchInput> = (props) => {
+  const { meals, setMealsFiltered, category, setSearch, search } = props;
 
-  const [search, setSearch] = useState<string>("");
-  const [searchResult, setSearchResult] = useState<IMeal[]>([]);
+  
+  const [searchResult, setSearchResult] = useState<IGetMeals[]>([]);
 
   // ---------------------- search -----------------------------
   const searchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,20 +24,20 @@ const Searchİnput: React.FC<ISearchInput> = (props) => {
     if (search.length > 0) {
       setSearchResult(
         meals.filter((meal) =>
-          meal.name.toLowerCase().includes(search.toLowerCase())
+          meal.name?.toLowerCase().includes(search.toLowerCase())
         )
       );
     } else {
       setSearchResult([]);
     }
-    console.log(searchResult);
+    // console.log(searchResult);
   };
 
   const searchHandle = () => {
     if (searchResult.length > 0) {
       setMealsFiltered(searchResult);
     }
-    console.log(searchResult);
+    // console.log(searchResult);
     setSearch("");
     setSearchResult([]);
   };
@@ -66,6 +60,10 @@ const Searchİnput: React.FC<ISearchInput> = (props) => {
       setSearchResult([]);
     }
   }, [search.length]);
+
+  useEffect(() => {
+    setMealsFiltered(meals);
+  }, [category]);
 
 
   return (
@@ -117,7 +115,7 @@ const Searchİnput: React.FC<ISearchInput> = (props) => {
           {searchResult.map((meal) => (
             <SearchItem
               key={meal.id}
-              name={meal.name}
+              name={meal.name ?? ""}
               findHandle={findHandle}
             />
           ))}
@@ -127,4 +125,4 @@ const Searchİnput: React.FC<ISearchInput> = (props) => {
   );
 };
 
-export default Searchİnput;
+export default SearchInput;

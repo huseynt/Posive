@@ -280,6 +280,7 @@
         &:hover {
             transition: .2s ease-in-out;
             background-color: $light_bg_gray;
+            color: $black !important;
         }
     }
     &_registr {

@@ -66,6 +66,7 @@
     left: -1px;
     color: $light_m_gray;
     border-radius: 0 0 10px 10px;
+    z-index: 98;
 
     @include themed() {
       background-color: t($white) !important;
