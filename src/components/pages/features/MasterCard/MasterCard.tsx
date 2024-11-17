@@ -17,7 +17,7 @@ interface MasterCardProps {
 const MasterCard: React.FC<MasterCardProps> = (props) => {
     const { setMastercard, requestNotify, handlePostOrder } = props;
     const {t} = useTranslation();
-    const [section, setSection] = useState("verify");
+    const [section, setSection] = useState("card");
     const [flipped, setFlipped] = useState(false);
     const [verifyCode, setVerifyCode] = useState("");
     const [data, setData] = useState({

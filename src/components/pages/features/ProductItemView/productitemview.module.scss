@@ -166,7 +166,10 @@
                 justify-content: space-between;
                 row-gap: 15px;
                 padding-right: 15px;
-                border-right: 1px solid $gray;
+                
+                @include themed {
+                    border-right: 1px solid t(gray);
+                }
 
                 @include mobile {
                     // height: 390px;
@@ -210,9 +213,12 @@
                         width: 178px;
                         @extend %sm_b;
                         padding: 7px 27px;
-                        border: 1px solid $gray;
                         border-radius: 8px;
                         @extend %text_overflow;
+
+                        @include themed {
+                            border: 1px solid t(gray);
+                        }
 
                         @include mobile {
                             width: 100%;
@@ -249,8 +255,11 @@
                     justify-content: space-between;
                     align-items: center;
                     column-gap: 10px;
-                    border: 1px solid $gray;
                     border-radius: 10px;
+
+                    @include themed {
+                        border: 1px solid t(gray);
+                    }
 
                     &_img {
                         width: 60px;
@@ -279,9 +288,11 @@
             display: flex;
             justify-content: end;
             column-gap: 10px;
-            border-top: 1px solid $gray;
             padding-top: 20px;
-
+            
+            @include themed {
+                border-top: 1px solid t(gray);
+            }
             @include mobile {
                 justify-content: space-between;
                 padding-top: 10px;

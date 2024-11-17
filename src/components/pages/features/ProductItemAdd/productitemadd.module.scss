@@ -133,7 +133,10 @@
                 justify-content: space-between;
                 row-gap: 15px;
                 padding-right: 15px;
-                border-right: 1px solid $gray;
+
+                @include themed {
+                    border-right: 1px solid t(gray);
+                }
 
                 @include mobile {
                     height: 340px;
@@ -165,11 +168,14 @@
                     &_value {
                         width: 205px;
                         padding: 7px 27px;
-                        border: 1px solid $gray;
                         border-radius: 10px;
                         @extend %sm_b;
                         display: flex;
                         align-items: center;
+
+                        @include themed {
+                            border: 1px solid t(gray);
+                        }
                         
 
                         @include mobile {
@@ -233,6 +239,7 @@
                                 div {
                                     width: 100%;
                                     padding: 0 27px;
+                                    border-radius: 5px;
                                     &:hover {
                                         color: $main_color;
                                     }
@@ -270,8 +277,11 @@
                     justify-content: space-between;
                     align-items: center;
                     column-gap: 10px;
-                    border: 1px solid $gray;
                     border-radius: 10px;
+
+                    @include themed {
+                        border: 1px solid t(gray);
+                    }
 
                     &_img {
                         width: 60px;
@@ -300,14 +310,19 @@
                     justify-content: center;
                     align-items: center;
                     column-gap: 10px;
-                    border: 1px solid $gray;
                     border-radius: 10px;
                     cursor: pointer;
                     user-select: none;
                     position: relative;
 
+                    @include themed {
+                        border: 1px solid t(gray);
+                    }
+
                     &:hover {
-                        border: 1px solid $main_light_color;
+                        @include themed {
+                            border: 1px solid t(main_light_color);
+                        }
                     }
 
                     label {
@@ -317,6 +332,7 @@
                         top: 0;
                         left: 0;
                         z-index: 10;
+                        cursor: pointer;
                     }
 
                     &_name {
@@ -335,8 +351,11 @@
             display: flex;
             justify-content: end;
             column-gap: 10px;
-            border-top: 1px solid $gray;
             padding-top: 20px;
+
+            @include themed {
+                border-top: 1px solid t(gray);
+            }
 
             @include mobile {
                 padding-top: 10px;

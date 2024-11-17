@@ -159,7 +159,7 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
                 
                 <div className={`${style.view_block_main_information_item_value_payment_down}`}>
                   {cashiers?.map((m, index) => 
-                    <div key={index} style={{backgroundColor: data.userName===m ? "#edf1d3" : ""}} onClick={() => setData({ ...data, userName: m })}>{m}</div>
+                    <div key={index} style={{backgroundColor: data.userName===m ? "#edf1d3" : "", color: data.userName===m ? "#000" : ""}} onClick={() => setData({ ...data, userName: m })}>{m}</div>
                   )}
                 </div>
               </div>
@@ -195,13 +195,13 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
 
                 <div className={`${style.view_block_main_information_item_value_payment_down}`}>
                   <div onClick={() => setData({ ...data, paymentMethod: "Master Card" })}
-                    style={{backgroundColor: data.paymentMethod == "Master Card" ? "#edf1d3": ""}}
+                    style={{backgroundColor: data.paymentMethod == "Master Card" ? "#edf1d3": "", color: data.paymentMethod == "Master Card" ? "black": ""}}
                     >{t("Master Card")}</div>
                   <div onClick={() => setData({ ...data, paymentMethod: "Paypal" })}
-                  style={{backgroundColor: data.paymentMethod == "Paypal" ? "#edf1d3": ""}}
+                  style={{backgroundColor: data.paymentMethod == "Paypal" ? "#edf1d3": "", color: data.paymentMethod == "Paypal" ? "black": ""}}
                     >Paypal</div>
                   <div onClick={() => setData({ ...data, paymentMethod: "QR-Code" })}
-                    style={{backgroundColor: data.paymentMethod == "QR-Code" ? "#edf1d3": ""}}
+                    style={{backgroundColor: data.paymentMethod == "QR-Code" ? "#edf1d3": "", color: data.paymentMethod == "QR-Code" ? "black": ""}}
                     >QR-Code</div>
                 </div>
               </div>

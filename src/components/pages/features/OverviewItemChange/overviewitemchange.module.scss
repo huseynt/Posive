@@ -133,7 +133,11 @@
                 justify-content: space-between;
                 row-gap: 15px;
                 padding-right: 15px;
-                border-right: 1px solid $gray;
+
+
+                @include themed {
+                    border-right: 1px solid t(gray);
+                }
 
                 @include mobile {
                     height: 345px;
@@ -166,9 +170,12 @@
                     &_value {
                         min-width: 189.39px;
                         padding: 7px 27px;
-                        border: 1px solid $gray;
                         border-radius: 10px;
                         @extend %sm_b;
+
+                        @include themed {
+                            border: 1px solid t(gray);
+                        }
 
                         @include mobile {
                             width: 100%;
@@ -203,20 +210,30 @@
                                 background-color: $white;
                                 top: 0;
                                 left: -1px;
-                                border: 1px solid $gray;
                                 border-radius: 10px;
                                 cursor: pointer;
 
                                 &:hover {
                                     display: block;
                                     top: -1px;
+                                    @include themed {
+                                        border: 1px solid t(main_color);
+                                    }
+                                }
+
+                                @include themed {
+                                    color: t(black);
+                                    background-color: t(white);
                                 }
 
                                 div {
                                     width: 100%;
                                     padding: 0 27px;
+                                    border-radius: 5px;
                                     &:hover {
-                                        background-color: $main_light_two;
+                                        @include themed {
+                                            color: t(main_color);
+                                        }
                                     }
                                 }
                             }
@@ -270,8 +287,11 @@
                             display: flex;
                             justify-content: space-between;
                             align-items: center;
-                            border: 1px solid $gray;
                             border-radius: 7px;
+
+                            @include themed {
+                                border: 1px solid t(gray);
+                            }
 
                             &_img {
                                 img {
@@ -312,6 +332,7 @@
 
                                         &:hover {
                                             background-color: $main_light_two;
+                                            color: $main_color_dark;
                                         }
                                     }
 
@@ -354,8 +375,11 @@
             display: flex;
             justify-content: end;
             column-gap: 10px;
-            border-top: 1px solid $gray;
             padding-top: 20px;
+
+            @include themed {
+                border-top: 1px solid t(gray);
+            }
 
             @include mobile {
                 padding-top: 10px;
