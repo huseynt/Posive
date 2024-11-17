@@ -53,7 +53,13 @@ const QRCodeComponent: React.FC<IQRCodeComponentProps> = (props) => {
           {t("Waiting for payment from customers")}
         </p>
         <div className={style.qrcode_block_qr}>
-          <QRCode value={code} size={224} fgColor={"#d4733b"} />
+          <QRCode 
+          value={code}
+          size={224} 
+          fgColor={document.body.getAttribute('data-theme') === 'dark' ? '#fff' : '#d4733b'} 
+          bgColor="transparent" 
+          level="H"           
+          />
         </div>
 
         <div className={style.qrcode_block_or}>

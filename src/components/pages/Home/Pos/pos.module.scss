@@ -147,7 +147,7 @@
             margin-left: 16px;
             border-radius: 10px;
             border: 1px solid;
-            z-index: 9991;
+            z-index: 99;
 
             @include themed() {
                 background-color: t(white);

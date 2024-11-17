@@ -22,11 +22,16 @@ const PermissionItemDelete: React.FC<IQRCodeComponentProps> = (props) => {
   } = useMutation({
     mutationFn: () => createDeleteUserPermission(email),
     onSuccess: (response) => {
-      console.log('Delete success:', response);
+      if (response === "Success") {
         console.log('Deleted');
         setViewOpen("");
         queryClient.invalidateQueries({queryKey: ["getPermission"]});
         requestNotify("done", "Order deleted successfully");
+      } else {
+        console.log('Delete error:');  
+        setViewOpen("");
+        requestNotify("undone", "Error deleting order");
+      }
     },
     onError: (error) => {
       console.log('Delete error:', error);  

@@ -160,10 +160,6 @@
 
 
 
-    "Welcome to our POS (Point of Sale) Dashboard, a powerful tool designed to revolutionize the way you manage your business transactions. Our intuitive interface provides real-time insights, customizable reports, and seamless integration with your existing POS system, empowering you to make informed decisions and drive business growth. Whether you're a small business owner or a large enterprise, our POS Dashboard is tailored to meet your unique needs.": "POS (Satış Nöqtəsi) İdarə Panelinə xoş gəlmisiniz, biznes əməliyyatlarınızı idarə etmək üçün yaradılmış güclü bir alətdir. Bizim intuativ interfeysimiz sizə anında görüşlər, tənzimlənə bilən hesabatlar və mövcud POS sisteminizlə səmərəli inteqrasiya təmin edir, sizə məlumatlı qərarlar vermək və biznesinizi inkişaf etdirmək imkanı verir. Kiçik biznes sahibi və ya böyük bir şirkət olun, bizim POS İdarə Panelimiz sizin unikal ehtiyaclarınıza cavab verəcək şəkildə hazırlanmışdır.",
-
-
-
 
     "POS Dashboard": "POS İdarə Paneli",
     "Main Course": "Ana yemək",
@@ -192,7 +188,7 @@
     "Discount": "Endirim",
     "Stock :": "Stok :",
     "Price :": "Qiymət :",
-    "Back to Shopping": "Alış-verişə geri dön",
+    "Back to Shopping": "Geri dön",
     "Choose Table": "Masa seçin",
     "Available": "Boş",
     "Available Soon": "Tezliklə boş olacaq",
@@ -285,7 +281,7 @@
     "Drag and drop a file to upload": "Yükləmək üçün bir faylı sürükləyin və buraxın",
     "Add product": "Əlavə edin",
     "Details Product": "Ətraflı məhsul",
-    "Delete Product ?": "Məhsulu silinsin?",
+    "Delete Product ?": "Məhsul silinsin?",
     "Are you sure you want to delete Product ?": "Məhsulu silmək istədiyinizə əminsiniz?",
     "Income Statistics": "Gəlir Statistikası",
     "1M": "1A",
@@ -312,16 +308,70 @@
 
 
 
+    
+    "Posive Help Center": "Posive Kömək Mərkəzi",
+    "Help & Center": "Kömək və Mərkəz",
+    "We will help you 24 hours here": "Biz burada 24 saat kömək edəcəyik",
+    
+    
 
+    "App Information": "Proqram məlumatları",
+    "Welcome to our POS (Point of Sale) Dashboard, a powerful tool designed to revolutionize the way you manage your business transactions. Our intuitive interface provides real-time insights, customizable reports, and seamless integration with your existing POS system, empowering you to make informed decisions and drive business growth. Whether you're a small business owner or a large enterprise, our POS Dashboard is tailored to meet your unique needs.": "POS (Satış Nöqtəsi) İdarə Panelinə xoş gəlmisiniz, biznes əməliyyatlarınızı idarə etmək üçün yaradılmış güclü bir alətdir. Bizim intuativ interfeysimiz sizə anında görüşlər, tənzimlənə bilən hesabatlar və mövcud POS sisteminizlə səmərəli inteqrasiya təmin edir, sizə məlumatlı qərarlar vermək və biznesinizi inkişaf etdirmək imkanı verir. Kiçik biznes sahibi və ya böyük bir şirkət olun, bizim POS İdarə Panelimiz sizin unikal ehtiyaclarınıza cavab verəcək şəkildə hazırlanmışdır.",
+    "Key Features :": "Əsas Xüsusiyyətlər :",
+    "Real-Time Transaction Monitoring :": "Anında Əməliyyatların Nəzarəti :",
+    "View live updates of sales transactions as they occur, allowing you to track sales performance and identify trends instantly.": "Satış əməliyyatlarının canlı yeniləmələrini, satış performansını izləməyə və trendləri dərhal müəyyənləşdirməyə imkan verir.",
+    "Monitor transaction volumes, average order value, and top-selling items in real-time to optimize sales strategies.": "Satış strategiyalarını optimallaşdırmaq üçün anında əməliyyat həcmi, orta sifariş dəyəri və ən çox satılan maddələri nəzarət edin.",
+    "Customizable Reports :": "Tənzimlənə bilən Hesabatlar :",  
+    "Generate detailed reports on sales, inventory, and customer behavior with customizable parameters and filters.": "Tənzimlənə bilən parametrlər və filtrlərlə, satış, inventar və müştəri davranışı haqqında ətraflı hesabatlar yaradın.",
+    "Analyze sales by product category, time period, location, and more to gain actionable insights into your business operations.": "Məhsul kateqoriyasına, vaxt dövrünə, yerə və daha çoxa görə satışları təhlil edin və biznes əməliyyatlarınıza əməliyyatlı görüşlər əldə edin.",
+    "Inventory Management :": "İnventar İdarəetməsi :",
+    "Keep track of stock levels and inventory turnover to prevent stockouts and minimize overstocking.": "Stokların bitməsini və çox stoklanmasını azaltmaq üçün, stok səviyyələrini və inventar dönüşünü izləyin.",
+    "Set up automatic alerts for low inventory levels and receive notifications when it's time to reorder products.": "Aşağı inventar səviyyələri üçün avtomatik xəbərdarlıqlar qurun və məhsulları yenidən sifariş etmə vaxtı olduğunda xəbərdarlıqlar alın.",
+    "Customer Insights :": "Müştəri Görüşləri :",
+    "Gain valuable insights into customer preferences and purchasing behavior to personalize marketing campaigns and enhance customer satisfaction.": "Müştəri istəklərinə və alış-veriş davranışına dair dəyərli görüşlər əldə edin, marketinq kampaniyalarını şəxsiyyətləşdirin və müştəri məmnuniyyətini artırın.",
+    "Segment customers based on demographics, purchase history, and loyalty to target promotions effectively.": "Müştəri segmentlərini demografik məlumatlar, alış-veriş tarixi və loyallıq əsasında segmentləşdirin və promosyonları effektiv şəkildə hədəfləyin.",
+    "Multi-Store Management :": "Çoxlu Mağaza İdarəetməsi :",
+    "Manage multiple store locations from a single dashboard, providing centralized control and visibility across your entire business.": "Bir idarə panelindən çoxlu mağaza yerləşmələrini idarə edin, bütün biznesinizin mərkəzləşdirilmiş nəzarətini və görünürlüyünü təmin edin.",
+    "Compare performance metrics between stores and identify areas for improvement to optimize profitability.": "Mağazalar arasında performans metrikalarını müqayisə edin və mənfəətliyi optimallaşdırmaq üçün təkmilləşdirilməsi üçün sahələri müəyyənləşdirin.",
+    "Secure Access and Data Protection :": "Təhlükəsiz Giriş və Məlumatların Qorunması :",
+    "Ensure data security and compliance with industry standards through robust encryption and access controls.": "Güclü şifrələmə və giriş nəzarəti vasitəsilə məlumatların təhlükəsizliyini və sənədləri standartlarına uyğunluğunu təmin edin.",
+    "Term & Conditions": "Şərtlər və Qaydalar",
+    "Welcome to our POS Dashboard! These terms and conditions outline the rules and regulations for the use of our POS Dashboard.": "POS İdarə Panelinə xoş gəlmisiniz! Bu şərtlər və qaydalar, POS İdarə Panelimizin istifadəsi üçün qaydaları və təlimatları təyin edir.",
+    "By accessing this dashboard, we assume you accept these terms and conditions in full. Do not continue to use our POS Dashboard if you do not accept all of the terms and conditions stated on this page.": "Bu idarə panelinə giriş etdikdə, bu şərtləri və qaydaları tam şəkildə qəbul etdiyinizi düşünürük. Bu səhifədə göstərilən bütün şərtləri və qaydaları qəbul etmirsəniz, POS İdarə Panelimizi istifadə etməyə davam etməyin.",
+    "The following terminology applies to these Terms and Conditions: 'Client', 'You' and 'Your' refer to you, the person accessing this dashboard and accepting the Company's terms and conditions. 'The Company', 'Ourselves', 'We', 'Our' and 'Us', refer to our company. 'Party', 'Parties', or 'Us', refers to both the Client and ourselves, or either the Client or ourselves.": "Bu Şərtlər və Qaydalar aşağıdakı terminlərə uyğun olur: 'Müştəri', 'Siz' və 'Sizin' sizə, bu idarə panelinə giriş edən və Şirkətin şərtlərini və qaydalarını qəbul edən şəxsə istinad edir. 'Şirkət', 'Özümüz', 'Biz', 'Bizim' və 'Biz', bizim şirkətə istinad edir. 'Tərəf', 'Tərəflər' və ya 'Biz', həm Müştəri və həm də bizim, ya da həm Müştəri və həm də bizim arasında istinad edir.",
+    "Cookies": "Kukilər",
+    "We employ the use of cookies. By using our POS Dashboard you consent to the use of cookies in accordance with our privacy policy.": "Kukilərdən istifadə edirik. Bizim POS İdarə Panelimizi istifadə edərək, gizlilik siyasətimizə uyğun olaraq kukilərdən istifadə etməyə razılaşırsınız.",
+    "License": "Lisenziya",
+    "Unless otherwise stated, we own the intellectual property rights for all material on our POS Dashboard. All intellectual property rights are reserved.": "Əks təqdirdə, bizim POS İdarə Panelimizdə olan bütün materialların intellektual mülkiyyət hüquqlarına sahibik. Bütün intellektual mülkiyyət hüquqları qorunur.",
+    "Restrictions": "Məhdudiyyətlər",
+    "You are specifically restricted from all of the following :": "Aşağıdakıların hamısından xüsusilə məhdud edilirsiniz :",
+    "Republishing material from our POS Dashboard": "Bizim POS İdarə Panelimizdən materialların təkrar nəşri",
+    "Selling, sublicensing and/or otherwise commercializing any material from our POS Dashboard": "Bizim POS İdarə Panelimizdən materialların satışı, alt lisenziya verməsi və ya başqa cür ticarət etməsi",
+    "Using our POS Dashboard in any way that is or may be damaging to this dashboard": "Bu idarə panelinə zərər vuracaq və ya zərər vuracaq cür istifadə etmək",
+    "Using our POS Dashboard in any way that impacts user access to this dashboard": "Bu idarə panelinə istifadəçi girişini təsir edəcək cür istifadə etmək",
+    "Using our POS Dashboard contrary to applicable laws and regulations, or in any way may cause harm to the dashboard, or to any person or business entity": "Mövzuat və qaydaların tələblərinə zidd istifadə etmək, və ya idarə panelinə, ya da hər hansı bir şəxsə və ya biznes təşkilatına zərər vuracaq cür istifadə etmək",  
+    "Information Collection, Use, and Sharing": "Məlumatların Toplanması, İstifadəsi və Paylaşılması",
+    "We are the sole owners of the information collected on this dashboard. We only have access to/collect information that you voluntarily give us via email or other direct contact from you. We will not sell or rent this information to anyone.": "Bu idarə panelində toplanan məlumatların yeganə sahibləriyik. Yalnız sizin e-poçt və ya digər doğrudan əlaqə vasitəsilə bizə özünüzün istəyə əsasən verdiyiniz məlumata girişimiz var. Bu məlumatı heç kimə satmayacağıq və ya kirayaya verməyəcəyik.",
+    "We will use your information to respond to you, regarding the reason you contacted us. We will not share your information with any third party outside of our organization, other than as necessary to fulfill your request, e.g., to ship an order.": "Biz sizin məlumatınıza sizin bizimlə əlaqə saxladığınız səbəbə cavab vermək üçün istifadə edəcəyik. Sizin məlumatınızı, sizin tələbinizi yerinə yetirmək üçün lazım olan digər təşkilatlar xaricində heç bir üçüncü tərəf ilə paylaşmayacağıq, məsələn, sifarişi göndərmək üçün.",
+    "Security": "Təhlükəsizlik",
+    "We take precautions to protect your information. When you submit sensitive information via the dashboard, your information is protected both online and offline.": "Sizin məlumatınızı qorumaq üçün ehtiyatlar alırıq. İdarə paneli vasitəsilə həssas məlumatları göndərdiyinizdə, məlumatınız həm onlayn, həm də oflayn şəkildə qorunur.",
+    "Our Privacy Policy may change from time to time, and all updates will be posted on this page.": "Gizlilik Siyasətimiz vaxt zamanı dəyişə bilər və bütün yeniləmələr bu səhifədə yerləşdiriləcək.",
+    "If you feel that we are not abiding by this privacy policy, you should contact us immediately via email.": "Əgər bizim bu gizlilik siyasətinə əməl etmədiyimizi düşünürsünüzsə, dərhal bizimlə e-poçt vasitəsilə əlaqə saxlamalısınız.",
+    "This is a basic example and should be customized to suit the specific needs and legal requirements of your business and jurisdiction. It's recommended to consult with a legal professional to ensure compliance.": "Bu sadə bir nümunədir və işinizin və yargı alanınızın xüsusi ehtiyaclarına və qanuni tələblərinə uyğunlaşdırılmalıdır. Uyğunluğu təmin etmək üçün bir hüquqşünasla məsləhət görülür.",
+    "Contact & FAQ": "Əlaqə və FAQ",
+    "Speak to our Customer service team": "Müştəri xidmətləri komandası ilə danışın",
+    "Send messages and we’ll get back asap": "Mesaj göndərin və biz tezliklə geri dönəcəyik",
+    "Help support with Documentation": "Sənədlərlə kömək dəstəyi",
+    "Frequently Asked Questions": "Tez-tez verilən suallar",
+    "Can a new user integrate the POS Dashboard with other business systems ?": "Yeni bir istifadəçi POS İdarə Panelini digər biznes sistemləri ilə inteqrasiya edə bilərmi ?",
+    "Yes, many POS Dashboards offer integration capabilities with accounting software, inventory management systems, customer relationship management (CRM) tools, and other business applications. Integration can streamline operations and improve data accuracy.": "Bəli, bir çox POS İdarə Paneli, mühasibat proqramları, inventar idarəetmə sistemləri, müştəri əlaqələri idarəetmə (CRM) alətləri və digər biznes tətbiqləri ilə inteqrasiya imkanları təklif edir. İnteqrasiya əməliyyatları səmərəliliyi artıra bilər və məlumatların dəqiqliyini artıra bilər.",
+    "What features do event organizer websites typically offer ?": "Hadisə təşkilatçı veb saytları tipik olaraq hansı xüsusiyyətlər təklif edir ?",
+    "How does a POS Dashboard help in improving customer service for new users ?": "POS İdarə Paneli yeni istifadəçilər üçün müştəri xidmətlərini necə yaxşılaşdırır ?",
+    "What kind of support and training are available for new users of a POS Dashboard ?": "POS İdarə Panelinin yeni istifadəçiləri üçün hansı növ dəstək və təlimatlar mövcuddur ?",
+    "Why is a POS Dashboard beneficial for new users ?": "POS İdarə Paneli yeni istifadəçilər üçün nəzərdə tutulmuşdur ?",
 
-
-
-
-
-
-
-
-
-
-    "1": "1"
+    "Code sent to your email address": "Kod e-poçt ünvanınıza göndərildi",
+    "Card data is incorrect": "Kart məlumatları düzgün deyil",
+    "Please fill in all fields": "Zəhmət olmasa, bütün sahələri doldurun",
+    "Code is incorrect": "Kod səhvdir"
 }

@@ -146,7 +146,7 @@ const General: React.FC<IGeneral> = (props) => {
   const changeData = (e: React.ChangeEvent<HTMLInputElement>) => { 
     const { id, value, files } = e.target;
 
-    if (id === "imageUrl" && files && files.length > 0) {
+    if (id === "imageUrl" && files && files.length > 0 && files[0].size < 5000000) {
         const Imgfile = files[0];
 
         // upload Firebase storage
@@ -350,6 +350,7 @@ const General: React.FC<IGeneral> = (props) => {
               <input 
               type="date" 
               id="birthDate" 
+              max={new Date().toISOString().split('T')[0]}
               lang={t("en")}
               onChange={changeData} 
               value={data.birthDate}

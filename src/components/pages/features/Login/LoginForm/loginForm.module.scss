@@ -60,6 +60,10 @@
         margin-top: 11px;
         @extend %l_b;
         animation: load 1s ease-in-out;
+
+        @include themed {
+            color: t(black);
+        }
     }
 
     &_form {
@@ -86,6 +90,7 @@
                 border: 1px solid $light_gray;
                 @extend %m;
                 z-index: 3;
+                
             }
             &:focus-within {
                 .label {
@@ -138,9 +143,14 @@
                 padding: 5px;
                 z-index: 999;
                 cursor: pointer;
-                img {
+                svg {
                     width: 16px;
                     height: 16px;
+                    path {
+                        @include themed {
+                            stroke: t(light_m_gray);
+                        }
+                    }
                 }
             }
         }
@@ -195,6 +205,8 @@
                 width: 100%;
                 height: 100%;
                 cursor: pointer;
+                background-color: transparent !important;
+                color: $white !important;
             }
         }
 
@@ -234,11 +246,14 @@
             position: absolute;
             @extend %m;
             color: $light_m_gray;
-            background-color: $white;
             padding: 0 15px;
             bottom: -11px;
             left: 50%;
             transform: translateX(-50%);
+
+            @include themed {
+                background-color: t(white);
+            }
         }
     }
     &_google {
@@ -256,6 +271,11 @@
         align-items: center;
         column-gap: 10px;
         position: relative;
+
+        @include themed {
+            border: 1px solid t(gray);
+            color: t(black);
+        }
 
         &:hover {
             transition: .2s ease-in-out;
@@ -288,6 +308,9 @@
         justify-content: space-around;
         animation: load 1s ease-in-out;
 
+        @include themed {
+            color: t(light_m_gray);
+        }
 
         @include mobile {
             flex-direction: column;

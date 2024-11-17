@@ -78,7 +78,9 @@ const OverviewItemView: React.FC<IQRCodeComponentProps> = (props) => {
 
             <div className={style.view_block_main_information_item}>
               <div className={style.view_block_main_information_item_head}>{t("Payment Method")}</div>
-              <div className={`${style.view_block_main_information_item_value} ${style.view_block_main_information_item_value_payment}`}>{paymentMethod}</div>
+              <div className={`${style.view_block_main_information_item_value} ${style.view_block_main_information_item_value_payment}`}
+              style={{color: "black"}}
+              >{paymentMethod}</div>
             </div>
           </div>
 
@@ -109,31 +111,6 @@ const OverviewItemView: React.FC<IQRCodeComponentProps> = (props) => {
                     </div>
                   ))
                 } 
-
-
-                {/* <div className={style.view_block_main_menu_container_list_item}>
-                  <div className={style.view_block_main_menu_container_list_item_img}>
-                    <img src="/public/meals/health_salad.png" alt="menu" />
-                  </div>
-                  <div className={style.view_block_main_menu_container_list_item_head}>Health Salad (2)</div>
-                  <div className={style.view_block_main_menu_container_list_item_price}>$24.00</div>
-                </div> */}
-
-                {/* <div className={style.view_block_main_menu_container_list_item}>
-                  <div className={style.view_block_main_menu_container_list_item_img}>
-                    <img src="/public/meals/health_salad.png" alt="menu" />
-                  </div>
-                  <div className={style.view_block_main_menu_container_list_item_head}>Health Salad (2)</div>
-                  <div className={style.view_block_main_menu_container_list_item_price}>$24.00</div>
-                </div>
-
-                <div className={style.view_block_main_menu_container_list_item}>
-                  <div className={style.view_block_main_menu_container_list_item_img}>
-                    <img src="/public/meals/health_salad.png" alt="menu" />
-                  </div>
-                  <div className={style.view_block_main_menu_container_list_item_head}>Health Salad (2)</div>
-                  <div className={style.view_block_main_menu_container_list_item_price}>$24.00</div>
-                </div> */}
               
               </div>
             </div>
@@ -155,10 +132,10 @@ const OverviewItemView: React.FC<IQRCodeComponentProps> = (props) => {
           </div>
 
           <div className={style.view_block_actions_option}
-          style={{width: "100px"}}
+          style={{width: "120px"}}
           onClick={() => setViewOpen("change")}
           >
-            <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg className={style.view_block_actions_option_edit} width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M9.34006 2.89982L3.86673 8.69315C3.66006 8.91315 3.46006 9.34649 3.42006 9.64649L3.1734 11.8065C3.08673 12.5865 3.64673 13.1198 4.42006 12.9865L6.56673 12.6198C6.86673 12.5665 7.28673 12.3465 7.4934 12.1198L12.9667 6.32649C13.9134 5.32649 14.3401 4.18649 12.8667 2.79315C11.4001 1.41315 10.2867 1.89982 9.34006 2.89982Z" stroke="#1A1C1E" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M8.42676 3.86621C8.71342 5.70621 10.2068 7.11288 12.0601 7.29954" stroke="#1A1C1E" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M2.5 15.167H14.5" stroke="#1A1C1E" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>

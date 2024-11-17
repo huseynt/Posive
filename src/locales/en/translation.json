@@ -163,10 +163,6 @@
 
 
 
-    "Welcome to our POS (Point of Sale) Dashboard, a powerful tool designed to revolutionize the way you manage your business transactions. Our intuitive interface provides real-time insights, customizable reports, and seamless integration with your existing POS system, empowering you to make informed decisions and drive business growth. Whether you're a small business owner or a large enterprise, our POS Dashboard is tailored to meet your unique needs.": "Welcome to our POS (Point of Sale) Dashboard, a powerful tool designed to revolutionize the way you manage your business transactions. Our intuitive interface provides real-time insights, customizable reports, and seamless integration with your existing POS system, empowering you to make informed decisions and drive business growth. Whether you're a small business owner or a large enterprise, our POS Dashboard is tailored to meet your unique needs.",
-
-
-
     "POS Dashboard": "POS Dashboard",
     "Main Course": "Main Course",
     "Rice Bowl": "Rice Bowl",
@@ -313,11 +309,68 @@
 
 
 
+    "Posive Help Center": "Posive Help Center",
+    "Help & Center": "Help & Center",
+    "We will help you 24 hours here": "We will help you 24 hours here",
 
+    "App Information": "App Information",
+    "Welcome to our POS (Point of Sale) Dashboard, a powerful tool designed to revolutionize the way you manage your business transactions. Our intuitive interface provides real-time insights, customizable reports, and seamless integration with your existing POS system, empowering you to make informed decisions and drive business growth. Whether you're a small business owner or a large enterprise, our POS Dashboard is tailored to meet your unique needs.": "Welcome to our POS (Point of Sale) Dashboard, a powerful tool designed to revolutionize the way you manage your business transactions. Our intuitive interface provides real-time insights, customizable reports, and seamless integration with your existing POS system, empowering you to make informed decisions and drive business growth. Whether you're a small business owner or a large enterprise, our POS Dashboard is tailored to meet your unique needs.",
+    "Key Features :": "Key Features :",
+    "Real-Time Transaction Monitoring :" : "Real-Time Transaction Monitoring :",
+    "View live updates of sales transactions as they occur, allowing you to track sales performance and identify trends instantly.": "View live updates of sales transactions as they occur, allowing you to track sales performance and identify trends instantly.",
+    "Monitor transaction volumes, average order value, and top-selling items in real-time to optimize sales strategies.": "Monitor transaction volumes, average order value, and top-selling items in real-time to optimize sales strategies.",
+    "Customizable Reports :" : "Customizable Reports :",
+    "Generate detailed reports on sales, inventory, and customer behavior with customizable parameters and filters.": "Generate detailed reports on sales, inventory, and customer behavior with customizable parameters and filters.",
+    "Analyze sales by product category, time period, location, and more to gain actionable insights into your business operations.": "Analyze sales by product category, time period, location, and more to gain actionable insights into your business operations.",
+    "Inventory Management :" : "Inventory Management :",
+    "Keep track of stock levels and inventory turnover to prevent stockouts and minimize overstocking.": "Keep track of stock levels and inventory turnover to prevent stockouts and minimize overstocking.",
+    "Set up automatic alerts for low inventory levels and receive notifications when it's time to reorder products.": "Set up automatic alerts for low inventory levels and receive notifications when it's time to reorder products.",
+    "Customer Insights :": "Customer Insights :",
+    "Gain valuable insights into customer preferences and purchasing behavior to personalize marketing campaigns and enhance customer satisfaction.": "Gain valuable insights into customer preferences and purchasing behavior to personalize marketing campaigns and enhance customer satisfaction.",
+    "Segment customers based on demographics, purchase history, and loyalty to target promotions effectively.": "Segment customers based on demographics, purchase history, and loyalty to target promotions effectively.",
+    "Multi-Store Management :": "Multi-Store Management :",
+    "Manage multiple store locations from a single dashboard, providing centralized control and visibility across your entire business.": "Manage multiple store locations from a single dashboard, providing centralized control and visibility across your entire business.",
+    "Compare performance metrics between stores and identify areas for improvement to optimize profitability.": "Compare performance metrics between stores and identify areas for improvement to optimize profitability.",
+    "Secure Access and Data Protection :": "Secure Access and Data Protection :",
+    "Ensure data security and compliance with industry standards through robust encryption and access controls.": "Ensure data security and compliance with industry standards through robust encryption and access controls.",
+    "Term & Conditions": "Term & Conditions",
+    "Welcome to our POS Dashboard! These terms and conditions outline the rules and regulations for the use of our POS Dashboard.": "Welcome to our POS Dashboard! These terms and conditions outline the rules and regulations for the use of our POS Dashboard.",
+    "By accessing this dashboard, we assume you accept these terms and conditions in full. Do not continue to use our POS Dashboard if you do not accept all of the terms and conditions stated on this page.": "By accessing this dashboard, we assume you accept these terms and conditions in full. Do not continue to use our POS Dashboard if you do not accept all of the terms and conditions stated on this page.",
+    "The following terminology applies to these Terms and Conditions: 'Client', 'You' and 'Your' refer to you, the person accessing this dashboard and accepting the Company's terms and conditions. 'The Company', 'Ourselves', 'We', 'Our' and 'Us', refer to our company. 'Party', 'Parties', or 'Us', refers to both the Client and ourselves, or either the Client or ourselves.": "The following terminology applies to these Terms and Conditions: 'Client', 'You' and 'Your' refer to you, the person accessing this dashboard and accepting the Company's terms and conditions. 'The Company', 'Ourselves', 'We', 'Our' and 'Us', refer to our company. 'Party', 'Parties', or 'Us', refers to both the Client and ourselves, or either the Client or ourselves.",
+    "Cookies": "Cookies",
+    "We employ the use of cookies. By using our POS Dashboard you consent to the use of cookies in accordance with our privacy policy.": "We employ the use of cookies. By using our POS Dashboard you consent to the use of cookies in accordance with our privacy policy.",
+    "License": "License",
+    "Unless otherwise stated, we own the intellectual property rights for all material on our POS Dashboard. All intellectual property rights are reserved.": "Unless otherwise stated, we own the intellectual property rights for all material on our POS Dashboard. All intellectual property rights are reserved.",
+    "Restrictions": "Restrictions",
+    "You are specifically restricted from all of the following :": "You are specifically restricted from all of the following :",
+    "Republishing material from our POS Dashboard": "Republishing material from our POS Dashboard",
+    "Selling, sublicensing and/or otherwise commercializing any material from our POS Dashboard": "Selling, sublicensing and/or otherwise commercializing any material from our POS Dashboard",
+    "Using our POS Dashboard in any way that is or may be damaging to this dashboard": "Using our POS Dashboard in any way that is or may be damaging to this dashboard",
+    "Using our POS Dashboard in any way that impacts user access to this dashboard": "Using our POS Dashboard in any way that impacts user access to this dashboard",
+    "Using our POS Dashboard contrary to applicable laws and regulations, or in any way may cause harm to the dashboard, or to any person or business entity": "Using our POS Dashboard contrary to applicable laws and regulations, or in any way may cause harm to the dashboard, or to any person or business entity",
+    "Information Collection, Use, and Sharing": "Information Collection, Use, and Sharing",
+    "We are the sole owners of the information collected on this dashboard. We only have access to/collect information that you voluntarily give us via email or other direct contact from you. We will not sell or rent this information to anyone.": "We are the sole owners of the information collected on this dashboard. We only have access to/collect information that you voluntarily give us via email or other direct contact from you. We will not sell or rent this information to anyone.",
+    "We will use your information to respond to you, regarding the reason you contacted us. We will not share your information with any third party outside of our organization, other than as necessary to fulfill your request, e.g., to ship an order.": "We will use your information to respond to you, regarding the reason you contacted us. We will not share your information with any third party outside of our organization, other than as necessary to fulfill your request, e.g., to ship an order.",
+    "Security": "Security",
+    "We take precautions to protect your information. When you submit sensitive information via the dashboard, your information is protected both online and offline.": "We take precautions to protect your information. When you submit sensitive information via the dashboard, your information is protected both online and offline.",
+    "Our Privacy Policy may change from time to time, and all updates will be posted on this page.": "Our Privacy Policy may change from time to time, and all updates will be posted on this page.",
+    "If you feel that we are not abiding by this privacy policy, you should contact us immediately via email.": "If you feel that we are not abiding by this privacy policy, you should contact us immediately via email.",
+    "This is a basic example and should be customized to suit the specific needs and legal requirements of your business and jurisdiction. It's recommended to consult with a legal professional to ensure compliance.": "This is a basic example and should be customized to suit the specific needs and legal requirements of your business and jurisdiction. It's recommended to consult with a legal professional to ensure compliance.",
+    "Contact & FAQ": "Contact & FAQ",
+    "Speak to our Customer service team": "Speak to our Customer service team",
+    "Send messages and we’ll get back asap": "Send messages and we’ll get back asap",
+    "Help support with Documentation": "Help support with Documentation",
+    "Frequently Asked Questions": "Frequently Asked Questions",
+    "Can a new user integrate the POS Dashboard with other business systems ?": "Can a new user integrate the POS Dashboard with other business systems ?",
+    "Yes, many POS Dashboards offer integration capabilities with accounting software, inventory management systems, customer relationship management (CRM) tools, and other business applications. Integration can streamline operations and improve data accuracy.": "Yes, many POS Dashboards offer integration capabilities with accounting software, inventory management systems, customer relationship management (CRM) tools, and other business applications. Integration can streamline operations and improve data accuracy.",
+    "What features do event organizer websites typically offer ?": "What features do event organizer websites typically offer ?",
+    "How does a POS Dashboard help in improving customer service for new users ?": "How does a POS Dashboard help in improving customer service for new users ?",
+    "What kind of support and training are available for new users of a POS Dashboard ?": "What kind of support and training are available for new users of a POS Dashboard ?",
+    "Why is a POS Dashboard beneficial for new users ?": "Why is a POS Dashboard beneficial for new users ?",
 
-
-
-
-    "1": "1"
+    "Code sent to your email address": "Code sent to your email address",
+    "Card data is incorrect": "Card data is incorrect",
+    "Please fill in all fields": "Please fill in all fields",
+    "Code is incorrect": "Code is incorrect"
 }
   

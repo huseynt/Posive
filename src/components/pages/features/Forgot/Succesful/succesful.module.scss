@@ -46,12 +46,17 @@
         grid-row: 1 / 1;
     }
 
+    @include themed {
+        color: t(black);
+    }   
+
     &_logo {
         animation: load 1s ease-in-out;
         margin-top: auto;
+        cursor: pointer;
         img {
-        width: 30px;
-        height: 30px;
+            width: 30px;
+            height: 30px;
         }
     }
 
@@ -130,47 +135,6 @@
             }
         }
 
-        // &_password {
-        //     position: relative;
-
-        //     input {
-        //         width: 100%;
-        //         padding: 7px 36px 7px 13px;
-        //         border: none;
-        //         border-radius: 10px;
-        //         border-bottom: 1px solid $gray;
-        //         outline: none;
-        //         background-color: transparent;
-        //         border: 1px solid $light_gray;
-        //         @extend %m;
-        //     }
-        //     &:focus-within {
-        //         .label {
-        //             color: $main_color;
-        //             @extend %label_focus;
-        //         }
-        //     }
-        //     .label_focus {
-        //         @extend %label_focus;
-        //     }
-
-        //     .label {
-        //         @extend %label_unset
-        //     }
-        //     &_eye {
-        //         position: absolute;
-        //         right: 10px;
-        //         top: 7px;
-        //         padding: 5px;
-        //         z-index: 999;
-        //         cursor: pointer;
-        //         img {
-        //             width: 16px;
-        //             height: 16px;
-        //         }
-        //     }
-        // }
-
 
         &_actions {
             display: flex;
@@ -212,6 +176,7 @@
             &:hover {
                 transition: .2s ease-in-out;
                 background-color: darken($main_color, 7%);
+                color: $white !important;
             }
         }
 

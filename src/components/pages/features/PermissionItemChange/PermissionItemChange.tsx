@@ -44,14 +44,20 @@ const PermissionItemChange: React.FC<IPermissionItemChangeProps> = (props) => {
     isPending: isEditUser,
   } = useMutation({
     mutationFn: createEditUserPermissions,
-    onSuccess: () => {
-      console.log('Success');
-      queryClient.invalidateQueries({queryKey: ["getPermission"]});
-      setViewOpen("")
-      requestNotify("done", "Order saved successfully");
+    onSuccess: (res) => {
+      if (res === "Success") {
+        console.log('Success');
+        queryClient.invalidateQueries({queryKey: ["getPermission"]});
+        setViewOpen("")
+        requestNotify("done", "Order saved successfully");
+      } 
+      else {
+        console.log('Failed');
+        requestNotify("undone", "Order save failed");
+      }
     },
     onError: (error) => {
-      console.log('Login error:', error);
+      console.log(error);
       requestNotify("undone", "Order save failed");
     },
   });
@@ -103,15 +109,14 @@ const PermissionItemChange: React.FC<IPermissionItemChangeProps> = (props) => {
 
             <div className={style.view_block_main_information_item}>
               <div className={style.view_block_main_information_item_head}>{t("Email")}</div>
-              <div className={style.view_block_main_information_item_value}
-              style={{backgroundColor: "#edf1f3"}}
+              <div className={`${style.view_block_main_information_item_value} ${style.view_block_main_information_item_value_unique}`}
+              // style={{backgroundColor: "#edf1f3"}}
               >{data.email}</div>
             </div>
 
             <div className={style.view_block_main_information_item}>
               <div className={style.view_block_main_information_item_head}>{t("Created")}</div>
-              <div className={style.view_block_main_information_item_value}
-              style={{backgroundColor: "#edf1f3"}}
+              <div className={`${style.view_block_main_information_item_value} ${style.view_block_main_information_item_value_unique}`}
               >{
                 new Date(data.created).toLocaleDateString() + " " + new Date(data.created).toLocaleTimeString()
               }</div>
@@ -128,9 +133,9 @@ const PermissionItemChange: React.FC<IPermissionItemChangeProps> = (props) => {
                 </div>
                 
                 <div className={`${style.view_block_main_information_item_value_payment_down}`}>
-                  <div style={{backgroundColor: data.role==="SUPER_ADMIN" ? "#edf1d3" : ""}} onClick={() => setData({ ...data, role: "SUPER_ADMIN" })}>{t("SUPER ADMIN")}</div>
-                  <div style={{backgroundColor: data.role==="ADMIN" ? "#edf1d3" : ""}} onClick={() => setData({ ...data, role: "ADMIN" })}>{t("ADMIN")}</div>
-                  <div style={{backgroundColor: data.role==="MEMBER" ? "#edf1d3" : ""}} onClick={() => setData({ ...data, role: "MEMBER" })}>{t("MEMBER")}</div>
+                  <div style={{backgroundColor: data.role==="SUPER_ADMIN" ? "#edf1d3" : "", color:  data.role==="SUPER_ADMIN" ? "black": ""}} onClick={() => setData({ ...data, role: "SUPER_ADMIN" })}>{t("SUPER ADMIN")}</div>
+                  <div style={{backgroundColor: data.role==="ADMIN" ? "#edf1d3" : "", color:  data.role==="ADMIN" ? "black": ""}} onClick={() => setData({ ...data, role: "ADMIN" })}>{t("ADMIN")}</div>
+                  <div style={{backgroundColor: data.role==="MEMBER" ? "#edf1d3" : "", color:  data.role==="MEMBER" ? "black": ""}} onClick={() => setData({ ...data, role: "MEMBER" })}>{t("MEMBER")}</div>
                 </div>
               </div>
             </div>

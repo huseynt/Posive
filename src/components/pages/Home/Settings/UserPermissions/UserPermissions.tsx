@@ -127,7 +127,7 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
 
 
     {/* ----------------- save buttons ------------------------------ */}
-    { multiCheck.length > 0 &&
+    { multiCheck.length > 0 || isDeletePermissionLoading ?
       <div className={style.parent_buttons}>
         <button className={style.parent_buttons_cancel}
         onClick={() => {
@@ -144,7 +144,7 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
           t("Delete All")
           }
           </button>
-      </div>
+      </div> : null
     }
     {/* ----------------- save buttons ------------------------------ */}
       
@@ -163,6 +163,7 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
           <tr className={style.parent_main_table_thead_row}>
             <th className={style.parent_main_table_thead_row_item}>
               <input type="checkbox"
+              style={{accentColor: "#ea7e41"}}
               checked={checked}
               onChange={(e) => {setChecked(e.target.checked)}}
               />
@@ -217,21 +218,21 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
 
           {/* pages */}
           <div className={style.main_down_pagination_pages_page}
-          style={{border: page === pagination ? "1px solid #6c7278" : ""}}
+          style={{border: page === pagination ? "1px solid #ea7e41" : ""}}
           onClick={() => setPage(pagination)}
           >
             {pagination}
           </div>
           
           {countOrders >1 && <div className={style.main_down_pagination_pages_page}
-          style={{border: page === pagination + 1 ? "1px solid #6c7278" : ""}}
+          style={{border: page === pagination + 1 ? "1px solid #ea7e41" : ""}}
           onClick={() => setPage(pagination + 1)}
           >
             {pagination + 1}
           </div>}
           
           {countOrders >2 && <div className={style.main_down_pagination_pages_page}
-          style={{border: page === pagination + 2 ? "1px solid #6c7278" : ""}}
+          style={{border: page === pagination + 2 ? "1px solid #ea7e41" : ""}}
           onClick={() => setPage(pagination + 2)}
           >
             {pagination + 2}
@@ -240,7 +241,7 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
           {countOrders >3 && <div className={`${style.main_down_pagination_pages_dots} 
           ${pagination + 4 === countOrders ? style.main_down_pagination_pages_dots_hover : ""}`}
           style={{
-            border: page === pagination + 3 ? "1px solid #6c7278" : "",
+            border: page === pagination + 3 ? "1px solid #ea7e41" : "",
           }}
           onClick={() => setPage(pagination + 4 === countOrders ? countOrders -1 : page)}
           >
@@ -249,7 +250,7 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
 
           {countOrders >4 && <div className={style.main_down_pagination_pages_page}
           style={{
-            border: page === countOrders || pagination + 9 === page  ? "1px solid #6c7278" : "",
+            border: page === countOrders || pagination + 9 === page  ? "1px solid #ea7e41" : "",
           }}
           onClick={() => {
             setPage(

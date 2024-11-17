@@ -80,8 +80,7 @@ const UserItem: React.FC<IUsers> = (props) => {
         />}
 
 
-        <tr className={`${style.row} ${checked && style.tr_checked}`}
-        style={{backgroundColor: multiCheck.includes(email) ? '#cce0f7' : ''}}>
+        <tr className={`${style.row} ${multiCheck.includes(email) ? style.row_tr_checked: ""}`}>
             <td className={style.row_item}
             onClick={() => setIsChecked(!isChecked)}
             >

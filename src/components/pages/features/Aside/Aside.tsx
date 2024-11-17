@@ -102,8 +102,8 @@ const Aside: React.FC<AsideProps> = (props) => {
       if (paymentMethod === "mastercard") {
 
         // for testing
-        setMastercard(true);
-        // handlePostOrder();
+        // setMastercard(true);
+        handlePostOrder();
 
       } else if (paymentMethod === "paypal") {
         console.log("paypal");
@@ -165,7 +165,10 @@ const Aside: React.FC<AsideProps> = (props) => {
         <div className={style.aside_up_order}>
           <h4>{t("Current Order")}</h4>
           <p
-            onClick={() => navigator.clipboard.writeText(orderId)}
+            onClick={() => {
+              requestNotify("done", "Order ID copied");
+              navigator.clipboard.writeText(orderId) 
+            }}
             title={t("Copy Current Order ID")}
           >
             {orderId}
@@ -196,7 +199,7 @@ const Aside: React.FC<AsideProps> = (props) => {
 
         {/* ------------------- for mobile ----------------- */}
         <div className={style.aside_up_mobileLeft} onClick={() => setBag(!bag)}>
-          <svg
+          <svg className={style.aside_up_mobileLeft_back}
             width="24"
             height="25"
             viewBox="0 0 24 25"
@@ -572,7 +575,7 @@ const Aside: React.FC<AsideProps> = (props) => {
               border: paymentMethod === "qrcode" ? "1px solid #F79E1B" : "",
             }}
             >
-              <svg
+              <svg className={style.aside_payment_select_option_icon_qrcode}
                 width="21"
                 height="21"
                 viewBox="0 0 21 21"

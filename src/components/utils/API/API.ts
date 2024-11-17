@@ -1,5 +1,6 @@
 // import { resetToken } from '../Hooks/useToken';
 import { getToken } from '../reUse/getToken';
+import { userRole } from '../reUse/user';
 import { IcreatePostAuthenticate, 
     IVerifyEmail, 
     IChangePassword, 
@@ -189,101 +190,6 @@ export const createGetMeals = async () => {
     }
 }
 
-
-//  Get orders
-interface GetOrdersParams {
-    page?: number;
-    size?: number;
-    date?: string;
-    filter?: string;
-}
-export const createGetOrders = async ({ page, size, date, filter }: GetOrdersParams) => {
-    try {
-        const token = await getToken();
-        const accessToken = token?.accessToken;
-        const res = await fetch(`${base}/order/get?page=${page}&size=${size}&date=${date}&filter=${filter}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${accessToken}`
-            }
-        });
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(res);
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-
-// Save Preferences
-export const createSavePreferences = async (data: ISavePreferences) => {
-    try {
-        const token = await getToken();
-        const accessToken = token?.accessToken;
-        const res = await fetch(`${base}/setting/save`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${accessToken}`
-            },
-            body: JSON.stringify(data)
-        });
-        if (res.ok) {
-            return res.status;
-        }
-        return Promise.reject(res);
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-// get Subscriptions
-export const createGetPlans = async () => {
-    try {
-        const token = await getToken();
-        const accessToken = token?.accessToken;
-        const res = await fetch(`${base}/subscriptions/getByEmail`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${accessToken}`
-            }
-        });
-        if (res.ok) {
-            return res.json();
-        }
-        return Promise.reject(res);
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-// Save Subscriptions 
-export const createPostPlans = async (data: ISavePlans) => {
-    try {
-        const token = await getToken();
-        const accessToken = token?.accessToken;
-        const res = await fetch(`${base}/subscriptions/create`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${accessToken}`
-            },
-            body: JSON.stringify(data)
-        });
-        if (res.ok) {
-            return res.status;
-        }
-        return Promise.reject(res);
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-
 //  Post Orders
 export const createPostOrders = async (data: IPostOrders) => {
     try {
@@ -372,18 +278,25 @@ export const createGetTables = async () => {
     }
 }
 
-// Save orders
-export const createSaveOrders = async (data: ISaveOrder) => {
+//  ---------------------------------------------------------------------------------------------------------
+
+//  Get orders (Overview)
+interface GetOrdersParams {
+    page?: number;
+    size?: number;
+    date?: string;
+    filter?: string;
+}
+export const createGetOrders = async ({ page, size, date, filter }: GetOrdersParams) => {
     try {
         const token = await getToken();
         const accessToken = token?.accessToken;
-        const res = await fetch(`${base}/order/update`, {
-            method: 'PUT',
+        const res = await fetch(`${base}/order/get?page=${page}&size=${size}&date=${date}&filter=${filter}`, {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${accessToken}`
-            },
-            body: JSON.stringify(data)
+            }
         });
         if (res.ok) {
             return res.json();
@@ -394,7 +307,32 @@ export const createSaveOrders = async (data: ISaveOrder) => {
     }
 }
 
-// Delete orders
+// Save orders (Overview)
+export const createSaveOrders = async (data: ISaveOrder) => {
+    const role = await userRole();
+    try {
+        if (role === "ADMIN" || role === "SUPER_ADMIN") {
+            const token = await getToken();
+            const accessToken = token?.accessToken;
+            const res = await fetch(`${base}/order/update`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`
+                },
+                body: JSON.stringify(data)
+            });
+            if (res.ok) {
+                return res.json();
+            }
+        }
+        return Promise.reject();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Delete orders (Overview)
 export const createDeleteOrders = async (id: string) => {
     try {
         const token = await getToken();
@@ -415,7 +353,7 @@ export const createDeleteOrders = async (id: string) => {
     }
 }
 
-// Delete orders all
+// Delete orders all (Overview)
 export const createDeleteOrdersAll = async (data: number[]) => {
     try {
         const token = await getToken();
@@ -589,6 +527,71 @@ export const createSaveSettingGeneral = async (data: IGetGeneral) => {
         });
         if (res.ok) {
             return "Success";
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Save Preferences
+export const createSavePreferences = async (data: ISavePreferences) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/setting/save`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            body: JSON.stringify(data)
+        });
+        if (res.ok) {
+            return res.status;
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// get Subscriptions
+export const createGetPlans = async () => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/subscriptions/getByEmail`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Save Subscriptions 
+export const createPostPlans = async (data: ISavePlans) => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/subscriptions/create`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            body: JSON.stringify(data)
+        });
+        if (res.ok) {
+            return res.status;
         }
         return Promise.reject(res);
     } catch (error) {

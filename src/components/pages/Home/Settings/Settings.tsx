@@ -114,7 +114,7 @@ const Settings: React.FC<ThemeProps> = (props) => {
             </div>
 
             <div className={style.main_mobileUp_actions_right}>
-              <div
+              {/* <div
                 className={style.main_mobileUp_actions_right_search}
                 // onClick={() => setMobileSearch(!mobileSearch)}
               >
@@ -140,7 +140,7 @@ const Settings: React.FC<ThemeProps> = (props) => {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </div>
+              </div> */}
 
               <div
                 className={style.main_mobileUp_actions_right_setting}

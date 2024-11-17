@@ -32,7 +32,7 @@
 .view {
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.151);
+    background-color: #00000027;
     z-index: 999999;
     position: fixed;
     top: 0;
@@ -59,16 +59,20 @@
         width: 100%;
         max-width: 750px;
         min-width: 320px;
-        background-color: $white;
         display: flex;
         flex-direction: column;
         align-items: center;
         row-gap: 20px;
         border-radius: 14px;
-        border: 1px solid $gray;
         padding: 26px;
         z-index: 30;
         animation: fadeBg 0.3s ease;
+
+        @include themed {
+            background-color: t(white);
+            border: 1px solid t(gray);
+            color: t(black);
+        }
 
         &_head {
             width: 100%;
@@ -84,8 +88,21 @@
                 cursor: pointer;
                 transition: background-color 0.3s;
 
+                svg {
+                    path {
+                        @include themed {
+                            stroke: t(black);
+                        }
+                    }
+                }
+
                 &:hover {
                     background-color: $gray;
+                    svg {
+                        path {
+                            stroke:black !important;
+                        }
+                    }
                 }
             }
         }
@@ -131,6 +148,7 @@
                         row-gap: 5px;
                     }
 
+
                     &_head {
                         @extend %sm;
 
@@ -150,12 +168,24 @@
                             width: 100%;
                         }
 
+
                         &:focus-within {
                             border: 1px solid $main_color !important;
                         }
 
                         input {
                             width: 100%;
+                            @include themed {
+                                color: t(black);
+                                background-color: t(white);
+                            }
+                        }
+
+                        &_unique {
+                            @include themed {
+                                color: black;
+                                background-color: $light_bg_gray;
+                            }
                         }
 
                         &_payment {
@@ -185,16 +215,22 @@
                                 border-radius: 10px;
                                 cursor: pointer;
 
+                                @include themed {
+                                    color: t(black);
+                                    background-color: t(white);
+                                }
+
                                 &:hover {
                                     display: block;
                                     top: -1px;
+                                    border: 1px solid $main_light_color;
                                 }
 
                                 div {
                                     width: 100%;
                                     padding: 0 27px;
                                     &:hover {
-                                        background-color: $main_light_two;
+                                        color: $main_color;
                                     }
                                 }
                             }
@@ -203,90 +239,6 @@
                 }
             }
 
-            &_menu {
-                width: 100%;
-                height: 257px;
-                padding-left: 15px;
-                display: flex;
-                flex-direction: column;
-                justify-content: start;
-                row-gap: 10px;
-
-                @include mobile {
-                    height: 300px;
-                    padding-left: 0;
-                    // padding-top: 20px;
-                }
-
-                &_head {
-                    @extend %sm;
-                    color: $light_m_gray;
-                }
-
-                &_image {
-                    width: 100%;
-                    padding: 7px 10px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    column-gap: 10px;
-                    border: 1px solid $gray;
-                    border-radius: 10px;
-
-                    &_img {
-                        width: 60px;
-                        
-                        img {
-                            width: 40px;
-                            height: 40px;
-                            object-fit: cover;
-                            border-radius: 13px;
-                        }
-                    }
-
-                    &_name {
-                        width: 100%;
-                        text-align: left;
-                        @extend %sm_b;
-                        color: $light_m_gray;
-                    }
-                }
-
-                &_drag {
-                    width: 100%;
-                    padding: 5px 5px;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    column-gap: 10px;
-                    border: 1px solid $gray;
-                    border-radius: 10px;
-                    cursor: pointer;
-                    user-select: none;
-                    position: relative;
-
-                    &:hover {
-                        border: 1px solid $main_light_color;
-                    }
-
-                    label {
-                        position: absolute;
-                        width: 100%;
-                        height: 100%;
-                        top: 0;
-                        left: 0;
-                        z-index: 10;
-                    }
-
-                    &_name {
-                        width: 100%;
-                        text-align: center;
-                        @extend %sm_b;
-                        color: $light_m_gray;
-                    }
-                }
-            }
         }
 
         &_actions {

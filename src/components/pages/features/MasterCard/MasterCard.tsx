@@ -16,9 +16,8 @@ interface MasterCardProps {
 
 const MasterCard: React.FC<MasterCardProps> = (props) => {
     const { setMastercard, requestNotify, handlePostOrder } = props;
-    // const dispatch = useDispatch();
     const {t} = useTranslation();
-    const [section, setSection] = useState("card");
+    const [section, setSection] = useState("verify");
     const [flipped, setFlipped] = useState(false);
     const [verifyCode, setVerifyCode] = useState("");
     const [data, setData] = useState({
@@ -38,15 +37,19 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
         if (data === 200) {
             console.log('Success');
             setSection("verify");
-            requestNotify("done", "Code sent to your email address");
+            requestNotify("done", t("Code sent to your email address"));
         } else {
-            requestNotify("undone", "Card data is incorrect");
+            requestNotify("undone", t("Card data is incorrect"));
         }
 
         },
     });
     const handlePostCardData = () => {
-        PostCardData(data);
+        if (data.number && data.name && data.date && data.cvv) {
+            PostCardData(data);
+        } else {
+            requestNotify("undone", t("Card data is incorrect"));
+        }
     }
     // ------------------- post card data -------------------
 
@@ -63,7 +66,7 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
             handlePostOrder();
             setVerifyCode("");
         } else {
-            requestNotify("undone", "Code is incorrect");
+            requestNotify("undone", t("Code is incorrect"));
             setVerifyCode("");
             setSection("card");
         }

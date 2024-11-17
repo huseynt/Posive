@@ -10,11 +10,26 @@
     grid-template-columns: 24px 35px 1fr 1fr 1fr 1fr 90px;
     column-gap: 4px;
     cursor: pointer;
-    // column-gap: 5px;
+    // background-color: #3e79b8;
 
     @include mobile() {
         grid-template-columns: 20px 23px 1fr 70px;
         column-gap: 4px;
+    }
+
+    &_tr_checked {
+
+        input {
+            accent-color: $main_color;
+        }
+
+        @include themed() {
+            background-color: t(main_light_two);
+        }
+    
+        td {
+            color: $black !important;
+        }
     }
 
     &_item {
@@ -73,10 +88,3 @@
     }
 }
 
-.tr_checked {
-    background-color: $main_light_two !important;
-
-    td {
-        color: $black !important;
-    }
-}

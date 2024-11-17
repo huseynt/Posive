@@ -221,13 +221,22 @@
             place-items: center;
             border-radius: 5px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.1s;
             user-select: none;
             @extend %sm;
 
             &:hover {
-                border: 1px solid $gray;
-                background-color: $main_light_two;
+                // border: 1px solid $gray;
+                // background-color: $main_light_two;
+
+                @include themed() {
+                    border: 1px solid transparent;
+                    background-color: t(main_light_color);    
+                }
+            }
+
+            @include themed() {
+                color: t(black);
             }
         }
 
@@ -244,7 +253,7 @@
             @extend %sm;
 
             &_hover:hover {
-                border: 1px solid $gray;
+                border: 1px solid transparent;
                 background-color: $main_light_two;
             }
         }
@@ -264,6 +273,14 @@
 
             &:hover {
                 background-color: $main_light_color;
+            }
+
+            svg {
+                path {
+                    @include themed() {
+                        stroke: t(light_m_gray);
+                    }
+                }
             }
 
             @include mobile {
@@ -288,6 +305,14 @@
                 background-color: $main_light_color;
             }
 
+            svg {
+                path {
+                    @include themed() {
+                        stroke: t(light_m_gray);
+                    }
+                }
+            }
+
             @include mobile {
                 margin-left: auto;
             }
@@ -296,6 +321,7 @@
     }
 
     &_itemperpage {
+
         display: flex;
         align-items: center;
         column-gap: 10px;
@@ -322,9 +348,18 @@
             &_select {
                 outline: none;
                 border: none;
+                background-color: transparent;
+
+                @include themed() {
+                    color: t(black);
+                }
 
                 option {
                     @extend %sm;
+                    @include themed() {
+                        color: t(black);
+                        background-color: t(white);
+                    }
                 }
             }
         }

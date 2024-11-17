@@ -17,7 +17,7 @@ const Information: React.FC<IInformation> = (props) => {
     onClick={() => setMobileSelect(false)}
     >
 
-    <h2 className={style.parent_head}>App Information</h2>
+    <h2 className={style.parent_head}>{t("App Information")}</h2>
 
 
 
@@ -31,54 +31,54 @@ const Information: React.FC<IInformation> = (props) => {
       </div>
 
       <div className={style.parent_main_block}>
-        <h2 className={style.parent_main_block_head}>Key Features:</h2>
+        <h2 className={style.parent_main_block_head}>{t("Key Features :")}</h2>
 
         <ul className={style.parent_main_block_down}>
 
           <li className={style.parent_main_block_down_item}>
-            <h3 className={style.parent_main_block_down_item_head}>Real-Time Transaction Monitoring:</h3>
+            <h3 className={style.parent_main_block_down_item_head}>{t("Real-Time Transaction Monitoring :")}</h3>
             <ul className={style.parent_main_block_down_item_list}>
-              <li>View live updates of sales transactions as they occur, allowing you to track sales performance and identify trends instantly.</li>
-              <li>Monitor transaction volumes, average order value, and top-selling items in real-time to optimize sales strategies.</li>
+              <li>{t("View live updates of sales transactions as they occur, allowing you to track sales performance and identify trends instantly.")}</li>
+              <li>{t("Monitor transaction volumes, average order value, and top-selling items in real-time to optimize sales strategies.")}</li>
             </ul>
           </li>
 
           <li className={style.parent_main_block_down_item}>
-            <h3 className={style.parent_main_block_down_item_head}>Customizable Reports:</h3>
+            <h3 className={style.parent_main_block_down_item_head}>{t("Customizable Reports :")}</h3>
             <ul className={style.parent_main_block_down_item_list}>
-              <li>Generate detailed reports on sales, inventory, and customer behavior with customizable parameters and filters.</li>
-              <li>Analyze sales by product category, time period, location, and more to gain actionable insights into your business operations.</li>
+              <li>{t("Generate detailed reports on sales, inventory, and customer behavior with customizable parameters and filters.")}</li>
+              <li>{t("Analyze sales by product category, time period, location, and more to gain actionable insights into your business operations.")}</li>
             </ul>
           </li>
 
           <li className={style.parent_main_block_down_item}>
-            <h3 className={style.parent_main_block_down_item_head}>Inventory Management:</h3>
+            <h3 className={style.parent_main_block_down_item_head}>{t("Inventory Management :")}</h3>
             <ul className={style.parent_main_block_down_item_list}>
-              <li>Keep track of stock levels and inventory turnover to prevent stockouts and minimize overstocking.</li>
-              <li>Set up automatic alerts for low inventory levels and receive notifications when it's time to reorder products.</li>
+              <li>{t("Keep track of stock levels and inventory turnover to prevent stockouts and minimize overstocking.")}</li>
+              <li>{t("Set up automatic alerts for low inventory levels and receive notifications when it's time to reorder products.")}</li>
             </ul>
           </li>
 
           <li className={style.parent_main_block_down_item}>
-            <h3 className={style.parent_main_block_down_item_head}>Customer Insights:</h3>
+            <h3 className={style.parent_main_block_down_item_head}>{t("Customer Insights :")}</h3>
             <ul className={style.parent_main_block_down_item_list}>
-              <li>Gain valuable insights into customer preferences and purchasing behavior to personalize marketing campaigns and enhance customer satisfaction.</li>
-              <li>Segment customers based on demographics, purchase history, and loyalty to target promotions effectively.</li>
+              <li>{t("Gain valuable insights into customer preferences and purchasing behavior to personalize marketing campaigns and enhance customer satisfaction.")}</li>
+              <li>{t("Segment customers based on demographics, purchase history, and loyalty to target promotions effectively.")}</li>
             </ul>
           </li>
 
           <li className={style.parent_main_block_down_item}>
-            <h3 className={style.parent_main_block_down_item_head}>Multi-Store Management:</h3>
+            <h3 className={style.parent_main_block_down_item_head}>{t("Multi-Store Management :")}</h3>
             <ul className={style.parent_main_block_down_item_list}>
-              <li>Manage multiple store locations from a single dashboard, providing centralized control and visibility across your entire business.</li>
-              <li>Compare performance metrics between stores and identify areas for improvement to optimize profitability.</li>
+              <li>{t("Manage multiple store locations from a single dashboard, providing centralized control and visibility across your entire business.")}</li>
+              <li>{t("Compare performance metrics between stores and identify areas for improvement to optimize profitability.")}</li>
             </ul>
           </li>
 
           <li className={style.parent_main_block_down_item}>
-            <h3 className={style.parent_main_block_down_item_head}>Secure Access and Data Protection:</h3>
+            <h3 className={style.parent_main_block_down_item_head}>{t("Secure Access and Data Protection :")}</h3>
             <ul className={style.parent_main_block_down_item_list}>
-              <li>Ensure data security and compliance with industry standards through robust encryption and access controls.</li>
+              <li>{t("Ensure data security and compliance with industry standards through robust encryption and access controls.")}</li>
             </ul>
           </li>
 

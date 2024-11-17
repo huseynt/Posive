@@ -126,7 +126,7 @@
 
                     &_period {
                         @include themed() {
-                            color: t(light_m_gray);
+                            color: t(low_black);
                         }
                     }
                 }
@@ -163,7 +163,7 @@
                 }
 
                 &_btn {
-                    height: 45px;
+                    height: 47px;
                     padding: 12px 24px;
                     @extend %btn_main;
                 }
@@ -183,39 +183,6 @@
                 }
             }
 
-        //     <div className={style.parent_main_transactions_main}>
-        //   <table className={style.parent_main_transactions_table}>
-        //     <thead className={style.parent_main_transactions_main_head}>
-        //       <tr>
-        //         <th className={style.parent_main_transactions_main_head_date}>Invoices</th>
-        //         <th className={style.parent_main_transactions_main_head_desc}>Created Date</th>
-        //         <th className={style.parent_main_transactions_main_head_price}>Amount</th>
-        //         <th className={style.parent_main_transactions_main_head_price}>Selected Plan</th>
-        //       </tr>
-        //     </thead>
-        //     <tbody>
-        //       <tr className={style.parent_main_transactions_main_item}>
-        //         <td className={style.parent_main_transactions_main_item_date}>12th May 2021</td>
-        //         <td className={style.parent_main_transactions_main_item_desc}>Basic Plan Subscription</td>
-        //         <td className={style.parent_main_transactions_main_item_price}>$99.99</td>
-        //         <td className={style.parent_main_transactions_main_item_plan}>Selected Plan</td>
-        //       </tr>
-        //       <tr className={style.parent_main_transactions_main_item}>
-        //         <td className={style.parent_main_transactions_main_item_date}>12th May 2021</td>
-        //         <td className={style.parent_main_transactions_main_item_desc}>Enterprise Plan Subscription</td>
-        //         <td className={style.parent_main_transactions_main_item_price}>$119.99</td>
-        //         <td className={style.parent_main_transactions_main_item_plan}>Selected Plan</td>
-        //       </tr>
-        //       <tr className={style.parent_main_transactions_main_item}>
-        //         <td className={style.parent_main_transactions_main_item_date}>12th May 2021</td>
-        //         <td className={style.parent_main_transactions_main_item_desc}>Professional Plan Subscription</td>
-        //         <td className={style.parent_main_transactions_main_item_price}>$159.99</td>
-        //         <td className={style.parent_main_transactions_main_item_plan}>Selected Plan</td>
-        //       </tr>
-        //     </tbody>
-        //   </table>
-        // </div>
-
             &_main {
                 width: 100%;
                 display: flex;
@@ -232,7 +199,7 @@
 
                         @extend %m_b;
                         @include themed() {
-                            color: t(light_m_gray);
+                            color: t(low_black);
                         }
 
                         &_price {
@@ -339,13 +306,13 @@
         }
         &_period {
             @include themed() {
-                color: t(light_m_gray);
+                color: t(low_black);
             }
         }
     }
     .parent_main_plans_option_desc {
         @include themed() {
-            color: t(light_m_gray);
+            color: t(low_black);
         }
     }
 

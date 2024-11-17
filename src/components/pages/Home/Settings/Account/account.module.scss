@@ -258,6 +258,7 @@
                                 @include themed() {
                                     border: 1px solid t(gray);
                                     color: t(black);
+                                    color-scheme: t(calendar);
                                 }
                             }
 
@@ -463,7 +464,8 @@
                         border-radius: 10px;
                         @include themed() {
                             background-color: t(warning);
-                            color: t(white);
+                            // color: t(white);
+                            color: white;
                         }
                         &:hover {
                             @include themed() {

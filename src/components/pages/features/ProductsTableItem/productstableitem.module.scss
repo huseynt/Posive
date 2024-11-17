@@ -6,15 +6,15 @@
 .productsItem {
     width: 100%;
 
+    @include themed {
+        color: t(black);
+    }
+
     &_head {
         display: flex;
         justify-content: start;
         align-items: center;
         column-gap: 7px;
-
-        // @include mobile {
-        //     max-width: 100px;
-        // }
 
         &_name {
             max-width: 150px;

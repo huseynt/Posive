@@ -9,6 +9,7 @@ import { Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 
 interface MainProps {
@@ -19,7 +20,7 @@ interface MainProps {
 
 const HelpCenter = () => {
   const { setToggleMenu, setNotification, notification }= useOutletContext<MainProps>();
-
+  const {t} = useTranslation();
 
 
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ const HelpCenter = () => {
   return (
     <div className={style.overflow}>
       <Helmet>
-        <title>Posive Help Center</title>
+        <title>{t("Posive Help Center")}</title>
         <meta name="description" content="Help Center" />
         <meta name="keywords" content="Posive" />
       </Helmet>
@@ -96,7 +97,7 @@ const HelpCenter = () => {
             </div>
 
             <div className={style.main_mobileUp_actions_right}>
-              <div
+              {/* <div
                 className={style.main_mobileUp_actions_right_search}
                 // onClick={() => setMobileSearch(!mobileSearch)}
               >
@@ -122,7 +123,7 @@ const HelpCenter = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </div>
+              </div> */}
 
               <div
                 className={style.main_mobileUp_actions_right_setting}
@@ -171,8 +172,8 @@ const HelpCenter = () => {
 
         {/* --------------------------- up ------------------------------- */}
         <div className={style.main_up}>
-          <h2 className={style.main_up_head}>Help & Center</h2>
-          <p className={style.main_up_desc}>We will help you 24 hours here</p>
+          <h2 className={style.main_up_head}>{t("Help & Center")}</h2>
+          <p className={style.main_up_desc}>{t("We will help you 24 hours here")}</p>
         </div>
 
         <div className={style.main_container}>
@@ -182,7 +183,7 @@ const HelpCenter = () => {
           >
             
             <h3 className={style.main_container_navigation_head}>
-              Sub settings
+              {t("Sub settings")}
             </h3>
 
             <div className={style.main_container_navigation_mobileSelect}
@@ -309,10 +310,10 @@ const HelpCenter = () => {
 
 
               {
-                sub === "contact" ? "Contact & FAQ" : 
-                sub === "privacy" ? "Privacy Policy" : 
-                sub === "term" ? "Term & Condition" : 
-                sub === "information" ? "App Information" : "Contact & FAQ"
+                sub === "contact" ? t("Contact & FAQ") : 
+                sub === "privacy" ? t("Privacy Policy") : 
+                sub === "term" ? t("Term & Conditions") : 
+                sub === "information" ? t("App Information") : t("Contact & FAQ")
               }
               <p style={{marginLeft: "auto"}}>
                 <svg width="14" 
@@ -378,7 +379,7 @@ const HelpCenter = () => {
                   color: sub === "contact" || sub === undefined ? "#EA7E41" : "",
                 }}
               >
-                Contact & FAQ
+                {t("Contact & FAQ")}
               </p>
             </div>
 
@@ -423,7 +424,9 @@ const HelpCenter = () => {
               style={{
                 color: sub === "privacy" ? "#EA7E41" : "",
               }}
-              >Privacy Policy</p>
+              >
+                {t("Privacy Policy")}
+              </p>
             </div>
 
             <div
@@ -476,7 +479,9 @@ const HelpCenter = () => {
               style={{
                 color: sub === "term" ? "#EA7E41" : "",
               }}
-              >Term & Condition</p>
+              >
+                {t("Term & Conditions")}
+              </p>
             </div>
 
             <div
@@ -529,7 +534,9 @@ const HelpCenter = () => {
               style={{
                 color: sub === "information" ? "#EA7E41" : "",
               }}
-              >App Information</p>
+              >
+                {t("App Information")}
+                </p>
             </div>
           </div>
 

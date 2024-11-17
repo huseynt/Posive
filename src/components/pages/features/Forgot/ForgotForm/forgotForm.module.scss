@@ -40,6 +40,10 @@
     justify-content: center;
     color: $black;
 
+    @include themed {
+        color: t(black);
+    }   
+
     @include mobile {
         padding: 0 5%;
         grid-row: 1 / 1;
@@ -59,7 +63,13 @@
         max-width: 416px;
         cursor: pointer;
         animation: load 1s ease-in-out;
-
+        svg {
+            path {
+                @include themed {
+                    stroke: t(black);
+                }
+            }
+        }
 
         div {
             width: 50px;
@@ -125,47 +135,6 @@
             }
         }
 
-        // &_password {
-        //     position: relative;
-
-        //     input {
-        //         width: 100%;
-        //         padding: 7px 36px 7px 13px;
-        //         border: none;
-        //         border-radius: 10px;
-        //         border-bottom: 1px solid $gray;
-        //         outline: none;
-        //         background-color: transparent;
-        //         border: 1px solid $light_gray;
-        //         @extend %m;
-        //     }
-        //     &:focus-within {
-        //         .label {
-        //             color: $main_color;
-        //             @extend %label_focus;
-        //         }
-        //     }
-        //     .label_focus {
-        //         @extend %label_focus;
-        //     }
-
-        //     .label {
-        //         @extend %label_unset
-        //     }
-        //     &_eye {
-        //         position: absolute;
-        //         right: 10px;
-        //         top: 7px;
-        //         padding: 5px;
-        //         z-index: 999;
-        //         cursor: pointer;
-        //         img {
-        //             width: 16px;
-        //             height: 16px;
-        //         }
-        //     }
-        // }
-
 
         &_actions {
             display: flex;
@@ -215,6 +184,8 @@
                 width: 100%;
                 height: 100%;
                 cursor: pointer;
+                background-color: transparent !important;
+                color: $white !important;
             }
         }
 
@@ -315,8 +286,10 @@
             row-gap: 10px;
         }
 
-        span {
-            color: $light_m_gray;
+        p {
+            @include themed {
+                color: t(light_m_gray);
+            }
         }
         a {
             color: $link_blue;

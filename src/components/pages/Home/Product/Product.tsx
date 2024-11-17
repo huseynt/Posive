@@ -508,7 +508,9 @@ const Product = () => {
                       <th className={style.main_down_transactions_table_head_th_desktop}>{t("Stock")}</th>
                       <th className={style.main_down_transactions_table_head_th_desktop}>{t("Tax")}</th>
                       <th className={style.main_down_transactions_table_head_th_desktop}>{t("Discount")}</th>
-                      <th className={style.main_down_transactions_table_head_th_mobileDate}>{t("Action")}</th>
+                      <th className={style.main_down_transactions_table_head_th_mobileDate}
+                      style={{width: "100px"}}
+                      >{t("Action")}</th>
                     </tr>
                   </thead>
 

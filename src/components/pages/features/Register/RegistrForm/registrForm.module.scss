@@ -59,6 +59,13 @@
         cursor: pointer;
         animation: load 1s ease-in-out;
 
+        svg {
+            path {
+                @include themed {
+                    stroke: t(black);
+                }
+            }
+        }
 
         div {
             width: 50px;
@@ -71,12 +78,19 @@
         margin-top: 5px;
         @extend %l_b;
         animation: load 1s ease-in-out;
+        @include themed {
+            color: t(black);
+        }
     }
 
     &_information {
         width: 100%;
         max-width: 416px;
         animation: load 1s ease-in-out;
+
+        @include themed {
+            color: t(black);
+        }
 
     }
 
@@ -87,12 +101,12 @@
         display: flex;
         flex-direction: column;
         row-gap: 16px;
-        animation: load 1s ease-in-out;
 
 
         &_email {
             position: relative;
             margin-bottom: 12px;
+            animation: load 1s ease-in-out;
 
             input {
                 width: 100%;
@@ -125,6 +139,7 @@
         &_password {
             position: relative;
             margin-bottom: 12px;
+            animation: load 1.02s ease-in-out;
 
             input {
                 width: 100%;
@@ -157,9 +172,14 @@
                 padding: 5px;
                 z-index: 999;
                 cursor: pointer;
-                img {
+                svg {
                     width: 16px;
                     height: 16px;
+                    path {
+                        @include themed {
+                            stroke: t(light_m_gray);
+                        }
+                    }
                 }
             }
         }
@@ -213,6 +233,8 @@
                 width: 100%;
                 height: 100%;
                 cursor: pointer;
+                background-color: transparent !important;
+                color: $white !important;
             }
         }
 
@@ -313,8 +335,10 @@
             row-gap: 10px;
         }
 
-        span {
-            color: $light_m_gray;
+        p {
+            @include themed {
+                color: t(light_m_gray);
+            }
         }
         a {
             color: $link_blue;

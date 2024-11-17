@@ -22,7 +22,10 @@
 
     svg {
         path {
-            fill: $main_color;
+            // fill: $main_color;
+            @include themed {
+                fill: t(main_color);
+            }
         }
     }
 }
@@ -70,6 +73,12 @@
     -ms-overflow-style: none;
     &::-webkit-scrollbar {
         display: none;
+    }
+
+    @include themed {
+        background-color: t(white);
+        border: 1px solid t(gray);
+        color: t(black);
     }
 
     @include mobile {
@@ -133,6 +142,14 @@
             }
             svg {
                 width: 24px;
+            }
+
+            &_back {
+                path {
+                    @include themed {
+                        stroke: t(black);
+                    }
+                }
             }
         }
         // ------------------------------------
@@ -234,19 +251,6 @@
                 cursor: pointer;
                 user-select: none;
                 @extend %sm;
-
-    
-                // &:hover {
-                //     border: 1px solid $main_color;
-                //     background-color: $main_light_two;
-                //     color: $main_color;
-    
-                //     svg {
-                //         path {
-                //             fill: $main_color;
-                //         }
-                //     }
-                // }
     
                 &_name {
                     @extend %sm;
@@ -254,6 +258,11 @@
     
                 &_icon {
                     width: 18px;
+                    path {
+                        @include themed {
+                            fill: t(black_light);
+                        }
+                    }
                 }
             }
         }
@@ -448,6 +457,14 @@
                     place-items: center;
                     border-radius: 10px;
                     border: 1px solid $gray;
+
+                    &_qrcode {
+                        path {
+                            @include themed {
+                                fill: t(black_light);
+                            }
+                        }
+                    }
                 } 
                 &_name {
                     @extend %s;

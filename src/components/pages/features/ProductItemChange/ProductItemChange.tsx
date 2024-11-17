@@ -183,19 +183,17 @@ const ProductItemChange: React.FC<IQRCodeComponentProps> = (props) => {
                 </div>
                 
                 <div className={`${style.view_block_main_information_item_value_payment_down}`}>
-                  <div style={{backgroundColor: data.category==="Main Course" ? "#edf1d3" : ""}} onClick={() => setData({ ...data, category: "Main Course" })}>{t("Main Course")}</div>
-                  <div style={{backgroundColor: data.category==="Rice Bowl" ? "#edf1d3" : ""}} onClick={() => setData({ ...data, category: "Rice Bowl" })}>{t("Rice Bowl")}</div>
-                  <div style={{backgroundColor: data.category==="Fast food" ? "#edf1d3" : ""}} onClick={() => setData({ ...data, category: "Fast food" })}>{t("Fast Food")}</div>
-                  <div style={{backgroundColor: data.category==="Healthy food" ? "#edf1d3" : ""}} onClick={() => setData({ ...data, category: "Healthy food" })}>{t("Healthy Food")}</div>
+                  <div style={{backgroundColor: data.category==="Main Course" ? "#edf1d3" : "", color:  data.category==="Main Course" ? "black": ""}} onClick={() => setData({ ...data, category: "Main Course" })}>{t("Main Course")}</div>
+                  <div style={{backgroundColor: data.category==="Rice Bowl" ? "#edf1d3" : "", color:  data.category==="Rice Bowl" ? "black": ""}} onClick={() => setData({ ...data, category: "Rice Bowl" })}>{t("Rice Bowl")}</div>
+                  <div style={{backgroundColor: data.category==="Fast food" ? "#edf1d3" : "", color:  data.category==="Fast food" ? "black": ""}} onClick={() => setData({ ...data, category: "Fast food" })}>{t("Fast Food")}</div>
+                  <div style={{backgroundColor: data.category==="Healthy food" ? "#edf1d3" : "", color:  data.category==="Healthy food" ? "black": ""}} onClick={() => setData({ ...data, category: "Healthy food" })}>{t("Healthy Food")}</div>
                 </div>
               </div>
             </div>
 
             <div className={style.view_block_main_information_item}>
               <div className={style.view_block_main_information_item_head}>{t("Receipt Number")}</div>
-              <div className={style.view_block_main_information_item_value}
-              style={{backgroundColor: "#edf1f3"}}
-              >{data.receiptNo}</div>
+              <div className={`${style.view_block_main_information_item_value} ${style.view_block_main_information_item_value_unique}`}>{data.receiptNo}</div>
             </div>
 
             <div className={style.view_block_main_information_item}>
@@ -250,12 +248,13 @@ const ProductItemChange: React.FC<IQRCodeComponentProps> = (props) => {
             <div className={style.view_block_main_menu_head}>{t("Product Image")}</div>
             <div className={style.view_block_main_menu_drag}>
               <div className={style.view_block_main_menu_drag_img}>
-                <label htmlFor="imageUrl"></label>
+                <label htmlFor="imageUrl" draggable></label>
                 <input type="file" 
                 accept="image/png, image/jpeg"
                 multiple = {false}
                 name="imageUrl" 
                 id="imageUrl"
+                draggable="true"
                 style={{display: "none"}}
                 className={style.parent_main_business_block_photo_upload_input} 
                 onChange={handleChange}/>

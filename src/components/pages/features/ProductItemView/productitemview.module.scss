@@ -93,16 +93,20 @@
         width: 100%;
         max-width: 880px;
         min-width: 320px;
-        background-color: $white;
         display: flex;
         flex-direction: column;
         align-items: center;
         row-gap: 20px;
         border-radius: 14px;
-        border: 1px solid $gray;
         padding: 26px;
         z-index: 30;
         animation: fadeBg 0.3s ease;
+
+        @include themed {
+            background-color: t(white);
+            border: 1px solid t(gray);
+            color: t(black);
+        }
 
         @include mobile {
             padding: 17px;
@@ -124,8 +128,21 @@
                 cursor: pointer;
                 transition: background-color 0.3s;
 
+                svg {
+                    path {
+                        @include themed {
+                            stroke: t(black);
+                        }
+                    }
+                }
+
                 &:hover {
                     background-color: $gray;
+                    svg {
+                        path {
+                            stroke:black !important;
+                        }
+                    }
                 }
             }
         }
@@ -182,9 +199,7 @@
 
                     &_head {
                         @extend %sm;
-                        color: $light_m_gray;
                         @extend %text_overflow;
-
                         @include mobile {
                             width: 100%;
                             text-align: left;
@@ -192,7 +207,7 @@
                     }
 
                     &_value {
-                        width: 168px;
+                        width: 178px;
                         @extend %sm_b;
                         padding: 7px 27px;
                         border: 1px solid $gray;
@@ -306,9 +321,15 @@
                 }   
 
                 svg {
-                    max-width: 15px;
-                    min-width: 15px;
                     width: 15px;
+                }
+
+                &_edit {
+                    path {
+                        @include themed {
+                            stroke: t(black);
+                        }
+                    }
                 }
 
                 &:hover {

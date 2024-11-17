@@ -70,6 +70,12 @@
         z-index: 30;
         animation: fadeBg 0.3s ease;
 
+        @include themed {
+            background-color: t(white);
+            border: 1px solid t(gray);
+            color: t(black);
+        }
+
         @include mobile {
             padding: 17px;
             row-gap: 5px;
@@ -89,8 +95,21 @@
                 cursor: pointer;
                 transition: background-color 0.3s;
 
+                svg {
+                    path {
+                        @include themed {
+                            stroke: t(black);
+                        }
+                    }
+                }
+
                 &:hover {
                     background-color: $gray;
+                    svg {
+                        path {
+                            stroke:black !important;
+                        }
+                    }
                 }
             }
         }
@@ -153,6 +172,12 @@
 
                         @include mobile {
                             width: 100%;
+                        }
+
+                        input {
+                            @include themed {
+                                color-scheme: t(calendar);
+                            }
                         }
 
                         &_payment {
@@ -231,6 +256,7 @@
                 &_container {
                     width: 100%;
                     overflow-y: scroll;
+                    padding-bottom: 2px;
 
                     &_list {
                         padding-right: 5px;

@@ -136,14 +136,14 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
             <div className={style.view_block_main_information_item}>
               <div className={style.view_block_main_information_item_head}>{t("Order ID")}</div>
               <div className={style.view_block_main_information_item_value}
-              style={{backgroundColor: "#edf1f3"}}
+              style={{backgroundColor: "#edf1f3", color: "black"}}
               >{orderId}</div>
             </div>
 
             <div className={style.view_block_main_information_item}>
               <div className={style.view_block_main_information_item_head}>{t("Receipt Number")}</div>
               <div className={style.view_block_main_information_item_value}
-              style={{backgroundColor: "#edf1f3"}}
+              style={{backgroundColor: "#edf1f3", color: "black"}}
               >{menus.map((m) => m.receiptNo).join('').slice(1,10)}</div>
             </div>
 
@@ -168,7 +168,10 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
             <div className={style.view_block_main_information_item}>
               <div className={style.view_block_main_information_item_head}>{t("Date & Time")}</div>
               <div className={style.view_block_main_information_item_value}>
-                <input style={{outline:"none", border: "none"}} type="date" value={formattedDate || ""} 
+                <input style={{outline:"none", border: "none"}} 
+                type="date" 
+                max={new Date().toISOString().split("T")[0]}
+                value={formattedDate || ""} 
                 onChange={(e) => setData({ ...data, orderDate: 
                   e.target.value + "T" + data.orderDate.split("T")[1]
                  })}

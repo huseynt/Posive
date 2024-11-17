@@ -90,6 +90,12 @@
         animation: fadeIn 0.3s ease;
         @extend %sm_b;
 
+        @include themed {
+            background-color: t(white);
+            // border: 1px solid t(gray);
+            // color: t(black);
+        }    
+
         @include mobile {
             scale: 0.8;
             padding: 15px;
@@ -102,6 +108,10 @@
             grid-template-columns: auto 3fr auto;
             grid-template-areas: 'title list search';
             justify-content: space-between;
+
+            @include themed {
+                color: t(black);
+            }   
 
             @include mobile {
                 grid-template-columns: 1fr auto;
@@ -395,6 +405,10 @@
             justify-content: space-between;
             align-items: center;
 
+            @include themed {
+                color: t(black);
+            }  
+
             @include mobile {
                 grid-template-columns:  auto auto;
                 grid-template-areas: 
@@ -442,6 +456,7 @@
                     &_selected {
                         padding: 7px 20px;
                         background-color: $light_bg_gray;
+                        color: black;
                         border-radius: 8px;
                         @extend %s_b;
                     }

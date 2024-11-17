@@ -625,24 +625,24 @@
             padding: 10px 0;
             animation: fadeIn 0.5s;
             @extend %sm;
-
+        
             @include mobile {
                 flex-direction: column;
                 row-gap: 10px;
             }
-
+        
             &_pages {
                 height: 28px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 column-gap: 5px;
-
+        
                 @include mobile {
                     width: 100%;
                     column-gap: 3px;
                 }
-
+        
                 &_page {
                     min-width: 32px;
                     padding: 2px 5px;
@@ -650,16 +650,25 @@
                     place-items: center;
                     border-radius: 5px;
                     cursor: pointer;
-                    transition: all 0.3s;
+                    transition: all 0.1s;
                     user-select: none;
                     @extend %sm;
-
+        
                     &:hover {
-                        border: 1px solid $gray;
-                        background-color: $main_light_two;
+                        // border: 1px solid $gray;
+                        // background-color: $main_light_two;
+        
+                        @include themed() {
+                            border: 1px solid transparent;
+                            background-color: t(main_light_color);    
+                        }
+                    }
+        
+                    @include themed() {
+                        color: t(black);
                     }
                 }
-
+        
                 &_dots {
                     min-width: 32px;
                     height: 100%;
@@ -671,13 +680,13 @@
                     transition: all 0.3s;
                     user-select: none;
                     @extend %sm;
-
+        
                     &_hover:hover {
-                        border: 1px solid $gray;
+                        border: 1px solid transparent;
                         background-color: $main_light_two;
                     }
                 }
-
+        
                 &_left {
                     min-width: 32px;
                     height: 100%;
@@ -690,16 +699,24 @@
                     cursor: pointer;
                     transition: all 0.3s;
                     user-select: none;
-
+        
                     &:hover {
                         background-color: $main_light_color;
                     }
-
+        
+                    svg {
+                        path {
+                            @include themed() {
+                                stroke: t(light_m_gray);
+                            }
+                        }
+                    }
+        
                     @include mobile {
                         margin-right: auto;
                     }
                 }
-
+        
                 &_right {
                     min-width: 32px;
                     height: 100%;
@@ -712,54 +729,70 @@
                     cursor: pointer;
                     transition: all 0.3s;
                     user-select: none;
-
+        
                     &:hover {
                         background-color: $main_light_color;
                     }
-
+        
+                    svg {
+                        path {
+                            @include themed() {
+                                stroke: t(light_m_gray);
+                            }
+                        }
+                    }
+        
                     @include mobile {
                         margin-left: auto;
                     }
                 }
                 
             }
-
+        
             &_itemperpage {
+        
                 display: flex;
                 align-items: center;
                 column-gap: 10px;
-
+        
                 @include mobile {
                     width: 100%;
                     column-gap: 3px;
                     justify-content: space-between;
                 }
-
+        
                 &_info {
                     @extend %s;
                     @include themed() {
                         color: t(light_m_gray);
                     }
                 }
-
+        
                 &_action {
                     padding: 2px 7px;
                     border: 1px solid $gray;
                     border-radius: 5px;
-
-
+        
+        
                     &_select {
                         outline: none;
                         border: none;
-
+                        background-color: transparent;
+        
+                        @include themed() {
+                            color: t(black);
+                        }
+        
                         option {
                             @extend %sm;
+                            @include themed() {
+                                color: t(black);
+                                background-color: t(white);
+                            }
                         }
                     }
                 }
             }
-           
-
         }
     }
 }

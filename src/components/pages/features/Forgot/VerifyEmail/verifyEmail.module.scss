@@ -44,6 +44,10 @@
         grid-row: 1 / 1;
     }
 
+    @include themed {
+        color: t(black);
+    }
+
     &_logo {
         animation: load 1s ease-in-out;
         margin-top: auto;
@@ -58,7 +62,13 @@
         max-width: 416px;
         cursor: pointer;
         animation: load 1s ease-in-out;
-
+        svg {
+            path {
+                @include themed {
+                    stroke: t(black);
+                }
+            }
+        }
 
         div {
             width: 50px;
@@ -172,6 +182,8 @@
                 width: 100%;
                 height: 100%;
                 cursor: pointer;
+                background-color: transparent !important;
+                color: $white !important;
             }
         }
 

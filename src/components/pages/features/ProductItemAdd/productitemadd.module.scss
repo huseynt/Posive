@@ -70,6 +70,12 @@
         z-index: 30;
         animation: fadeBg 0.3s ease;
 
+        @include themed {
+            background-color: t(white);
+            border: 1px solid t(gray);
+            color: t(black);
+        }
+
         @include mobile {
             padding: 20px;
             row-gap: 10px;
@@ -89,8 +95,21 @@
                 cursor: pointer;
                 transition: background-color 0.3s;
 
+                svg {
+                    path {
+                        @include themed {
+                            stroke: t(black);
+                        }
+                    }
+                }
+
                 &:hover {
                     background-color: $gray;
+                    svg {
+                        path {
+                            stroke:black !important;
+                        }
+                    }
                 }
             }
         }
@@ -165,6 +184,13 @@
                             width: 100%;
                         }
 
+                        &_unique {
+                            @include themed {
+                                color: black;
+                                background-color: $light_bg_gray;
+                            }
+                        }
+
                         &_payment {
                             padding: 7px 27px;
                             border-radius: 10px;
@@ -193,16 +219,22 @@
                                 border-radius: 10px;
                                 cursor: pointer;
 
+                                @include themed {
+                                    color: t(black);
+                                    background-color: t(white);
+                                }
+
                                 &:hover {
                                     display: block;
                                     top: -1px;
+                                    border: 1px solid $main_light_color;
                                 }
 
                                 div {
                                     width: 100%;
                                     padding: 0 27px;
                                     &:hover {
-                                        background-color: $main_light_two;
+                                        color: $main_color;
                                     }
                                 }
                             }

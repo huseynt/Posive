@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 interface IGeneral {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>;
-  requestNotify: (purpose: string) => void;
+  requestNotify: (purpose: string, description: string) => void;
 }
 
 const Billings: React.FC<IGeneral> = (props) => {
@@ -45,12 +45,13 @@ const Billings: React.FC<IGeneral> = (props) => {
     onSuccess: (data) => {
       console.log('Success', data);
       if (data === 201) {
-        requestNotify('success')
+        requestNotify('done', 'Plan saved successfully');
         queryClient.invalidateQueries({queryKey: ["getSubscriptions"]})
       }
     },
     onError: (error) => {
       console.log('Login error:', error);
+      requestNotify('undone', 'Plan save failed');
     },
   });
   // ------------------- save user ------------------------

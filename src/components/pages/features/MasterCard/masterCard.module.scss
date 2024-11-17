@@ -12,6 +12,18 @@
     }
 }
 
+@keyframes slide {
+    0% {
+        background-size: 205% 100%;
+        background-position: 0% 0;
+
+    }
+    100% {
+        background-size: 205% 100%;
+        background-position: 70% 0;
+    }
+}
+
 .bg {
     position: fixed;
     width: 100vw;
@@ -51,7 +63,14 @@
         transition: 0.4s ease-out;
         background-size: 205% 100%;
         background-position: 70% 0;
+        animation: slide 1s ease-in-out;
         // z-index: 9;
+
+        @include themed {
+            background-color: t(white);
+            border: 1px solid t(gray);
+            color: t(black);
+        }
 
         @include mobile {
             width: 100%;
@@ -109,12 +128,19 @@
                 width: 100%;
                 svg {
                     cursor: pointer;
+                    path {
+                        @include themed {
+                            stroke: t(black);
+                        }
+                    }
                 }
             }
 
             &_title {
                 @extend %sl_b;
                 margin-bottom: 20px;
+
+                
             }
 
             &_item {
@@ -122,11 +148,13 @@
                 display: flex;
                 flex-direction: column;
                 row-gap: 2px;
-                animation: fade 0.5s ease-in-out;
+                animation: fade 1.5s ease-in-out;
 
                 &_label {
                     @extend %s_b;
-                    color: black;
+                    @include themed {
+                        color: t(black_light);
+                    }
                 }
 
                 &_input {
@@ -136,10 +164,11 @@
                     padding: 0 1px;
                     @extend %ml;
                     color: $black;
-                    background-color: transparent;
+                    background-color: transparent !important;
                     border: none;
                     border-bottom: 1px solid $light_m_gray;
                     transition: 0.2s ease-in-out;
+
 
                     &:focus {
                         outline: none;
