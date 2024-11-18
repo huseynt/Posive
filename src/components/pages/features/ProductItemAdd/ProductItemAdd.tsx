@@ -241,7 +241,9 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
             </div>
             
             <div className={style.view_block_main_menu_head}>{t("Product Image")}</div>
-            <div className={style.view_block_main_menu_drag}>
+            <div className={style.view_block_main_menu_drag}
+            style={{ flexDirection: data?.imageUrl && data.imageUrl !== undefined ? "row" : undefined}}
+            >
               <div className={style.view_block_main_menu_drag_img}>
                 <label htmlFor="imageUrl"></label>
                 <input type="file" 

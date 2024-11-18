@@ -172,20 +172,15 @@
                 }
 
                 @include mobile {
-                    // height: 390px;
                     padding-left: 0;
                     padding-right: 0;
                     padding-bottom: 20px;
-                    // border-right: none;
-                    // row-gap: 10px;
-
-
+                    border-right: none !important;
+                    border-bottom: none !important;
                     height: 305px;
                     padding-right: 0;
                     padding-bottom: 0px;
-                    border-right: none;
                     row-gap: 2px;
-                    // border-bottom: 1px solid $gray;
                 }
 
                 &_item {

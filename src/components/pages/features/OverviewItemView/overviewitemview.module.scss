@@ -175,8 +175,10 @@
                 @include mobile {
                     padding-left: 0;
                     padding-bottom: 30px;
-                    border-right: none;
-                    border-bottom: 1px solid $gray;
+                    border-right: none !important;
+                    @include themed {
+                        border-bottom: 1px solid t(gray);
+                    }
                 }
 
                 &_item {

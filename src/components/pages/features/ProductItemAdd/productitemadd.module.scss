@@ -144,7 +144,8 @@
                     padding-bottom: 0px;
                     border-right: none;
                     row-gap: 5px;
-                    // border-bottom: 1px solid $gray;
+                    border-right: none !important;
+                    border-bottom: none !important;
                 }
 
                 &_item {
@@ -260,7 +261,7 @@
                 row-gap: 10px;
 
                 @include mobile {
-                    height: 230px;
+                    height: 265px;
                     padding-left: 0;
                     row-gap: 5px;
                 }

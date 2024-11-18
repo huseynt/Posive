@@ -149,8 +149,9 @@ input {
                     height: 305px;
                     padding-right: 0;
                     padding-bottom: 0px;
-                    border-right: none;
                     row-gap: 2px;
+                    border-right: none !important;
+                    border-bottom: none !important;
                 }
 
                 &_item {
