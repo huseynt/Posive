@@ -11,8 +11,9 @@ import { GoogleLogin } from '@react-oauth/google';
 import Loader from "../../../../common/Loader/Loader";
 import TermForHomePage from "../../TermForHomePage/TermForHomePage";
 import PrivacyForHomePage from "../../PrivacyForHomePage/PrivacyForHomePage";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createGoogleAuth } from "../../../../utils/API/API";
+import { setCookie } from "../../../../utils/reUse/cookie";
 // import { useMutation } from "@tanstack/react-query";
 // import { createGoogleAuth } from "../../../../utils/API/API";
 // ---------- google auth ------------------------------
@@ -108,15 +109,24 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 
 
   // ----------- check api ------------------------------
-  // const queryClient = useQueryClient()
+  const queryClient = useQueryClient()
   const {
     mutate: googleLogin,
     // isPending: isLoginPending,
   } = useMutation({
     mutationFn: createGoogleAuth,
-    onSuccess: (res) => {
-      console.log('Success', res);
-      // queryClient.invalidateQueries({queryKey: ["getMeals"]})
+    onSuccess: (data) => {
+      console.log('Success', data);
+      console.log('Success');
+      navigate('/home')
+      sessionStorage.setItem('access_token', data.access_token);
+      sessionStorage.setItem('refresh_token', data.refresh_token);
+      console.log(data.statusCode);
+      queryClient.invalidateQueries({queryKey: ["getUserSaveUser"]})
+      const tokenExpiry = 7;
+      const resfreshTokenExpiry = 365;
+      setCookie('access_token', data.access_token, tokenExpiry);
+      setCookie('refresh_token', data.refresh_token, resfreshTokenExpiry);
     },
     onError: (error) => {
       console.log('Login error:', error);

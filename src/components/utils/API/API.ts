@@ -747,13 +747,10 @@ export const createSaveNotifications = async (params: SaveNotificationsParams) =
 
 // google auth 
 export const createGoogleAuth = async (idToken: string) => {
-    // const token = await getToken();
-    // const accessToken = token?.accessToken;
     const res = await fetch(`${base}/v1/auth/google?idToken=${idToken}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            // 'Authorization': `Bearer ${accessToken}`
         },
     });
     if (res.ok) {
