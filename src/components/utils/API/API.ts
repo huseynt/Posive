@@ -1,4 +1,5 @@
 // import { resetToken } from '../Hooks/useToken';
+import { resetToken } from '../Hooks/useToken';
 import { getToken } from '../reUse/getToken';
 import { userRole } from '../reUse/user';
 import { createRefreshToken } from './refreshToken';
@@ -123,6 +124,7 @@ export const createGetUser = async () => {
             createRefreshToken();
         }
         else {
+            resetToken();
             return "Error";
         }
 
