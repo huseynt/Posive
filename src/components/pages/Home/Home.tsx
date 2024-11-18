@@ -22,6 +22,8 @@ import { saveUser } from "../../utils/reUse/user";
 import { setCookie } from "../../utils/reUse/cookie";
 import { useTranslation } from "react-i18next";
 // import { createRefreshToken } from "../../utils/API/refreshToken";
+// import { createRefreshToken } from "../../utils/API/refreshToken";
+// import { createRefreshToken } from "../../utils/API/refreshToken";
 
 // {
 //   "orderId": 915696049,
@@ -115,17 +117,45 @@ const Home: React.FC<IHome> = (props) => {
   };
   //  ----------------------------- for notify ----------------------------
 
+  // ------------------------------ refresh token ------------------------------
+  //   const base = import.meta.env.VITE_BASE
+  //   const createRefreshToken = async () => {
+  //     const token = await getToken();
+  //     const refreshToken = token?.refreshToken;
+      
+  //     const res = await fetch(`${base}/v1/auth/refresh`, {
+  //         method: 'POST',
+  //         headers: {
+  //             'Content-Type': 'application/json',
+  //             'Authorization': `Bearer ${refreshToken}`
+  //         },
+  //     });
+  //     if (res.ok) {
+  //         console.log('refresh token', res);
+  //         const data = await res.json();
+  //         deleteCookie('access_token');
+  //         deleteCookie('refresh_token');
+  //         sessionStorage.setItem('access_token', data.access_token);
+  //         sessionStorage.setItem('refresh_token', data.refresh_token);
+  //         console.log(data, "refresh token");
+  //         // return "ok";
+  //         sessionStorage.setItem('refreshDate', new Date().toISOString());
+  //         return res.status;
+  //     }
+  //     return Promise.reject(res);
+  // }
+  // ------------------------------ refresh token ------------------------------
 
 
-// ----------------------------- get user ----------------------------
-const {
-  data: userData,
-} = useQuery<IgetUser | undefined>({
-  queryKey: ["getUser"],
-  queryFn: createGetUser,
-});
+  // ----------------------------- get user ----------------------------
+  const {
+    data: userData,
+  } = useQuery<IgetUser | undefined>({
+    queryKey: ["getUser"],
+    queryFn: createGetUser,
+  });
 
-useEffect(() => {
+  useEffect(() => {
   const handleUserData = async () => {
     if (userData) {
       saveUser(userData);
@@ -134,16 +164,25 @@ useEffect(() => {
         userData.setting?.language === "Azərbaycan" ? "az" : "en"
       )
     } 
-    // else if (!userData) {
-    //   const refreshToken = await createRefreshToken();
-    //   if (refreshToken == "ok") {
-    //     userData && saveUser(userData);
+    // else if (userData == "400") {
+    //   const resRefresh = await createRefreshToken();
+    //   if (resRefresh === 200) {
+    //     queryClient.invalidateQueries({queryKey: ["getUser"]});
+    //     console.log("refreshed");
     //   }
     // }
+    console.log(userData);
   };
   handleUserData();
 }, [userData, setTheme]);
+
+  
+  // useEffect(() => {
+  //   queryClient.invalidateQueries({queryKey: ["getUserSaveUser"]});
+  // }, [refreshDate]);
 // ----------------------------- get user ----------------------------
+
+
 
 
 

@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createPostAuthenticate } from '../../../utils/API/API'
 import { setCookie } from '../../../utils/reUse/cookie'
 import { useToken } from '../../../utils/Hooks/useToken'
@@ -17,7 +17,6 @@ import Notify from '../Notify/Notify'
 
 const Login = () => {
   const [rememberMe, setRememberMe] = useState<boolean>(false);
-  // const dispatch = useDispatch();
   const navigate = useNavigate()
 
   // ----------------------------- for token ----------------------------
@@ -30,7 +29,7 @@ const Login = () => {
     }
   }, [token, navigate]);
   // ----------------------------- for token ----------------------------
-
+  const queryClient = useQueryClient()
   const {
     mutate: Authenticate,
     isPending: isLoginPending,
@@ -39,21 +38,10 @@ const Login = () => {
     onSuccess: (data) => {
       console.log('Success');
       navigate('/home')
-      // dispatch(addAccessToken(data.access_token));
-      // dispatch(addRefreshToken(data.refresh_token));
       sessionStorage.setItem('access_token', data.access_token);
       sessionStorage.setItem('refresh_token', data.refresh_token);
       console.log(data.statusCode);
-      
-      // if (data.statusCode === 200) {
-      //   setDescribtion('Login successfully')
-      //   requestNotify('done')
-      // } 
-      // else if (data === 'Error') {
-      //   setDescribtion('Email is not registered')
-      //   requestNotify('important')
-      // }
-  
+      queryClient.invalidateQueries({queryKey: ["getUserSaveUser"]})
       if (rememberMe) {
         const tokenExpiry = 7;
         const resfreshTokenExpiry = 365;
@@ -67,7 +55,6 @@ const Login = () => {
       requestNotify('important')
     },
   });
-
 
     //  ----------------------------- for notify ----------------------------
     const [notify, setNotify] = useState<boolean>(false);

@@ -1,6 +1,7 @@
 // import { resetToken } from '../Hooks/useToken';
 import { getToken } from '../reUse/getToken';
 import { userRole } from '../reUse/user';
+import { createRefreshToken } from './refreshToken';
 import { IcreatePostAuthenticate, 
     IVerifyEmail, 
     IChangePassword, 
@@ -19,7 +20,7 @@ import { IcreatePostAuthenticate,
 } from './types';
 
 // Base
-export const API = import.meta.env.VITE_API_URL
+// export const API = import.meta.env.VITE_API_URL
 export const base = import.meta.env.VITE_BASE
 
 
@@ -114,9 +115,17 @@ export const createGetUser = async () => {
             return res.json();
         }
         // return Promise.reject(res);
+        // else {
+        //     return "Error";
+        // }
+
+        else if (res.status === 400) {
+            createRefreshToken();
+        }
         else {
             return "Error";
         }
+
     } catch (error) {
         // resetToken();
         console.log(error);
@@ -735,19 +744,18 @@ export const createSaveNotifications = async (params: SaveNotificationsParams) =
 
 
 // google auth 
-// export const createGoogleAuth = async (data: any) => {
-//     const token = await getToken();
-//     const accessToken = token?.accessToken;
-//     const res = await fetch(`${base}/login/outh/code/google`, {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Authorization': `Bearer ${accessToken}`
-//         },
-//         body: JSON.stringify(data)
-//     });
-//     if (res.ok) {
-//         return res.json();
-//     }
-//     return Promise.reject(res);
-// }
+export const createGoogleAuth = async (idToken: string) => {
+    // const token = await getToken();
+    // const accessToken = token?.accessToken;
+    const res = await fetch(`${base}/v1/auth/google?idToken=${idToken}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': `Bearer ${accessToken}`
+        },
+    });
+    if (res.ok) {
+        return res.json();
+    }
+    return Promise.reject(res);
+}

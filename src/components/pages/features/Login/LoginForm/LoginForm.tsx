@@ -7,10 +7,12 @@ import { useNavigate } from "react-router-dom";
 
 // ---------- google auth ------------------------------
 import { GoogleLogin } from '@react-oauth/google';
-import { jwtDecode } from 'jwt-decode';
+// import { jwtDecode } from 'jwt-decode';
 import Loader from "../../../../common/Loader/Loader";
 import TermForHomePage from "../../TermForHomePage/TermForHomePage";
 import PrivacyForHomePage from "../../PrivacyForHomePage/PrivacyForHomePage";
+import { useMutation } from "@tanstack/react-query";
+import { createGoogleAuth } from "../../../../utils/API/API";
 // import { useMutation } from "@tanstack/react-query";
 // import { createGoogleAuth } from "../../../../utils/API/API";
 // ---------- google auth ------------------------------
@@ -102,31 +104,35 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
   //   navigate('/home')
   // }
 
+
+
+
   // ----------- check api ------------------------------
-  // // const queryClient = useQueryClient()
-  // const {
-  //   mutate: googleLogin,
-  //   // isPending: isLoginPending,
-  // } = useMutation({
-  //   mutationFn: createGoogleAuth,
-  //   onSuccess: () => {
-  //     console.log('Success');
-  //     // queryClient.invalidateQueries({queryKey: ["getMeals"]})
-  //   },
-  //   onError: (error) => {
-  //     console.log('Login error:', error);
-  //   },
-  // });
-
-
+  // const queryClient = useQueryClient()
+  const {
+    mutate: googleLogin,
+    // isPending: isLoginPending,
+  } = useMutation({
+    mutationFn: createGoogleAuth,
+    onSuccess: (res) => {
+      console.log('Success', res);
+      // queryClient.invalidateQueries({queryKey: ["getMeals"]})
+    },
+    onError: (error) => {
+      console.log('Login error:', error);
+    },
+  });
   // ---------- google auth ------------------------------
   interface GoogleLoginResponse {
     credential?: string;
   }
   const handleSuccess = (response: GoogleLoginResponse) => {
+    
     if (response.credential) {
-      const userObject = jwtDecode(response.credential);
-      console.log("User Info:", userObject, response);
+      const idToken = response.credential;
+      // const userObject = jwtDecode(response.credential);
+      googleLogin(idToken)
+      console.log("User Info:", idToken);
     } else {
       console.log('No credential received');
     }
@@ -340,7 +346,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
             <GoogleLogin 
             onSuccess={handleSuccess} 
             onError={handleError}
-          />
+            />
           </div>
           {/* -------------- */}
           <span><img src={google} alt="google" /></span>
@@ -369,3 +375,8 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 };
 
 export default LoginForm;
+
+// function createGoogleAuth(variables: void): Promise<unknown> {
+//   throw new Error("Function not implemented.");
+// }
+
