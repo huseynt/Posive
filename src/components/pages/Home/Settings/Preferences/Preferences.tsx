@@ -91,6 +91,7 @@ const Preferences: React.FC<IPreferences> = (props) => {
       if (data === 200) {
         requestNotify("done", t("Saved successfully!"))
         queryClient.invalidateQueries({queryKey: ["getUser"]})
+        queryClient.invalidateQueries({queryKey: ["getNotifications"]});
         toggleTheme(pereferencesData.theme??'light')
         changeLanguage(
           pereferencesData.language === "Azərbaycan" ? "az" : "en"

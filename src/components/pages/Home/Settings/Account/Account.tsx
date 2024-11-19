@@ -88,6 +88,7 @@ const General: React.FC<IGeneral> = (props) => {
     onSuccess: () => {
       requestNotify("done", "Account saved successfully")
       queryClient.invalidateQueries({queryKey: ["getUser"]})
+      queryClient.invalidateQueries({queryKey: ["getNotifications"]});
     },
     onError: (error) => {
       console.log('Login error:', error);

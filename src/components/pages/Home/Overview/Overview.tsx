@@ -2,13 +2,10 @@ import { useEffect } from "react";
 import style from "./overview.module.scss";
 import { useState } from "react";
 // import SearchInput from "../../features/SearchInput/SearchInput";
-// import { meals } from "../../../test/db/cards";
-// import { IMeal } from "../../../utils/interface/Meal";
 import { useOutletContext } from "react-router-dom";
 import OverviewTableItem from "../../features/OverviewTableItem/OverviewTableItem";
-// import { orders } from "../../../test/db/transactions";
 import { Helmet } from "react-helmet";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { createGetOrders } from "../../../utils/API/API";
 import { IGetMeals, IGetOrdersResponse } from "../../../utils/API/types";
 
@@ -16,7 +13,8 @@ import * as XLSX from "xlsx";
 import OverviewItemDeleteAll from "../../features/OverItemDeleteAll/OverviewItemDeleteAll";
 import PageLoader from "../../../common/PageLoader/PageLoader";
 import { useTranslation } from "react-i18next";
-
+import { NotificationState } from "../../../redux/slice/notificationSlice";
+import { useSelector } from "react-redux";
 
 interface IOverview {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -39,7 +37,6 @@ interface IOrder {
 }
 
 const Overview = () => {
-
   const { setToggleMenu, setNotification, notification } =
     useOutletContext<IOverview>();
   const [mobileSearch, setMobileSearch] = useState<boolean>(false);
@@ -52,28 +49,35 @@ const Overview = () => {
   const [ordersSetting, setOrdersSetting] = useState<boolean>(false);
   const [ascend, setAscend] = useState<string>("DESC");
 
-
   const [pagination, setPagination] = useState<number>(1);
   const [page, setPage] = useState<number>(1);
   const [itemperpage, setItemPerPage] = useState<number>(10);
   const [countOrders, setCountOrders] = useState<number>(1);
   const [allDataCount, setAllDataCount] = useState<number>(0);
   const [deleteAllOpen, setDeleteAllOpen] = useState<boolean>(false);
-  const {t} = useTranslation();
-
+  const { t } = useTranslation();
+  const newNotifications: NotificationState[] = useSelector( (state: { notifications: {new: NotificationState[]} }) => state.notifications.new);
 
   useEffect(() => {
-    setPage(1)
+    setPage(1);
   }, [itemperpage]);
 
-  
   // ------------------- get orders ------------------------
-  const {
-    data: m,
-    isPending: isMPending,
-  } = useQuery<IGetOrdersResponse | undefined>({
-    queryKey: ["getOrders", { page: page-1, size: itemperpage, date: period, filter: ascend}],
-    queryFn: () => createGetOrders({ page: page-1, size: itemperpage, date: period, filter: ascend }),
+  const queryClient = useQueryClient();
+  const { data: m, isPending: isMPending } = useQuery<
+    IGetOrdersResponse | undefined
+  >({
+    queryKey: [
+      "getOrders",
+      { page: page - 1, size: itemperpage, date: period, filter: ascend },
+    ],
+    queryFn: () =>
+      createGetOrders({
+        page: page - 1,
+        size: itemperpage,
+        date: period,
+        filter: ascend,
+      }),
   });
   useEffect(() => {
     if (m && !isMPending) {
@@ -81,119 +85,47 @@ const Overview = () => {
         m.countOrders % itemperpage === 0
           ? m.countOrders / itemperpage
           : Math.floor(m.countOrders / itemperpage) + 1
-        
       );
       setAllDataCount(m.countOrders);
+      queryClient.invalidateQueries({queryKey: ["getNotifications"]});
     }
   }, [m, isMPending, itemperpage]);
   //  ----------------- get orders ---------------------------
 
-
-
   // ------------------- export orders as xlsx ------------------------
   const exportToExcel = () => {
-    // 1. WorkBook və WorkSheet yaradın
     const worksheet = XLSX.utils.json_to_sheet(
-    m?.orders?.map((order) => {
-      return {
-        "Order ID": order.orderId,
-        "Receipt Number": order.receiptNumber?.join(""),
-        Cashier: order.cashier,
-        Menu: order.receiptNumber?.join(","),
-        Price: order.price,
-        Place: order.place,
-        Table: order.tables?.join(","),
-        "Order Date": order.orderDate,
-        "Payment Method": order.paymentMethod,
-      };
-    }) || []);
+      m?.orders?.map((order) => {
+        return {
+          "Order ID": order.orderId,
+          "Receipt Number": order.receiptNumber?.join(""),
+          Cashier: order.cashier,
+          Menu: order.receiptNumber?.join(","),
+          Price: order.price,
+          Place: order.place,
+          Table: order.tables?.join(","),
+          "Order Date": order.orderDate,
+          "Payment Method": order.paymentMethod,
+        };
+      }) || []
+    );
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
 
-    // 2. Excel faylını yazın
     XLSX.writeFile(workbook, "data.xlsx");
   };
-
   // ------------------- export orders as xlsx ------------------------
 
-
-  
   useEffect(() => {
     if (checked == false) {
       setMultiCheck([]);
     }
   }, [checked, m, ordersFiltered]);
 
-  useEffect(() => { 
+  useEffect(() => {
     setChecked(false);
     setMultiCheck([]);
   }, [ordersFiltered, period]);
-
-
-
-  // const ascendingOrderDate = () => {
-  //   const sortedOrders = ordersFiltered.sort((a, b) => {
-  //     const dateA = new Date(a.orderDate);
-  //     const dateB = new Date(b.orderDate);
-  //     return dateA.getTime() - dateB.getTime();
-  //   });
-  //   setOrdersFiltered([...sortedOrders]);
-  //   setAscend(false);
-  // };
-
-  // const descendingOrderDate = () => {
-  //   const sortedOrders = ordersFiltered.sort((a, b) => {
-  //     const dateA = new Date(a.orderDate);
-  //     const dateB = new Date(b.orderDate);
-  //     return dateB.getTime() - dateA.getTime();
-  //   });
-  //   setOrdersFiltered([...sortedOrders]);
-  //   setAscend(true);
-  // };
-
-
-``
-// useEffect(() => {
-//   if (period !== "All time") {
-//     const filteredOrders = m?.orders.filter((order) => {
-//       const date = new Date(order.orderDate); // ISO formatında tarix, birbaşa `Date` obyektinə çevrilir
-//       const today = new Date();
-
-//       if (period === "This week") {
-//         const startOfWeek = new Date(today);
-//         startOfWeek.setDate(today.getDate() - today.getDay());
-
-//         const endOfWeek = new Date(today);
-//         endOfWeek.setDate(today.getDate() - today.getDay() + 6);
-
-//         return date >= startOfWeek && date <= endOfWeek;
-//       } 
-//       else if (period === "This month") {
-//         return (
-//           date.getMonth() === today.getMonth() &&
-//           date.getFullYear() === today.getFullYear()
-//         );
-//       } else if (period === "This year") {
-//         return date.getFullYear() === today.getFullYear();
-//       } else {
-//         return order;
-//       }
-//     });
-
-//     setOrdersFiltered(filteredOrders ? filteredOrders : []);
-//     setOrdersSetting(false);
-//     console.log(period);
-//   } else {
-//     const sortedOrders = m?.orders.sort((a, b) => {
-//       const dateA = new Date(a.orderDate);
-//       const dateB = new Date(b.orderDate);
-//       return dateB.getTime() - dateA.getTime();
-//     });
-//     setOrdersFiltered([...sortedOrders ? sortedOrders : []]);
-//   }
-// }, [period, m]);
-
-
 
   useEffect(() => {
     let sortedOrders: IOrder[] = [];
@@ -213,30 +145,19 @@ const Overview = () => {
     setOrdersFiltered([...sortedOrders]);
   }, [m, ascend]);
 
-          // .map(order => ({
-      //   ...order,
-      //   orderDate: new Date(order.orderDate).toLocaleDateString("en-GB")
-      // }));
-
-
- 
-
   return (
     <>
-      { deleteAllOpen &&
+      {deleteAllOpen && (
         <OverviewItemDeleteAll
           setDeleteAllOpen={setDeleteAllOpen}
           setMultiCheck={setMultiCheck}
           multiCheck={multiCheck}
         />
-      }
+      )}
 
-      {isMPending && <PageLoader /> }
-
-
+      {isMPending && <PageLoader />}
 
       <div className={style.overflow}>
-
         <Helmet>
           <title>{t("Posive Overview")}</title>
           <meta name="description" content="Overview" />
@@ -312,6 +233,8 @@ const Overview = () => {
                   className={style.main_mobileUp_actions_right_setting}
                   onClick={() => setNotification(!notification)}
                 >
+                  <div className={style.count}>{newNotifications.length}</div>
+
                   <svg
                     width="18"
                     height="18"
@@ -358,18 +281,18 @@ const Overview = () => {
             <div className={style.main_up_overview}>
               <h3 className={style.main_up_overview_head}>{t("Overview")}</h3>
               <p className={style.main_up_overview_date}>
-                { 
-                new Date().toLocaleDateString(t("en-US"), {
+                {new Date().toLocaleDateString(t("en-US"), {
                   year: "numeric",
                   month: "numeric",
                   day: "numeric",
-                })
-              }</p>
+                })}
+              </p>
             </div>
 
             <div className={style.main_up_actions}>
-              <div className={style.main_up_actions_export}
-              onClick={exportToExcel}
+              <div
+                className={style.main_up_actions_export}
+                onClick={exportToExcel}
               >
                 <p>{t("Export")}</p>
                 <svg
@@ -411,12 +334,15 @@ const Overview = () => {
                   className={style.main_up_actions_period_text}
                   onClick={() => setPeriodDown(!periodDown)}
                 >
-                  {
-                    period === "This week" ? t("This week") :
-                    period === "This month" ? t("This month") :
-                    period === "This year" ? t("This year") :
-                    period === "All time" ? t("All time") : t("All time")
-                  }
+                  {period === "This week"
+                    ? t("This week")
+                    : period === "This month"
+                    ? t("This month")
+                    : period === "This year"
+                    ? t("This year")
+                    : period === "All time"
+                    ? t("All time")
+                    : t("All time")}
                 </p>
                 <svg
                   width="16"
@@ -437,15 +363,8 @@ const Overview = () => {
                   />
                 </svg>
 
-                {/* <div
-                  className={style.main_up_actions_period_bg}
-                  onClick={() => setPeriodDown(false)}
-                  style={{ display: periodDown ? "block" : "none" }}
-                ></div> */}
-
                 <div
                   className={style.main_up_actions_period_down}
-                  // style={{ display: periodDown ? "block" : "none" }}
                 >
                   <div
                     className={style.main_up_actions_period_down_option}
@@ -489,23 +408,20 @@ const Overview = () => {
           </div>
 
           {/* -------------------------- total review -------------------------------- */}
-          <div className={style.main_total}
-          onClick={() => setPeriodDown(false)}
+          <div
+            className={style.main_total}
+            onClick={() => setPeriodDown(false)}
           >
             <div
               className={style.main_total_option}
               style={{ animationDuration: "0.5s" }}
             >
               <div className={style.main_total_option_text}>
-                <p className={style.main_total_option_text_up}>{t("Total Sales")}</p>
+                <p className={style.main_total_option_text_up}>
+                  {t("Total Sales")}
+                </p>
                 <h3 className={style.main_total_option_text_head}>
-                  {/* ${ordersFiltered ? 
-                  Number(ordersFiltered.reduce((acc, order) => acc + order.price, 0).toFixed(3)) > 10000 ?
-                    Math.floor(Number(ordersFiltered.reduce((acc, order) => acc + order.price, 0).toFixed(3))/1000) + "K": 
-                    ordersFiltered.reduce((acc, order) => acc + order.price, 0).toFixed(3)
-                  : "0"} */}
-
-                  ${m?.sales ? m.sales.toFixed(2): "0"}
+                  ${m?.sales ? m.sales.toFixed(2) : "0"}
                 </h3>
               </div>
 
@@ -537,8 +453,12 @@ const Overview = () => {
               style={{ animationDuration: "0.55s" }}
             >
               <div className={style.main_total_option_text}>
-                <p className={style.main_total_option_text_up}>{t("Total Customers")}</p>
-                <h3 className={style.main_total_option_text_head}>{m?.countOrders ? m.countOrders: "0"}</h3>
+                <p className={style.main_total_option_text_up}>
+                  {t("Total Customers")}
+                </p>
+                <h3 className={style.main_total_option_text_head}>
+                  {m?.countOrders ? m.countOrders : "0"}
+                </h3>
               </div>
 
               <div
@@ -585,8 +505,12 @@ const Overview = () => {
               style={{ animationDuration: "0.6s" }}
             >
               <div className={style.main_total_option_text}>
-                <p className={style.main_total_option_text_up}>{t("Total Orders")}</p>
-                <h3 className={style.main_total_option_text_head}>{m?.countOrders ? m.countOrders: "0"}</h3>
+                <p className={style.main_total_option_text_up}>
+                  {t("Total Orders")}
+                </p>
+                <h3 className={style.main_total_option_text_head}>
+                  {m?.countOrders ? m.countOrders : "0"}
+                </h3>
               </div>
 
               <div
@@ -613,9 +537,16 @@ const Overview = () => {
               style={{ animationDuration: "0.65s" }}
             >
               <div className={style.main_total_option_text}>
-                <p className={style.main_total_option_text_up}>{t("Total Tips")}</p>
+                <p className={style.main_total_option_text_up}>
+                  {t("Total Tips")}
+                </p>
                 <h3 className={style.main_total_option_text_head}>
-                  ${m ? m?.countOrders * 0.1 > 1000 ? Math.floor(m?.countOrders/1000).toFixed(2) + "K": (m?.countOrders * 0.1).toFixed(2) : "0"}
+                  $
+                  {m
+                    ? m?.countOrders * 0.1 > 1000
+                      ? Math.floor(m?.countOrders / 1000).toFixed(2) + "K"
+                      : (m?.countOrders * 0.1).toFixed(2)
+                    : "0"}
                 </h3>
               </div>
 
@@ -644,12 +575,12 @@ const Overview = () => {
           </div>
 
           {/* -------------------------- Transactions -------------------------------- */}
-          <div className={style.main_down}
-          onClick={() => setPeriodDown(false)}
-          >
+          <div className={style.main_down} onClick={() => setPeriodDown(false)}>
             {/* -------------------------- Transactions up -------------------------------- */}
             <div className={style.main_down_up}>
-              <p className={style.main_down_up_head}>{t("Recent Transactions")}</p>
+              <p className={style.main_down_up_head}>
+                {t("Recent Transactions")}
+              </p>
               <div className={style.main_down_up_actions}>
                 <div className={style.main_down_up_actions_search}>
                   {/* <SearchInput
@@ -721,8 +652,9 @@ const Overview = () => {
                 </div>
 
                 {/* --------------------- setting ----------------------------------- */}
-                <div className={style.main_down_up_actions_setting}
-                title={t("Sorting Date")}
+                <div
+                  className={style.main_down_up_actions_setting}
+                  title={t("Sorting Date")}
                 >
                   <svg
                     width="18"
@@ -783,13 +715,17 @@ const Overview = () => {
                     />
                   </svg>
 
-                  <div className={style.main_down_up_actions_setting_down}
-                  // style={{display: ordersSetting ? "flex" : "none"}}
+                  <div
+                    className={style.main_down_up_actions_setting_down}
+                    // style={{display: ordersSetting ? "flex" : "none"}}
                   >
-                    <button className={style.main_down_up_actions_setting_down_btn}
-                    onClick={() => setAscend("ASC")}
-                    style={{backgroundColor: ascend==="ASC" ? "#fdefd9" : ""}}
-                    title={t("Ascending Date")}
+                    <button
+                      className={style.main_down_up_actions_setting_down_btn}
+                      onClick={() => setAscend("ASC")}
+                      style={{
+                        backgroundColor: ascend === "ASC" ? "#fdefd9" : "",
+                      }}
+                      title={t("Ascending Date")}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -802,21 +738,24 @@ const Overview = () => {
                       </svg>
                     </button>
 
-                    <button className={style.main_down_up_actions_setting_down_btn}
-                    onClick={() => setAscend("DESC")} 
-                    style={{backgroundColor: ascend==="DESC" ? "#fdefd9" : ""}}
-                    title={t("Descending Date")}
+                    <button
+                      className={style.main_down_up_actions_setting_down_btn}
+                      onClick={() => setAscend("DESC")}
+                      style={{
+                        backgroundColor: ascend === "DESC" ? "#fdefd9" : "",
+                      }}
+                      title={t("Descending Date")}
                     >
                       <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          height="24px"
-                          viewBox="0 -960 960 960"
-                          width="24px"
-                          fill="#6c7278"
-                          style={{rotate: "180deg"}}
-                        >
-                          <path d="M400-240v-80h160v80H400ZM240-440v-80h480v80H240ZM120-640v-80h720v80H120Z" />
-                        </svg>
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="24px"
+                        viewBox="0 -960 960 960"
+                        width="24px"
+                        fill="#6c7278"
+                        style={{ rotate: "180deg" }}
+                      >
+                        <path d="M400-240v-80h160v80H400ZM240-440v-80h480v80H240ZM120-640v-80h720v80H120Z" />
+                      </svg>
                     </button>
                   </div>
                 </div>
@@ -824,8 +763,9 @@ const Overview = () => {
             </div>
 
             {/* -------------------------- Transactions main -------------------------------- */}
-            <div className={style.main_down_transactions}
-            onClick={() => setOrdersSetting(false)}
+            <div
+              className={style.main_down_transactions}
+              onClick={() => setOrdersSetting(false)}
             >
               <table className={style.main_down_transactions_table}>
                 <thead className={style.main_down_transactions_table_head}>
@@ -859,7 +799,13 @@ const Overview = () => {
                     >
                       {t("Collected/Cashier")}
                     </th>
-                    <th className={style.main_down_transactions_table_head_th_mobileDate}>Date & Time</th>
+                    <th
+                      className={
+                        style.main_down_transactions_table_head_th_mobileDate
+                      }
+                    >
+                      Date & Time
+                    </th>
                     <th
                       className={
                         style.main_down_transactions_table_head_th_desktop
@@ -867,7 +813,7 @@ const Overview = () => {
                     >
                       {t("Payment method")}
                     </th>
-                    <th style={{width: "110px"}}>{t("Action")}</th>
+                    <th style={{ width: "110px" }}>{t("Action")}</th>
                   </tr>
                 </thead>
 
@@ -888,110 +834,182 @@ const Overview = () => {
               </table>
             </div>
 
-
             <div className={style.main_down_pagination}>
-              
               <div className={style.main_down_pagination_pages}>
-
                 {/* left button */}
-                <div className={style.main_down_pagination_pages_left}
-                onClick={() => {
-                  setPage(page> 1 ? page - 1 : page)
-                  page === pagination && setPagination(pagination > 1 ? pagination - 1 : pagination)
-                }}
+                <div
+                  className={style.main_down_pagination_pages_left}
+                  onClick={() => {
+                    setPage(page > 1 ? page - 1 : page);
+                    page === pagination &&
+                      setPagination(
+                        pagination > 1 ? pagination - 1 : pagination
+                      );
+                  }}
                 >
-                  <svg width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6 12.2797L1.65333 7.93306C1.14 7.41973 1.14 6.57973 1.65333 6.06639L6 1.71973" stroke="#292D32" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg
+                    width="7"
+                    height="14"
+                    viewBox="0 0 7 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M6 12.2797L1.65333 7.93306C1.14 7.41973 1.14 6.57973 1.65333 6.06639L6 1.71973"
+                      stroke="#292D32"
+                      strokeWidth="1.5"
+                      strokeMiterlimit="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
 
                 {/* pages */}
-                <div className={style.main_down_pagination_pages_page}
-                style={{border: page === pagination ? "1px solid #6c7278" : ""}}
-                onClick={() => setPage(pagination)}
+                <div
+                  className={style.main_down_pagination_pages_page}
+                  style={{
+                    border: page === pagination ? "1px solid #6c7278" : "",
+                  }}
+                  onClick={() => setPage(pagination)}
                 >
                   {pagination}
                 </div>
-                
-                {countOrders >1 && <div className={style.main_down_pagination_pages_page}
-                style={{border: page === pagination + 1 ? "1px solid #6c7278" : ""}}
-                onClick={() => setPage(pagination + 1)}
-                >
-                  {pagination + 1}
-                </div>}
-                
-                {countOrders >2 && <div className={style.main_down_pagination_pages_page}
-                style={{border: page === pagination + 2 ? "1px solid #6c7278" : ""}}
-                onClick={() => setPage(pagination + 2)}
-                >
-                  {pagination + 2}
-                </div>}
 
-                {countOrders >3 && <div className={`${style.main_down_pagination_pages_dots} 
-                ${pagination + 4 === countOrders ? style.main_down_pagination_pages_dots_hover : ""}`}
-                style={{
-                  border: page === pagination + 3 ? "1px solid #6c7278" : "",
-                }}
-                onClick={() => setPage(pagination + 4 === countOrders ? countOrders -1 : page)}
-                >
-                  {pagination + 4 === countOrders ? countOrders -1 : "..." }
-                </div>}
+                {countOrders > 1 && (
+                  <div
+                    className={style.main_down_pagination_pages_page}
+                    style={{
+                      border:
+                        page === pagination + 1 ? "1px solid #6c7278" : "",
+                    }}
+                    onClick={() => setPage(pagination + 1)}
+                  >
+                    {pagination + 1}
+                  </div>
+                )}
 
-                {countOrders >4 && <div className={style.main_down_pagination_pages_page}
-                style={{
-                  border: page === countOrders || pagination + 9 === page  ? "1px solid #6c7278" : "",
-                }}
-                onClick={() => {
-                  setPage(
-                  pagination + 9 <= countOrders ? pagination + 9 : countOrders
-                )
-                  setPagination(countOrders - 4 > pagination + 9 ? pagination + 9 : countOrders - 4)
-                }}
-                >
-                  {
-                    pagination + 9 <= countOrders ? pagination + 9 : countOrders
-                  }
-                </div>}
+                {countOrders > 2 && (
+                  <div
+                    className={style.main_down_pagination_pages_page}
+                    style={{
+                      border:
+                        page === pagination + 2 ? "1px solid #6c7278" : "",
+                    }}
+                    onClick={() => setPage(pagination + 2)}
+                  >
+                    {pagination + 2}
+                  </div>
+                )}
+
+                {countOrders > 3 && (
+                  <div
+                    className={`${style.main_down_pagination_pages_dots} 
+                ${
+                  pagination + 4 === countOrders
+                    ? style.main_down_pagination_pages_dots_hover
+                    : ""
+                }`}
+                    style={{
+                      border:
+                        page === pagination + 3 ? "1px solid #6c7278" : "",
+                    }}
+                    onClick={() =>
+                      setPage(
+                        pagination + 4 === countOrders ? countOrders - 1 : page
+                      )
+                    }
+                  >
+                    {pagination + 4 === countOrders ? countOrders - 1 : "..."}
+                  </div>
+                )}
+
+                {countOrders > 4 && (
+                  <div
+                    className={style.main_down_pagination_pages_page}
+                    style={{
+                      border:
+                        page === countOrders || pagination + 9 === page
+                          ? "1px solid #6c7278"
+                          : "",
+                    }}
+                    onClick={() => {
+                      setPage(
+                        pagination + 9 <= countOrders
+                          ? pagination + 9
+                          : countOrders
+                      );
+                      setPagination(
+                        countOrders - 4 > pagination + 9
+                          ? pagination + 9
+                          : countOrders - 4
+                      );
+                    }}
+                  >
+                    {pagination + 9 <= countOrders
+                      ? pagination + 9
+                      : countOrders}
+                  </div>
+                )}
 
                 {/* right button */}
-                <div className={style.main_down_pagination_pages_right}
-                onClick={() => {
-                  setPage(countOrders > page ? page + 1 : page)
-                  page - 2 === pagination && setPagination(pagination + 4 < countOrders ? pagination + 1 : pagination)
-                }}
+                <div
+                  className={style.main_down_pagination_pages_right}
+                  onClick={() => {
+                    setPage(countOrders > page ? page + 1 : page);
+                    page - 2 === pagination &&
+                      setPagination(
+                        pagination + 4 < countOrders
+                          ? pagination + 1
+                          : pagination
+                      );
+                  }}
                 >
-                  <svg width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0.940002 12.2797L5.28667 7.93306C5.8 7.41973 5.8 6.57973 5.28667 6.06639L0.940002 1.71973" stroke="#292D32" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg
+                    width="7"
+                    height="14"
+                    viewBox="0 0 7 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0.940002 12.2797L5.28667 7.93306C5.8 7.41973 5.8 6.57973 5.28667 6.06639L0.940002 1.71973"
+                      stroke="#292D32"
+                      strokeWidth="1.5"
+                      strokeMiterlimit="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
-
               </div>
 
               <div className={style.main_down_pagination_itemperpage}>
-                  
-                  <div className={style.main_down_pagination_itemperpage_info}>
-                    {t("Showing")} {page === 1 ? 1 : page * itemperpage - itemperpage + 1} {t("to")} {page * itemperpage > allDataCount ? allDataCount : page * itemperpage} {t("of")} {allDataCount} {t("entries")}
-                  </div>
-                  
-                  <div className={style.main_down_pagination_itemperpage_action}>
-                    <select
-                      className={style.main_down_pagination_itemperpage_action_select}
-                      onChange={(e) =>
-                        setItemPerPage(Number(e.target.value))
-                      }
-                      value={itemperpage}
-                    >
-                      <option value="8">{t("Show")} 8</option>
-                      <option value="10">{t("Show")} 10</option>
-                      <option value="20">{t("Show")} 20</option>
-                    </select>
-                  </div>
+                <div className={style.main_down_pagination_itemperpage_info}>
+                  {t("Showing")}{" "}
+                  {page === 1 ? 1 : page * itemperpage - itemperpage + 1}{" "}
+                  {t("to")}{" "}
+                  {page * itemperpage > allDataCount
+                    ? allDataCount
+                    : page * itemperpage}{" "}
+                  {t("of")} {allDataCount} {t("entries")}
+                </div>
 
+                <div className={style.main_down_pagination_itemperpage_action}>
+                  <select
+                    className={
+                      style.main_down_pagination_itemperpage_action_select
+                    }
+                    onChange={(e) => setItemPerPage(Number(e.target.value))}
+                    value={itemperpage}
+                  >
+                    <option value="8">{t("Show")} 8</option>
+                    <option value="10">{t("Show")} 10</option>
+                    <option value="20">{t("Show")} 20</option>
+                  </select>
+                </div>
               </div>
             </div>
-
-
-
           </div>
         </div>
       </div>

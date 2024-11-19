@@ -28,7 +28,7 @@
         background-color: transparent;
         border-radius: 50%;
         animation: loaderBorder 2.5s infinite ease-in-out;
-        border-top: 3px solid white;
-        border-bottom: 3px solid white;
+        border-top: 3.5px solid $main_color;
+        border-bottom: 3.5px solid $main_color;
     }
 }

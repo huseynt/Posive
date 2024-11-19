@@ -4,7 +4,7 @@ import { useOutletContext } from "react-router-dom";
 
 import ChartComponent from '../../features/ChartComponent/ChartComponent';
 import { useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { createGetProducts } from '../../../utils/API/API';
 import { IGetProducts } from '../../../utils/API/types';
 import ProductsTableItem from '../../features/ProductsTableItem/ProductsTableItem';
@@ -12,6 +12,8 @@ import ProductItemAdd from '../../features/ProductItemAdd/ProductItemAdd';
 import PageLoader from '../../../common/PageLoader/PageLoader';
 import { useTranslation } from 'react-i18next';
 import Notify from '../../features/Notify/Notify';
+import { NotificationState } from '../../../redux/slice/notificationSlice';
+import { useSelector } from 'react-redux';
 
 interface IProduct {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -34,8 +36,10 @@ const Product = () => {
   const [purchanes, setPurchanes] = useState<number>(0);
   // const [deleteAllOpen, setDeleteAllOpen] = useState<boolean>(false);
   const {t} = useTranslation();
+  const newNotifications: NotificationState[] = useSelector( (state: { notifications: {new: NotificationState[]} }) => state.notifications.new);
   
   // ------------------- get products ------------------------
+  const queryClient = useQueryClient();
   const {
     data: getProducts,
     isPending: isProductsPending,
@@ -52,6 +56,7 @@ const Product = () => {
         
       );
       setAllDataCount(getProducts.countProducts);
+      queryClient.invalidateQueries({queryKey: ["getNotifications"]});
     }
   }, [getProducts, isProductsPending, itemperpage]);
   //  ----------------- get products ---------------------------
@@ -169,6 +174,7 @@ const Product = () => {
                   className={style.main_mobileUp_actions_right_setting}
                   onClick={() => setNotification(!notification)}
                 >
+                  <div className={style.count}>{newNotifications.length}</div>
                   <svg
                     width="18"
                     height="18"

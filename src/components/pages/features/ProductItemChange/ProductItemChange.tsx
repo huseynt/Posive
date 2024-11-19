@@ -108,6 +108,7 @@ const ProductItemChange: React.FC<IQRCodeComponentProps> = (props) => {
     onSuccess: () => {
       console.log('Success');
       queryClient.invalidateQueries({queryKey: ["getProducts"]});
+      queryClient.invalidateQueries({queryKey: ["getNotifications"]});
       setViewOpen("")
       requestNotify("done", t("Product saved successfully"));
     },

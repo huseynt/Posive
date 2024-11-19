@@ -8,9 +8,10 @@
 .item {
     width: 100%;
     display: flex;
-    flex-direction: column;
     margin-top: 2px;
+    justify-content: space-between;
     padding-block: 5px;
+    padding: 0 2px;
     border-bottom: 1px solid;
     cursor: pointer;
     user-select: none;
@@ -19,17 +20,26 @@
         border-color: t(gray);
     }
 
-    &_head {
-        @extend %sm_b;
+    &_block {
+        display: flex;
+        flex-direction: column;
 
-        @include themed() {
-            color: t(black);
+        &_head {
+            @extend %sm_b;
+    
+            @include themed() {
+                color: t(black);
+            }
+        }
+        &_desc {
+            @extend %sm, %text_overflow;
+            @include themed() {
+                color: t(black_light);
+            }
         }
     }
-    &_desc {
-        @extend %sm, %text_overflow;
-        @include themed() {
-            color: t(black_light);
-        }
+
+    &_new {
+        color: $main_color;
     }
 }

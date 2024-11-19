@@ -11,7 +11,7 @@ import { Helmet } from "react-helmet";
 
 import { useOutletContext } from "react-router-dom";
 import { createGetMeals } from "../../../utils/API/API";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { IGetMeals } from "../../../utils/API/types";
 
 
@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addMeal, resetState } from "../../../redux/slice/mealSlice";
 import PageLoader from "../../../common/PageLoader/PageLoader";
 import { useTranslation } from "react-i18next";
+import { NotificationState } from "../../../redux/slice/notificationSlice";
 
 
 
@@ -43,16 +44,13 @@ const Main= () => {
   // ------------------------- Redux -----------------------------
   const dispatch = useDispatch();
   const reduxMeals: IGetMeals[] = useSelector(
-  (state: { orders: IGetMeals[] }) => state.orders);
-
-  // useEffect(() => {
-  //   console.log(reduxMeals);
-  // }, [reduxMeals]);
+  (state: { order: {orders: IGetMeals[]} }) => state.order.orders);
+  const newNotifications: NotificationState[] = useSelector( (state: { notifications: {new: NotificationState[]} }) => state.notifications.new);
   // ------------------------- Redux -----------------------------
 
 
-
   // ------------------- get meals ------------------------
+  const queryClient = useQueryClient();
   const {
     data: getMealsData,
     isLoading: isMealsLoading,
@@ -66,6 +64,7 @@ const Main= () => {
       dispatch(resetState());
       getMealsData.forEach((meal) => dispatch(addMeal(meal)));
       setMealsFiltered(getMealsData);
+      queryClient.invalidateQueries({queryKey: ["getNotifications"]});
     }
   }, [getMealsData, isMealsLoading, dispatch]);
   
@@ -188,6 +187,7 @@ const Main= () => {
             className={style.main_up_notification}
             onClick={() => setNotification(!notification)}
           >
+            <div className={style.count}>{newNotifications.length}</div>
             <svg
               width="18"
               height="18"
@@ -288,62 +288,8 @@ const Main= () => {
                 className={style.main_mobileUp_actions_right_setting}
                 onClick={() => setNotification(!notification)}
               >
-                {/* <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M14.6665 4.3335H10.6665"
-                    stroke="#1A1C1E"
-                    strokeWidth="1.5"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M4.00016 4.3335H1.3335"
-                    stroke="#1A1C1E"
-                    strokeWidth="1.5"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M6.66683 6.66667C7.95549 6.66667 9.00016 5.622 9.00016 4.33333C9.00016 3.04467 7.95549 2 6.66683 2C5.37816 2 4.3335 3.04467 4.3335 4.33333C4.3335 5.622 5.37816 6.66667 6.66683 6.66667Z"
-                    stroke="#1A1C1E"
-                    strokeWidth="1.5"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M14.6667 11.6665H12"
-                    stroke="#1A1C1E"
-                    strokeWidth="1.5"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M5.3335 11.6665H1.3335"
-                    stroke="#1A1C1E"
-                    strokeWidth="1.5"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M9.33333 14.0002C10.622 14.0002 11.6667 12.9555 11.6667 11.6668C11.6667 10.3782 10.622 9.3335 9.33333 9.3335C8.04467 9.3335 7 10.3782 7 11.6668C7 12.9555 8.04467 14.0002 9.33333 14.0002Z"
-                    stroke="#1A1C1E"
-                    strokeWidth="1.5"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg> */}
+                <div className={style.count}>{newNotifications.length}</div>
+                
                 <svg
                   width="18"
                   height="18"

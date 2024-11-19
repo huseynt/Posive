@@ -81,7 +81,6 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
 
   // ----------------- save order -----------------
   const queryClient = useQueryClient();
-  
   const {
     mutate: SaveOrder,
     isPending: isSaveOrders,
@@ -90,6 +89,7 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
     onSuccess: () => {
       console.log('Success');
       queryClient.invalidateQueries({queryKey: ["getOrders"]})
+      queryClient.invalidateQueries({queryKey: ["getNotifications"]});
       setViewOpen("")
       requestNotify("done", "Order saved successfully");
     },
@@ -103,15 +103,6 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
     SaveOrder(data);
   }
   // ----------------- save order -----------------
-
-
-  useEffect(() => {
-    console.log(productCounts);
-  }, [productCounts]);
-
-  useEffect(() => {
-    console.log(data);
-  }, [setData, data])
 
   return (
     <div className={style.view}>

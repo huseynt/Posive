@@ -71,6 +71,7 @@ const General: React.FC<IGeneral> = (props) => {
     onSuccess: () => {
       requestNotify("done", t("Saved successfully!"));
       queryClient.invalidateQueries({queryKey: ["getSettingGeneral"]})
+      queryClient.invalidateQueries({queryKey: ["getNotifications"]});
     },
     onError: (error) => {
       console.log('Delete error:', error);  

@@ -18,6 +18,20 @@
   }
 }
 
+.count {
+  min-width: 23px;
+  position: absolute;
+  top: -7px;
+  right: -9px;
+  padding: 2px 5px;
+  border-radius: 50%;
+  background-color: $main_color;
+  color: $white;
+  @extend %s;
+  font-weight: 600;
+  text-align: center;
+}
+
 .selectedSub {
   path {
       stroke: $main_color !important;
@@ -133,6 +147,8 @@
           border: 1px solid $gray;
           user-select: none;
           cursor: pointer;
+          position: relative;
+          
           @include themed() {
             border: 1px solid t(gray);
             background-color: t(white);

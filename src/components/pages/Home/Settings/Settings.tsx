@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import { NotificationState } from '../../../redux/slice/notificationSlice';
+import { useSelector } from 'react-redux';
 
 
 
@@ -33,7 +35,7 @@ const Settings: React.FC<ThemeProps> = (props) => {
   const { setTheme, theme} = props;
   const { setToggleMenu, setNotification, notification, requestNotify } = useOutletContext<IProduct>();
   const { t } = useTranslation();
-
+  const newNotifications: NotificationState[] = useSelector( (state: { notifications: {new: NotificationState[]} }) => state.notifications.new);
   const [mobileSelect, setMobileSelect] = useState<boolean>(false);
   const [sub, setSub] = useState<string>("");
   const navigate = useNavigate();
@@ -146,6 +148,7 @@ const Settings: React.FC<ThemeProps> = (props) => {
                 className={style.main_mobileUp_actions_right_setting}
                 onClick={() => setNotification(!notification)}
               >
+                <div className={style.count}>{newNotifications.length}</div>
                 <svg
                   width="18"
                   height="18"

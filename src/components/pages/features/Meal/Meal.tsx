@@ -25,7 +25,7 @@ const Meal = (props: IMeal) => {
   const { id, name, price, description, imageUrl, stock } = props;
   const [aboutmeal, setAboutMeal] = useState<boolean>(false);
   const dispatch = useDispatch();
-  const thisMeal = useSelector((state: { orders: IGetMeals[] }) => state.orders.find((meal) => meal.id === id));
+  const thisMeal = useSelector((state: {order: { orders: IGetMeals[] }}) => state.order.orders.find((meal) => meal.id === id));
 
 
 

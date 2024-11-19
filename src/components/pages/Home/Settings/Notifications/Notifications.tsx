@@ -21,7 +21,7 @@ const Notifications: React.FC<IGeneral> = (props) => {
     data: getNotifications,
     isPending: isNotificationsLoading,
   } = useQuery<IGetNotifications | undefined>({
-    queryKey: ["getNotifications"],
+    queryKey: ["getNotification"],
     queryFn: createGetNotifications,
   });
   useEffect(() => {
@@ -67,7 +67,7 @@ const Notifications: React.FC<IGeneral> = (props) => {
     mutationFn: createSaveNotifications,
     onSuccess: (data) => {
       if (data == 200) {
-        queryClient.invalidateQueries({queryKey: ["getNotifications"]})
+        queryClient.invalidateQueries({queryKey: ["getNotification"]})
       }
     },
     onError: (error) => {

@@ -59,6 +59,20 @@
     }
 }
 
+.count {
+    min-width: 23px;
+    position: absolute;
+    top: -7px;
+    right: -9px;
+    padding: 2px 5px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: $main_color;
+    color: $white;
+    @extend %s;
+    font-weight: 600;
+}
+
 .main_down_actions_setting:hover .main_down_actions_setting_down {
     display: flex;
     background-color: $main_light_two;
@@ -301,7 +315,8 @@
                     border-radius: 7px;
                     user-select: none;
                     cursor: pointer;
-
+                    position: relative;
+                    
                     @include themed() {
                         border: 1px solid t(gray);
                         background-color: t(white);

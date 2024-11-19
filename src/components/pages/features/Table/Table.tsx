@@ -21,7 +21,7 @@ const Table: React.FC<ITable> = (props) => {
   const { t } = useTranslation();
   // -------------------- redux --------------------------
   const dispatch = useDispatch();
-  const { tables } = useSelector((state: IOrderState) => state);
+  const { tables } = useSelector((state: {order: IOrderState}) => state.order);
   // ------------------------------------------------------
 
 

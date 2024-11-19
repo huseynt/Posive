@@ -27,6 +27,7 @@ const ProductItemDelete: React.FC<IQRCodeComponentProps> = (props) => {
         console.log('Deleted');
         setViewOpen("");
         queryClient.invalidateQueries({queryKey: ["getProducts"]});
+        queryClient.invalidateQueries({queryKey: ["getNotifications"]});
         requestNotify("done", t("Order deleted successfully"));
     },
     onError: (error) => {

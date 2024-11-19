@@ -89,7 +89,6 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
 
   // ----------------- add product -----------------
   const queryClient = useQueryClient();
-  
   const {
     mutate: AddProduct,
     isPending: isSaveProductPending,
@@ -98,6 +97,7 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
     onSuccess: () => {
       console.log('Success');
       queryClient.invalidateQueries({queryKey: ["getProducts"]})
+      queryClient.invalidateQueries({queryKey: ["getNotifications"]});
       setViewAdd(false);
       requestNotify("done", t("Product saved successfully"));
     },

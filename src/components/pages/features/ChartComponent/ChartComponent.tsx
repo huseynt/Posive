@@ -39,14 +39,9 @@ const ChartComponent: React.FC<IChartComponenrtProps> = (props) => {
         queryKey: ["getStatistics", { months: selectedMonth, year: selectedYear}],
         queryFn: () => createGetStatistics(selectedMonth, Number(selectedYear)),
     });
-
-    useEffect(() => {
-        console.log("StatisticsData", StatisticsData);
-    }, [StatisticsData]);
     
     useEffect(() => {
         if (StatisticsData && !isPending) {
-        console.log("StatisticsData", StatisticsData.incomes, StatisticsData.years);
         setProductsNumber(StatisticsData.products);
         setMonthlyIncome(StatisticsData.monthlyIncome);
         setPurchanes(StatisticsData.purchase);

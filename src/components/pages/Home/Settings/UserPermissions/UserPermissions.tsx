@@ -103,6 +103,7 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
       setMultiCheck([]);
       setChecked(false);
       queryClient.invalidateQueries({queryKey: ["getPermission"]})
+      queryClient.invalidateQueries({queryKey: ["getNotifications"]});
     },
     onError: (error) => {
       console.log('Delete error:', error);  

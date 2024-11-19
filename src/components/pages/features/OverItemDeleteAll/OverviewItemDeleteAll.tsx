@@ -26,6 +26,7 @@ const OverviewItemDeleteAll: React.FC<IQRCodeComponentProps> = (props) => {
       console.log('Delete success:');
         console.log('Deleted');
         queryClient.invalidateQueries({queryKey: ["getOrders"]})
+        queryClient.invalidateQueries({queryKey: ["getNotifications"]});
         setMultiCheck([]);
         setDeleteAllOpen(false);
         // requestNotify("done", "Order deleted successfully");

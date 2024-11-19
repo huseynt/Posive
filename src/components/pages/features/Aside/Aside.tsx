@@ -37,7 +37,7 @@ const Aside: React.FC<AsideProps> = (props) => {
   const [orderId, setOrderId] = useState<string>(
     Math.floor(Math.random() * 1000000000).toString()
   );
-  const { name, place, tables, orders, paymentMethod } = useSelector((state: IOrderState) => state);
+  const { name, place, tables, orders, paymentMethod } = useSelector((state: {order: IOrderState}) => state.order);
   const [mastercard, setMastercard] = useState<boolean>(false);
   const {t} = useTranslation();
   
@@ -66,6 +66,7 @@ const Aside: React.FC<AsideProps> = (props) => {
       dispatch(resetTable());
       setOrderId(Math.floor(Math.random() * 1000000000).toString());
       queryClient.invalidateQueries({queryKey: ["getMeals"]})
+      queryClient.invalidateQueries({queryKey: ["getNotifications"]});
     },
     onError: (error) => {
       console.log('Login error:', error);

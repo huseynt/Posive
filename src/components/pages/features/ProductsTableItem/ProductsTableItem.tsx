@@ -6,7 +6,6 @@ import ProductItemChange from "../ProductItemChange/ProductItemChange";
 import ProductItemDelete from "../ProductItemDelete/ProductItemDelete";
 import Notify from "../Notify/Notify";
 
-
 const ProductsTableItem: React.FC<IProducts> = (props) => {
   const {
     name,

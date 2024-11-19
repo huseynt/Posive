@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { NotificationState } from "../../../redux/slice/notificationSlice";
+import { useSelector } from "react-redux";
 
 
 interface MainProps {
@@ -21,8 +23,7 @@ interface MainProps {
 const HelpCenter = () => {
   const { setToggleMenu, setNotification, notification }= useOutletContext<MainProps>();
   const {t} = useTranslation();
-
-
+  const newNotifications: NotificationState[] = useSelector( (state: { notifications: {new: NotificationState[]} }) => state.notifications.new);
   const navigate = useNavigate();
   const [sub, setSub] = useState<string>("");
   const [mobileSelect, setMobileSelect] = useState<boolean>(false);
@@ -34,7 +35,6 @@ const HelpCenter = () => {
       const path = window.location.pathname.split("/")[3];
       setSub(path);
     });
-    console.log(sub);
   }, [sub]);
 
   const handleSub = (path: string) => {
@@ -129,6 +129,7 @@ const HelpCenter = () => {
                 className={style.main_mobileUp_actions_right_setting}
                 onClick={() => setNotification(!notification)}
               >
+                <div className={style.count}>{newNotifications.length}</div>
                 <svg
                   width="18"
                   height="18"

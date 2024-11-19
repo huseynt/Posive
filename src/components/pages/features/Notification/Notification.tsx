@@ -3,8 +3,13 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { createNotifications } from "../../../utils/API/API";
 import NotificationItem from "../NotificationItem/NotificationItem";
+import { useDispatch, useSelector } from "react-redux";
+import { addNotificationCount, reset } from "../../../redux/slice/notificationSlice";
 
-
+interface INotificationSelector { 
+  text: string; 
+  description: string 
+}
 
 interface INotification {
   setNotification: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,27 +20,32 @@ interface INotification {
 const Notification: React.FC<INotification> = ({ setNotification, notification, bag }) => {
   const queryClient = useQueryClient();
   const socket = import.meta.env.VITE_SOCKET;
+  const dispatch = useDispatch();
+  const newNotifications: INotificationSelector[] = useSelector( (state: { notifications: {new: INotificationSelector[]} }) => state.notifications.new);
 
-  const fetchNotifications = async () => {
-    try {
-      const response = await createNotifications(); 
-      return response; 
-    } catch (error) {
-      throw new Error("Bildirişlər yüklənmədi");
-    }
-  };
 
-  // TanStack Query ilə bildirişlər
+  // ----------------------- get notifications -----------------------
   const { data: notifications, isLoading: isLoadingNotifications } = useQuery({
-    queryKey: ["notifications"],
-    queryFn: fetchNotifications,
+    queryKey: ["getNotifications"],
+    queryFn: createNotifications,
     refetchOnWindowFocus: false,
     staleTime: 20000,
   });
-
-  
   useEffect(() => {
-    const ws = new WebSocket(`${socket}/ws`);
+    if (notifications) {
+      dispatch(addNotificationCount(notifications));
+    } else {
+      dispatch(reset());
+    }
+  }, [notifications, dispatch]);
+  // ----------------------- get notifications -----------------------
+
+
+
+
+  // ----------------------- WebSocket -----------------------
+  useEffect(() => {
+    const ws = new WebSocket(`${socket}/ws/topic/notifications`);
 
     ws.onopen = () => {
       console.log("WebSocket açıldı!");
@@ -49,18 +59,21 @@ const Notification: React.FC<INotification> = ({ setNotification, notification, 
             ]);
     };
 
-    ws.onerror = (error) => {
-      console.error("WebSocket xətası:", error);
-    };
+    // ws.onerror = (error) => {
+    //   console.error("WebSocket xətası:", error);
+    // };
 
-    ws.onclose = () => {
-      console.log("WebSocket əlaqəsi kəsildi");
-    };
+    // ws.onclose = () => {
+    //   console.log("WebSocket əlaqəsi kəsildi");
+    // };
 
-    return () => {
-      ws.close(); 
-    };
+    // return () => {
+    //   ws.close(); 
+    // };
   }, [queryClient]);
+  // ----------------------- WebSocket -----------------------
+
+
 
   return (
     <div
@@ -78,7 +91,9 @@ const Notification: React.FC<INotification> = ({ setNotification, notification, 
           className={style.notification_screen_block}
           style={{ right: bag ? "328px" : "0" }}
         >
+
           <div className={style.notification_screen_block_back}>
+
             <svg
               width="24"
               height="25"
@@ -110,8 +125,8 @@ const Notification: React.FC<INotification> = ({ setNotification, notification, 
             {isLoadingNotifications ? (
               <p>Bildirişlər yüklənir...</p>
             ) : (
-              notifications?.map((notification: {text: string, description: string}, index: number) => (
-                <NotificationItem key={index} id={index} name={notification.text} description={notification.description} />
+              notifications?.slice().reverse().map((notification: {text: string, description: string}, index: number) => (
+                <NotificationItem key={index} newNotifications={newNotifications} id={index} name={notification.text} descriptionId={notification.description} />
               ))
             )}
           </div>

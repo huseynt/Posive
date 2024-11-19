@@ -163,6 +163,7 @@
                 width: 100%;
                 display: flex;
                 justify-content: start;
+                position: relative;
 
                 @include themed() {
                     background-color: t(white);
