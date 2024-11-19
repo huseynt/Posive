@@ -23,7 +23,7 @@ const notificationSlice = createSlice({
                         (existing) => existing.description === notification.description
                     )
             );
-            state.new = newNotifications;
+            state.new = newNotifications < 1 ? newNotifications: [];
             state.all = [...state.all, ...newNotifications];
         },
         reset: (state) => {

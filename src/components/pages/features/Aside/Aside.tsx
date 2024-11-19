@@ -45,7 +45,7 @@ const Aside: React.FC<AsideProps> = (props) => {
   const queryClient = useQueryClient()
   const {
     mutate: PostOrders,
-    // isPending: isLoginPending,
+    isPending: isLoginPending,
   } = useMutation({
     mutationFn: createPostOrders,
     onSuccess: (data) => {
@@ -70,6 +70,7 @@ const Aside: React.FC<AsideProps> = (props) => {
     },
     onError: (error) => {
       console.log('Login error:', error);
+      requestNotify("undone", "Error");
     },
   });
   const handlePostOrder = () => {
@@ -150,6 +151,7 @@ const Aside: React.FC<AsideProps> = (props) => {
           setMastercard={setMastercard}
           requestNotify={requestNotify}
           handlePostOrder={handlePostOrder}
+          isLoginPending={isLoginPending}
         />
       }
 

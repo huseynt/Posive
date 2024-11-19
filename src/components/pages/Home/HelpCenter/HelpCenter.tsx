@@ -129,7 +129,9 @@ const HelpCenter = () => {
                 className={style.main_mobileUp_actions_right_setting}
                 onClick={() => setNotification(!notification)}
               >
-                <div className={style.count}>{newNotifications.length}</div>
+                { newNotifications.length > 0 && 
+                  <div className={style.count}>{newNotifications.length}</div>
+                }
                 <svg
                   width="18"
                   height="18"

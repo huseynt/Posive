@@ -21,14 +21,19 @@
     }
 
     &_block {
-        display: flex;
-        flex-direction: column;
 
         &_head {
             @extend %sm_b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
     
             @include themed() {
                 color: t(black);
+            }
+
+            &_new {
+                color: $main_color;
             }
         }
         &_desc {
@@ -39,7 +44,5 @@
         }
     }
 
-    &_new {
-        color: $main_color;
-    }
+    
 }

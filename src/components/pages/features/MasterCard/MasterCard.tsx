@@ -12,10 +12,11 @@ interface MasterCardProps {
     setMastercard: React.Dispatch<React.SetStateAction<boolean>>;
     requestNotify: (type: string, message: string) => void;
     handlePostOrder: () => void;
+    isLoginPending: boolean;
 }
 
 const MasterCard: React.FC<MasterCardProps> = (props) => {
-    const { setMastercard, requestNotify, handlePostOrder } = props;
+    const { setMastercard, requestNotify, handlePostOrder, isLoginPending } = props;
     const {t} = useTranslation();
     const [section, setSection] = useState("card");
     const [flipped, setFlipped] = useState(false);
@@ -250,7 +251,7 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
                             <div className={style.masterCard_main_form_btn}
                             onClick={handleVerify}
                             >
-                                {isVerifyCardDataPending ? <Loader/> : t("Pay") }
+                                {isVerifyCardDataPending || isLoginPending ? <Loader/> : t("Pay") }
                             </div>
                         </>
                     )

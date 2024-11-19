@@ -18,13 +18,18 @@ const NotificationItem: React.FC<INotificationItem> = (props) => {
   return (
     <div className={style.item} id={`${id}`}>    
       <div className={style.item_block}>
-        <h2 className={style.item_block_head}>{name}</h2>
+        <div className={style.item_block_head}>
+          <p>{name}</p>
+          <p className={style.item_block_head_new}
+          style={{display: newNotifications.some((item) => item.description === descriptionId) ? "" : "none"}}
+          >new</p>
+        </div>
+
+
         <p className={style.item_block_desc}>{descriptionId}</p>
       </div> 
       
-      <p className={style.item_new}
-      style={{display: newNotifications.some((item) => item.description === descriptionId) ? "" : "none"}}
-      >new</p>
+      
     </div>
   )
 }
