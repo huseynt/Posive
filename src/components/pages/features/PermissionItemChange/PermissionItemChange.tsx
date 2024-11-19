@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import style from "./permissionItemchange.module.scss";
 import { createEditUserPermissions } from "../../../utils/API/API";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -28,10 +28,6 @@ const PermissionItemChange: React.FC<IPermissionItemChangeProps> = (props) => {
   });
   const { t } = useTranslation();
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
@@ -46,13 +42,11 @@ const PermissionItemChange: React.FC<IPermissionItemChangeProps> = (props) => {
     mutationFn: createEditUserPermissions,
     onSuccess: (res) => {
       if (res === "Success") {
-        console.log('Success');
         queryClient.invalidateQueries({queryKey: ["getPermission"]});
         setViewOpen("")
         requestNotify("done", "Order saved successfully");
       } 
       else {
-        console.log('Failed');
         requestNotify("undone", "Order save failed");
       }
     },
@@ -70,7 +64,6 @@ const PermissionItemChange: React.FC<IPermissionItemChangeProps> = (props) => {
       data.role !== ""
     ) {
       EditUserPermissions(data);
-      console.log(data);
     }
   }
   // ----------------- save product -----------------
@@ -110,7 +103,7 @@ const PermissionItemChange: React.FC<IPermissionItemChangeProps> = (props) => {
             <div className={style.view_block_main_information_item}>
               <div className={style.view_block_main_information_item_head}>{t("Email")}</div>
               <div className={`${style.view_block_main_information_item_value} ${style.view_block_main_information_item_value_unique}`}
-              // style={{backgroundColor: "#edf1f3"}}
+              title={data.email}
               >{data.email}</div>
             </div>
 

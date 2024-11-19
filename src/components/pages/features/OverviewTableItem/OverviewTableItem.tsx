@@ -84,36 +84,6 @@ const OverviewTableItem:React.FC<Order> = (props) => {
 
   return (
     <>
-        {viewOpen==="view" && 
-        <OverviewItemView 
-        setViewOpen={setViewOpen} 
-        viewOpen={viewOpen} 
-        {...props}
-        />}
-
-        {viewOpen==="change" && 
-        <OverviewItemChange
-        setViewOpen={setViewOpen} 
-        viewOpen={viewOpen} 
-        requestNotify={requestNotify}
-        {...props}
-        />}
-
-        { viewOpen==="delete" &&
-          <OverviewItemDelete
-          setViewOpen={setViewOpen} 
-          viewOpen={viewOpen} 
-          orderId={orderId}
-          requestNotify={requestNotify}
-          />
-        }
-
-        <Notify notify={notify} purpose={notifyPurpose} describtion={description}/>
-
-
-
-
-
       <tr className={`${style.tr} ${isChecked && style.tr_checked}`}
       onChange={()=> setIsChecked(!isChecked)}
       >
@@ -161,7 +131,31 @@ const OverviewTableItem:React.FC<Order> = (props) => {
         </td>
 
         <td className={style.tr_actions}>
-          <div
+
+          {viewOpen==="view" && 
+          <OverviewItemView 
+          setViewOpen={setViewOpen} 
+          viewOpen={viewOpen} 
+          {...props}
+          />}
+          {viewOpen==="change" && 
+          <OverviewItemChange
+          setViewOpen={setViewOpen} 
+          viewOpen={viewOpen} 
+          requestNotify={requestNotify}
+          {...props}
+          />}
+          { viewOpen==="delete" &&
+            <OverviewItemDelete
+            setViewOpen={setViewOpen} 
+            viewOpen={viewOpen} 
+            orderId={orderId}
+            requestNotify={requestNotify}
+            />
+          }
+          <Notify notify={notify} purpose={notifyPurpose} describtion={description}/>
+
+          <p
             className={style.tr_actions_option}
             style={{
               backgroundColor: "#12B3A8",
@@ -191,8 +185,8 @@ const OverviewTableItem:React.FC<Order> = (props) => {
                 strokeLinejoin="round"
               />
             </svg>
-          </div>
-          <div
+          </p>
+          <p
             className={style.tr_actions_option}
             style={{
               backgroundColor: "#4D81E7",
@@ -227,9 +221,9 @@ const OverviewTableItem:React.FC<Order> = (props) => {
                 strokeLinejoin="round"
               />
             </svg>
-          </div>
+          </p>
           
-          <div
+          <p
             className={style.tr_actions_option}
             style={{
               backgroundColor: "#C65468",
@@ -279,7 +273,7 @@ const OverviewTableItem:React.FC<Order> = (props) => {
                 strokeLinejoin="round"
               />
             </svg>
-          </div>
+          </p>
         </td>
       </tr>
     </>

@@ -193,7 +193,11 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
+%text_overflow_block {
+  white-space: unset !important;
+  overflow: unset !important;
+  text-overflow: unset !important;
+}
 // ----------------- button -----------------
 %btn_main {
   height: 38px;

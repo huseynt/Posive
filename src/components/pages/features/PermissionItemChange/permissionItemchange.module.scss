@@ -158,14 +158,17 @@
                     }
 
                     &_value {
-                        width: 275px;
+                        width: 305px;
                         padding: 7px 27px;
                         border: 1px solid $gray;
                         border-radius: 10px;
+                        @extend %text_overflow;
                         @extend %sm_b;
 
                         @include mobile {
                             width: 100%;
+                            max-width: 290px;
+                            @extend %text_overflow;
                         }
 
 
@@ -194,6 +197,7 @@
                             @extend %sm;
                             font-weight: 500;
                             position: relative;
+                            @extend %text_overflow_block;
                             
 
                             &_head {
@@ -214,6 +218,7 @@
                                 border: 1px solid $gray;
                                 border-radius: 10px;
                                 cursor: pointer;
+
 
                                 @include themed {
                                     color: t(black);

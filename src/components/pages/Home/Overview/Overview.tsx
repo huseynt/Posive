@@ -867,7 +867,7 @@ const Overview = () => {
                     >
                       {t("Payment method")}
                     </th>
-                    <th>{t("Action")}</th>
+                    <th style={{width: "110px"}}>{t("Action")}</th>
                   </tr>
                 </thead>
 
