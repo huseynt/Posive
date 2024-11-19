@@ -33,6 +33,17 @@
     }
 }
 
+.notallowed {
+    width: 100%;
+    cursor: not-allowed;
+    display: grid;
+    place-items: center;
+    @include themed() {
+        background-color: t(light_bg_gray);
+        color: t(black);
+    }
+}
+
 .count {
     min-width: 23px;
     position: absolute;

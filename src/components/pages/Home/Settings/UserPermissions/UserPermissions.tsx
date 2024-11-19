@@ -8,6 +8,7 @@ import PageLoader from '../../../../common/PageLoader/PageLoader'
 import Notify from '../../../features/Notify/Notify'
 import Loader from '../../../../common/Loader/Loader'
 import { useTranslation } from 'react-i18next'
+import { getCookie } from '../../../../utils/reUse/cookie'
 interface IGeneral {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>
 }
@@ -34,7 +35,7 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
   const [checked, setChecked] = useState<boolean>(false);
   const [multiCheck, setMultiCheck] = useState<string[]>([]);
   const { t } = useTranslation();
-
+  const role = getCookie("userRole");
   //  ----------------------------- for notify ----------------------------
   const [notify, setNotify] = useState<boolean>(false);
   const [notifyPurpose, setNotifyPurpose] = useState<string>("");
@@ -115,7 +116,17 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
   }
   // ----------------- delete all --------------------------
 
+
+
+
+
+
+
   return (
+    role !== "SUPER_ADMIN" && role !=="ADMIN" ? (
+      <div className={style.notallowed} >NOT ALLOWED</div>
+    ) : 
+    (
     <>
 
     {isPermissionLoading && <PageLoader /> }
@@ -309,7 +320,7 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
   </div>
 
   </>
-  )
+  ))
 }
 
 export default UserPermissions;

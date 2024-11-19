@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next';
 import Notify from '../../features/Notify/Notify';
 import { changeNewToAll, NotificationState } from '../../../redux/slice/notificationSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { getCookie } from '../../../utils/reUse/cookie';
 
 interface IProduct {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -37,6 +38,7 @@ const Product = () => {
   // const [deleteAllOpen, setDeleteAllOpen] = useState<boolean>(false);
   const {t} = useTranslation();
   const newNotifications: NotificationState[] = useSelector( (state: { notifications: {new: NotificationState[]} }) => state.notifications.new);
+
   
   // ------------------- get products ------------------------
   const queryClient = useQueryClient();
@@ -92,10 +94,18 @@ const Product = () => {
     // ------------------- reset notifcation for colse ------------------------
 
 
+    // ------------------------ check -------------------
+    const role = getCookie("userRole");
+    // ------------------------ check -------------------
 
 
 
-  return (
+
+  return ( 
+    role !== "SUPER_ADMIN" && role !=="ADMIN" ? (
+      <div className={style.notallowed} >NOT ALLOWED</div>
+    ) : 
+    (
     <>
       { viewAdd && <ProductItemAdd 
       requestNotify={requestNotify}
@@ -593,6 +603,7 @@ const Product = () => {
         </div>
       </div>
     </>
+    )
   )
 }
 

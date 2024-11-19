@@ -115,11 +115,6 @@ export const createGetUser = async () => {
         if (res.ok) {
             return res.json();
         }
-        // return Promise.reject(res);
-        // else {
-        //     return "Error";
-        // }
-
         else if (res.status === 400) {
             createRefreshToken();
         }
@@ -336,6 +331,8 @@ export const createSaveOrders = async (data: ISaveOrder) => {
             if (res.ok) {
                 return res.json();
             }
+        } else {
+            return Promise.reject();
         }
         return Promise.reject();
     } catch (error) {
@@ -345,7 +342,9 @@ export const createSaveOrders = async (data: ISaveOrder) => {
 
 // Delete orders (Overview)
 export const createDeleteOrders = async (id: string) => {
+    const role = await userRole();
     try {
+        if (role === "ADMIN" || role === "SUPER_ADMIN") {
         const token = await getToken();
         const accessToken = token?.accessToken;
         const res = await fetch(`${base}/order/delete?id=${id}`, {
@@ -358,7 +357,10 @@ export const createDeleteOrders = async (id: string) => {
         if (res.ok) {
             return "Success";
         }
-        return Promise.reject(res);
+        } else {
+            return Promise.reject();
+        }
+        return Promise.reject();
     } catch (error) {
         console.log(error);
     }
@@ -366,7 +368,9 @@ export const createDeleteOrders = async (id: string) => {
 
 // Delete orders all (Overview)
 export const createDeleteOrdersAll = async (data: number[]) => {
+    const role = await userRole();
     try {
+        if (role === "ADMIN" || role === "SUPER_ADMIN") {
         const token = await getToken();
         const accessToken = token?.accessToken;
         const res = await fetch(`${base}/order/deleteALL`, {
@@ -380,7 +384,10 @@ export const createDeleteOrdersAll = async (data: number[]) => {
         if (res.ok) {
             return "Success";
         }
-        return Promise.reject(res);
+        } else {
+            return Promise.reject();
+        }
+        return Promise.reject();
     } catch (error) {
         console.log(error);
     }
@@ -438,7 +445,9 @@ export const createGetProducts = async ({ page, size, filter }: GetProductsParam
 
 // Delete product
 export const createDeleteProduct = async (receiptNo: string) => {
+    const role = await userRole();
     try {
+        if (role === "ADMIN" || role === "SUPER_ADMIN") {
         const token = await getToken();
         const accessToken = token?.accessToken;
         const res = await fetch(`${base}/product/deleteBy?product=${receiptNo}`, {
@@ -451,7 +460,10 @@ export const createDeleteProduct = async (receiptNo: string) => {
         if (res.ok) {
             return "Success";
         }
-        return Promise.reject(res);
+        } else {
+            return Promise.reject();
+        }
+        return Promise.reject();
     } catch (error) {
         console.log(error);
     }
@@ -459,7 +471,9 @@ export const createDeleteProduct = async (receiptNo: string) => {
 
 // Change product
 export const createChangeProduct = async (data: IUpdateProduct) => {
+    const role = await userRole();
     try {
+        if (role === "ADMIN" || role === "SUPER_ADMIN") {
         const token = await getToken();
         const accessToken = token?.accessToken;
         const res = await fetch(`${base}/product/update`, {
@@ -473,7 +487,10 @@ export const createChangeProduct = async (data: IUpdateProduct) => {
         if (res.ok) {
             return "Success";
         }
-        return Promise.reject(res);
+    } else {
+            return Promise.reject();
+        }
+        return Promise.reject();
     } catch (error) {
         console.log(error);
     }
@@ -482,7 +499,9 @@ export const createChangeProduct = async (data: IUpdateProduct) => {
 
 // Add product
 export const createAddProduct = async (data: IAddProduct) => {
+    const role = await userRole();
     try {
+        if (role === "ADMIN" || role === "SUPER_ADMIN") {
         const token = await getToken();
         const accessToken = token?.accessToken;
         const res = await fetch(`${base}/product/add`, {
@@ -496,7 +515,10 @@ export const createAddProduct = async (data: IAddProduct) => {
         if (res.ok) {
             return "Success";
         }
-        return Promise.reject(res);
+        }else {
+            return Promise.reject();
+        }
+        return Promise.reject();
     } catch (error) {
         console.log(error);
     }
@@ -638,7 +660,9 @@ export const createGetUsers = async ({ page, size }: GetUsersParams) => {
 
 // Edit User Permissions
 export const createEditUserPermissions = async (data: IUpdateUserPermissions) => {
+    const role = await userRole();
     try {
+        if (role === "ADMIN" || role === "SUPER_ADMIN") {
         const token = await getToken();
         const accessToken = token?.accessToken;
         const res = await fetch(`${base}/user_permission/update`, {
@@ -652,7 +676,10 @@ export const createEditUserPermissions = async (data: IUpdateUserPermissions) =>
         if (res.ok) {
             return "Success";
         }
-        return Promise.reject(res);
+        } else {
+            return Promise.reject();
+        }
+        return Promise.reject();
     } catch (error) {
         console.log(error);
     }
@@ -660,7 +687,9 @@ export const createEditUserPermissions = async (data: IUpdateUserPermissions) =>
 
 // Delete User
 export const createDeleteUserPermission = async (email: string) => {
+    const role = await userRole();
     try {
+        if (role === "ADMIN" || role === "SUPER_ADMIN") {
         const token = await getToken();
         const accessToken = token?.accessToken;
         const res = await fetch(`${base}/user_permission/delete?email=${email}`, {
@@ -673,7 +702,10 @@ export const createDeleteUserPermission = async (email: string) => {
         if (res.ok) {
             return "Success";
         }
-        return Promise.reject(res);
+        } else {
+            return Promise.reject();
+        }
+        return Promise.reject();
     } catch (error) {
         console.log(error);
     }

@@ -18,6 +18,18 @@
     }
 }
 
+.notallowed {
+    width: 100%;
+    height: 100%;
+    cursor: not-allowed;
+    display: grid;
+    place-items: center;
+    @include themed() {
+        background-color: t(light_bg_gray);
+        color: t(black);
+    }
+}
+
 .parent {
     width: 100%;
     height: 100%;

@@ -918,7 +918,29 @@ const Overview = () => {
                   </div>
                 )}
 
-                {countOrders > 3 && (
+                {countOrders > 3 && countOrders < 5 && (
+                  <div
+                    className={`${style.main_down_pagination_pages_dots} 
+                ${
+                  pagination + 4 === countOrders
+                    ? style.main_down_pagination_pages_dots_hover
+                    : ""
+                }`}
+                    style={{
+                      border:
+                        page === pagination + 3 ? "1px solid #6c7278" : "",
+                    }}
+                    onClick={() =>
+                      setPage(
+                        pagination + 3 === countOrders ? countOrders : page
+                      )
+                    }
+                  >
+                    {pagination + 3 === countOrders ? countOrders : "..."}
+                  </div>
+                )}
+
+                {countOrders > 4 && (
                   <div
                     className={`${style.main_down_pagination_pages_dots} 
                 ${

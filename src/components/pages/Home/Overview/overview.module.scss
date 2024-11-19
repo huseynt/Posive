@@ -695,6 +695,10 @@
                     transition: all 0.3s;
                     user-select: none;
                     @extend %sm;
+
+                    @include themed() {
+                        color: t(black);
+                    }  
         
                     &_hover:hover {
                         border: 1px solid transparent;
