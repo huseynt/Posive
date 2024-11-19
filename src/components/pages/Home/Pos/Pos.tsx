@@ -195,8 +195,7 @@ const Main= () => {
             className={style.main_up_notification}
             onClick={() => {
               setNotification(!notification)
-              dispatch(changeNewToAll())
-              }}
+            }}
           >
             { newNotifications.length > 0 && 
               <div className={style.count}>{newNotifications.length}</div>
