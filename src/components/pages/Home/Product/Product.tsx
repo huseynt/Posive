@@ -103,8 +103,47 @@ const Product = () => {
 
   return ( 
     role !== "SUPER_ADMIN" && role !=="ADMIN" ? (
-      <div className={style.notallowed} >NOT ALLOWED</div>
-    ) : 
+      <div className={style.main}>
+        {/* ----------------------------- mobile up ---------------------------------- */}
+        <div className={style.main_mobileUp}>
+          <div className={style.main_mobileUp_actions}>
+            <div
+              className={style.main_mobileUp_actions_menu}
+              onClick={() => setToggleMenu(true)}
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M2 4.6665H14"
+                  stroke="#1A1C1E"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M2 8H14"
+                  stroke="#1A1C1E"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M2 11.3335H14"
+                  stroke="#1A1C1E"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div className={style.notallowed} >NOT ALLOWED</div>
+      </div>
+    ) 
+      : 
     (
     <>
       { viewAdd && <ProductItemAdd 

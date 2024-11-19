@@ -35,6 +35,7 @@
 
 .notallowed {
     width: 100%;
+    height: 100vh;
     cursor: not-allowed;
     display: grid;
     place-items: center;
@@ -94,6 +95,10 @@
     flex-direction: column;
     align-items: center;
     row-gap: 24px;
+
+    @include themed() {
+        background-color: t(light_bg_gray);
+    }
 
     @include mobile {
         padding: 3%;
