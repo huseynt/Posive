@@ -1,6 +1,10 @@
 import style from "./notification.module.scss";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { createNotifications } from "../../../utils/API/API";
 import NotificationItem from "../NotificationItem/NotificationItem";
-import { notifications } from "../../../test/db/notifications";
+
+
 
 interface INotification {
   setNotification: React.Dispatch<React.SetStateAction<boolean>>;
@@ -8,11 +12,62 @@ interface INotification {
   bag: boolean;
 }
 
-const Notification: React.FC<INotification> = (props) => {
-  const { setNotification, notification, bag } = props;
+const Notification: React.FC<INotification> = ({ setNotification, notification, bag }) => {
+  const queryClient = useQueryClient();
+  const socket = import.meta.env.VITE_SOCKET;
+
+  const fetchNotifications = async () => {
+    try {
+      const response = await createNotifications(); 
+      return response; 
+    } catch (error) {
+      throw new Error("Bildirişlər yüklənmədi");
+    }
+  };
+
+  // TanStack Query ilə bildirişlər
+  const { data: notifications, isLoading: isLoadingNotifications } = useQuery({
+    queryKey: ["notifications"],
+    queryFn: fetchNotifications,
+    refetchOnWindowFocus: false,
+    staleTime: 20000,
+  });
+
+  
+  useEffect(() => {
+    const ws = new WebSocket(`${socket}/ws`);
+
+    ws.onopen = () => {
+      console.log("WebSocket açıldı!");
+    };
+
+    ws.onmessage = (event) => {
+      const newNotification = JSON.parse(event.data);
+      queryClient.setQueryData(["notifications"], (oldData: {text: string, description: string}[]) => [
+              ...(oldData || []),
+              newNotification,
+            ]);
+    };
+
+    ws.onerror = (error) => {
+      console.error("WebSocket xətası:", error);
+    };
+
+    ws.onclose = () => {
+      console.log("WebSocket əlaqəsi kəsildi");
+    };
+
+    return () => {
+      ws.close(); 
+    };
+  }, [queryClient]);
 
   return (
-    <div className={`${style.notification} ${ notification ? style.mobileIn : style.mobileOut}`}>
+    <div
+      className={`${style.notification} ${
+        notification ? style.mobileIn : style.mobileOut
+      }`}
+    >
       <div className={style.notification_screen}>
         <div
           className={style.notification_screen_bg}
@@ -51,11 +106,14 @@ const Notification: React.FC<INotification> = (props) => {
             </svg>
           </div>
 
-
           <div className={style.notification_screen_block_list}>
-            {notifications.map((notification) => (
-              <NotificationItem key={notification.id} {...notification} />
-            ))}
+            {isLoadingNotifications ? (
+              <p>Bildirişlər yüklənir...</p>
+            ) : (
+              notifications?.map((notification: {text: string, description: string}, index: number) => (
+                <NotificationItem key={index} id={index} name={notification.text} description={notification.description} />
+              ))
+            )}
           </div>
         </div>
       </div>

@@ -758,3 +758,25 @@ export const createGoogleAuth = async (idToken: string) => {
     }
     return Promise.reject(res);
 }
+
+
+// get notifications
+export const createNotifications = async () => {
+    try {
+        const token = await getToken();
+        const accessToken = token?.accessToken;
+        const res = await fetch(`${base}/not/get`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(res);
+    } catch (error) {
+        console.log(error);
+    }
+}
