@@ -23,16 +23,26 @@ const notificationSlice = createSlice({
                         (existing) => existing.description === notification.description
                     )
             );
-            state.new = newNotifications < 1 ? newNotifications: [];
+            state.new = [...state.new, ...newNotifications].slice(-5);
             state.all = [...state.all, ...newNotifications];
         },
         reset: (state) => {
             state.all = [];
             state.new = [];
         },
+        changeNewToAll: (state) => {
+            const newNotifications = state.new.filter(
+                (notification: { text: string; description: string }) =>
+                    !state.all.some(
+                        (existing) => existing.description === notification.description
+                    )
+            );
+            state.all = [...state.all, ...newNotifications];
+            state.new = [];
+        }
     },
 });
 
-export const { addNotificationCount, reset } = notificationSlice.actions;
+export const { addNotificationCount, reset, changeNewToAll } = notificationSlice.actions;
 export default notificationSlice.reducer;
 

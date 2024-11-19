@@ -21,7 +21,9 @@ const Notification: React.FC<INotification> = ({ setNotification, notification, 
   const queryClient = useQueryClient();
   const socket = import.meta.env.VITE_SOCKET;
   const dispatch = useDispatch();
+  const allNotifications: INotificationSelector[] = useSelector( (state: { notifications: {all: INotificationSelector[]} }) => state.notifications.all);
   const newNotifications: INotificationSelector[] = useSelector( (state: { notifications: {new: INotificationSelector[]} }) => state.notifications.new);
+
 
 
   // ----------------------- get notifications -----------------------
@@ -125,10 +127,13 @@ const Notification: React.FC<INotification> = ({ setNotification, notification, 
             {isLoadingNotifications ? (
               <p>Bildirişlər yüklənir...</p>
             ) : (
-              notifications?.slice().reverse().map((notification: {text: string, description: string}, index: number) => (
+              allNotifications?.slice().reverse().map((notification: {text: string, description: string}, index: number) => (
                 <NotificationItem key={index} newNotifications={newNotifications} id={index} name={notification.text} descriptionId={notification.description} />
               ))
             )}
+            {/* { !isLoadingNotifications && !notifications?.length && 
+            <p style={{textAlign: "center"}}>Bildiriş yoxdur</p>
+            } */}
           </div>
         </div>
       </div>

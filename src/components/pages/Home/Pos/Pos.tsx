@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addMeal, resetState } from "../../../redux/slice/mealSlice";
 import PageLoader from "../../../common/PageLoader/PageLoader";
 import { useTranslation } from "react-i18next";
-import { NotificationState } from "../../../redux/slice/notificationSlice";
+import { changeNewToAll, NotificationState } from "../../../redux/slice/notificationSlice";
 
 
 
@@ -72,7 +72,6 @@ const Main= () => {
     setCategory("");
   }, [search]);
 
-  
   // useEffect(() => {
   //   if (reduxMeals) {
   //     if (category === "") {
@@ -89,6 +88,15 @@ const Main= () => {
   //   console.log("mealFiltered",mealsFiltered);
   // }, [mealsFiltered]);
 
+
+  
+  // ------------------- reset notifcation for colse ------------------------
+  useEffect(() => {
+    if (!notification) {
+      dispatch(changeNewToAll());
+    }
+  }, [notification]);
+  // ------------------- reset notifcation for colse ------------------------
 
 
 
@@ -185,7 +193,10 @@ const Main= () => {
           </button>
           <button
             className={style.main_up_notification}
-            onClick={() => setNotification(!notification)}
+            onClick={() => {
+              setNotification(!notification)
+              dispatch(changeNewToAll())
+              }}
           >
             { newNotifications.length > 0 && 
               <div className={style.count}>{newNotifications.length}</div>
@@ -289,7 +300,9 @@ const Main= () => {
 
               <div
                 className={style.main_mobileUp_actions_right_setting}
-                onClick={() => setNotification(!notification)}
+                onClick={() => {
+                  setNotification(!notification)
+                  }}
               >
                 { newNotifications.length > 0 && 
                   <div className={style.count}>{newNotifications.length}</div>

@@ -10,8 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { NotificationState } from "../../../redux/slice/notificationSlice";
-import { useSelector } from "react-redux";
+import { changeNewToAll, NotificationState } from "../../../redux/slice/notificationSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 
 interface MainProps {
@@ -46,6 +46,14 @@ const HelpCenter = () => {
     setMobileSelect(false);
   }, [sub]);
 
+  // ------------------- reset notifcation for colse ------------------------
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!notification) {
+      dispatch(changeNewToAll());
+    }
+  }, [notification]);
+  // ------------------- reset notifcation for colse ------------------------
 
 
 

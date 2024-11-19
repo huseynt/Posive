@@ -13,8 +13,8 @@ import * as XLSX from "xlsx";
 import OverviewItemDeleteAll from "../../features/OverItemDeleteAll/OverviewItemDeleteAll";
 import PageLoader from "../../../common/PageLoader/PageLoader";
 import { useTranslation } from "react-i18next";
-import { NotificationState } from "../../../redux/slice/notificationSlice";
-import { useSelector } from "react-redux";
+import { changeNewToAll, NotificationState } from "../../../redux/slice/notificationSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 interface IOverview {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -39,7 +39,7 @@ interface IOrder {
 const Overview = () => {
   const { setToggleMenu, setNotification, notification } =
     useOutletContext<IOverview>();
-  const [mobileSearch, setMobileSearch] = useState<boolean>(false);
+  // const [mobileSearch, setMobileSearch] = useState<boolean>(false);
   // const [mealsFiltered, setMealsFiltered] = useState<IMeal[]>([]);
   const [periodDown, setPeriodDown] = useState<boolean>(false);
   const [period, setPeriod] = useState<string>("All time");
@@ -57,7 +57,8 @@ const Overview = () => {
   const [deleteAllOpen, setDeleteAllOpen] = useState<boolean>(false);
   const { t } = useTranslation();
   const newNotifications: NotificationState[] = useSelector( (state: { notifications: {new: NotificationState[]} }) => state.notifications.new);
-
+  const dispatch = useDispatch();
+  
   useEffect(() => {
     setPage(1);
   }, [itemperpage]);
@@ -145,6 +146,17 @@ const Overview = () => {
     setOrdersFiltered([...sortedOrders]);
   }, [m, ascend]);
 
+
+  // ------------------- reset notifcation for colse ------------------------
+  useEffect(() => {
+    if (!notification) {
+      dispatch(changeNewToAll());
+    }
+  }, [notification]);
+  // ------------------- reset notifcation for colse ------------------------
+
+
+
   return (
     <>
       {deleteAllOpen && (
@@ -201,7 +213,7 @@ const Overview = () => {
               </div>
 
               <div className={style.main_mobileUp_actions_right}>
-                <div
+                {/* <div
                   className={style.main_mobileUp_actions_right_search}
                   onClick={() => setMobileSearch(!mobileSearch)}
                 >
@@ -227,11 +239,13 @@ const Overview = () => {
                       strokeLinejoin="round"
                     />
                   </svg>
-                </div>
+                </div> */}
 
                 <div
                   className={style.main_mobileUp_actions_right_setting}
-                  onClick={() => setNotification(!notification)}
+                  onClick={() => {
+                    setNotification(!notification)
+                    }}
                 >
                   { newNotifications.length > 0 && 
                   <div className={style.count}>{newNotifications.length}</div>
@@ -270,12 +284,12 @@ const Overview = () => {
               </div>
             </div>
 
-            <div
+            {/* <div
               className={style.main_mobileUp_down}
               style={{ display: mobileSearch ? "flex" : "none" }}
             >
-              {/* <SearchInput meals={meals} setMealsFiltered={setMealsFiltered} /> */}
-            </div>
+              <SearchInput meals={meals} setMealsFiltered={setMealsFiltered} />
+            </div> */}
           </div>
 
           {/* ------------------------------ up ----------------------------------------- */}
@@ -584,12 +598,12 @@ const Overview = () => {
                 {t("Recent Transactions")}
               </p>
               <div className={style.main_down_up_actions}>
-                <div className={style.main_down_up_actions_search}>
-                  {/* <SearchInput
+                {/* <div className={style.main_down_up_actions_search}>
+                  <SearchInput
                     meals={meals}
                     setMealsFiltered={setMealsFiltered}
-                  /> */}
-                </div>
+                  />
+                </div> */}
 
                 {/* --------------------- delete multiselect ----------------------------------- */}
                 <div
