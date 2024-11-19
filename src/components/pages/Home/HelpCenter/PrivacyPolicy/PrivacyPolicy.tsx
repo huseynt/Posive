@@ -31,7 +31,7 @@ const PrivacyPolicy:  React.FC<IPrivacyPolicy> = (props) => {
 
       <div className={style.parent_main_block}>
         <h2 className={style.parent_main_block_head}>{t("Security")}</h2>
-        <p className={style.parent_main_block_text}>{t("We take precautions to protect your information. When you submit sensitive information via the dashboard, your information is protected both online and offline")}</p>
+        <p className={style.parent_main_block_text}>{t("We take precautions to protect your information. When you submit sensitive information via the dashboard, your information is protected both online and offline.")}</p>
       </div>
 
       <div className={style.parent_main_block}>
