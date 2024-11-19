@@ -15,7 +15,7 @@ const OverviewItemDelete: React.FC<IQRCodeComponentProps> = (props) => {
   const { setViewOpen, orderId, requestNotify } = props;
   const {t} = useTranslation();
 
-  // ------------------- delete user ------------------------
+  // ------------------- delete order ------------------------
   const queryClient = useQueryClient();
   const {
     mutate: DeleteOrder,
@@ -39,7 +39,7 @@ const OverviewItemDelete: React.FC<IQRCodeComponentProps> = (props) => {
   const handleDeleteOrder = () => {
     DeleteOrder();
   }
-  // ------------------- delete user ------------------------
+  // ------------------- delete order ------------------------
 
 
 

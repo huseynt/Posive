@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { IGetMeals, ISaveOrder } from "../../../utils/API/types";
 import style from "./overviewitemchange.module.scss";
-import { createSaveOrders } from "../../../utils/API/API";
+import { createDeleteOrders, createSaveOrders } from "../../../utils/API/API";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Loader from "../../../common/Loader/Loader";
 import { useTranslation } from "react-i18next";
@@ -79,6 +79,28 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
     }));
   };
 
+    // ------------------- delete order ------------------------
+    const {
+      mutate: DeleteOrder,
+      isPending: isDeleting,
+    } = useMutation({
+      mutationFn: () => createDeleteOrders(orderId?.toString()),
+      onSuccess: (response) => {
+        console.log('Delete success:', response);
+          console.log('Deleted');
+          setViewOpen("");
+          queryClient.invalidateQueries({queryKey: ["getOrders"]})
+          requestNotify("done", "Order deleted successfully"); 
+          queryClient.invalidateQueries({queryKey: ["getNotifications"]});
+      },
+      onError: (error) => {
+        console.log('Delete error:', error);  
+        setViewOpen("");
+        requestNotify("undone", "Error deleting order");
+      },
+    });
+    // ------------------- delete user ------------------------
+
   // ----------------- save order -----------------
   const queryClient = useQueryClient();
   const {
@@ -100,9 +122,15 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
   });
 
   const saveOrder = () => {
-    SaveOrder(data);
+    if (data.productsSet.length !==0){ 
+      SaveOrder(data);
+    }
+    else{
+      DeleteOrder();
+    }
   }
   // ----------------- save order -----------------
+
 
   return (
     <div className={style.view}>
@@ -271,7 +299,7 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
           <div className={`${style.view_block_actions_option} ${style.view_block_actions_print}`}
           onClick={saveOrder}
           >
-            {isSaveOrders ? 
+            {isSaveOrders || isDeleting ? 
             <Loader/>
             : 
             <span>{t("Save")}</span>
