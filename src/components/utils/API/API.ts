@@ -124,7 +124,7 @@ export const createGetUser = async () => {
         }
 
     } catch (error) {
-        // resetToken();
+        resetToken();
         console.log(error);
     }
 }

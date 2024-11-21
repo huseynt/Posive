@@ -124,7 +124,7 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
 
   return (
     role !== "SUPER_ADMIN" && role !=="ADMIN" ? (
-      <div className={style.notallowed} >NOT ALLOWED</div>
+      <div className={style.notallowed} >{t("NOT ALLOWED")}</div>
     ) : 
     (
     <>

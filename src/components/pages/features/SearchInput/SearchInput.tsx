@@ -37,7 +37,6 @@ const SearchInput: React.FC<ISearchInput> = (props) => {
     if (searchResult.length > 0) {
       setMealsFiltered(searchResult);
     }
-    // console.log(searchResult);
     setSearch("");
     setSearchResult([]);
   };

@@ -131,9 +131,9 @@ const Notification: React.FC<INotification> = ({ setNotification, notification, 
                 <NotificationItem key={index} newNotifications={newNotifications} id={index} name={notification.text} descriptionId={notification.description} />
               ))
             )}
-            {/* { !isLoadingNotifications && !notifications?.length && 
+            { !isLoadingNotifications && !allNotifications?.length && 
             <p style={{textAlign: "center"}}>Bildiriş yoxdur</p>
-            } */}
+            }
           </div>
         </div>
       </div>

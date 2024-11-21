@@ -373,5 +373,7 @@
     "Code sent to your email address": "Kod e-poçt ünvanınıza göndərildi",
     "Card data is incorrect": "Kart məlumatları düzgün deyil",
     "Please fill in all fields": "Zəhmət olmasa, bütün sahələri doldurun",
-    "Code is incorrect": "Kod səhvdir"
+    "Code is incorrect": "Kod səhvdir",
+
+    "NOT ALLOWED": "İCAZƏ VERİLMİR"
 }
