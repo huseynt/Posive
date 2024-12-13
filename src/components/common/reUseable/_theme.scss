@@ -1,5 +1,5 @@
-
 @import 'variable.scss';
+$valid-theme: var(--valid-theme);
 
 
 @mixin themed() {
@@ -16,5 +16,10 @@
 }
 
 @function t($key) {
-  @return map-get($theme-map, $key);
+  @if $valid-theme {
+    @return map-get($theme-map, $key);
+  }
+  @else {
+    @return #FFFFFF;
+  }
 }

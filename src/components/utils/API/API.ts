@@ -28,7 +28,7 @@ export const base = import.meta.env.VITE_BASE
 // Authenticate User
 export const createPostAuthenticate = async (body: IcreatePostAuthenticate) => {
     // ------- FOR TEST ------
-    if (body.email === 'test@mail.ru' || body.password === 'test') {
+    if (body.email === 'test@mail.ru' || body.password === 'test123456') {
         sessionStorage.setItem('access_token', 'test');
         sessionStorage.setItem('refresh_token', 'test');
     }

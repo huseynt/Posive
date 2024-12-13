@@ -11,10 +11,9 @@ import './components/utils/languages/i18n.ts'
 
 
 
-
 const queryClient = new QueryClient({ 
   defaultOptions: { queries: { retry: 3 },}
-    })
+})
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

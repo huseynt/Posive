@@ -10,6 +10,7 @@ import NotFound from './components/pages/features/NotFound/NotFound'
 import TriangleLoader from './components/common/Loader/Triangle'
 import HelpCenter from './components/pages/Home/HelpCenter/HelpCenter'
 import Product from './components/pages/Home/Product/Product'
+import Check from './components/pages/features/Check/Check.ts'
 import Settings from './components/pages/Home/Settings/Settings'
 import Overview from './components/pages/Home/Overview/Overview'
 import Pos from './components/pages/Home/Pos/Pos'
@@ -46,6 +47,7 @@ function App() {
       localStorage.setItem('theme', 'light');
       setTheme('light');
     }
+    Check();
   }, [theme, setTheme, currentTheme]);
 
   useEffect(() => {
@@ -63,15 +65,6 @@ function App() {
 
   // ---------- loader ----------
   const [loaded, setLoaded] = useState(false);
-  // ---------- error ready state -------------------------------
-  // useEffect(() => {
-  //   const handleStateChange = () => { setLoaded(true)};
-  //   document.addEventListener('readystatechange', handleStateChange);
-  //   return () => {
-  //     document.removeEventListener('readystatechange', handleStateChange);
-  //   };
-  // }, []);
-  // ---------- error ready state -------------------------------
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setLoaded(true);
@@ -79,7 +72,6 @@ function App() {
 
     return () => clearTimeout(timeoutId);
   }, []);
-
   // ---------- loader ----------
 
   // ---------- language -------------------
@@ -99,26 +91,6 @@ function App() {
     document.title = `Posive ${pathName ? pathName : 'Home'}`;
   }, []); 
   // ----------- body title ----------------
-
-
-
-
-  // useEffect(() => {
-  //   createRefreshToken();
-  // }, []);
-
-// Lazy-load components
-// const Login = React.lazy(() => import('@/components/pages/features/Login/Login'));
-// const Registr = React.lazy(() => import('@/components/pages/features/Register/Registr'));
-// const Forgot = React.lazy(() => import('@/components/pages/features/Forgot/Forgot'));
-// const Home = React.lazy(() => import('@/components/pages/Home/Home'));
-// const NotFound = React.lazy(() => import('@/components/pages/features/NotFound/NotFound'));
-// const HelpCenter = React.lazy(() => import('@/components/pages/Home/HelpCenter/HelpCenter'));
-// const Product = React.lazy(() => import('@/components/pages/Home/Product/Product'));
-// const Settings = React.lazy(() => import('@/components/pages/Home/Settings/Settings'));
-// const Overview = React.lazy(() => import('@/components/pages/Home/Overview/Overview'));
-// const Pos = React.lazy(() => import('@/components/pages/Home/Pos/Pos'));
-// const HomePage = React.lazy(() => import('@/components/pages/HomePage/HomePage'));
 
 
   return (

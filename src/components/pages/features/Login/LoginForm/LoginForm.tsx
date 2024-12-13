@@ -51,7 +51,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
       Authenticate(data);
 
       // ----- FOR TEST ------
-      if (data.email === "test@mail.ru" && data.password === "test") {
+      if (data.email === "test@mail.ru" && data.password === "test123456") {
         navigate("/home");
       }
       // ----- FOR TEST ------
