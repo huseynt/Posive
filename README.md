@@ -1,7 +1,45 @@
-# To install this project, follow these steps:
+# Layihə haqqında
+
+Bu layihə **Posive POS (Point of Sale) Dashboard** ilə bağlıdır və əsas məqsədi biznes əməliyyatlarını idarə etmək üçün güclü və intuitiv bir interfeys təqdim etməkdir. Bu alət real vaxtda məlumatları izləmək, fərdiləşdirilə bilən hesabatlar yaratmaq və mövcud sisteminizlə problemsiz inteqrasiyanı təmin edir. Layihə həm kiçik bizneslər, həm də iri müəssisələr üçün uyğunlaşdırılmışdır.
+
+## Əsas Xüsusiyyətlər:
+
+### 1. Real vaxtda əməliyyat monitorinqi:
+- Satış əməliyyatlarını canlı izləyin, satış göstəricilərini təhlil edin və dərhal trendləri müəyyən edin.  
+- Əməliyyat həcmlərini, sifariş dəyərini və satılan məhsulları izləyin.
+
+### 2. Fərdiləşdirilə bilən hesabatlar:
+- Satış, inventar və müştəri davranışları ilə bağlı detallı hesabatlar yaradın.  
+- Məhsul kateqoriyası, zaman aralığı, məkan və digər parametrlər üzrə analiz edin.
+
+### 3. İnventar idarəetməsi:
+- Anbar səviyyələrini izləyərək, çatışmazlıqların qarşısını alın və artıq ehtiyatların idarəsini optimallaşdırın.  
+- Avtomatik bildirişlər vasitəsilə məhsulların yenidən sifarişi zamanı xəbərdar olun.
+
+### 4. Müştəri məlumatları:
+- Müştəri üstünlüklərini təhlil edərək fərdiləşdirilmiş marketinq kampaniyaları həyata keçirin.  
+- Demoqrafiya, satınalma tarixçəsi və loyallıq əsaslı müştəri seqmentasiyası yaradın.
+
+### 5. Çox mağaza idarəetməsi:
+- Bir interfeys vasitəsilə birdən çox mağazanı idarə edin və iş fəaliyyətini mərkəzləşdirilmiş şəkildə izləyin.  
+- Mağazalar arasında performans göstəricilərini müqayisə edərək qazancı artırmaq üçün inkişaf sahələrini müəyyən edin.
+
+### 6. Təhlükəsiz giriş və məlumat qorunması:
+- Məlumatların təhlükəsizliyini təmin etmək üçün güclü şifrələmə və girişə nəzarət texnologiyalarından istifadə edin.
+
+Bu dashboard biznes qərarlarınızı dəstəkləmək və böyüməni artırmaq üçün nəzərdə tutulmuş müasir bir həll yoludur.
+
+---
+
+## Layihəni quraşdırmaq üçün addım:
 ```
 npm install
+```
+
+## Layihəni quraşdırmaq üçün əlavə addımlar:
+```
 npm install @reduxjs/toolkit
+npm install sass@latest
 npm install react-redux
 npm install react-loader-spinner --save
 npm install -D tailwindcss postcss autoprefixer
@@ -21,34 +59,3 @@ npm install firebase
 npm install i18next react-i18next
 npm install xlsx
 ```
-
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
