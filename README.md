@@ -59,3 +59,8 @@ npm install firebase
 npm install i18next react-i18next
 npm install xlsx
 ```
+
+## Layihəni başlatmaq üçün addım:
+```
+npm run dev
+```
