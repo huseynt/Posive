@@ -20,12 +20,12 @@ Bu layihə **Posive POS (Point of Sale) Dashboard** ilə bağlıdır və əsas m
 - Müştəri üstünlüklərini təhlil edərək fərdiləşdirilmiş marketinq kampaniyaları həyata keçirin.  
 - Demoqrafiya, satınalma tarixçəsi və loyallıq əsaslı müştəri seqmentasiyası yaradın.
 
-### 5. Çox mağaza idarəetməsi:
+### 5. Çoxlu mağaza idarəetməsi:
 - Bir interfeys vasitəsilə birdən çox mağazanı idarə edin və iş fəaliyyətini mərkəzləşdirilmiş şəkildə izləyin.  
 - Mağazalar arasında performans göstəricilərini müqayisə edərək qazancı artırmaq üçün inkişaf sahələrini müəyyən edin.
 
 ### 6. Təhlükəsiz giriş və məlumat qorunması:
-- Məlumatların təhlükəsizliyini təmin etmək üçün güclü şifrələmə və girişə nəzarət texnologiyalarından istifadə edin.
+- Məlumatların təhlükəsizliyini təmin etmək üçün güclü şifrələmə və girişə nəzarət texnologiyalarından istifadə edilir.
 
 Bu dashboard biznes qərarlarınızı dəstəkləmək və böyüməni artırmaq üçün nəzərdə tutulmuş müasir bir həll yoludur.
 
