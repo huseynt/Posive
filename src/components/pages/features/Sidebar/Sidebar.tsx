@@ -8,6 +8,7 @@ import { resetToken } from "../../../utils/Hooks/useToken";
 import { IgetUser } from "../../../utils/API/types";
 import { deleteUser } from "../../../utils/reUse/user";
 import { useTranslation } from 'react-i18next';
+import { getCookie } from "../../../utils/reUse/cookie";
 interface ISidebarProps {
   toggleMenu: boolean;
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -53,6 +54,10 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
     screen.width<=991 && setToggleMenu(false);
   }, [navigation]);
 
+
+  // ------------------------ check role -------------------
+  const role = getCookie("userRole");
+  // ------------------------ check role -------------------
 
   return (
     <div
@@ -234,6 +239,8 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
           </span>
         </div>
 
+        {
+          role === "SUPER_ADMIN" || role === "ADMIN" ? (
         <div
           style={{
             padding: screen.width>=991 && !toggleMenu ? "12px 0px" : "12px 20px",
@@ -289,6 +296,8 @@ const Sidebar: React.FC<ISidebarProps> = (props) => {
             {t('Product')}
           </span>
         </div>
+          ) : null
+        }
 
         <div
           style={{

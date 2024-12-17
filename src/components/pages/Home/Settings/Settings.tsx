@@ -15,6 +15,7 @@ import { useOutletContext } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { changeNewToAll, NotificationState } from '../../../redux/slice/notificationSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { getCookie } from '../../../utils/reUse/cookie';
 
 
 
@@ -65,16 +66,18 @@ const Settings: React.FC<ThemeProps> = (props) => {
 
 
 
-    // ------------------- reset notifcation for colse ------------------------
-    const dispatch = useDispatch();
-    useEffect(() => {
-      if (!notification) {
-        dispatch(changeNewToAll());
-      }
-    }, [notification]);
-    // ------------------- reset notifcation for colse ------------------------
+  // ------------------- reset notifcation for colse ------------------------
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!notification) {
+      dispatch(changeNewToAll());
+    }
+  }, [notification]);
+  // ------------------- reset notifcation for colse ------------------------
 
-
+  // ------------------------ check role -------------------
+  const role = getCookie("userRole");
+  // ------------------------ check role -------------------
 
 
 
@@ -394,7 +397,9 @@ const Settings: React.FC<ThemeProps> = (props) => {
             </div>
 
             {/* ----------------------  userpermissions  ------------------------------ */}
-            <div
+            {
+              role === "SUPER_ADMIN" || role === "ADMIN" ? (
+              <div
               className={style.main_container_navigation_option}
               onClick={() => handleSub("userpermissions")}
               style={{
@@ -426,6 +431,8 @@ const Settings: React.FC<ThemeProps> = (props) => {
               }}
               >{t("User Permissions")}</p>
             </div>
+            ) : null
+            }
 
             {/* ----------------------  account  ------------------------------ */}
             <div
