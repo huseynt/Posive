@@ -16,19 +16,13 @@ import Overview from './components/pages/Home/Overview/Overview'
 import Pos from './components/pages/Home/Pos/Pos'
 import HomePage from './components/pages/HomePage/HomePage'
 // ---------- import components ----------
-
 import { Routes, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-
-// import { useGetMealIds } from './components/services/Queries/queries'
-// import { useGetMealIdsSlice } from './components/services/Queries/queries'
-
 // ---------- google auth ------------------------------
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { getCookie } from './components/utils/reUse/cookie'
 import { changeLanguage } from 'i18next'
 
-// import { createRefreshToken } from './components/utils/API/refreshToken'
 
 
 
@@ -97,6 +91,7 @@ function App() {
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GCLIENT_ID as string}>
       <div className={style.app}>
         {!loaded && <TriangleLoader /> }
+        
         <div style={{opacity: loaded ? '1' : '0'}}>
           <Routes>
             <Route index element={<HomePage/>} />

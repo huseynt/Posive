@@ -1,4 +1,4 @@
-import { deleteCookie } from '../reUse/cookie';
+import { deleteCookie, getCookie, setCookie } from '../reUse/cookie';
 import { getToken } from '../reUse/getToken';
 
 
@@ -16,15 +16,22 @@ export const createRefreshToken = async () => {
         },
     });
     if (res.ok) {
-        console.log('refresh token', res);
         const data = await res.json();
-        deleteCookie('access_token');
-        deleteCookie('refresh_token');
         sessionStorage.setItem('access_token', data.access_token);
         sessionStorage.setItem('refresh_token', data.refresh_token);
         console.log(data, "refresh token");
         sessionStorage.setItem('refreshDate', new Date().toISOString());
         window.location.reload()
+
+        if (getCookie('access_token') && getCookie('refresh_token')) {
+            const tokenExpiry = 7;
+            const resfreshTokenExpiry = 365;
+            setCookie('access_token', data.access_token, tokenExpiry);
+            setCookie('refresh_token', data.refresh_token, resfreshTokenExpiry);
+        } else {
+            deleteCookie('access_token');
+            deleteCookie('refresh_token');
+        }
     }
     return Promise.reject(res);
 }
