@@ -75,7 +75,7 @@ function App() {
       changeLanguage(lang);
     }
     else {
-      changeLanguage('az');
+      changeLanguage('en');
     }}, [])
   // ---------- language -------------------
 
