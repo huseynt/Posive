@@ -1,23 +1,19 @@
 import style from './settings.module.scss'
 import { Helmet } from 'react-helmet'
-
 import General from './General/General';
 import UserPermissions from './UserPermissions/UserPermissions';
 import Preferences from './Preferences/Preferences';
 import Account from './Account/Account';
 import Billings from './Billings/Billings';
 import Notifications from './Notifications/Notifications';
-
 import { Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-import { changeNewToAll, NotificationState } from '../../../redux/slice/notificationSlice';
+import { changeNewToAll, NotificationState } from '../../../../redux/slice/notificationSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCookie } from '../../../utils/reUse/cookie';
-
-
+import { getCookie } from '../../../../utils/reUse/cookie';
 
 
 interface ThemeProps {
@@ -127,34 +123,6 @@ const Settings: React.FC<ThemeProps> = (props) => {
             </div>
 
             <div className={style.main_mobileUp_actions_right}>
-              {/* <div
-                className={style.main_mobileUp_actions_right_search}
-                // onClick={() => setMobileSearch(!mobileSearch)}
-              >
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M7.66659 14.0002C11.1644 14.0002 13.9999 11.1646 13.9999 7.66683C13.9999 4.16903 11.1644 1.3335 7.66659 1.3335C4.16878 1.3335 1.33325 4.16903 1.33325 7.66683C1.33325 11.1646 4.16878 14.0002 7.66659 14.0002Z"
-                    stroke="#1A1C1E"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M14.6666 14.6668L13.3333 13.3335"
-                    stroke="#1A1C1E"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div> */}
-
               <div
                 className={style.main_mobileUp_actions_right_setting}
                 onClick={() => setNotification(!notification)}

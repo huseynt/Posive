@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import style from "./aside.module.scss";
-import { changename, changePaymentMethod, changePlace, deleteOrderById, resetTable } from "../../../redux/slice/mealSlice";
+import { changename, changePaymentMethod, changePlace, deleteOrderById, resetTable } from "../../../../redux/slice/mealSlice";
 import { useEffect, useState } from "react";
-import { IOrderState } from "../../../redux/type";
+import { IOrderState } from "../../../../redux/type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createPostOrders } from "../../../utils/API/API";
+import { createPostOrders } from "../../../../utils/API/API";
 import MasterCard from "../MasterCard/MasterCard";
 import { useTranslation } from "react-i18next";
 

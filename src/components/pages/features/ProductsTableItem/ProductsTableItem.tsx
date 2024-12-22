@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IProducts } from "../../../utils/API/types";
+import { IProducts } from "../../../../utils/API/types";
 import ProductItemView from "../ProductItemView/ProductItemView";
 import style from "./productstableitem.module.scss";
 import ProductItemChange from "../ProductItemChange/ProductItemChange";

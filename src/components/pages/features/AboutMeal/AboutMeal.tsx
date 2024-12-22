@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { IGetMeals } from "../../../redux/type";
+import { IGetMeals } from "../../../../redux/type";
 import style from "./aboutMeal.module.scss";
 
 interface IQRCodeComponentProps {

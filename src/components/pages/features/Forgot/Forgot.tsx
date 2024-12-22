@@ -6,13 +6,8 @@ import { useState } from 'react'
 import VerifyEmail from './VerifyEmail/VerifyEmail'
 import ChangePassword from './ChangePassword/ChangePassword'
 import Succesful from './Succesful/Succesful'
-
-
 import { useMutation } from '@tanstack/react-query'
-import { createResetPassword, createVerifyEmail, createPostChangePassword } from '../../../utils/API/API'
-
-
-// import { useNavigate } from 'react-router-dom'
+import { createResetPassword, createVerifyEmail, createPostChangePassword } from '../../../../utils/API/API'
 
 import Notify from '../Notify/Notify'
 
@@ -20,7 +15,6 @@ const Forgot = () => {
   
   const [step, setStep] = useState<string>('email')
   const [email, setEmail] = useState<string>('')
-  // const navigate = useNavigate()
 
 
 

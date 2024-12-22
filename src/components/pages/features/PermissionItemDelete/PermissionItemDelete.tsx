@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createDeleteUserPermission } from "../../../utils/API/API";
+import { createDeleteUserPermission } from "../../../../utils/API/API";
 import style from "./permissionitemdelete.module.scss";
 import Loader from "../../../common/Loader/Loader";
 import { useTranslation } from "react-i18next";

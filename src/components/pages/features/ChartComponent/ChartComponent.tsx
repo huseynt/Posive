@@ -2,7 +2,7 @@ import style from './chartComponent.module.scss';
 import React, { useEffect, useState } from 'react';
 import HomeLineChart from './Chart/Chart';
 import { useQuery } from '@tanstack/react-query';
-import { createGetStatistics } from '../../../utils/API/API';
+import { createGetStatistics } from '../../../../utils/API/API';
 import { useTranslation } from 'react-i18next';
 
 interface IGetStatistics {

@@ -3,7 +3,7 @@ import style from './masterCard.module.scss';
 // import { useDispatch } from 'react-redux';
 // import { resetDefaultState } from '../../../redux/slice/mealSlice';
 import { useMutation } from '@tanstack/react-query';
-import { createPostCardData, createVerifyCardData } from '../../../utils/API/API';
+import { createPostCardData, createVerifyCardData } from '../../../../utils/API/API';
 import Loader from '../../../common/Loader/Loader';
 import { useTranslation } from 'react-i18next';
 
@@ -81,11 +81,6 @@ const MasterCard: React.FC<MasterCardProps> = (props) => {
     const handleVerify = () => {
         if (verifyCode !== "") {
             VerifyCardData({confirmPassword: verifyCode});
-            // setMastercard(false);
-            // requestNotify("done", "");
-            // setSuccessOrder(true);
-            // handlePostOrder();
-            // dispatch(resetDefaultState());
         }
     }
 

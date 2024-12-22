@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { IGetMeals, ISaveOrder } from "../../../utils/API/types";
+import { IGetMeals, ISaveOrder } from "../../../../utils/API/types";
 import style from "./overviewitemchange.module.scss";
-import { createDeleteOrders, createSaveOrders } from "../../../utils/API/API";
+import { createDeleteOrders, createSaveOrders } from "../../../../utils/API/API";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Loader from "../../../common/Loader/Loader";
 import { useTranslation } from "react-i18next";

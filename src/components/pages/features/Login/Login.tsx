@@ -5,15 +5,11 @@ import { Helmet } from 'react-helmet'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
-
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { createPostAuthenticate } from '../../../utils/API/API'
-import { setCookie } from '../../../utils/reUse/cookie'
-import { useToken } from '../../../utils/Hooks/useToken'
+import { createPostAuthenticate } from '../../../../utils/API/API'
+import { setCookie } from '../../../../utils/reUse/cookie'
+import { useToken } from '../../../../utils/Hooks/useToken'
 import Notify from '../Notify/Notify'
-// import { addAccessToken, addRefreshToken } from '../../../redux/authenticate/token';
-// import { useDispatch } from 'react-redux';
-
 
 const Login = () => {
   const [rememberMe, setRememberMe] = useState<boolean>(false);

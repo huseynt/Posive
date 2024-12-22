@@ -1,25 +1,18 @@
 import style from "./pos.module.scss";
-// import { meals } from "../../../test/db/cards";
 import Meal from "../../features/Meal/Meal";
 import { useEffect } from "react";
 import { useState } from "react";
-// import { IMeal } from "../../../utils/interface/Meal";
 import SearchInput from "../../features/SearchInput/SearchInput";
-
 import { Helmet } from "react-helmet";
-
-
 import { useOutletContext } from "react-router-dom";
-import { createGetMeals } from "../../../utils/API/API";
+import { createGetMeals } from "../../../../utils/API/API";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { IGetMeals } from "../../../utils/API/types";
-
-
+import { IGetMeals } from "../../../../utils/API/types";
 import { useDispatch, useSelector } from "react-redux";
-import { addMeal, resetState } from "../../../redux/slice/mealSlice";
+import { addMeal, resetState } from "../../../../redux/slice/mealSlice";
 import PageLoader from "../../../common/PageLoader/PageLoader";
 import { useTranslation } from "react-i18next";
-import { changeNewToAll, NotificationState } from "../../../redux/slice/notificationSlice";
+import { changeNewToAll, NotificationState } from "../../../../redux/slice/notificationSlice";
 
 
 

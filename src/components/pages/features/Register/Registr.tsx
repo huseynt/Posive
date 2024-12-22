@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet'
 
 import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
-import { createPostRegister } from '../../../utils/API/API'
+import { createPostRegister } from '../../../../utils/API/API'
 import Notify from '../Notify/Notify'
 
 

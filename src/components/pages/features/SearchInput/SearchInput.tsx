@@ -2,7 +2,7 @@ import style from "./searchInput.module.scss";
 import { useEffect, useState } from "react";
 // import { IMeal } from "../../../utils/interface/Meal";
 import SearchItem from "../SearchItem/SearchItem";
-import { IGetMeals } from "../../../utils/API/types";
+import { IGetMeals } from "../../../../utils/API/types";
 
 interface ISearchInput {
   meals: IGetMeals[];

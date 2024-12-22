@@ -1,7 +1,7 @@
 import { useState } from "react";
 import style from "./productitemchange.module.scss";
-import { uploadMealImage } from '../../../services/Firebase/Firebase'
-import { createChangeProduct } from "../../../utils/API/API";
+import { uploadMealImage } from '../../../../services/Firebase/Firebase'
+import { createChangeProduct } from "../../../../utils/API/API";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import Loader from "../../../common/Loader/Loader";

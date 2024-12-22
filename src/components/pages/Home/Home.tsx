@@ -9,12 +9,12 @@ import Notify from "../features/Notify/Notify";
 import Notification from "../features/Notification/Notification";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useToken } from "../../utils/Hooks/useToken";
-import { createGetUser } from "../../utils/API/API";
+import { useToken } from "../../../utils/Hooks/useToken";
+import { createGetUser } from "../../../utils/API/API";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { IgetUser } from "../../utils/API/types";
-import { saveUser } from "../../utils/reUse/user";
-import { setCookie } from "../../utils/reUse/cookie";
+import { IgetUser } from "../../../utils/API/types";
+import { saveUser } from "../../../utils/reUse/user";
+import { setCookie } from "../../../utils/reUse/cookie";
 import { useTranslation } from "react-i18next";
 
 interface ISuccessOrder {

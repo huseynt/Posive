@@ -1,20 +1,19 @@
 import style from './product.module.scss'
 import { Helmet } from 'react-helmet'
 import { useOutletContext } from "react-router-dom";
-
 import ChartComponent from '../../features/ChartComponent/ChartComponent';
 import { useEffect, useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { createGetProducts } from '../../../utils/API/API';
-import { IGetProducts } from '../../../utils/API/types';
+import { createGetProducts } from '../../../../utils/API/API';
+import { IGetProducts } from '../../../../utils/API/types';
 import ProductsTableItem from '../../features/ProductsTableItem/ProductsTableItem';
 import ProductItemAdd from '../../features/ProductItemAdd/ProductItemAdd';
 import PageLoader from '../../../common/PageLoader/PageLoader';
 import { useTranslation } from 'react-i18next';
 import Notify from '../../features/Notify/Notify';
-import { changeNewToAll, NotificationState } from '../../../redux/slice/notificationSlice';
+import { changeNewToAll, NotificationState } from '../../../../redux/slice/notificationSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCookie } from '../../../utils/reUse/cookie';
+import { getCookie } from '../../../../utils/reUse/cookie';
 
 interface IProduct {
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;

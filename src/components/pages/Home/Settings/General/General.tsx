@@ -1,9 +1,9 @@
 import style from './general.module.scss'
 import { useEffect, useState } from 'react'
-import uploadImage from '../../../../services/Firebase/Firebase'
-import { createGetSettingGeneral, createSaveSettingGeneral } from '../../../../utils/API/API';
+import uploadImage from '../../../../../services/Firebase/Firebase'
+import { createGetSettingGeneral, createSaveSettingGeneral } from '../../../../../utils/API/API';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { IGetGeneral } from '../../../../utils/API/types';
+import { IGetGeneral } from '../../../../../utils/API/types';
 import PageLoader from '../../../../common/PageLoader/PageLoader';
 import Loader from '../../../../common/Loader/Loader';
 import { useTranslation } from 'react-i18next';

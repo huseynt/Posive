@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createDeleteProduct } from "../../../utils/API/API";
+import { createDeleteProduct } from "../../../../utils/API/API";
 import style from "./productitemdelete.module.scss";
 import Loader from "../../../common/Loader/Loader";
 import { useTranslation } from "react-i18next";

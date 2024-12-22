@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { createGetNotifications, createSaveNotifications } from '../../../../utils/API/API';
+import { createGetNotifications, createSaveNotifications } from '../../../../../utils/API/API';
 import style from './notifications.module.scss'
 import { useEffect, useState } from 'react'
-import { IGetNotifications } from '../../../../utils/API/types';
+import { IGetNotifications } from '../../../../../utils/API/types';
 import { useTranslation } from 'react-i18next';
 import PageLoader from '../../../../common/PageLoader/PageLoader';
 import Loader from '../../../../common/Loader/Loader';

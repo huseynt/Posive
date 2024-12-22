@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import style from "./notify.module.scss";
 import '../SuccessOrder/forprint.scss'
+import { useTranslation } from "react-i18next";
 
 interface INotify {
   notify: boolean;
@@ -15,6 +16,7 @@ interface InotifyData {
 
 const Notify: React.FC<INotify> = (props) => {
   const { notify, purpose, describtion } = props;
+  const { t } = useTranslation();
   const [data, setData] = React.useState<InotifyData>({
     color: "",
     text: "",
@@ -25,20 +27,20 @@ const Notify: React.FC<INotify> = (props) => {
     if (purpose === "done") {
       setData({
         color: "#12B3A8",
-        text: "SUCCESS !",
-        desc: !describtion ? "Your changes have been successfully saved.": describtion,
+        text: t("SUCCESS !"),
+        desc: !describtion ? t("Your changes have been successfully saved."): describtion,
       });
     } else if (purpose === "important") {
       setData({
         color: "#b4ac3a",
-        text: "IMPORTANT !",
-        desc: !describtion ? "This change is important, please check it again.": describtion,
+        text: t("IMPORTANT !"),
+        desc: !describtion ? t("This change is important, please check it again."): describtion,
       });
     } else if (purpose === "undone") {
       setData({
         color: "#C65468",
-        text: "ERROR !",
-        desc: !describtion ? "There was an error saving your changes.": describtion,
+        text: t("ERROR !"),
+        desc: !describtion ? t("There was an error saving your changes."): describtion,
       });
     }
   }, [purpose]);

@@ -13,8 +13,6 @@ interface INotificationItem {
 const NotificationItem: React.FC<INotificationItem> = (props) => {
     const { id, name, descriptionId, newNotifications } = props;
 
-    // { text: string; description: string }[];
-
   return (
     <div className={style.item} id={`${id}`}>    
       <div className={style.item_block}>

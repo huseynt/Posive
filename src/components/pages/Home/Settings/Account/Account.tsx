@@ -1,12 +1,11 @@
 import style from './account.module.scss'
 import { useEffect, useState } from 'react'
 import arrowdown from '/public/assets/arrow-down.png'
-import uploadImage from '../../../../services/Firebase/Firebase'
+import uploadImage from '../../../../../services/Firebase/Firebase'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-// import { IgetUser } from '../../../../utils/API/types';
-import { createDeleteUser, createGetUser, createSaveUser } from '../../../../utils/API/API';
+import { createDeleteUser, createGetUser, createSaveUser } from '../../../../../utils/API/API';
 import { useNavigate } from 'react-router-dom';
-import { resetToken } from '../../../../utils/Hooks/useToken';
+import { resetToken } from '../../../../../utils/Hooks/useToken';
 import PageLoader from '../../../../common/PageLoader/PageLoader';
 import Loader from '../../../../common/Loader/Loader';
 import { useTranslation } from 'react-i18next';

@@ -11,9 +11,6 @@ interface ForgotFormProps {
   setEmail: (email: string) => void;
   ResetPassword: (email: string) => void;
   isResetPasswordPending: boolean;
-  // setStep: (step: string) => void;
-  // requestNotify: (purpose: string) => void;
-  // setDescribtion: (describtion: string) => void;
 }
 
 const ForgotForm: React.FC<ForgotFormProps>  = (props) => {

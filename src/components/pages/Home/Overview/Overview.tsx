@@ -6,14 +6,14 @@ import { useOutletContext } from "react-router-dom";
 import OverviewTableItem from "../../features/OverviewTableItem/OverviewTableItem";
 import { Helmet } from "react-helmet";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { createGetOrders } from "../../../utils/API/API";
-import { IGetMeals, IGetOrdersResponse } from "../../../utils/API/types";
+import { createGetOrders } from "../../../../utils/API/API";
+import { IGetMeals, IGetOrdersResponse } from "../../../../utils/API/types";
 
 import * as XLSX from "xlsx";
 import OverviewItemDeleteAll from "../../features/OverItemDeleteAll/OverviewItemDeleteAll";
 import PageLoader from "../../../common/PageLoader/PageLoader";
 import { useTranslation } from "react-i18next";
-import { changeNewToAll, NotificationState } from "../../../redux/slice/notificationSlice";
+import { changeNewToAll, NotificationState } from "../../../../redux/slice/notificationSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 interface IOverview {
@@ -39,8 +39,6 @@ interface IOrder {
 const Overview = () => {
   const { setToggleMenu, setNotification, notification } =
     useOutletContext<IOverview>();
-  // const [mobileSearch, setMobileSearch] = useState<boolean>(false);
-  // const [mealsFiltered, setMealsFiltered] = useState<IMeal[]>([]);
   const [periodDown, setPeriodDown] = useState<boolean>(false);
   const [period, setPeriod] = useState<string>("All time");
   const [checked, setChecked] = useState<boolean>(false);

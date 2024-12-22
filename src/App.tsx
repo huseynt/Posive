@@ -20,7 +20,7 @@ import { Routes, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 // ---------- google auth ------------------------------
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { getCookie } from './components/utils/reUse/cookie'
+import { getCookie } from './utils/reUse/cookie'
 import { changeLanguage } from 'i18next'
 
 
@@ -75,7 +75,7 @@ function App() {
       changeLanguage(lang);
     }
     else {
-      changeLanguage('en');
+      changeLanguage('az');
     }}, [])
   // ---------- language -------------------
 

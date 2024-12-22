@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import style from "./contact.module.scss";
-// import SearcInput from "../../../features/SearchInput/SearchInput";
 
 interface IContact {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>

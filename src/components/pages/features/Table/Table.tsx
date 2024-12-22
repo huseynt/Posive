@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import style from "./table.module.scss";
-import { IOrderState } from "../../../redux/type";
-import { changeTable, resetTable } from "../../../redux/slice/mealSlice";
-import { createGetTables } from "../../../utils/API/API";
+import { IOrderState } from "../../../../redux/type";
+import { changeTable, resetTable } from "../../../../redux/slice/mealSlice";
+import { createGetTables } from "../../../../utils/API/API";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
@@ -77,22 +77,7 @@ const Table: React.FC<ITable> = (props) => {
               ></div>
               <p className={style.table_block_head_list_item_title}>{t("Filled")}</p>
             </div>
-
-            {/* <div className={style.table_block_head_list_item}>
-              <div className={style.table_block_head_list_item_circle}
-              style={{backgroundColor: "#C65468"}}
-              ></div>
-              <p className={style.table_block_head_list_item_title}>Reserved</p>
-            </div> */}
           </div>
-
-          {/* <div className={style.table_block_head_search}>
-            <input className={style.table_block_head_search_input} type="text" placeholder="Search" />
-            <svg className={style.table_block_head_search_svg} width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7.66659 14.0002C11.1644 14.0002 13.9999 11.1646 13.9999 7.66683C13.9999 4.16903 11.1644 1.3335 7.66659 1.3335C4.16878 1.3335 1.33325 4.16903 1.33325 7.66683C1.33325 11.1646 4.16878 14.0002 7.66659 14.0002Z" stroke="#1A1C1E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M14.6666 14.6668L13.3333 13.3335" stroke="#1A1C1E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div> */}
           
         </div>
 

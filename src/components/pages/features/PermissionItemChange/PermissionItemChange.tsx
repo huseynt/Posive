@@ -1,9 +1,9 @@
 import { useState } from "react";
 import style from "./permissionItemchange.module.scss";
-import { createEditUserPermissions } from "../../../utils/API/API";
+import { createEditUserPermissions } from "../../../../utils/API/API";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Loader from "../../../common/Loader/Loader";
-import { IUpdateUserPermissions } from "../../../utils/API/types";
+import { IUpdateUserPermissions } from "../../../../utils/API/types";
 import { useTranslation } from "react-i18next";
 
 interface IPermissionItemChangeProps {

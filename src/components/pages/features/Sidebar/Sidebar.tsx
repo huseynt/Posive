@@ -4,11 +4,11 @@ import logo from "/assets/posive_logo.svg";
 // import user1 from "/assets/user1.png";
 import { useNavigate } from "react-router-dom";
 
-import { resetToken } from "../../../utils/Hooks/useToken";
-import { IgetUser } from "../../../utils/API/types";
-import { deleteUser } from "../../../utils/reUse/user";
+import { resetToken } from "../../../../utils/Hooks/useToken";
+import { IgetUser } from "../../../../utils/API/types";
+import { deleteUser } from "../../../../utils/reUse/user";
 import { useTranslation } from 'react-i18next';
-import { getCookie } from "../../../utils/reUse/cookie";
+import { getCookie } from "../../../../utils/reUse/cookie";
 interface ISidebarProps {
   toggleMenu: boolean;
   setToggleMenu: React.Dispatch<React.SetStateAction<boolean>>;

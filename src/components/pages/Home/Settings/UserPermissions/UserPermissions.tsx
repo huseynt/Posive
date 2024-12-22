@@ -1,14 +1,13 @@
 import UserItem from '../../../features/UserItem/UserItem'
 import style from './userpermissions.module.scss'
-// import { users } from '../../../../test/db/users'
-import { createDeletePermissionUserAll, createGetUsers } from '../../../../utils/API/API'
+import { createDeletePermissionUserAll, createGetUsers } from '../../../../../utils/API/API'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import PageLoader from '../../../../common/PageLoader/PageLoader'
 import Notify from '../../../features/Notify/Notify'
 import Loader from '../../../../common/Loader/Loader'
 import { useTranslation } from 'react-i18next'
-import { getCookie } from '../../../../utils/reUse/cookie'
+import { getCookie } from '../../../../../utils/reUse/cookie'
 interface IGeneral {
   setMobileSelect: React.Dispatch<React.SetStateAction<boolean>>
 }

@@ -1,4 +1,4 @@
-import { IGetMeals } from "../../../utils/API/types";
+import { IGetMeals } from "../../../../utils/API/types";
 import style from "./overviewitemview.module.scss";
 import { useTranslation } from "react-i18next";
 

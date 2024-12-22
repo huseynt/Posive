@@ -1,10 +1,11 @@
 import style from "./notification.module.scss";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { createNotifications } from "../../../utils/API/API";
+import { createNotifications } from "../../../../utils/API/API";
 import NotificationItem from "../NotificationItem/NotificationItem";
 import { useDispatch, useSelector } from "react-redux";
-import { addNotificationCount, reset } from "../../../redux/slice/notificationSlice";
+import { addNotificationCount, reset } from "../../../../redux/slice/notificationSlice";
+import { useTranslation } from "react-i18next";
 
 interface INotificationSelector { 
   text: string; 
@@ -18,6 +19,7 @@ interface INotification {
 }
 
 const Notification: React.FC<INotification> = ({ setNotification, notification, bag }) => {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const socket = import.meta.env.VITE_SOCKET;
   const dispatch = useDispatch();
@@ -125,14 +127,14 @@ const Notification: React.FC<INotification> = ({ setNotification, notification, 
 
           <div className={style.notification_screen_block_list}>
             {isLoadingNotifications ? (
-              <p>Bildirişlər yüklənir...</p>
+              <p>{t("Notifications are loading...")}</p>
             ) : (
               allNotifications?.slice().reverse().map((notification: {text: string, description: string}, index: number) => (
                 <NotificationItem key={index} newNotifications={newNotifications} id={index} name={notification.text} descriptionId={notification.description} />
               ))
             )}
             { !isLoadingNotifications && !allNotifications?.length && 
-            <p style={{textAlign: "center"}}>Bildiriş yoxdur</p>
+            <p style={{textAlign: "center"}}>{t("No notification")}</p>
             }
           </div>
         </div>

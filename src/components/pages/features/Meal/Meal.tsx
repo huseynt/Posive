@@ -4,8 +4,8 @@ import { useState } from 'react'
 import AboutMeal from "../AboutMeal/AboutMeal";
 // import { IMeal } from '../../../utils/interface/Meal';
 import { useDispatch, useSelector } from 'react-redux';
-import { ascendingOrder, desascendingOrder } from '../../../redux/slice/mealSlice';
-import { IGetMeals } from '../../../redux/type';
+import { ascendingOrder, desascendingOrder } from '../../../../redux/slice/mealSlice';
+import { IGetMeals } from '../../../../redux/type';
 
 export interface IMeal { 
   key?: string | undefined;

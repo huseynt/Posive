@@ -11,8 +11,6 @@ interface VerifyEmailProps {
   setStep: (step: string) => void;
   Verify: (data: IVerifyEmail) => void;
   isVerifyEmailPending: boolean;
-  // requestNotify: (purpose: string) => void;
-  // setDescribtion: (describtion: string) => void;
 }
 
 interface IVerifyEmail {

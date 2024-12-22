@@ -1,4 +1,4 @@
-import { IGetMeals } from "../../../utils/API/types";
+import { IGetMeals } from "../../../../utils/API/types";
 import Notify from "../Notify/Notify";
 import OverviewItemChange from "../OverviewItemChange/OverviewItemChange";
 import OverviewItemDelete from "../OverviewItemDelete/OverviewItemDelete";

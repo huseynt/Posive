@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createDeleteOrdersAll } from "../../../utils/API/API";
+import { createDeleteOrdersAll } from "../../../../utils/API/API";
 import style from "./overviewitemdeleteall.module.scss";
 import Loader from "../../../common/Loader/Loader";
 import { useTranslation } from "react-i18next";
@@ -8,7 +8,6 @@ interface IQRCodeComponentProps {
   setDeleteAllOpen: React.Dispatch<React.SetStateAction<boolean>>;
   multiCheck: number[];
   setMultiCheck: React.Dispatch<React.SetStateAction<number[]>>;
-  // requestNotify: (purpose: string, description: string | undefined) => void;
 }
 
 const OverviewItemDeleteAll: React.FC<IQRCodeComponentProps> = (props) => {
@@ -29,11 +28,9 @@ const OverviewItemDeleteAll: React.FC<IQRCodeComponentProps> = (props) => {
         queryClient.invalidateQueries({queryKey: ["getNotifications"]});
         setMultiCheck([]);
         setDeleteAllOpen(false);
-        // requestNotify("done", "Order deleted successfully");
     },
     onError: (error) => {
       console.log('Delete error:', error);  
-      // requestNotify("undone", "Error deleting order");
     },
   });
   const handleDeleteAll = () => {

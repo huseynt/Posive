@@ -1,6 +1,5 @@
 import style from "./successorder.module.scss";
-// import jsPDF from 'jspdf';
-// import html2canvas from 'html2canvas';
+import { useTranslation } from "react-i18next";
 
 interface ISuccessOrder {
   orderId: number;
@@ -20,26 +19,10 @@ interface IQRCodeComponentProps {
 
 const SuccessOrder: React.FC<IQRCodeComponentProps> = (props) => {
   const { setSuccessOrder, successOrder } = props;
-
+  const { t } = useTranslation();
   const handlePrint = () => {
     window.print();
   }
-
-  // const handlePrint = () => {
-  //   const input = document.getElementById('content');
-
-  //   html2canvas(input)
-  //     .then((canvas) => {
-  //       const imgData = canvas.toDataURL('image/png');
-  //       const pdf = new jsPDF();
-  //       pdf.addImage(imgData, 'PDF', 20, 20);
-  //       pdf.save('example.pdf');
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
-
-
 
   return (
     <div className={style.success}>
@@ -83,26 +66,30 @@ const SuccessOrder: React.FC<IQRCodeComponentProps> = (props) => {
             />
           </svg>
           <p className={style.success_block_head_text}>
-            Successfully placed an order
+            {t("Successfully placed an order")}
           </p>
           <p className={style.success_block_head_price}>${successOrder.price.toFixed(2)}</p>
         </div>
 
         <div className={style.success_block_detail}>
           <div className={style.success_block_detail_item}>
-            <p className={style.success_block_detail_item_name}>Order ID</p>
+            <p className={style.success_block_detail_item_name}>
+              {t("Order ID")}
+            </p>
             <p className={style.success_block_detail_item_value}>{successOrder.orderId}</p>
           </div>
 
           <div className={style.success_block_detail_item}>
             <p className={style.success_block_detail_item_name}>
-              Receipt Number
+              {t("Receipt Number")}
             </p>
             <p className={style.success_block_detail_item_value}>{successOrder.receiptNumber.join("").slice(1,8)}</p>
           </div>
 
           <div className={style.success_block_detail_item}>
-            <p className={style.success_block_detail_item_name}>Date & Time</p>
+            <p className={style.success_block_detail_item_name}>
+              {t("Date & Time")}
+            </p>
             <p className={style.success_block_detail_item_value}>
               {new Date(successOrder.orderDate).toLocaleDateString("en-US", {
                   year: "numeric",
@@ -116,7 +103,7 @@ const SuccessOrder: React.FC<IQRCodeComponentProps> = (props) => {
 
           <div className={style.success_block_detail_item}>
             <p className={style.success_block_detail_item_name}>
-              Payment method
+              {t("Payment method")}
             </p>
             <p className={style.success_block_detail_item_value}>
               {successOrder.paymentMethod}
@@ -124,7 +111,9 @@ const SuccessOrder: React.FC<IQRCodeComponentProps> = (props) => {
           </div>
 
           <div className={style.success_block_detail_item}>
-            <p className={style.success_block_detail_item_name}>Collected by</p>
+            <p className={style.success_block_detail_item_name}>
+              {t("Collected by")}
+            </p>
             <p className={style.success_block_detail_item_value}>
               {successOrder.cashier}
             </p>
@@ -146,7 +135,9 @@ const SuccessOrder: React.FC<IQRCodeComponentProps> = (props) => {
               tables: []
             }
           )}
-          >New Order</button>
+          >
+            {t("New Order")}
+          </button>
 
           <div className={style.success_block_actions_print}
           onClick={handlePrint}
@@ -200,7 +191,9 @@ const SuccessOrder: React.FC<IQRCodeComponentProps> = (props) => {
                 strokeLinejoin="round"
               />
             </svg>
-            <p className={style.success_block_actions_print_name}>Print Receipt</p>
+            <p className={style.success_block_actions_print_name}>
+              {t("Print Receipt")}
+            </p>
           </div>
         </div>
       </div>

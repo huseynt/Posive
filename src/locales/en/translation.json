@@ -374,6 +374,35 @@
     "Code is incorrect": "Code is incorrect",
 
 
-    "NOT ALLOWED": "NOT ALLOWED"
+    "NOT ALLOWED": "NOT ALLOWED",
+    "Page Not Found": "Page Not Found",
+    "Home": "Home",
+    "Notifications are loading...": "Notifications are loading...",
+    "No notification": "No notification",
+    "ERROR !" : "ERROR !",
+    "IMPORTANT !" : "IMPORTANT !",
+    "SUCCESS !" : "SUCCESS !",
+    "Your changes have been successfully saved." : "Your changes have been successfully saved.",
+    "This change is important, please check it again." : "This change is important, please check it again.",
+    "There was an error saving your changes." : "There was an error saving your changes.",
+    "Successfully placed an order": "Successfully placed an order",
+    "Order ID:": "Order ID:",
+    "Collected by": "Collected by",
+    "New Order": "New Order",
+    "Print Receipt": "Print Receipt",
+    "Login": "Login",
+    "Remember me": "Remember me",
+    "Forgot Password ?": "Forgot Password ?",
+    "Login with Google": "Login with Google",
+    "Don’t have an account ?": "Don’t have an account ?",
+    "Register here": "Register here",
+    "© 2024 Posive. All rights reserved.": "© 2024 Posive. All rights reserved.",
+    "Please enter your email address": "Please enter your email address",
+    "Please enter a password": "Please enter a password",
+    "Please enter a valid email address": "Please enter a valid email address",
+    "Password must contain at least 8 characters": "Password must contain at least 8 characters",
+    "Unleash the power of our intuitive point of sale solution": "Unleash the power of our intuitive point of sale solution",
+    "Experience the future of retail with our user-friendly POS platform. Increase your sales, streamline operations, and delight your customers with a modern and efficient checkout process": "Experience the future of retail with our user-friendly POS platform. Increase your sales, streamline operations, and delight your customers with a modern and efficient checkout process"
+
 }
   

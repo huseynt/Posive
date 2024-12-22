@@ -9,10 +9,11 @@ import PrivacyForHomePage from "../../PrivacyForHomePage/PrivacyForHomePage";
 // ---------- google auth ------------------------------
 import { GoogleLogin } from "@react-oauth/google";
 import Loader from "../../../../common/Loader/Loader";
-import { createGoogleAuth } from "../../../../utils/API/API";
-import { setCookie } from "../../../../utils/reUse/cookie";
+import { createGoogleAuth } from "../../../../../utils/API/API";
+import { setCookie } from "../../../../../utils/reUse/cookie";
 import GLoader from "../../../../common/Loader/GLoader";
 // ---------- google auth ------------------------------
+import { useTranslation } from "react-i18next";
 
 interface LoginFormProps {
   Authenticate: (data: { email: string; password: string }) => void;
@@ -32,6 +33,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
     email: "",
     password: "",
   });
+  const { t } = useTranslation();
   // --------------- term and privacy ----------------
   const [viewOpen, setViewOpen] = useState<string>("");
   // --------------- term and privacy ----------------
@@ -58,20 +60,20 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
     }
     if (!data.email && !data.password) {
       setValidate({
-        email: "Please enter your email address",
-        password: "Please enter a password",
+        email: t("Please enter your email address"),
+        password: t("Please enter a password"),
       });
     } else {
       if (!data.email) {
         setValidate({
           ...validate,
-          email: "Please enter a email address",
+          email: t("Please enter your email address"),
         });
       }
       if (!data.password) {
         setValidate({
           ...validate,
-          password: "Please enter a password",
+          password: t("Please enter a password"),
         });
       }
     }
@@ -131,7 +133,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
       if (!emailRegex.test(data.email)) {
         setValidate({
           ...validate,
-          email: "Please enter a valid email address",
+          email: t("Please enter a valid email address"),
         });
       } else {
         setValidate({
@@ -145,7 +147,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
       if (data.password.length < 8) {
         setValidate({
           ...validate,
-          password: "Password must contain at least 8 characters",
+          password: t("Password must contain at least 8 characters"),
         });
       } else {
         setValidate({
@@ -192,7 +194,9 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
             alt="Posive"
           />
         </div>
-        <h2 className={style.login_name}>Login</h2>
+        <h2 className={style.login_name}>
+          {t("Login")}
+        </h2>
 
         <form className={style.login_form} action="submit">
           <div className={style.login_form_email}>
@@ -210,7 +214,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
               }}
             />
             <p className={data.email ? style.label_focus : style.label}>
-              Email
+              {t("Email")}
             </p>
 
             {/* -- validation -- */}
@@ -254,7 +258,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
               }}
             />
             <p className={data.password ? style.label_focus : style.label}>
-              Password
+              {t("Password")}
             </p>
             <span
               className={style.login_form_password_eye}
@@ -372,14 +376,16 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
                 checked={rememberMe}
                 onChange={() => setRememberMe(!rememberMe)}
               />
-              <label htmlFor="remember"> Remember me</label>
+              <label htmlFor="remember">
+                {t("Remember me")}
+              </label>
             </div>
 
             <div
               className={style.login_form_actions_forgot}
               onClick={handleForgot}
             >
-              Forgot Password
+              {t("Forgot Password ?")}
             </div>
           </div>
 
@@ -390,7 +396,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
               <input
                 className={style.login_form_submit_input}
                 type="submit"
-                value="Login"
+                value={t("Login")}
                 onClick={sumbit}
               />
             )}
@@ -398,7 +404,9 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
         </form>
 
         <div className={style.login_or}>
-          <span>or</span>
+          <span>
+            {t("or")} 
+          </span>
         </div>
 
         <button className={style.login_google}>
@@ -420,25 +428,35 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
               <span>
                 <img src={google} alt="google" />
               </span>
-              <span>Login with Google</span>
+              <span>
+                {t("Login with Google")}
+              </span>
             </>
           )}
         </button>
 
         <div className={style.login_registr}>
-          <span>Don’t have an account? </span>
-          <a onClick={handleRegistr}>Register Here</a>
+          <span>
+            {t("Don’t have an account ?")}
+          </span>
+          <a onClick={handleRegistr}>
+            {t("Register here")}
+          </a>
         </div>
 
         <div className={style.login_footer}>
-          <p>© 2024 Posive. All rights reserved.</p>
+          <p>
+            {t("© 2024 Posive. All rights reserved.")}
+          </p>
           <div className={style.login_footer_links}>
-            <a onClick={() => setViewOpen("term")}>Term & Condition</a>
+            <a onClick={() => setViewOpen("term")}>
+              {t("Term & Conditions")}
+            </a>
             <a
               onClick={() => setViewOpen("privacy")}
               style={{ borderLeft: "1px solid #000" }}
             >
-              Privacy & Policy
+              {t("Privacy Policy")}
             </a>
           </div>
         </div>

@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import style from './billings.module.scss'
 import { useEffect, useState } from 'react'
-import { createGetPlans, createPostPlans } from '../../../../utils/API/API';
-import { IGetPlan } from '../../../../utils/API/types';
+import { createGetPlans, createPostPlans } from '../../../../../utils/API/API';
+import { IGetPlan } from '../../../../../utils/API/types';
 import { useTranslation } from 'react-i18next';
 
 interface IGeneral {

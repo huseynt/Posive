@@ -6,8 +6,8 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Provider } from 'react-redux'
-import { store } from './components/redux/store.ts';
-import './components/utils/languages/i18n.ts'
+import { store } from './redux/store.ts';
+import './utils/languages/i18n.ts'
 
 
 
