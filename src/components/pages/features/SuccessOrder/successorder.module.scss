@@ -155,6 +155,14 @@
                     border: 1px solid $light_gray;
                 }
 
+                &_icon {
+                    path {
+                        @include themed {
+                            stroke: t(black);
+                        }
+                    }
+                }
+
                 &_name {
                     @extend %m_b;
                 }
