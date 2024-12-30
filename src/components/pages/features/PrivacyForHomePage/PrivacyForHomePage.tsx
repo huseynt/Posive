@@ -49,7 +49,7 @@ const PrivacyForHomePage: React.FC<ITerm> = (props) => {
           </div>
 
           <div className={style.parent_block_main_block}>
-            <h2 className={style.parent_block_main_block_head}>Updates</h2>
+            <h2 className={style.parent_block_main_block_head}>{t("Updates")}</h2>
             <p className={style.parent_block_main_block_text}>{t("Our Privacy Policy may change from time to time, and all updates will be posted on this page.")}</p>
             <p className={style.parent_block_main_block_text}>{t("If you feel that we are not abiding by this privacy policy, you should contact us immediately via email.")}</p>
             <p className={style.parent_block_main_block_text}>{t("This is a basic example and should be customized to suit the specific needs and legal requirements of your business and jurisdiction. It's recommended to consult with a legal professional to ensure compliance.")}</p>
