@@ -20,7 +20,7 @@ import { Routes, Route, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 // ---------- google auth ------------------------------
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { getCookie } from './utils/reUse/cookie'
+import { getCookie, setCookie } from './utils/reUse/cookie'
 import { changeLanguage } from 'i18next'
 
 
@@ -92,7 +92,7 @@ function App() {
     const { lang } = useParams<{ lang: string }>();
     changeLanguage(lang);
     // must back save language / not to use at the moment
-    // setCookie('i18next', lang || 'en', 365);
+    setCookie('i18next', lang ? lang : 'en', 365);
     return lang == 'az' || lang == 'en' ? <HomePage /> : <NotFound />;
   };
 
