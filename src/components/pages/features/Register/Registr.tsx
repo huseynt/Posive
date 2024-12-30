@@ -7,24 +7,28 @@ import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { createPostRegister } from '../../../../utils/API/API'
 import Notify from '../Notify/Notify'
+import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 
 
 
 const Registr = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate()
 
   const {
     mutate: Registr,
     isPending: isRegistrPending,
   } = useMutation({
     mutationFn: createPostRegister,
-    onSuccess: (data) => {
-      console.log('Success', data);
-      setDescribtion('You have successfully registered')
+    onSuccess: () => {
+      setDescribtion(t('You have successfully registered'))
       requestNotify('done')
+      navigate('/login')
     },
     onError: (error) => {
       console.log('Login error:', error);
-      setDescribtion('Email is already registered')
+      setDescribtion(t('Email is already registered or error'))
       requestNotify('important')
     },
   });

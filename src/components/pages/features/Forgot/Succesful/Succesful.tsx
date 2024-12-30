@@ -4,10 +4,11 @@ import logo from "/assets/posive_logo.svg";
 import { useNavigate } from "react-router-dom";
 import TermForHomePage from "../../TermForHomePage/TermForHomePage";
 import PrivacyForHomePage from "../../PrivacyForHomePage/PrivacyForHomePage";
+import { useTranslation } from "react-i18next";
 
 
 const Succesful = () => {
-
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const sumbit = (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -31,7 +32,7 @@ const Succesful = () => {
         <div className={style.login_logo}
         onClick={() => navigate('/')}
         >
-          <img src={logo} alt="Posive" />
+          <img src={logo} onClick={() => navigate("/")} style={{cursor: "pointer"}} alt="Posive" />
         </div>
         <div className={style.login_previous}>
             <svg width="65" height="64" viewBox="0 0 65 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,27 +40,28 @@ const Succesful = () => {
               <path d="M21.1665 31.9998L28.7132 39.5465L43.8332 24.4531" stroke="#12B3A8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
         </div>
-        <h2 className={style.login_name}>Reset password succesful</h2>
-        <p className={style.login_information}>Successfully changed password. you can enter the main page</p>
+        <h2 className={style.login_name}>{t("Reset password succesful")}</h2>
+        <p className={style.login_information}>{t("Successfully changed password. you can enter the main page")}</p>
 
         <form className={style.login_form} action="submit">
           <input
             className={style.login_form_submit}
             type="submit"
-            value="Go to login"
+            value={t("Go to login")}
             onClick={sumbit}
           />
         </form>
 
         <div className={style.login_footer}>
-          <p>© 2024 Posive. All rights reserved.</p>
+          <p>{t("© 2024 Posive. All rights reserved.")}</p>
           <div className={style.login_footer_links}>
               <a onClick={
                 () => setViewOpen("term")
-              }>Term & Condition</a>
-              <a onClick={
+              }>{t("Term & Conditions")}</a>
+              <a className={style.login_footer_links_privacy}
+              onClick={
                 () => setViewOpen("privacy")
-              } style={{borderLeft: "1px solid #000"}}>Privacy & Policy</a>
+              }>{t("Privacy Policy")}</a>
           </div>
         </div>
       </div>

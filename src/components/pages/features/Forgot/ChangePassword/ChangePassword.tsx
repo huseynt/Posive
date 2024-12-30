@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Loader from "../../../../common/Loader/Loader";
 import TermForHomePage from "../../TermForHomePage/TermForHomePage";
 import PrivacyForHomePage from "../../PrivacyForHomePage/PrivacyForHomePage";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 
 interface ChangePasswordProps {
@@ -11,12 +13,10 @@ interface ChangePasswordProps {
   setStep: (step: string) => void;
   Change: (data:{email: string, newPassword: string}) => void;
   isChangePasswordPending: boolean;
-  // requestNotify: (purpose: string) => void;
-  // setDescribtion: (describtion: string) => void;
 }
 
 const ChangePassword: React.FC<ChangePasswordProps> = (props) => {
-
+  const { t } = useTranslation();
   const [hide, setHide] = useState(false);
   const { email, Change, setStep, isChangePasswordPending } = props;
   const [data, setData] = useState({
@@ -28,6 +28,7 @@ const ChangePassword: React.FC<ChangePasswordProps> = (props) => {
     password: "",
     repeatPassword: "",
   });
+  const navigate = useNavigate()
   // --------------- term and privacy ----------------
   const [viewOpen, setViewOpen] = useState<string>("");
   // --------------- term and privacy ----------------
@@ -46,52 +47,23 @@ const ChangePassword: React.FC<ChangePasswordProps> = (props) => {
     e.preventDefault();
     if (data.newPassword!== "" && repeatPassword==data.newPassword && data.newPassword.length > 7) {
       console.log(data, email);
-      // setStep('succesful');
       Change(data)
-      // requestNotify("done")
-      // setDescribtion("Password changed successfully")
-      // navigate('/login')
     }
     else { 
       setValidate({
         ...validate,
-        password: !data.newPassword ? "Please enter the verification code": "",
-        repeatPassword: !repeatPassword ? "Please enter the verification code": "",
+        password: !data.newPassword || data.newPassword.length < 8 ? t("Please enter the verification code"): "",
+        repeatPassword: !repeatPassword ? t("Please enter the verification code"): "",
       });
     }
   }
 
 
   const checkValidation = () => {
-
-    // if (data.password.length < 8 && data.password.length > 0) {
-    //   setValidate({
-    //     ...validate,
-    //     password: "Password must be at least 8 characters",
-    //   });
-    // } else {
-    //   setValidate({
-    //     ...validate,
-    //     password: "",
-    //   });
-    // }
-
-    // if (repeatPassword !== data.password && repeatPassword.length > 0) {
-    //   setValidate({
-    //     ...validate,
-    //     repeatPassword: "Passwords do not match",
-    //   });
-    // } else {
-    //   setValidate({
-    //     ...validate,
-    //     repeatPassword: "",
-    //   });
-    // }
-    // write all validation one setValidate
     setValidate({
       ...validate,
-      password: data.newPassword.length < 8 && data.newPassword.length > 0 ? "Password must be at least 8 characters": "",
-      repeatPassword: repeatPassword !== data.newPassword && repeatPassword.length > 0 ? "Passwords do not match": "",
+      password: data.newPassword.length < 8 && data.newPassword.length > 0 ? t("Password must be at least 8 characters"): "",
+      repeatPassword: repeatPassword !== data.newPassword && repeatPassword.length > 0 ? t("Passwords do not match"): "",
     });
   }
 
@@ -103,14 +75,6 @@ const ChangePassword: React.FC<ChangePasswordProps> = (props) => {
     checkValidation();
   }, [repeatPassword, data.newPassword]);
 
-
-
-  // const navigate = useNavigate()
-  // const handleLogin = () => {
-  //   navigate('/login')
-  // }
-
-
   return (
     <>
 
@@ -120,7 +84,7 @@ const ChangePassword: React.FC<ChangePasswordProps> = (props) => {
 
       <div className={style.login}>
         <div className={style.login_logo}>
-          <img src={logo} alt="Posive" />
+          <img src={logo} onClick={() => navigate("/")} style={{cursor: "pointer"}} alt="Posive" />
         </div>
         <div className={style.login_previous}>
           <div onClick={() => setStep('verify')}>
@@ -130,36 +94,10 @@ const ChangePassword: React.FC<ChangePasswordProps> = (props) => {
             </svg>
           </div>
         </div>
-        <h2 className={style.login_name}>Create new password</h2>
-        <p className={style.login_information}>Let's create a new and more secure password</p>
+        <h2 className={style.login_name}>{t("Create new password")}</h2>
+        <p className={style.login_information}>{t("Let's create a new and more secure password")}</p>
 
         <form className={style.login_form} action="submit">
-
-
-          {/* <div className={style.login_form_password}>
-            <input 
-            type="text"
-            id="password"
-            onChange={change}
-            value={data.password}
-            className={style.login_form_password_input}
-            />
-            <p className={data.password ? style.label_focus: style.label}>New Password</p>
-          </div>
-
-          <div className={style.login_form_password}>
-            <input 
-            type="text"
-            id="password"
-            onChange={change}
-            value={data.password}
-            className={style.login_form_password_input}
-            />
-            <p className={data.password ? style.label_focus: style.label}>Repeat Password</p>
-          </div> */}
-
-          
-
 
           <div className={style.login_form_password}>
             <input 
@@ -173,7 +111,7 @@ const ChangePassword: React.FC<ChangePasswordProps> = (props) => {
               borderColor: validate.password ? 'red' : ''
             }}
             />
-            <p className={data.newPassword ? style.label_focus: style.label}>Password</p>
+            <p className={data.newPassword ? style.label_focus: style.label}>{t("Password")}</p>
             <span 
             className={style.login_form_password_eye}
             onClick={() => setHide(!hide)}
@@ -220,7 +158,7 @@ const ChangePassword: React.FC<ChangePasswordProps> = (props) => {
               borderColor: validate.repeatPassword ? 'red' : ''
             }}
             />
-            <p className={repeatPassword ? style.label_focus: style.label}>Password</p>
+            <p className={repeatPassword ? style.label_focus: style.label}>{t("Password")}</p>
             <span 
             className={style.login_form_password_eye}
             onClick={() => setHide(!hide)}
@@ -262,7 +200,7 @@ const ChangePassword: React.FC<ChangePasswordProps> = (props) => {
               <input
               className={style.login_form_submit_input}
               type="submit"
-              value="Continue"
+              value={t("Continue")}
               onClick={sumbit}
               />
             }
@@ -272,14 +210,15 @@ const ChangePassword: React.FC<ChangePasswordProps> = (props) => {
         </form>
 
         <div className={style.login_footer}>
-          <p>© 2024 Posive. All rights reserved.</p>
+          <p>{t("© 2024 Posive. All rights reserved.")}</p>
           <div className={style.login_footer_links}>
               <a onClick={
                 () => setViewOpen("term")
-              }>Term & Condition</a>
-              <a onClick={
+              }>{t("Term & Conditions")}</a>
+              <a className={style.login_footer_links_privacy}
+              onClick={
                 () => setViewOpen("privacy")
-              } style={{borderLeft: "1px solid #000"}}>Privacy & Policy</a>
+              }>{t("Privacy Policy")}</a>
           </div>
         </div>
       </div>

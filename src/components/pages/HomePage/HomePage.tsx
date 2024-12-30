@@ -5,13 +5,15 @@ import mac from "/public/MacbookAir.png";
 import { useNavigate } from "react-router-dom";
 import img_person from "/public/assets/login_wall_person.png";
 import img_wall from "/public/assets/login_wall.png";
+import { useTranslation } from "react-i18next";
 
 interface ICovers {
   [key: number]: string;
 }
 
 const HomePage = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { t } = useTranslation();
   const [I, setI] = useState<number>(0)
   const covers: ICovers ={
     0: img_person,
@@ -51,10 +53,10 @@ const HomePage = () => {
         <div className={style.home_main}>
 
           <header className={style.home_main_header}>
-            <p className={style.home_main_header_text}>Let`s do your best today 🎉</p>
+            <p className={style.home_main_header_text}>{t("Let`s do your best today 🎉")}</p>
             <div className={style.home_main_header_button} 
             onClick={() => navigate('/login')}
-            >Sign In</div>
+            >{t("Sign In")}</div>
           </header>
 
           <div className={style.home_main_container}>
@@ -81,10 +83,10 @@ const HomePage = () => {
                 <p className={style.home_main_container_left_logo_title}>Posive</p>
               </div>
 
-              <h2 className={style.home_main_container_left_text}>POS Admin</h2>
-              <h2 className={style.home_main_container_left_text}>Dashboard</h2>
+              <h2 className={style.home_main_container_left_text}>{t("POS Admin")}</h2>
+              <h2 className={style.home_main_container_left_text}>{t("Dashboard")}</h2>
               <div className={style.home_main_container_left_actions}>
-                <button onClick={() => navigate("/registr")}>Sign Up</button>
+                <button onClick={() => navigate("/registr")}>{t("Sign Up")}</button>
               </div>
             </div>
 
@@ -142,19 +144,19 @@ const HomePage = () => {
                 <span className={style.home_mobile_up_desc_head_b}>POS</span>
               </div>
 
-              <div className={style.home_mobile_up_desc_more}>Admin Dashboard</div>
+              <div className={style.home_mobile_up_desc_more}>{t("Admin Dashboard")}</div>
 
-              <div className={style.home_mobile_up_desc_info}>Experience the future of retail with our user-friendly POS platform. Increase your sales, streamline operations, and delight your customers with a modern and efficient checkout process</div>
+              <div className={style.home_mobile_up_desc_info}>{t("Experience the future of retail with our user-friendly POS platform. Increase your sales, streamline operations, and delight your customers with a modern and efficient checkout process")}</div>
             </div>
           </div>
 
           <div className={style.home_mobile_actions}>
             <button className={style.home_mobile_actions_btn}
             onClick={() => navigate('/login')}
-            >Login</button>
+            >{t("Login")}</button>
             <button className={style.home_mobile_actions_btnW}
             onClick={() => navigate('/registr')}
-            >Create an Account</button>
+            >{t("Create an Account")}</button>
           </div>
 
         </div>

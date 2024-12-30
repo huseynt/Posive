@@ -16,7 +16,7 @@ import Overview from './components/pages/Home/Overview/Overview'
 import Pos from './components/pages/Home/Pos/Pos'
 import HomePage from './components/pages/HomePage/HomePage'
 // ---------- import components ----------
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 // ---------- google auth ------------------------------
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -87,6 +87,15 @@ function App() {
   // ----------- body title ----------------
 
 
+  // ----------- language wrapper ------------
+  const LanguageWrapper: React.FC = () => {
+    const { lang } = useParams<{ lang: string }>();
+    changeLanguage(lang);
+    // must back save language / not to use at the moment
+    // setCookie('i18next', lang || 'en', 365);
+    return lang == 'az' || lang == 'en' ? <HomePage /> : <NotFound />;
+  };
+
   return (
     <GoogleOAuthProvider clientId={import.meta.env.VITE_GCLIENT_ID as string}>
       <div className={style.app}>
@@ -98,7 +107,7 @@ function App() {
             <Route path='/registr' element={<Registr />} />
             <Route path='/login' element={<Login />} />
             <Route path='/forgot' element={<Forgot />} />
-            <Route path='/homepage' element={<HomePage />} />
+            <Route path="/:lang" element={<LanguageWrapper />} />
             
             <Route path='/home' element={<Home setTheme={setTheme}/>}>
               <Route index element={<Pos/>} />

@@ -8,11 +8,11 @@ import ChangePassword from './ChangePassword/ChangePassword'
 import Succesful from './Succesful/Succesful'
 import { useMutation } from '@tanstack/react-query'
 import { createResetPassword, createVerifyEmail, createPostChangePassword } from '../../../../utils/API/API'
-
 import Notify from '../Notify/Notify'
+import { useTranslation } from 'react-i18next'
 
 const Forgot = () => {
-  
+  const { t } = useTranslation();
   const [step, setStep] = useState<string>('email')
   const [email, setEmail] = useState<string>('')
 
@@ -29,11 +29,11 @@ const Forgot = () => {
       console.log('Success', data);
       if (data === 'Success') {
         setStep('verify')
-        setDescribtion('Code sent successfully')
+        setDescribtion(t('Code sent successfully'))
         requestNotify('done')
       } 
       else if (data === 'Error') {
-        setDescribtion('Email is not registered')
+        setDescribtion(t('Email is not registered'))
         requestNotify('important')
       }
     },
@@ -52,11 +52,11 @@ const Forgot = () => {
       console.log('Success', data);
       if (data === 'Success') {
         setStep('change')
-        setDescribtion('Email verified successfully')
+        setDescribtion(t('Email verified successfully'))
         requestNotify('done')
       }
       else if (data === 'Error') {
-        setDescribtion('Code is incorrect')
+        setDescribtion(t('Code is incorrect'))
         requestNotify('undone')
       }
     },
@@ -75,11 +75,11 @@ const Forgot = () => {
       console.log('Success', data);
       if (data === 'Success') {
         setStep('succesful')
-        setDescribtion('Password changed successfully')
+        setDescribtion(t('Password changed successfully'))
         requestNotify('done')
       }
       else if (data === 'Error') {
-        setDescribtion('Error changing password')
+        setDescribtion(t('Error changing password'))
         requestNotify('undone')
       }
     },

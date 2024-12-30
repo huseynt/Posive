@@ -327,6 +327,13 @@
             padding: 0 9px;
             cursor: pointer;
         }
+        &_links {
+            &_privacy {
+                @include themed {
+                    border-left: 1px solid t(black);
+                }
+            }
+        }
     }
 }
 

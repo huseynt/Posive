@@ -452,12 +452,10 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
             <a onClick={() => setViewOpen("term")}>
               {t("Term & Conditions")}
             </a>
-            <a
-              onClick={() => setViewOpen("privacy")}
-              style={{ borderLeft: "1px solid #000" }}
-            >
-              {t("Privacy Policy")}
-            </a>
+            <a className={style.login_footer_links_privacy}
+              onClick={
+                () => setViewOpen("privacy")
+              }>{t("Privacy Policy")}</a>
           </div>
         </div>
       </div>

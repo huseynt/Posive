@@ -265,11 +265,14 @@
         max-width: 500px;
         margin-top: auto;
         margin-bottom: 20px;
-        @extend %sm;
+        @extend %s;
         display: flex;
         justify-content: space-around;
         animation: load 1s ease-in-out;
 
+        @include themed {
+            color: t(light_m_gray);
+        }
 
         @include mobile {
             flex-direction: column;
@@ -284,6 +287,14 @@
             color: $link_blue;
             padding: 0 9px;
             cursor: pointer;
+        }
+
+        &_links {
+            &_privacy {
+                @include themed {
+                    border-left: 1px solid t(black);
+                }
+            }
         }
     }
 }

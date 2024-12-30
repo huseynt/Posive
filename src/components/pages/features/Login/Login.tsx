@@ -10,10 +10,12 @@ import { createPostAuthenticate } from '../../../../utils/API/API'
 import { setCookie } from '../../../../utils/reUse/cookie'
 import { useToken } from '../../../../utils/Hooks/useToken'
 import Notify from '../Notify/Notify'
+import { useTranslation } from 'react-i18next'
 
 const Login = () => {
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const navigate = useNavigate()
+  const { t } = useTranslation();
 
   // ----------------------------- for token ----------------------------
   const token = useToken();
@@ -47,7 +49,7 @@ const Login = () => {
     },
     onError: (error) => {
       console.log('Login error:', error);
-      setDescribtion('Email or password is incorrect')
+      setDescribtion(t('Email or password is incorrect'))
       requestNotify('important')
     },
   });

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../../../../common/Loader/Loader";
 import TermForHomePage from "../../TermForHomePage/TermForHomePage";
 import PrivacyForHomePage from "../../PrivacyForHomePage/PrivacyForHomePage";
+import { useTranslation } from "react-i18next";
 
 
 interface ForgotFormProps {
@@ -14,7 +15,7 @@ interface ForgotFormProps {
 }
 
 const ForgotForm: React.FC<ForgotFormProps>  = (props) => {
-
+  const { t } = useTranslation();
   const { setEmail, ResetPassword, isResetPasswordPending } = props;
   const [data, setData] = useState({email: ""});
   const [validate, setValidate] = useState({
@@ -50,7 +51,7 @@ const ForgotForm: React.FC<ForgotFormProps>  = (props) => {
       if (data.email === "") {
         setValidate({
           ...validate,
-          email: "Email is required",
+          email: t("Email is required"),
         });
       }
     }
@@ -61,7 +62,7 @@ const ForgotForm: React.FC<ForgotFormProps>  = (props) => {
     if (!regexEmail.test(data.email) && data.email.length > 0) {
       setValidate({
         ...validate,
-        email: "Email is required",
+        email: t("Email is required"),
       });
     } else {
       setValidate({
@@ -101,8 +102,8 @@ const ForgotForm: React.FC<ForgotFormProps>  = (props) => {
             </svg>
           </div>
         </div>
-        <h2 className={style.login_name}>Reset password</h2>
-        <p className={style.login_information}>Input your email address account to receive a reset link</p>
+        <h2 className={style.login_name}>{t("Reset password")}</h2>
+        <p className={style.login_information}>{t("Input your email address account to receive a reset link")}</p>
 
         <form className={style.login_form} action="submit">
 
@@ -120,7 +121,7 @@ const ForgotForm: React.FC<ForgotFormProps>  = (props) => {
             />
 
 
-            <p className={data.email ? style.label_focus : style.label}>Email</p>
+            <p className={data.email ? style.label_focus : style.label}>{t("Email")}</p>
             {/* -- validation -- */}
             <div className={`${style.login_form_validation} ${validate.email && style.shake}`}>
               <span style={{
@@ -150,7 +151,7 @@ const ForgotForm: React.FC<ForgotFormProps>  = (props) => {
               <input
               className={style.login_form_submit_input}
               type="submit"
-              value="Continue"
+              value={t("Continue")}
               onClick={sumbit}
               />
             }
@@ -160,14 +161,15 @@ const ForgotForm: React.FC<ForgotFormProps>  = (props) => {
 
 
         <div className={style.login_footer}>
-          <p>© 2024 Posive. All rights reserved.</p>
+          <p>{t("© 2024 Posive. All rights reserved.")}</p>
           <div className={style.login_footer_links}>
               <a onClick={
                 () => setViewOpen("term")
-              }>Term & Condition</a>
-              <a onClick={
+              }>{t("Term & Conditions")}</a>
+              <a className={style.login_footer_links_privacy}
+              onClick={
                 () => setViewOpen("privacy")
-              } style={{borderLeft: "1px solid #000"}}>Privacy & Policy</a>
+              }>{t("Privacy Policy")}</a>
           </div>
         </div>
       </div>

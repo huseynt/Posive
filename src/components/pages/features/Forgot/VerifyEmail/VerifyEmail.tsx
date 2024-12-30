@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Loader from "../../../../common/Loader/Loader";
 import PrivacyForHomePage from "../../PrivacyForHomePage/PrivacyForHomePage";
 import TermForHomePage from "../../TermForHomePage/TermForHomePage";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 
 interface VerifyEmailProps {
@@ -23,7 +25,8 @@ interface IPassword {
 }
 
 const VerifyEmail: React.FC<VerifyEmailProps> = (props) => {
-
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const { email, setStep, Verify, isVerifyEmailPending } = props;
   const [data, setData] = useState<IVerifyEmail>({
     email: email,
@@ -48,16 +51,13 @@ const VerifyEmail: React.FC<VerifyEmailProps> = (props) => {
     e.preventDefault();
     if (data.confirmPassword!== "" && data.confirmPassword.length > 2) {
       console.log(data, email);
-      // setStep('change')
       Verify(data);
-      // requestNotify('done')
-      // setDescribtion('Email verified successfully')
     }
     else { 
       if (data.confirmPassword === "") {
         setValidate({
           ...validate,
-          confirmPassword: "Please enter the verification code",
+          confirmPassword: t("Please enter the verification code"),
         });
       }
     }
@@ -68,7 +68,7 @@ const VerifyEmail: React.FC<VerifyEmailProps> = (props) => {
     if (data.confirmPassword.length < 3 && data.confirmPassword.length > 0) {
       setValidate({
         ...validate,
-        confirmPassword: "Code is required",
+        confirmPassword: t("Code is required"),
       });
     } else {
       setValidate({
@@ -97,7 +97,7 @@ const VerifyEmail: React.FC<VerifyEmailProps> = (props) => {
 
       <div className={style.login}>
         <div className={style.login_logo}>
-          <img src={logo} alt="Posive" />
+          <img src={logo} onClick={() => navigate("/")} style={{cursor: "pointer"}} alt="Posive" />
         </div>
         <div className={style.login_previous}>
           <div onClick={() => setStep('email')}>
@@ -107,23 +107,10 @@ const VerifyEmail: React.FC<VerifyEmailProps> = (props) => {
             </svg>
           </div>
         </div>
-        <h2 className={style.login_name}>Verify Email</h2>
-        <p className={style.login_information}>Account verification code may only be used once to verify email.</p>
+        <h2 className={style.login_name}>{t("Verify Email")}</h2>
+        <p className={style.login_information}>{t("Account verification code may only be used once to verify email.")}</p>
 
         <form className={style.login_form} action="submit">
-
-
-          {/* <div className={style.login_form_password}>
-            <input 
-            type="text"
-            id="password"
-            onChange={change}
-            value={data.password}
-            className={style.login_form_password_input}
-            />
-            <p className={data.password ? style.label_focus: style.label}>Verification Code</p>
-          </div> */}
-
 
           <div className={style.login_form_email}>
             <input 
@@ -137,7 +124,7 @@ const VerifyEmail: React.FC<VerifyEmailProps> = (props) => {
                 borderColor: validate.confirmPassword ? 'red' : ''
               }}
             />
-            <p className={data.confirmPassword ? style.label_focus : style.label}>Verification code</p>
+            <p className={data.confirmPassword ? style.label_focus : style.label}>{t("Verification code")}</p>
             {/* -- validation -- */}
             <div className={`${style.login_form_validation} ${validate.confirmPassword && style.shake}`}>
               <span style={{
@@ -158,7 +145,7 @@ const VerifyEmail: React.FC<VerifyEmailProps> = (props) => {
               <input
               className={style.login_form_submit_input}
               type="submit"
-              value="Continue"
+              value={t("Continue")}
               onClick={sumbit}
               />
             }
@@ -167,14 +154,15 @@ const VerifyEmail: React.FC<VerifyEmailProps> = (props) => {
         </form>
 
         <div className={style.login_footer}>
-          <p>© 2024 Posive. All rights reserved.</p>
+          <p>{t("© 2024 Posive. All rights reserved.")}</p>
           <div className={style.login_footer_links}>
               <a onClick={
                 () => setViewOpen("term")
-              }>Term & Condition</a>
-              <a onClick={
+              }>{t("Term & Conditions")}</a>
+              <a className={style.login_footer_links_privacy}
+              onClick={
                 () => setViewOpen("privacy")
-              } style={{borderLeft: "1px solid #000"}}>Privacy & Policy</a>
+              }>{t("Privacy Policy")}</a>
           </div>
         </div>
       </div>

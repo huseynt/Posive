@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../../../../common/Loader/Loader";
 import TermForHomePage from "../../TermForHomePage/TermForHomePage";
 import PrivacyForHomePage from "../../PrivacyForHomePage/PrivacyForHomePage";
+import { useTranslation } from "react-i18next";
 
 interface RegistrFormProps {
   Registr: (data: { fullName: string; phoneNumber: string; email: string; password: string }) => void;
@@ -15,6 +16,7 @@ interface RegistrFormProps {
 const RegisterForm: React.FC<RegistrFormProps>  = (props) => {
   const { Registr, isRegistrPending } = props;
   const [hide, setHide] = useState(false);
+  const { t } = useTranslation();
   const [data, setData] = useState({
     fullName: "",
     phoneNumber: "",
@@ -43,7 +45,7 @@ const RegisterForm: React.FC<RegistrFormProps>  = (props) => {
 
     if (id === 'email') {
       if (!emailRegex.test(data.email) && data.email !== '') {
-        setValidate({ ...validate, email: 'Please enter a valid email address' });
+        setValidate({ ...validate, email: t('Please enter a valid email address') });
       } else {
         setValidate({ ...validate, email: '' });
       }
@@ -51,7 +53,7 @@ const RegisterForm: React.FC<RegistrFormProps>  = (props) => {
 
     if (id === 'phoneNumber') {
       if (!phoneRegex.test(data.phoneNumber) && data.phoneNumber !== '') {
-        setValidate({ ...validate, phoneNumber: 'Please enter a valid phone number' });
+        setValidate({ ...validate, phoneNumber: t('Please enter a valid phone number') });
       } else {
         setValidate({ ...validate, phoneNumber: '' });
       }
@@ -59,7 +61,7 @@ const RegisterForm: React.FC<RegistrFormProps>  = (props) => {
 
     if (id === 'password') {
       if (data.password.length < 8 && data.password !== '') {
-        setValidate({ ...validate, password: 'Password must contain at least 8 characters' });
+        setValidate({ ...validate, password: t('Password must contain at least 8 characters') });
       } else {
         setValidate({ ...validate, password: '' });
       }
@@ -67,7 +69,7 @@ const RegisterForm: React.FC<RegistrFormProps>  = (props) => {
 
     if (id === 'repeatPassword') {
       if (data.password !== repeatPassword && repeatPassword !== '') {
-        setValidate({ ...validate, repeatPassword: 'Passwords do not match' });
+        setValidate({ ...validate, repeatPassword: t('Passwords do not match') });
       } else {
         setValidate({ ...validate, repeatPassword: '' });
       }
@@ -76,7 +78,7 @@ const RegisterForm: React.FC<RegistrFormProps>  = (props) => {
     if (id === 'fullName') {
       if (data.fullName.split(" ").length !== 2 || data.fullName.split(" ")[0].length < 3 || data.fullName.split(" ")[1].length < 3) {
         if (data.fullName.length > 0) {
-          setValidate({ ...validate, fullName: 'Please enter your full name' });
+          setValidate({ ...validate, fullName: t('Please enter your full name') });
         } else {
           setValidate({ ...validate, fullName: '' });
         }
@@ -131,22 +133,20 @@ const RegisterForm: React.FC<RegistrFormProps>  = (props) => {
       data.email &&
       data.password &&
       repeatPassword) {
-      console.log("Form submitted successfully", data);
       Registr({
         ...data,
         phoneNumber: data.phoneNumber[0] !== '+' ? `+${data.phoneNumber}` : data.phoneNumber
       });
-      // Registr(data);
     } 
     else {
       setValidate((prevData) => {
         return {
           ...prevData,
-          fullName: !data.fullName ? 'Please enter your full name' : '',
-          phoneNumber: !data.phoneNumber ? 'Please enter your phone number' : '',
-          email: !data.email ? 'Please enter your email address' : '',
-          password: !data.password ? 'Please enter a password' : '',
-          repeatPassword: !repeatPassword ? 'Please repeat your password' : '',
+          fullName: !data.fullName || validate.fullName ? t('Please enter your full name') : '',
+          phoneNumber: !data.phoneNumber || validate.phoneNumber ? t('Please enter your phone number') : '',
+          email: !data.email || validate.email ? t('Please enter your email address') : '',
+          password: !data.password || validate.password ? t('Please enter a password') : '',
+          repeatPassword: !repeatPassword || validate.repeatPassword ? t('Please repeat your password') : '',
         };
       });
     }
@@ -176,8 +176,8 @@ const RegisterForm: React.FC<RegistrFormProps>  = (props) => {
             </svg>
           </div>
         </div>
-        <h2 className={style.login_name}>Register</h2>
-        <p className={style.login_information}>Let’s create a new account</p>
+        <h2 className={style.login_name}>{t("Register")}</h2>
+        <p className={style.login_information}>{t("Let’s create a new account")}</p>
 
         <form className={style.login_form} action="submit">
 
@@ -193,7 +193,7 @@ const RegisterForm: React.FC<RegistrFormProps>  = (props) => {
                 borderColor: validate.fullName ? 'red' : ''
               }}
             />
-            <p className={data.fullName ? style.label_focus : style.label}>Full Name</p>
+            <p className={data.fullName ? style.label_focus : style.label}>{t("Full Name")}</p>
             {/* -- validation -- */}
             <div className={`${style.login_form_validation} ${validate.fullName && style.shake}`}>
               <span style={{
@@ -218,7 +218,7 @@ const RegisterForm: React.FC<RegistrFormProps>  = (props) => {
                 borderColor: validate.email ? 'red' : ''
               }}
             />
-            <p className={data.email ? style.label_focus : style.label}>Email</p>
+            <p className={data.email ? style.label_focus : style.label}>{t("Email")}</p>
             {/* -- validation -- */}
             <div className={`${style.login_form_validation} ${validate.email && style.shake}`}>
               <span style={{
@@ -242,7 +242,7 @@ const RegisterForm: React.FC<RegistrFormProps>  = (props) => {
                 borderColor: validate.phoneNumber ? 'red' : ''
               }}
             />
-            <p className={data.phoneNumber ? style.label_focus : style.label}>Phone Number</p>
+            <p className={data.phoneNumber ? style.label_focus : style.label}>{t("Phone Number")}</p>
             {/* -- validation -- */}
             <div className={`${style.login_form_validation} ${validate.phoneNumber && style.shake}`}>
               <span style={{
@@ -267,7 +267,7 @@ const RegisterForm: React.FC<RegistrFormProps>  = (props) => {
                 borderColor: validate.password ? 'red' : ''
               }}
             />
-            <p className={data.password ? style.label_focus : style.label}>Password</p>
+            <p className={data.password ? style.label_focus : style.label}>{t("Password")}</p>
             <span 
               className={style.login_form_password_eye}
               onClick={() => setHide(!hide)}
@@ -312,7 +312,7 @@ const RegisterForm: React.FC<RegistrFormProps>  = (props) => {
                 borderColor: validate.repeatPassword ? 'red' : ''
               }}
             />
-            <p className={repeatPassword ? style.label_focus : style.label}>Repeat Password</p>
+            <p className={repeatPassword ? style.label_focus : style.label}>{t("Repeat Password")}</p>
             <span 
               className={style.login_form_password_eye}
               onClick={() => setHide(!hide)}
@@ -359,7 +359,7 @@ const RegisterForm: React.FC<RegistrFormProps>  = (props) => {
               <input
               className={style.login_form_submit_input}
               type="submit"
-              value="Register"
+              value={t("Register")}
               onClick={sumbit}
               />
             }
@@ -367,19 +367,20 @@ const RegisterForm: React.FC<RegistrFormProps>  = (props) => {
         </form>
 
         <div className={style.login_registr}>
-          <span>Already have an account? </span>
-          <div onClick={handleLogin}>Login Here</div>
+          <span>{t("Already have an account?")} </span>
+          <div onClick={handleLogin}>{t("Login Here")}</div>
         </div>
 
         <div className={style.login_footer}>
-          <p>© 2024 Posive. All rights reserved.</p>
+          <p>{t("© 2024 Posive. All rights reserved.")}</p>
           <div className={style.login_footer_links}>
             <a onClick={
               () => setViewOpen("term")
-            }>Term & Condition</a>
-            <a onClick={
-              () => setViewOpen("privacy")
-            } style={{borderLeft: "1px solid #000"}}>Privacy & Policy</a>
+            }>{t("Term & Conditions")}</a>
+            <a className={style.login_footer_links_privacy}
+              onClick={
+                () => setViewOpen("privacy")
+              }>{t("Privacy Policy")}</a>   
           </div>
         </div>
       </div>
