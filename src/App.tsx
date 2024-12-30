@@ -90,7 +90,7 @@ function App() {
   // ----------- language wrapper ------------
   const LanguageWrapper: React.FC = () => {
     const { lang } = useParams<{ lang: string }>();
-    changeLanguage(lang);
+    changeLanguage(lang=='az' ? 'az' : 'en');
     // must back save language / not to use at the moment
     setCookie('i18next', lang ? lang : 'en', 365);
     return lang == 'az' || lang == 'en' ? <HomePage /> : <NotFound />;
