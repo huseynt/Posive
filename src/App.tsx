@@ -92,7 +92,7 @@ function App() {
     const { lang } = useParams<{ lang: string }>();
     changeLanguage(lang=='az' ? 'az' : 'en');
     // must back save language / not to use at the moment
-    setCookie('i18next', lang ? lang : 'en', 365);
+    setCookie('i18next', lang=='az' ? 'az' : 'en', 365);
     return lang == 'az' || lang == 'en' ? <HomePage /> : <NotFound />;
   };
 
