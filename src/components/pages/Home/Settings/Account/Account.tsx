@@ -85,12 +85,13 @@ const General: React.FC<IGeneral> = (props) => {
   } = useMutation({
     mutationFn: createSaveUser,
     onSuccess: () => {
-      requestNotify("done", "Account saved successfully")
+      requestNotify("done", t("Account saved successfully"))
       queryClient.invalidateQueries({queryKey: ["getUser"]})
       queryClient.invalidateQueries({queryKey: ["getNotifications"]});
     },
     onError: (error) => {
       console.log('Login error:', error);
+      requestNotify("important", t("Account saving error"))
     },
   });
   // ------------------- save user ------------------------

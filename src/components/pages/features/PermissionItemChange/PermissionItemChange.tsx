@@ -38,14 +38,14 @@ const PermissionItemChange: React.FC<IPermissionItemChangeProps> = (props) => {
       if (res === "Success") {
         queryClient.invalidateQueries({ queryKey: ["getPermission"] });
         setViewOpen("");
-        requestNotify("done", "Order saved successfully");
+        requestNotify("done", t("Saved successfully"));
       } else {
-        requestNotify("undone", "Order save failed");
+        requestNotify("undone", t("Save failed"));
       }
     },
     onError: (error) => {
       console.log(error);
-      requestNotify("undone", "Order save failed");
+      requestNotify("undone", t("Save failed"));
     },
   });
 

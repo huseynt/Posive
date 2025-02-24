@@ -25,16 +25,16 @@ const PermissionItemDelete: React.FC<IQRCodeComponentProps> = (props) => {
       if (response === "Success") {
         setViewOpen("");
         queryClient.invalidateQueries({queryKey: ["getPermission"]});
-        requestNotify("done", "Order deleted successfully");
+        requestNotify("done", t("Deleted successfully"));
       } else {
         setViewOpen("");
-        requestNotify("undone", "Error deleting order");
+        requestNotify("undone", t("Error deleting"));
       }
     },
     onError: (error) => {
       console.log('Delete error:', error);  
       setViewOpen("");
-      requestNotify("undone", "Error deleting order");
+      requestNotify("undone", t("Error deleting"));
     },
   });
   // ------------------- delete user ------------------------

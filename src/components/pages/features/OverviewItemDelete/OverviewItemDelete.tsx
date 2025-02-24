@@ -27,13 +27,13 @@ const OverviewItemDelete: React.FC<IQRCodeComponentProps> = (props) => {
         console.log('Deleted');
         setViewOpen("");
         queryClient.invalidateQueries({queryKey: ["getOrders"]})
-        requestNotify("done", "Order deleted successfully"); 
+        requestNotify("done", t("Order deleted successfully")); 
         queryClient.invalidateQueries({queryKey: ["getNotifications"]});
     },
     onError: (error) => {
       console.log('Delete error:', error);  
       setViewOpen("");
-      requestNotify("undone", "Error deleting order");
+      requestNotify("undone", t("Error deleting order"));
     },
   });
   const handleDeleteOrder = () => {

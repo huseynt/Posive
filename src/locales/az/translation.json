@@ -215,7 +215,7 @@
     "Change Method": "Metodu dəyişdirin",
     "Send QR": "QR Göndər",
     "Copied to clipboard": "Klipborda kopyalanmışdır",
-
+    "Please fill in the required fields": "Zəhmət olmasa, tələb olunan sahələri doldurun",
 
 
     "Posive Overview": "Posive Ümumi Baxış",
@@ -305,6 +305,15 @@
     "Product save failed": "Məhsul yadda saxlanmadı",
     "Order deleted successfully": "Sifariş uğurla silindi",
     "Error deleting order": "Sifariş silinmədi",
+    "Order saved successfully": "Sifariş uğurla yadda saxlanıldı",
+    "Order save failed": "Sifariş yadda saxlanmadı",
+    "Saved successfully": "Uğurla yadda saxlanıldı",
+    "Save failed": "Yadda saxlanmadı",
+    "Deleted successfully": "Uğurla silindi",
+    "Error deleting": "Silinmədi",
+
+
+
 
 
     
@@ -442,5 +451,12 @@
     "Admin Dashboard": "İdarə Paneli",
     "Create an Account": "Hesab yaradın",
     "Updates": "Yeniləmələr",
-    "We take precautions to protect your information. When you submit sensitive information via the dashboard, your information is protected both online and offline": "Məlumatlarınızı qorumaq üçün ehtiyatlar alırıq. İdarə paneli vasitəsilə həssas məlumatları göndərdiyinizdə, məlumatınız həm onlayn, həm də oflayn şəkildə qorunur."
+    "We take precautions to protect your information. When you submit sensitive information via the dashboard, your information is protected both online and offline": "Məlumatlarınızı qorumaq üçün ehtiyatlar alırıq. İdarə paneli vasitəsilə həssas məlumatları göndərdiyinizdə, məlumatınız həm onlayn, həm də oflayn şəkildə qorunur.",
+
+    "Account saved successfully": "Hesab uğurla yadda saxlanıldı",
+    "Account saving error": "Hesab yadda saxlanmadı",
+    "Plan saved successfully": "Plan uğurla yadda saxlanıldı",
+    "Plan save failed": "Plan yadda saxlanmadı",
+    "Delete failed": "Silinmədi"
+
 }

@@ -64,22 +64,9 @@ const Main= () => {
   useEffect(() => {
     setCategory("");
   }, [search]);
-
-  // useEffect(() => {
-  //   if (reduxMeals) {
-  //     if (category === "") {
-  //       setMealsFiltered(reduxMeals);
-  //     } else {
-  //       setMealsFiltered(reduxMeals.filter((meal) => meal.category === category));
-  //     }
-  //   }
-  // }, [category, reduxMeals]);
   //  ----------------- get meals ---------------------------
 
 
-  // useEffect(() => {
-  //   console.log("mealFiltered",mealsFiltered);
-  // }, [mealsFiltered]);
 
 
   
@@ -90,10 +77,6 @@ const Main= () => {
     }
   }, [notification]);
   // ------------------- reset notifcation for colse ------------------------
-
-
-
-
 
 
   

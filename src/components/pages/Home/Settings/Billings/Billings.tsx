@@ -45,14 +45,14 @@ const Billings: React.FC<IGeneral> = (props) => {
     onSuccess: (data) => {
       console.log('Success', data);
       if (data === 201) {
-        requestNotify('done', 'Plan saved successfully');
+        requestNotify('done', t("Plan saved successfully"));
         queryClient.invalidateQueries({queryKey: ["getSubscriptions"]})
         queryClient.invalidateQueries({queryKey: ["getNotifications"]});
       }
     },
     onError: (error) => {
       console.log('Login error:', error);
-      requestNotify('undone', 'Plan save failed');
+      requestNotify('undone', t("Plan save failed"));
     },
   });
   // ------------------- save user ------------------------

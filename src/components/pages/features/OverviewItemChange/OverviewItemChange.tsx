@@ -90,13 +90,13 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
           console.log('Deleted');
           setViewOpen("");
           queryClient.invalidateQueries({queryKey: ["getOrders"]})
-          requestNotify("done", "Order deleted successfully"); 
+          requestNotify("done", t("Order deleted successfully")); 
           queryClient.invalidateQueries({queryKey: ["getNotifications"]});
       },
       onError: (error) => {
         console.log('Delete error:', error);  
         setViewOpen("");
-        requestNotify("undone", "Error deleting order");
+        requestNotify("undone", t("Error deleting order"));
       },
     });
     // ------------------- delete user ------------------------
@@ -113,11 +113,11 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
       queryClient.invalidateQueries({queryKey: ["getOrders"]})
       queryClient.invalidateQueries({queryKey: ["getNotifications"]});
       setViewOpen("")
-      requestNotify("done", "Order saved successfully");
+      requestNotify("done", t("Order saved successfully"));
     },
     onError: (error) => {
       console.log('Login error:', error);
-      requestNotify("undone", "Order save failed");
+      requestNotify("undone", t("Order save failed"));
     },
   });
 

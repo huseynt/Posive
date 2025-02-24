@@ -99,7 +99,7 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
   } = useMutation({
     mutationFn: createDeletePermissionUserAll,
     onSuccess: () => {
-      requestNotify("done", "Deleted successfully");
+      requestNotify("done", t("Deleted successfully"));
       setMultiCheck([]);
       setChecked(false);
       queryClient.invalidateQueries({queryKey: ["getPermission"]})
@@ -107,7 +107,7 @@ const UserPermissions: React.FC<IGeneral> = (props) => {
     },
     onError: (error) => {
       console.log('Delete error:', error);  
-      requestNotify("undone", "Delete failed");
+      requestNotify("undone", t("Delete failed"));
     },
   });
   const handleDeleteAll = () => {

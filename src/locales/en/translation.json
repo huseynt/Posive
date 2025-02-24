@@ -17,11 +17,6 @@
 
 
 
-
-
-
-
-
     "settings": "Settings",
     "cancel": "Cancel",
     "save": "Save",
@@ -216,6 +211,7 @@
     "Change Method": "Change Method",
     "Send QR": "Send QR",
     "Copied to clipboard": "Copied to clipboard",
+    "Please fill in the required fields": "Please fill in the required fields",
 
 
 
@@ -255,7 +251,6 @@
     "Edit": "Edit",
     "Delete Transaction details ?": "Delete Transaction details ?",
     "Are you sure you want to delete Transaction details ?": "Are you sure you want to delete Transaction details ?",
-
 
 
     "Posive Product": "Posive Product",
@@ -306,6 +301,12 @@
     "Product save failed": "Product save failed",
     "Order deleted successfully": "Order deleted successfully",
     "Error deleting order": "Error deleting order",
+    "Order saved successfully": "Order saved successfully",
+    "Order save failed": "Order save failed",
+    "Saved successfully": "Saved successfully",
+    "Save failed": "Save failed",
+    "Deleted successfully": "Deleted successfully",
+    "Error deleting": "Error deleting",
 
 
 
@@ -443,6 +444,14 @@
     "Admin Dashboard": "Admin Dashboard",
     "Create an Account": "Create an Account",
     "Updates": "Updates",
-    "We take precautions to protect your information. When you submit sensitive information via the dashboard, your information is protected both online and offline": "We take precautions to protect your information. When you submit sensitive information via the dashboard, your information is protected both online and offline."
+    "We take precautions to protect your information. When you submit sensitive information via the dashboard, your information is protected both online and offline": "We take precautions to protect your information. When you submit sensitive information via the dashboard, your information is protected both online and offline.",
+
+    "Account saved successfully": "Account saved successfully",
+    "Account saving error": "Account saving error",
+    "Plan saved successfully": "Plan saved successfully",
+    "Plan save failed": "Plan save failed",
+    "Delete failed": "Delete failed"
+    
+    
 }
   

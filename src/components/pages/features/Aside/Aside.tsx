@@ -98,7 +98,7 @@ const Aside: React.FC<AsideProps> = (props) => {
       place === "" ||
       place === "Dine In" && tables.length === 0 || 
       orders.reduce((acc, m) => acc + m.order, 0) === 0) { 
-      requestNotify("important", "Please fill in the required fields");
+      requestNotify("important", t("Please fill in the required fields"));
     }  else {
 
       if (paymentMethod === "mastercard") {
