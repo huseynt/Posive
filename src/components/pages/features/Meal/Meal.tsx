@@ -33,7 +33,10 @@ const Meal = (props: IMeal) => {
   return (
       <div className={style.meal} id={`${id}`}>
         <div className={style.meal_photo}>
-          <div className={style.meal_photo_discount}>{thisMeal?.discount}%</div>
+          { thisMeal?.discount ?
+            <div className={style.meal_photo_discount}>{thisMeal?.discount}%</div>
+            : null
+          }
           <img src={imageUrl? imageUrl: ""} alt={description} />
         </div>
         
@@ -41,7 +44,7 @@ const Meal = (props: IMeal) => {
         onClick={() => setAboutMeal(!aboutmeal)}
         >
           <h4>{name}</h4>
-          <p>${price.toFixed(2)}</p>
+          <p>{price.toFixed(2)} AZN</p>
         </div>
 
         <div className={style.meal_count}>

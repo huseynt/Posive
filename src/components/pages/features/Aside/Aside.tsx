@@ -459,16 +459,16 @@ const Aside: React.FC<AsideProps> = (props) => {
             <p className={style.aside_detail_orders_subtotal_name}>
               {t("Subtotal")}
             </p>
-            <p className={style.aside_detail_orders_subtotal_price}>$
-              {orders.reduce((acc, m) => acc + (m.price - (m.price * ((m.discount ?? 0) * 0.01))) * m.order, 0).toFixed(2)}
+            <p className={style.aside_detail_orders_subtotal_price}>
+              {orders.reduce((acc, m) => acc + (m.price - (m.price * ((m.discount ?? 0) * 0.01))) * m.order, 0).toFixed(2)} AZN
             </p>
           </div>
           <div className={style.aside_detail_orders_tax}>
             <p className={style.aside_detail_orders_tax_name}>
               {t("Service Tax")}
             </p>
-            <p className={style.aside_detail_orders_tax_price}>$
-              {orders.reduce((acc, m) => acc + (m.price * ((m.tax ?? 0) * 0.01)) * m.order, 0).toFixed(2)}
+            <p className={style.aside_detail_orders_tax_price}>
+              {orders.reduce((acc, m) => acc + (m.price * ((m.tax ?? 0) * 0.01)) * m.order, 0).toFixed(2)} AZN
             </p>
           </div>
         </div>
@@ -476,8 +476,8 @@ const Aside: React.FC<AsideProps> = (props) => {
           <p className={style.aside_detail_total_name}>
             {t("Total Payment")}  
           </p>
-          <p className={style.aside_detail_total_price}>$
-            {orders.reduce((acc, m) => acc + ((m.price - (m.price * ((m.discount ?? 0) * 0.01))) + (m.price * ((m.tax ?? 0) * 0.01))) * m.order, 0).toFixed(2)}
+          <p className={style.aside_detail_total_price}>
+            {orders.reduce((acc, m) => acc + ((m.price - (m.price * ((m.discount ?? 0) * 0.01))) + (m.price * ((m.tax ?? 0) * 0.01))) * m.order, 0).toFixed(2)} AZN
           </p>
         </div>
       </div>

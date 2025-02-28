@@ -107,7 +107,7 @@ const OverviewItemView: React.FC<IQRCodeComponentProps> = (props) => {
                       <div className={style.view_block_main_menu_container_list_item_head}>
                         {menu.name} ({size?.find((size) => menu.receiptNo && size.split(":")[0] === menu.receiptNo.toString())?.split(":")[1]})
                       </div>
-                      <div className={style.view_block_main_menu_container_list_item_price}>${menu.price}</div>
+                      <div className={style.view_block_main_menu_container_list_item_price}>{menu.price} AZN</div>
                     </div>
                   ))
                 } 

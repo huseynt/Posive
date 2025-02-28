@@ -68,7 +68,7 @@ const SuccessOrder: React.FC<IQRCodeComponentProps> = (props) => {
           <p className={style.success_block_head_text}>
             {t("Successfully placed an order")}
           </p>
-          <p className={style.success_block_head_price}>${successOrder.price.toFixed(2)}</p>
+          <p className={style.success_block_head_price}>{successOrder.price.toFixed(2)} AZN</p>
         </div>
 
         <div className={style.success_block_detail}>

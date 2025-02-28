@@ -178,6 +178,8 @@ input {
                         padding: 7px 27px;
                         border-radius: 10px;
                         @extend %sm_b;
+                        display: flex;
+                        justify-content: start;
 
                         @include themed {
                             border: 1px solid t(gray);
@@ -193,6 +195,7 @@ input {
 
                         input {
                             width: 100%;
+                            padding-right: 2px;
                         }
 
                         &_unique {
@@ -227,6 +230,7 @@ input {
                                 left: -1px;
                                 border: 1px solid $gray;
                                 border-radius: 10px;
+                                z-index: 99;
                                 cursor: pointer;
 
                                 &:hover {

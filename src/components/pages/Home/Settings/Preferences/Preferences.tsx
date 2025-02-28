@@ -284,7 +284,7 @@ const Preferences: React.FC<IPreferences> = (props) => {
           </div>
         </div>
 
-        <div className={style.parent_main_form_parametr}>
+        {/* <div className={style.parent_main_form_parametr}>
           <h3 className={style.parent_main_form_parametr_head}>{t("Currency")}</h3>
 
           <div className={style.parent_main_form_parametr_select}>
@@ -309,7 +309,7 @@ const Preferences: React.FC<IPreferences> = (props) => {
               >{t("Azerbaijan Manat (AZN)")}</p>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className={style.parent_main_form_parametr}>
           <h3 className={style.parent_main_form_parametr_head}>{t("Time Zone")}</h3>

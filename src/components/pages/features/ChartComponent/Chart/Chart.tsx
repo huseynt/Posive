@@ -55,10 +55,10 @@ const options: ChartOptions<'line'> = {
         },
         label: function (context: TooltipItem<'line'>) {
           const value = context.raw as number;
-          return `$${value.toLocaleString(undefined, {
+          return `${value.toLocaleString(undefined, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
-          })}`;
+          })} AZN`;
         },
         footer: function (context: TooltipItem<'line'>[]) {
           const index = context[0].dataIndex;

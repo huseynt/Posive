@@ -79,7 +79,7 @@ const ProductItemView: React.FC<IProductViewComponentProps> = (props) => {
 
             <div className={style.view_block_main_information_item}>
               <div className={style.view_block_main_information_item_head}>{t("Price")}</div>
-              <div className={style.view_block_main_information_item_value}>${price}</div>
+              <div className={style.view_block_main_information_item_value}>{price} AZN</div>
             </div>
 
             <div className={style.view_block_main_information_item}>

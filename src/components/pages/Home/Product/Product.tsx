@@ -353,7 +353,7 @@ const Product = () => {
               <div className={style.main_total_option_text}>
                 <p className={style.main_total_option_text_up}>{t("Montly Income")}</p>
                 <h3 className={style.main_total_option_text_head}>
-                  ${monthlyIncome ? monthlyIncome.toFixed(2) : 0}
+                  {monthlyIncome ? monthlyIncome.toFixed(2) : 0} AZN
                 </h3>
               </div>
 

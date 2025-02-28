@@ -107,10 +107,10 @@ const ProductItemChange: React.FC<IQRCodeComponentProps> = (props) => {
     mutationFn: createChangeProduct,
     onSuccess: () => {
       console.log('Success');
+      requestNotify("done", t("Product saved successfully"));
       queryClient.invalidateQueries({queryKey: ["getProducts"]});
       queryClient.invalidateQueries({queryKey: ["getNotifications"]});
       setViewOpen("")
-      requestNotify("done", t("Product saved successfully"));
     },
     onError: (error) => {
       console.log('Login error:', error);
@@ -125,8 +125,6 @@ const ProductItemChange: React.FC<IQRCodeComponentProps> = (props) => {
       data.price && 
       data.stock && 
       data.imageUrl &&
-      data.tax &&
-      data.discount &&
       data.category &&
       data.description
     ) {
@@ -227,11 +225,11 @@ const ProductItemChange: React.FC<IQRCodeComponentProps> = (props) => {
             <div className={style.view_block_main_information_item}>
               <div className={style.view_block_main_information_item_head}>{t("Price")}</div>
               <div className={style.view_block_main_information_item_value}>
-                $<input type="text" 
+                <input type="text" 
                 name="price" 
                 value={data.price} 
                 style={{outline:"none", border: "none"}}  
-                onChange={handleChange} />
+                onChange={handleChange} /> <span>AZN</span>
               </div>
             </div>
 

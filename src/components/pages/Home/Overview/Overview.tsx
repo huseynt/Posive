@@ -435,7 +435,7 @@ const Overview = () => {
                   {t("Total Sales")}
                 </p>
                 <h3 className={style.main_total_option_text_head}>
-                  ${m?.sales ? m.sales.toFixed(2) : "0"}
+                  {m?.sales ? m.sales.toFixed(2) : "0"} AZN
                 </h3>
               </div>
 
@@ -555,12 +555,11 @@ const Overview = () => {
                   {t("Total Tips")}
                 </p>
                 <h3 className={style.main_total_option_text_head}>
-                  $
                   {m
                     ? m?.countOrders * 0.1 > 1000
                       ? Math.floor(m?.countOrders / 1000).toFixed(2) + "K"
                       : (m?.countOrders * 0.1).toFixed(2)
-                    : "0"}
+                    : "0"} AZN
                 </h3>
               </div>
 

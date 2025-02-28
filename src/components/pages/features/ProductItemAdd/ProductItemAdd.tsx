@@ -115,8 +115,6 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
       data.price && 
       data.stock && 
       data.imageUrl &&
-      data.tax &&
-      data.discount &&
       data.category &&
       data.description
     ) {

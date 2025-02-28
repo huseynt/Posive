@@ -26,7 +26,10 @@ const AboutMeal: React.FC<IQRCodeComponentProps> = (props) => {
 
         <div className={style.meal_block_photo}>
         <div className={style.meal_block_photo_id}>{t("Receipt ID :")} {thisMeal?.receiptNo}</div>
-          <div className={style.meal_block_photo_discount}>{thisMeal?.discount}% {t("Discount")}</div>
+          { thisMeal?.discount ? 
+            <div className={style.meal_block_photo_discount}>{thisMeal?.discount}% {t("Discount")}</div>
+            : null
+          }
           <div className={style.meal_block_photo_stock}>{t("Stock :")} {thisMeal?.stock}</div>
 
           <img
@@ -38,7 +41,7 @@ const AboutMeal: React.FC<IQRCodeComponentProps> = (props) => {
 
         <p className={style.meal_block_desc}>{description}</p>
         <div className={style.meal_block_down}>
-          <p className={style.meal_block_down_price}>{t("Price :")} ${price.toFixed(2)}</p>
+          <p className={style.meal_block_down_price}>{t("Price :")} {price.toFixed(2)} AZN</p>
           <button className={style.meal_block_down_btn}
           onClick={() => setAboutMeal(false)}
           >

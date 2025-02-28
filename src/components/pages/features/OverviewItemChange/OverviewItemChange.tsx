@@ -279,7 +279,7 @@ const OverviewItemChange: React.FC<IQRCodeComponentProps> = (props) => {
                             <path d="M4.75 6.25H7.25" stroke="#b30606" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                           </svg>
                         </div>
-                        <div className={style.view_block_main_menu_container_list_item_price_num}>${(menu.price).toFixed(2)}</div>
+                        <div className={style.view_block_main_menu_container_list_item_price_num}>{(menu.price).toFixed(2)} AZN</div>
                       </div>
                     </div>)
                     )

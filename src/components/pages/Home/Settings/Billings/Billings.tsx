@@ -82,8 +82,8 @@ const Billings: React.FC<IGeneral> = (props) => {
           <div className={style.parent_main_plans_option_price}>
 
             <p className={style.parent_main_plans_option_price_number}>
-              <span className={style.parent_main_plans_option_price_number_integer}>$99.</span>
-              <span className={style.parent_main_plans_option_price_number_reminder}>99</span>
+              <span className={style.parent_main_plans_option_price_number_integer}>99.</span>
+              <span className={style.parent_main_plans_option_price_number_reminder}>99 AZN</span>
             </p>
 
             <p className={style.parent_main_plans_option_price_period}>/{t("year")}</p>
@@ -130,8 +130,8 @@ const Billings: React.FC<IGeneral> = (props) => {
           <div className={style.parent_main_plans_option_price}>
 
             <p className={style.parent_main_plans_option_price_number}>
-              <span className={style.parent_main_plans_option_price_number_integer}>$119.</span>
-              <span className={style.parent_main_plans_option_price_number_reminder}>99</span>
+              <span className={style.parent_main_plans_option_price_number_integer}>119.</span>
+              <span className={style.parent_main_plans_option_price_number_reminder}>99 AZN</span>
             </p>
 
             <p className={style.parent_main_plans_option_price_period}>/{t("year")}</p>
@@ -178,8 +178,8 @@ const Billings: React.FC<IGeneral> = (props) => {
           <div className={style.parent_main_plans_option_price}>
 
             <p className={style.parent_main_plans_option_price_number}>
-              <span className={style.parent_main_plans_option_price_number_integer}>$159.</span>
-              <span className={style.parent_main_plans_option_price_number_reminder}>99</span>
+              <span className={style.parent_main_plans_option_price_number_integer}>159.</span>
+              <span className={style.parent_main_plans_option_price_number_reminder}>99 AZN</span>
             </p>
 
             <p className={style.parent_main_plans_option_price_period}>/{t("year")}</p>
@@ -246,7 +246,7 @@ const Billings: React.FC<IGeneral> = (props) => {
                     <tr key={index} className={style.parent_main_transactions_main_table_body_item}>
                       <td className={style.parent_main_transactions_main_table_body_item_date}>{item.subscriptionId}</td>
                       <td className={style.parent_main_transactions_main_table_body_item_desc}>{item.startDate}</td>
-                      <td className={style.parent_main_transactions_main_table_body_item_price}>${item.amount}</td>
+                      <td className={style.parent_main_transactions_main_table_body_item_price}>{item.amount} AZN</td>
                       <td className={style.parent_main_transactions_main_table_body_item_plan}>{
                       item.planName === "Basic Plan" ? t("Basic Plan") : item.planName === "Enterprise Plan" ? t("Enterprise Plan") : t("Professional Plan")
                       }</td>
