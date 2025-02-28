@@ -40,7 +40,7 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
     price: 0,
     stock: 0,
     imageUrl: "",
-    description: "A healthy salad made with fresh vegetables and fruits"
+    description: ""
   });
   const [imagePreview, setImagePreview] = useState<string>("");
   const [uploadProgress, setUploadProgress] = useState<number>(0);
@@ -115,8 +115,7 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
       data.price && 
       data.stock && 
       data.imageUrl &&
-      data.category &&
-      data.description
+      data.category    
     ) {
       AddProduct(data);
       console.log(data);
@@ -164,7 +163,7 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
                     {/* <span>{data.category}</span> */}
                     {
                       data.category === "Main Course" ? t("Main Course") :
-                      data.category === "Rice Bowl" ? t("Rice Bowl") :
+                      data.category === "Snack" ? t("Snack") :
                       data.category === "Fast food" ? t("Fast Food") :
                       data.category === "Healthy food" ? t("Healthy Food") : ""
                     }
@@ -175,7 +174,7 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
                 
                 <div className={`${style.view_block_main_information_item_value_payment_down}`}>
                   <div style={{backgroundColor: data.category==="Main Course" ? "#edf1d3" : "", color:  data.category==="Main Course" ? "black": ""}} onClick={() => setData({ ...data, category: "Main Course" })}>{t("Main Course")}</div>
-                  <div style={{backgroundColor: data.category==="Rice Bowl" ? "#edf1d3" : "", color:  data.category==="Rice Bowl" ? "black": ""}} onClick={() => setData({ ...data, category: "Rice Bowl" })}>{t("Rice Bowl")}</div>
+                  <div style={{backgroundColor: data.category==="Snack" ? "#edf1d3" : "", color:  data.category==="Snack" ? "black": ""}} onClick={() => setData({ ...data, category: "Snack" })}>{t("Snack")}</div>
                   <div style={{backgroundColor: data.category==="Fast food" ? "#edf1d3" : "", color:  data.category==="Fast food" ? "black": ""}} onClick={() => setData({ ...data, category: "Fast food" })}>{t("Fast Food")}</div>
                   <div style={{backgroundColor: data.category==="Healthy food" ? "#edf1d3" : "", color:  data.category==="Healthy food" ? "black": ""}} onClick={() => setData({ ...data, category: "Healthy food" })}>{t("Healthy Food")}</div>
                 </div>
@@ -219,11 +218,11 @@ const ProductItemAdd: React.FC<IProductItemAddComponentProps> = (props) => {
             <div className={style.view_block_main_information_item}>
               <div className={style.view_block_main_information_item_head}>{t("Price")}</div>
               <div className={style.view_block_main_information_item_value}>
-                $<input type="text" 
+                <input type="text" 
                 name="price" 
                 value={data.price} 
                 style={{outline:"none", border: "none"}}  
-                onChange={handleChange} />
+                onChange={handleChange} /> AZN
               </div>
             </div>
 

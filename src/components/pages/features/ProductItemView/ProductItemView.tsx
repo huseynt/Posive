@@ -54,7 +54,7 @@ const ProductItemView: React.FC<IProductViewComponentProps> = (props) => {
 
             <div className={style.view_block_main_information_item}>
               <div className={style.view_block_main_information_item_head}>{t("Category")}</div>
-              <div className={style.view_block_main_information_item_value}>{category}</div>
+              <div className={style.view_block_main_information_item_value}>{t(category)}</div>
             </div>
 
             <div className={style.view_block_main_information_item}>
