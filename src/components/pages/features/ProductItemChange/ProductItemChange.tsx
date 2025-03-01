@@ -125,8 +125,7 @@ const ProductItemChange: React.FC<IQRCodeComponentProps> = (props) => {
       data.price && 
       data.stock && 
       data.imageUrl &&
-      data.category &&
-      data.description
+      data.category
     ) {
       ChangeProduct(data);
       console.log(data);
