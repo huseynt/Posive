@@ -414,12 +414,12 @@ const Main= () => {
           <div
             className={style.main_filter_option}
             onClick={() =>
-              category !== "Fast Food"
-                ? setCategory("Fast Food")
+              category !== "Fast food"
+                ? setCategory("Fast food")
                 : setCategory("")
             }
             style={{
-              backgroundColor: category === "Fast Food" ? "#EA7E41" : "",
+              backgroundColor: category === "Fast food" ? "#EA7E41" : "",
             }}
           >
             <svg
@@ -444,14 +444,14 @@ const Main= () => {
             </svg>
             <div>
               <h4
-                style={{ color: category === "Fast Food" ? "white" : "" }}
+                style={{ color: category === "Fast food" ? "white" : "" }}
               >
                 {t("Fast Food")}
               </h4>
               <p
-                style={{ color: category === "Fast Food" ? "white" : "" }}
+                style={{ color: category === "Fast food" ? "white" : "" }}
               >
-                {reduxMeals.filter((meal) => meal.category === "Fast Food").length}
+                {reduxMeals.filter((meal) => meal.category === "Fast food").length}
               </p>
             </div>
           </div>
