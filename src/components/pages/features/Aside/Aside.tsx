@@ -104,8 +104,8 @@ const Aside: React.FC<AsideProps> = (props) => {
       if (paymentMethod === "mastercard") {
 
         // for testing
-        // setMastercard(true);
-        handlePostOrder();
+        setMastercard(true);
+        // handlePostOrder();
 
       } else if (paymentMethod === "paypal") {
         console.log("paypal");
