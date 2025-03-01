@@ -104,8 +104,8 @@ const Aside: React.FC<AsideProps> = (props) => {
       if (paymentMethod === "mastercard") {
 
         // for testing
-        setMastercard(true);
-        // handlePostOrder();
+        // setMastercard(true);
+        handlePostOrder();
 
       } else if (paymentMethod === "paypal") {
         console.log("paypal");
@@ -434,7 +434,7 @@ const Aside: React.FC<AsideProps> = (props) => {
                     </p>
                   </div>
                   <p className={style.aside_order_select_price}>
-                    ${(m.price * m.order).toFixed(2)}
+                    {(m.price * m.order).toFixed(2)} AZN
                   </p>
                 </div>
               ))
